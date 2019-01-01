@@ -31,10 +31,6 @@ var router = _express2.default.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-/**
- * @author 4Decoder
- * @description Student holds record of all students
- */
 router.get("/students", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
@@ -65,7 +61,7 @@ router.get("/students", [_authorization.checkAuth, _authorization.isValidStaff],
  * @apiError 404 Student not found.
  * @apiError 401 master access only.
  */
-router.post("/students", _controller.createRecord);
+router.post("/students", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {put} /api/v1/students/{recordId} Update students
@@ -95,7 +91,7 @@ router.post("/students", _controller.createRecord);
  * @apiError 404 Student not found.
  * @apiError 401 master access only.
  */
-router.put("/students/:recordId", [_authorization.checkAuth], _controller.updateRecord);
+router.put("/students/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/v1/students/{recordId} Delete students
