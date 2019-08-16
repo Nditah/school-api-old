@@ -1,0 +1,9 @@
+{
+  "name": "PEACE API",
+  "version": "0.1.0",
+  "description": "apiDoc basic example",
+  "apidoc": {
+    "title": "PEACE apiDoc",
+    "url" : "https://api.github.com/v1"
+  }
+}

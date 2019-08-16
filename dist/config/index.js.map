@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/config/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,YAAxB","file":"index.js","sourcesContent":["export { default } from \"./database\";\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../src/api/general/multimedia/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,UAAxB","file":"index.js","sourcesContent":["export { default } from \"./routes\";\n"]}
