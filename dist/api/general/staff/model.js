@@ -1,3 +1,56 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = exports.schemaLogin = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../state/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _model3 = require("../county/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
+var _model5 = require("../office/model");
+
+var _model6 = _interopRequireDefault(_model5);
+
+var _model7 = require("../vehicle/model");
+
+var _model8 = _interopRequireDefault(_model7);
+
+var _model9 = require("../bank/model");
+
+var _model10 = _interopRequireDefault(_model9);
+
+var _model11 = require("../rating/model");
+
+var _model12 = _interopRequireDefault(_model11);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Schema = _mongoose2.default.Schema;
+// eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
@@ -74,171 +127,157 @@
  * @property {String} updated_by Staff record modified by
  * @description Staff holds record of all cities with terminal_list
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE, GENDER, MARITAL_STATUS, EMPLOYMENT_STATUS, SUBSIDIARY } from "../../../constants";
-import table from "./table";
-import State from "../state/model";
-import County from "../county/model";
-import Office from "../office/model";
-import Vehicle from "../vehicle/model";
-import Bank from "../bank/model";
-import Rating from "../rating/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaLogin = {
-    email: Joi.string().trim().email().optional(),
-    phone: Joi.string().optional(),
-    otp: Joi.string().optional(),
-    password: Joi.string().optional(),
-    type: Joi.string().valid(["EMAIL", "PHONE", "OTP"]).optional()
+var ObjectId = Schema.Types.ObjectId;
+var schemaLogin = exports.schemaLogin = {
+    email: _joi2.default.string().trim().email().optional(),
+    phone: _joi2.default.string().optional(),
+    otp: _joi2.default.string().optional(),
+    password: _joi2.default.string().optional(),
+    type: _joi2.default.string().valid(["EMAIL", "PHONE", "OTP"]).optional()
 };
 
-export const schemaCreate = {
-    serial: Joi.string().optional(),
-    category: Joi.string().optional(),
-    title: Joi.string().optional(),
-    surname: Joi.string().required(),
-    other_name: Joi.string().required(),
-    gender: Joi.string().required(),
-    birth_date: Joi.date().required(),
-    marital_status: Joi.string().required(),
-    children: Joi.number().optional(),
-    phone: Joi.string().required(),
-    phone_personal: Joi.string().optional(),
-    address: Joi.string().optional(),
-    village: Joi.string().optional(),
-    state_id: Joi.string().required(),
-    county_id: Joi.string().required(),
-    country_iso2: Joi.string().optional(),
-    email: Joi.string().trim().email().optional(),
-    password: Joi.string().optional(),
-    otp: Joi.string().optional(),
-    otp_count: Joi.number().optional(),
-    kin: Joi.string().required(),
-    kin_phone: Joi.string().required(),
-    kin_address: Joi.string().required(),
-    guarantor1: Joi.string().required(),
-    guarantor1_phone: Joi.string().required(),
-    guarantor1_address: Joi.string().required(),
-    guarantor2: Joi.string().optional(),
-    guarantor2_phone: Joi.string().optional(),
-    guarantor2_address: Joi.string().optional(),
-    profession: Joi.string().optional(),
-    qualification: Joi.string().optional(),
-    institution: Joi.string().optional(),
-    employment_status: Joi.string().trim().valid(Object.values(EMPLOYMENT_STATUS)).optional(),
-    tax: Joi.number().optional(),
-    basic_salary: Joi.number().optional(),
-    bonus: Joi.number().optional(),
-    entertainment_allowance: Joi.number().optional(),
-    house_allowance: Joi.number().optional(),
-    lunch_allowance: Joi.number().optional(),
-    medical_allowance: Joi.number().optional(),
-    transport_allowance: Joi.number().optional(),
-    utility_allowance: Joi.number().optional(),
-    welfare_allowance: Joi.number().optional(),
-    pension: Joi.number().optional(),
-    assurance: Joi.number().optional(),
-    bank_id: Joi.string().optional(),
-    bank_account_number: Joi.string().optional(),
-    bank_account_name: Joi.string().optional(),
-    rank: Joi.string().optional(),
-    office_id: Joi.string().required(),
-    role: Joi.array().optional(),
-    superior_id: Joi.string().required(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).required(),
-    terminal_id: Joi.string().required(),
-    vehicle_id: Joi.string().optional(),
-    notice: Joi.string().optional(),
-    rating_ids: Joi.array().optional(),
-    remark: Joi.string().optional(),
-    photo: Joi.string().optional(),
-    is_salary_payable: Joi.boolean().optional(),
-    is_document_complete: Joi.boolean().optional(),
-    access_level: Joi.string().optional(),
-    approved_by: Joi.string().optional(),
-    approved_date: Joi.date().optional(),
-    disengaged_by: Joi.string().optional(),
-    disengaged_date: Joi.date().optional(),
-    created_by: Joi.string().required()
+var schemaCreate = exports.schemaCreate = {
+    serial: _joi2.default.string().optional(),
+    category: _joi2.default.string().optional(),
+    title: _joi2.default.string().optional(),
+    surname: _joi2.default.string().required(),
+    other_name: _joi2.default.string().required(),
+    gender: _joi2.default.string().required(),
+    birth_date: _joi2.default.date().required(),
+    marital_status: _joi2.default.string().required(),
+    children: _joi2.default.number().optional(),
+    phone: _joi2.default.string().required(),
+    phone_personal: _joi2.default.string().optional(),
+    address: _joi2.default.string().optional(),
+    village: _joi2.default.string().optional(),
+    state_id: _joi2.default.string().required(),
+    county_id: _joi2.default.string().required(),
+    country_iso2: _joi2.default.string().optional(),
+    email: _joi2.default.string().trim().email().optional(),
+    password: _joi2.default.string().optional(),
+    otp: _joi2.default.string().optional(),
+    otp_count: _joi2.default.number().optional(),
+    kin: _joi2.default.string().required(),
+    kin_phone: _joi2.default.string().required(),
+    kin_address: _joi2.default.string().required(),
+    guarantor1: _joi2.default.string().required(),
+    guarantor1_phone: _joi2.default.string().required(),
+    guarantor1_address: _joi2.default.string().required(),
+    guarantor2: _joi2.default.string().optional(),
+    guarantor2_phone: _joi2.default.string().optional(),
+    guarantor2_address: _joi2.default.string().optional(),
+    profession: _joi2.default.string().optional(),
+    qualification: _joi2.default.string().optional(),
+    institution: _joi2.default.string().optional(),
+    employment_status: _joi2.default.string().trim().valid(Object.values(_constants.EMPLOYMENT_STATUS)).optional(),
+    tax: _joi2.default.number().optional(),
+    basic_salary: _joi2.default.number().optional(),
+    bonus: _joi2.default.number().optional(),
+    entertainment_allowance: _joi2.default.number().optional(),
+    house_allowance: _joi2.default.number().optional(),
+    lunch_allowance: _joi2.default.number().optional(),
+    medical_allowance: _joi2.default.number().optional(),
+    transport_allowance: _joi2.default.number().optional(),
+    utility_allowance: _joi2.default.number().optional(),
+    welfare_allowance: _joi2.default.number().optional(),
+    pension: _joi2.default.number().optional(),
+    assurance: _joi2.default.number().optional(),
+    bank_id: _joi2.default.string().optional(),
+    bank_account_number: _joi2.default.string().optional(),
+    bank_account_name: _joi2.default.string().optional(),
+    rank: _joi2.default.string().optional(),
+    office_id: _joi2.default.string().required(),
+    role: _joi2.default.array().optional(),
+    superior_id: _joi2.default.string().required(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).required(),
+    terminal_id: _joi2.default.string().required(),
+    vehicle_id: _joi2.default.string().optional(),
+    notice: _joi2.default.string().optional(),
+    rating_ids: _joi2.default.array().optional(),
+    remark: _joi2.default.string().optional(),
+    photo: _joi2.default.string().optional(),
+    is_salary_payable: _joi2.default.boolean().optional(),
+    is_document_complete: _joi2.default.boolean().optional(),
+    access_level: _joi2.default.string().optional(),
+    approved_by: _joi2.default.string().optional(),
+    approved_date: _joi2.default.date().optional(),
+    disengaged_by: _joi2.default.string().optional(),
+    disengaged_date: _joi2.default.date().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    serial: Joi.string().optional(),
-    category: Joi.string().optional(),
-    title: Joi.string().optional(),
-    surname: Joi.string().optional(),
-    other_name: Joi.string().optional(),
-    gender: Joi.string().optional(),
-    birth_date: Joi.date().optional(),
-    marital_status: Joi.string().optional(),
-    children: Joi.number().optional(),
-    phone: Joi.string().optional(),
-    phone_personal: Joi.string().optional(),
-    address: Joi.string().optional(),
-    village: Joi.string().optional(),
-    state_id: Joi.string().optional(),
-    county_id: Joi.string().optional(),
-    country_iso2: Joi.string().optional(),
-    email: Joi.string().trim().email().optional(),
-    password: Joi.string().optional(),
-    otp: Joi.string().optional(),
-    otp_count: Joi.number().optional(),
-    kin: Joi.string().optional(),
-    kin_phone: Joi.string().optional(),
-    kin_address: Joi.string().optional(),
-    guarantor1: Joi.string().optional(),
-    guarantor1_phone: Joi.string().optional(),
-    guarantor1_address: Joi.string().optional(),
-    guarantor2: Joi.string().optional(),
-    guarantor2_phone: Joi.string().optional(),
-    guarantor2_address: Joi.string().optional(),
-    profession: Joi.string().optional(),
-    qualification: Joi.string().optional(),
-    institution: Joi.string().optional(),
-    employment_status: Joi.string().trim().valid(Object.values(EMPLOYMENT_STATUS)).optional(),
-    tax: Joi.number().optional(),
-    basic_salary: Joi.number().optional(),
-    bonus: Joi.number().optional(),
-    entertainment_allowance: Joi.number().optional(),
-    house_allowance: Joi.number().optional(),
-    lunch_allowance: Joi.number().optional(),
-    medical_allowance: Joi.number().optional(),
-    transport_allowance: Joi.number().optional(),
-    utility_allowance: Joi.number().optional(),
-    welfare_allowance: Joi.number().optional(),
-    pension: Joi.number().optional(),
-    assurance: Joi.number().optional(),
-    bank_id: Joi.string().optional(),
-    bank_account_number: Joi.string().optional(),
-    bank_account_name: Joi.string().optional(),
-    rank: Joi.string().optional(),
-    office_id: Joi.string().optional(),
-    role: Joi.array().optional(),
-    superior_id: Joi.string().optional(),
-    subsidiary: Joi.string().trim().valid(Object.values(SUBSIDIARY)).optional(),
-    terminal_id: Joi.string().optional(),
-    vehicle_id: Joi.string().optional(),
-    notice: Joi.string().optional(),
-    rating_ids: Joi.array().optional(),
-    remark: Joi.string().optional(),
-    photo: Joi.string().optional(),
-    is_salary_payable: Joi.boolean().optional(),
-    is_document_complete: Joi.boolean().optional(),
-    access_level: Joi.string().optional(),
-    approved_by: Joi.string().optional(),
-    approved_date: Joi.date().optional(),
-    disengaged_by: Joi.string().optional(),
-    disengaged_date: Joi.date().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    serial: _joi2.default.string().optional(),
+    category: _joi2.default.string().optional(),
+    title: _joi2.default.string().optional(),
+    surname: _joi2.default.string().optional(),
+    other_name: _joi2.default.string().optional(),
+    gender: _joi2.default.string().optional(),
+    birth_date: _joi2.default.date().optional(),
+    marital_status: _joi2.default.string().optional(),
+    children: _joi2.default.number().optional(),
+    phone: _joi2.default.string().optional(),
+    phone_personal: _joi2.default.string().optional(),
+    address: _joi2.default.string().optional(),
+    village: _joi2.default.string().optional(),
+    state_id: _joi2.default.string().optional(),
+    county_id: _joi2.default.string().optional(),
+    country_iso2: _joi2.default.string().optional(),
+    email: _joi2.default.string().trim().email().optional(),
+    password: _joi2.default.string().optional(),
+    otp: _joi2.default.string().optional(),
+    otp_count: _joi2.default.number().optional(),
+    kin: _joi2.default.string().optional(),
+    kin_phone: _joi2.default.string().optional(),
+    kin_address: _joi2.default.string().optional(),
+    guarantor1: _joi2.default.string().optional(),
+    guarantor1_phone: _joi2.default.string().optional(),
+    guarantor1_address: _joi2.default.string().optional(),
+    guarantor2: _joi2.default.string().optional(),
+    guarantor2_phone: _joi2.default.string().optional(),
+    guarantor2_address: _joi2.default.string().optional(),
+    profession: _joi2.default.string().optional(),
+    qualification: _joi2.default.string().optional(),
+    institution: _joi2.default.string().optional(),
+    employment_status: _joi2.default.string().trim().valid(Object.values(_constants.EMPLOYMENT_STATUS)).optional(),
+    tax: _joi2.default.number().optional(),
+    basic_salary: _joi2.default.number().optional(),
+    bonus: _joi2.default.number().optional(),
+    entertainment_allowance: _joi2.default.number().optional(),
+    house_allowance: _joi2.default.number().optional(),
+    lunch_allowance: _joi2.default.number().optional(),
+    medical_allowance: _joi2.default.number().optional(),
+    transport_allowance: _joi2.default.number().optional(),
+    utility_allowance: _joi2.default.number().optional(),
+    welfare_allowance: _joi2.default.number().optional(),
+    pension: _joi2.default.number().optional(),
+    assurance: _joi2.default.number().optional(),
+    bank_id: _joi2.default.string().optional(),
+    bank_account_number: _joi2.default.string().optional(),
+    bank_account_name: _joi2.default.string().optional(),
+    rank: _joi2.default.string().optional(),
+    office_id: _joi2.default.string().optional(),
+    role: _joi2.default.array().optional(),
+    superior_id: _joi2.default.string().optional(),
+    subsidiary: _joi2.default.string().trim().valid(Object.values(_constants.SUBSIDIARY)).optional(),
+    terminal_id: _joi2.default.string().optional(),
+    vehicle_id: _joi2.default.string().optional(),
+    notice: _joi2.default.string().optional(),
+    rating_ids: _joi2.default.array().optional(),
+    remark: _joi2.default.string().optional(),
+    photo: _joi2.default.string().optional(),
+    is_salary_payable: _joi2.default.boolean().optional(),
+    is_document_complete: _joi2.default.boolean().optional(),
+    access_level: _joi2.default.string().optional(),
+    approved_by: _joi2.default.string().optional(),
+    approved_date: _joi2.default.date().optional(),
+    disengaged_by: _joi2.default.string().optional(),
+    disengaged_date: _joi2.default.date().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     serial: { type: String },
     category: { type: String },
     title: { type: String },
@@ -246,14 +285,14 @@ export const schema = {
     other_name: { type: String, required: [false, "Why no other_name?"] },
     gender: {
         type: String,
-        enum: Object.values(GENDER),
-        default: GENDER.MALE,
+        enum: Object.values(_constants.GENDER),
+        default: _constants.GENDER.MALE,
         required: [false, "Why no gender?"]
     },
     birth_date: { type: Date, required: [false, "Why no birth_date?"] },
     marital_status: {
         type: String,
-        enum: Object.values(MARITAL_STATUS),
+        enum: Object.values(_constants.MARITAL_STATUS),
         required: [false, "Why no marital_status?"]
     },
     children: { type: String },
@@ -299,7 +338,7 @@ export const schema = {
     institution: { type: String },
     employment_status: {
         type: String,
-        enum: Object.values(EMPLOYMENT_STATUS),
+        enum: Object.values(_constants.EMPLOYMENT_STATUS),
         required: [false, "Why no input?"]
     },
     tax: { type: Number, default: 0.0 },
@@ -323,7 +362,7 @@ export const schema = {
     superior_id: { type: ObjectId, ref: "Staff", required: [false, "Why no input?"] },
     subsidiary: {
         type: String,
-        enum: Object.values(SUBSIDIARY),
+        enum: Object.values(_constants.SUBSIDIARY),
         required: [false, "Why no input?"]
     },
     terminal_id: { type: ObjectId, ref: "Terminal", required: [false, "Why no input?"] },
@@ -345,28 +384,30 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.index({ phone: 1, email: 1 }, { unique: true });
 newSchema.set("collection", "staff");
-newSchema.plugin(mongoose_csv);
+newSchema.plugin(_mongooseCsv2.default);
 
-const Staff = mongoose.model("Staff", newSchema);
+var Staff = _mongoose2.default.model("Staff", newSchema);
 
-Staff.findOne({ email: "admin@royalacademy.ng" }).then(user => {
+Staff.findOne({ email: "admin@royalacademy.ng" }).then(function (user) {
     if (!user) {
-        console.log(table[0]);
-        const newRecord = new Staff(table[0]);
+        console.log(_table2.default[0]);
+        var newRecord = new Staff(_table2.default[0]);
         newRecord.save();
-        delete table[0];
+        delete _table2.default[0];
     }
-}).catch(err => console.log(__dirname, err.message));
+}).catch(function (err) {
+    return console.log(__dirname, err.message);
+});
 
 if (preload) {
-    Staff.insertMany(table);
+    Staff.insertMany(_table2.default);
 }
 
-export default Staff;
+exports.default = Staff;
 //# sourceMappingURL=model.js.map

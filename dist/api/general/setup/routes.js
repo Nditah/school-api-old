@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { setupSystem, setCollection, uploadCsv, downloadCsv } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {post} /api/setups/system Complete System Setup
@@ -15,7 +27,7 @@ const router = express.Router();
  * @apiError 404 Setup not found.
  * @apiError 401 admin access only.
  */
-router.get("/setups/preload/system", [checkAuth, isValidStaff], setupSystem);
+router.get("/setups/preload/system", [_authorization.checkAuth, _authorization.isValidStaff], _controller.setupSystem);
 
 /**
  * @api {get} /api/setups/preload/{subsidiary}/{folder}/{collection} Preload Setups data
@@ -30,7 +42,7 @@ router.get("/setups/preload/system", [checkAuth, isValidStaff], setupSystem);
  * @apiError 404 Setup not found.
  * @apiError 401 admin access only.
  */
-router.get("/setups/preload/:subsidiary/:folder/:collection", [checkAuth, isValidStaff], setCollection);
+router.get("/setups/preload/:subsidiary/:folder/:collection", [_authorization.checkAuth, _authorization.isValidStaff], _controller.setCollection);
 
 /**
  * @api {get} /api/setups/csv/{collection} Download Table in CSV
@@ -46,7 +58,7 @@ router.get("/setups/preload/:subsidiary/:folder/:collection", [checkAuth, isVali
  * @apiError 404 Setup not found.
  * @apiError 401 admin access only.
  */
-router.get("/setups/csv/:collection", [checkAuth, isValidStaff], downloadCsv);
+router.get("/setups/csv/:collection", [_authorization.checkAuth, _authorization.isValidStaff], _controller.downloadCsv);
 
 /**
  * @api {post} /api/setups/csv/{collection} Upload Table in CSV
@@ -62,7 +74,7 @@ router.get("/setups/csv/:collection", [checkAuth, isValidStaff], downloadCsv);
  * @apiError 404 Setup not found.
  * @apiError 401 admin access only.
  */
-router.post("/setups/csv/:collection", [checkAuth, isValidStaff], uploadCsv);
+router.post("/setups/csv/:collection", [_authorization.checkAuth, _authorization.isValidStaff], _controller.uploadCsv);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

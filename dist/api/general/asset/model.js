@@ -1,3 +1,40 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _model3 = require("../category/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Schema = _mongoose2.default.Schema;
+// eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Dcoder
@@ -32,83 +69,73 @@
  * @property {Number} accumulated_depreciation Asset accumulated_depreciation
  * @description Asset model holds record of all Inventories except vehicles
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-import Category from "../category/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    label: Joi.string().optional(),
-    serial: Joi.string().optional(),
-    name: Joi.string().optional(),
-    type: Joi.string().optional(),
-    make: Joi.string().optional(),
-    measure: Joi.string().optional(),
-    category_id: Joi.string().optional(),
-    description: Joi.string().optional(),
-    terminal_id: Joi.string().optional(),
-    subsidiary: Joi.string().optional(),
-    location: Joi.string().optional(),
-    is_consumable: Joi.string().optional(),
-    usability: Joi.string().valid("DUTY", "SCRAP", "SHOP", "SOLD", "DISPOSED").optional(),
-    worth: Joi.string().valid("APPRECIATE", "DEPRECIATE").optional(),
-    staff_id: Joi.string().optional(),
-    launch_date: Joi.date().optional(),
-    expire_date: Joi.date().optional(),
-    purchase_id: Joi.string().optional(),
-    opening_value: Joi.number().optional(),
-    closing_value: Joi.number().optional(),
-    salvage_value: Joi.number().optional(),
-    current_value: Joi.number().optional(),
-    photo: Joi.string().optional(),
-    lifespan: Joi.number().optional(),
-    total_depreciable_cost: Joi.number().optional(),
-    depreciation_rate: Joi.number().optional(),
-    depreciation_expense: Joi.number().optional(),
-    accumulated_depreciation: Joi.number().optional(),
-    created_by: Joi.string().required()
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    label: _joi2.default.string().optional(),
+    serial: _joi2.default.string().optional(),
+    name: _joi2.default.string().optional(),
+    type: _joi2.default.string().optional(),
+    make: _joi2.default.string().optional(),
+    measure: _joi2.default.string().optional(),
+    category_id: _joi2.default.string().optional(),
+    description: _joi2.default.string().optional(),
+    terminal_id: _joi2.default.string().optional(),
+    subsidiary: _joi2.default.string().optional(),
+    location: _joi2.default.string().optional(),
+    is_consumable: _joi2.default.string().optional(),
+    usability: _joi2.default.string().valid("DUTY", "SCRAP", "SHOP", "SOLD", "DISPOSED").optional(),
+    worth: _joi2.default.string().valid("APPRECIATE", "DEPRECIATE").optional(),
+    staff_id: _joi2.default.string().optional(),
+    launch_date: _joi2.default.date().optional(),
+    expire_date: _joi2.default.date().optional(),
+    purchase_id: _joi2.default.string().optional(),
+    opening_value: _joi2.default.number().optional(),
+    closing_value: _joi2.default.number().optional(),
+    salvage_value: _joi2.default.number().optional(),
+    current_value: _joi2.default.number().optional(),
+    photo: _joi2.default.string().optional(),
+    lifespan: _joi2.default.number().optional(),
+    total_depreciable_cost: _joi2.default.number().optional(),
+    depreciation_rate: _joi2.default.number().optional(),
+    depreciation_expense: _joi2.default.number().optional(),
+    accumulated_depreciation: _joi2.default.number().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    label: Joi.string().optional(),
-    serial: Joi.string().optional(),
-    name: Joi.string().optional(),
-    type: Joi.string().optional(),
-    make: Joi.string().optional(),
-    measure: Joi.string().optional(),
-    category_id: Joi.string().optional(),
-    description: Joi.string().optional(),
-    terminal_id: Joi.string().optional(),
-    subsidiary: Joi.string().optional(),
-    location: Joi.string().optional(),
-    is_consumable: Joi.string().optional(),
-    usability: Joi.string().valid("DUTY", "SCRAP", "SHOP", "SOLD", "DISPOSED").optional(),
-    worth: Joi.string().valid("APPRECIATE", "DEPRECIATE").optional(),
-    staff_id: Joi.string().optional(),
-    launch_date: Joi.date().optional(),
-    expire_date: Joi.date().optional(),
-    purchase_id: Joi.string().optional(),
-    opening_value: Joi.number().optional(),
-    closing_value: Joi.number().optional(),
-    salvage_value: Joi.number().optional(),
-    current_value: Joi.number().optional(),
-    photo: Joi.string().optional(),
-    lifespan: Joi.number().optional(),
-    total_depreciable_cost: Joi.number().optional(),
-    depreciation_rate: Joi.number().optional(),
-    depreciation_expense: Joi.number().optional(),
-    accumulated_depreciation: Joi.number().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    label: _joi2.default.string().optional(),
+    serial: _joi2.default.string().optional(),
+    name: _joi2.default.string().optional(),
+    type: _joi2.default.string().optional(),
+    make: _joi2.default.string().optional(),
+    measure: _joi2.default.string().optional(),
+    category_id: _joi2.default.string().optional(),
+    description: _joi2.default.string().optional(),
+    terminal_id: _joi2.default.string().optional(),
+    subsidiary: _joi2.default.string().optional(),
+    location: _joi2.default.string().optional(),
+    is_consumable: _joi2.default.string().optional(),
+    usability: _joi2.default.string().valid("DUTY", "SCRAP", "SHOP", "SOLD", "DISPOSED").optional(),
+    worth: _joi2.default.string().valid("APPRECIATE", "DEPRECIATE").optional(),
+    staff_id: _joi2.default.string().optional(),
+    launch_date: _joi2.default.date().optional(),
+    expire_date: _joi2.default.date().optional(),
+    purchase_id: _joi2.default.string().optional(),
+    opening_value: _joi2.default.number().optional(),
+    closing_value: _joi2.default.number().optional(),
+    salvage_value: _joi2.default.number().optional(),
+    current_value: _joi2.default.number().optional(),
+    photo: _joi2.default.string().optional(),
+    lifespan: _joi2.default.number().optional(),
+    total_depreciable_cost: _joi2.default.number().optional(),
+    depreciation_rate: _joi2.default.number().optional(),
+    depreciation_expense: _joi2.default.number().optional(),
+    accumulated_depreciation: _joi2.default.number().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     label: { type: String, comment: "tag" },
     serial: { type: String },
     name: { type: String },
@@ -140,17 +167,17 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "asset");
-newSchema.plugin(mongoose_csv);
+newSchema.plugin(_mongooseCsv2.default);
 
-const Asset = mongoose.model("Asset", newSchema);
+var Asset = _mongoose2.default.model("Asset", newSchema);
 if (preload) {
-    Asset.insertMany(table);
+    Asset.insertMany(_table2.default);
 }
 
-export default Asset;
+exports.default = Asset;
 //# sourceMappingURL=model.js.map

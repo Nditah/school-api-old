@@ -1,3 +1,51 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = exports.schemaLogin = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _model3 = require("../state/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
+var _model5 = require("../county/model");
+
+var _model6 = _interopRequireDefault(_model5);
+
+var _model7 = require("../rating/model");
+
+var _model8 = _interopRequireDefault(_model7);
+
+var _model9 = require("../blog-comment/model");
+
+var _model10 = _interopRequireDefault(_model9);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Dcoder
@@ -54,127 +102,114 @@
  * @description Records of all company customers.
  */
 
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE, GENDER, CUSTOMER_TYPE } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-import State from "../state/model";
-import County from "../county/model";
-import Rating from "../rating/model";
-import BlogComment from "../blog-comment/model";
-
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaLogin = {
-    email: Joi.string().trim().email().optional(),
-    phone: Joi.string().optional(),
-    otp: Joi.string().optional(),
-    password: Joi.string().optional(),
-    type: Joi.string().valid(["EMAIL", "PHONE", "OTP"]).optional()
+var Schema = _mongoose2.default.Schema;
+var ObjectId = Schema.Types.ObjectId;
+var schemaLogin = exports.schemaLogin = {
+    email: _joi2.default.string().trim().email().optional(),
+    phone: _joi2.default.string().optional(),
+    otp: _joi2.default.string().optional(),
+    password: _joi2.default.string().optional(),
+    type: _joi2.default.string().valid(["EMAIL", "PHONE", "OTP"]).optional()
 };
 
-export const schemaCreate = {
-    customer_type: Joi.string().trim().optional(),
-    title: Joi.string().optional(),
-    surname: Joi.string().required(),
-    other_name: Joi.string().required(),
-    gender: Joi.string().required(),
-    birth_date: Joi.date().optional(),
-    phone: Joi.string().required(),
-    phone_personal: Joi.string().optional(),
-    email: Joi.string().trim().email().optional(),
-    password: Joi.string().optional(),
-    otp: Joi.string().optional(),
-    skype: Joi.string().optional(),
-    linkedin: Joi.string().optional(),
-    facebook: Joi.string().optional(),
-    instagram: Joi.string().optional(),
-    twitter: Joi.string().optional(),
-    youtube: Joi.string().optional(),
-    contact_person: Joi.string().optional(),
-    contact_person_phone: Joi.string().optional(),
-    product: Joi.string().optional(),
-    photo: Joi.string().optional(),
-    address: Joi.string().optional(),
-    state_id: Joi.string().optional(),
-    county_id: Joi.string().optional(),
-    country_iso2: Joi.string().trim().max(2).optional(),
-    is_pmt_client: Joi.boolean().optional(),
-    is_pesl_client: Joi.boolean().optional(),
-    is_pet_client: Joi.boolean().optional(),
-    is_shop_client: Joi.boolean().optional(),
-    is_engr_client: Joi.boolean().optional(),
-    is_tenant: Joi.boolean().optional(),
-    is_phone_verified: Joi.boolean().optional(),
-    is_email_verified: Joi.boolean().optional(),
-    remark: Joi.string().optional(),
-    points: Joi.number().optional(),
-    cart_id: Joi.string().optional(),
-    blog_comment_ids: Joi.array().optional(),
-    created_by: Joi.string().optional()
+var schemaCreate = exports.schemaCreate = {
+    customer_type: _joi2.default.string().trim().optional(),
+    title: _joi2.default.string().optional(),
+    surname: _joi2.default.string().required(),
+    other_name: _joi2.default.string().required(),
+    gender: _joi2.default.string().required(),
+    birth_date: _joi2.default.date().optional(),
+    phone: _joi2.default.string().required(),
+    phone_personal: _joi2.default.string().optional(),
+    email: _joi2.default.string().trim().email().optional(),
+    password: _joi2.default.string().optional(),
+    otp: _joi2.default.string().optional(),
+    skype: _joi2.default.string().optional(),
+    linkedin: _joi2.default.string().optional(),
+    facebook: _joi2.default.string().optional(),
+    instagram: _joi2.default.string().optional(),
+    twitter: _joi2.default.string().optional(),
+    youtube: _joi2.default.string().optional(),
+    contact_person: _joi2.default.string().optional(),
+    contact_person_phone: _joi2.default.string().optional(),
+    product: _joi2.default.string().optional(),
+    photo: _joi2.default.string().optional(),
+    address: _joi2.default.string().optional(),
+    state_id: _joi2.default.string().optional(),
+    county_id: _joi2.default.string().optional(),
+    country_iso2: _joi2.default.string().trim().max(2).optional(),
+    is_pmt_client: _joi2.default.boolean().optional(),
+    is_pesl_client: _joi2.default.boolean().optional(),
+    is_pet_client: _joi2.default.boolean().optional(),
+    is_shop_client: _joi2.default.boolean().optional(),
+    is_engr_client: _joi2.default.boolean().optional(),
+    is_tenant: _joi2.default.boolean().optional(),
+    is_phone_verified: _joi2.default.boolean().optional(),
+    is_email_verified: _joi2.default.boolean().optional(),
+    remark: _joi2.default.string().optional(),
+    points: _joi2.default.number().optional(),
+    cart_id: _joi2.default.string().optional(),
+    blog_comment_ids: _joi2.default.array().optional(),
+    created_by: _joi2.default.string().optional()
 };
 
-export const schemaUpdate = {
-    customer_type: Joi.string().trim().optional(),
-    title: Joi.string().optional(),
-    surname: Joi.string().optional(),
-    other_name: Joi.string().optional(),
-    gender: Joi.string().optional(),
-    birth_date: Joi.date().optional(),
-    phone: Joi.string().optional(),
-    phone_personal: Joi.string().optional(),
-    email: Joi.string().trim().email().optional(),
-    password: Joi.string().optional(),
-    otp: Joi.string().optional(),
-    otp_count: Joi.number().optional(),
-    company: Joi.string().optional(),
-    industry: Joi.string().optional(),
-    website: Joi.string().optional(),
-    skype: Joi.string().optional(),
-    linkedin: Joi.string().optional(),
-    facebook: Joi.string().optional(),
-    instagram: Joi.string().optional(),
-    twitter: Joi.string().optional(),
-    youtube: Joi.string().optional(),
-    contact_person: Joi.string().optional(),
-    contact_person_phone: Joi.string().optional(),
-    product: Joi.string().optional(),
-    photo: Joi.string().optional(),
-    address: Joi.string().optional(),
-    state_id: Joi.string().optional(),
-    county_id: Joi.string().optional(),
-    country_iso2: Joi.string().trim().max(2).optional(),
-    is_pmt_client: Joi.boolean().optional(),
-    is_pesl_client: Joi.boolean().optional(),
-    is_pet_client: Joi.boolean().optional(),
-    is_shop_client: Joi.boolean().optional(),
-    is_engr_client: Joi.boolean().optional(),
-    is_tenant: Joi.boolean().optional(),
-    is_phone_verified: Joi.boolean().optional(),
-    is_email_verified: Joi.boolean().optional(),
-    remark: Joi.string().optional(),
-    points: Joi.number().optional(),
-    wallet: Joi.number().optional(),
-    cart_id: Joi.string().optional(),
-    blog_comment_ids: Joi.array().optional(),
-    sales_rep_id: Joi.string().optional(),
-    sales_order_ids: Joi.array().optional(),
-    pml_shipment_ids: Joi.array().optional(),
-    pmt_boarding_ids: Joi.array().optional(),
-    ratings: Joi.array().optional(),
-    rating: Joi.number().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    customer_type: _joi2.default.string().trim().optional(),
+    title: _joi2.default.string().optional(),
+    surname: _joi2.default.string().optional(),
+    other_name: _joi2.default.string().optional(),
+    gender: _joi2.default.string().optional(),
+    birth_date: _joi2.default.date().optional(),
+    phone: _joi2.default.string().optional(),
+    phone_personal: _joi2.default.string().optional(),
+    email: _joi2.default.string().trim().email().optional(),
+    password: _joi2.default.string().optional(),
+    otp: _joi2.default.string().optional(),
+    otp_count: _joi2.default.number().optional(),
+    company: _joi2.default.string().optional(),
+    industry: _joi2.default.string().optional(),
+    website: _joi2.default.string().optional(),
+    skype: _joi2.default.string().optional(),
+    linkedin: _joi2.default.string().optional(),
+    facebook: _joi2.default.string().optional(),
+    instagram: _joi2.default.string().optional(),
+    twitter: _joi2.default.string().optional(),
+    youtube: _joi2.default.string().optional(),
+    contact_person: _joi2.default.string().optional(),
+    contact_person_phone: _joi2.default.string().optional(),
+    product: _joi2.default.string().optional(),
+    photo: _joi2.default.string().optional(),
+    address: _joi2.default.string().optional(),
+    state_id: _joi2.default.string().optional(),
+    county_id: _joi2.default.string().optional(),
+    country_iso2: _joi2.default.string().trim().max(2).optional(),
+    is_pmt_client: _joi2.default.boolean().optional(),
+    is_pesl_client: _joi2.default.boolean().optional(),
+    is_pet_client: _joi2.default.boolean().optional(),
+    is_shop_client: _joi2.default.boolean().optional(),
+    is_engr_client: _joi2.default.boolean().optional(),
+    is_tenant: _joi2.default.boolean().optional(),
+    is_phone_verified: _joi2.default.boolean().optional(),
+    is_email_verified: _joi2.default.boolean().optional(),
+    remark: _joi2.default.string().optional(),
+    points: _joi2.default.number().optional(),
+    wallet: _joi2.default.number().optional(),
+    cart_id: _joi2.default.string().optional(),
+    blog_comment_ids: _joi2.default.array().optional(),
+    sales_rep_id: _joi2.default.string().optional(),
+    sales_order_ids: _joi2.default.array().optional(),
+    pml_shipment_ids: _joi2.default.array().optional(),
+    pmt_boarding_ids: _joi2.default.array().optional(),
+    ratings: _joi2.default.array().optional(),
+    rating: _joi2.default.number().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     customer_type: {
         type: String,
-        enum: Object.values(CUSTOMER_TYPE),
-        default: CUSTOMER_TYPE.INDIVIDUAL,
+        enum: Object.values(_constants.CUSTOMER_TYPE),
+        default: _constants.CUSTOMER_TYPE.INDIVIDUAL,
         required: [true, "Why no customer_type?"]
     },
     title: { type: String },
@@ -192,7 +227,7 @@ export const schema = {
     },
     gender: {
         type: String,
-        enum: Object.values(GENDER),
+        enum: Object.values(_constants.GENDER),
         required: [true, "Why no gender?"]
     },
     birth_date: { type: Date },
@@ -262,10 +297,10 @@ export const schema = {
     updated_by: { type: ObjectId }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 
 newSchema.index({
     phone: "text",
@@ -284,22 +319,24 @@ newSchema.index({
 });
 
 newSchema.set("collection", "customer");
-newSchema.plugin(mongoose_csv);
+newSchema.plugin(_mongooseCsv2.default);
 
-const Customer = mongoose.model("Customer", newSchema);
+var Customer = _mongoose2.default.model("Customer", newSchema);
 Customer.createIndexes();
-Customer.findOne({ email: "customer@peacegroup.ng" }).then(user => {
+Customer.findOne({ email: "customer@peacegroup.ng" }).then(function (user) {
     if (!user) {
-        console.log(table[0]);
-        const newRecord = new Customer(table[0]);
+        console.log(_table2.default[0]);
+        var newRecord = new Customer(_table2.default[0]);
         newRecord.save();
-        delete table[0];
+        delete _table2.default[0];
     }
-}).catch(err => console.log(__dirname, err.message));
+}).catch(function (err) {
+    return console.log(__dirname, err.message);
+});
 
 if (preload) {
-    Customer.insertMany(table);
+    Customer.insertMany(_table2.default);
 }
 
-export default Customer;
+exports.default = Customer;
 //# sourceMappingURL=model.js.map

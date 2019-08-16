@@ -1,8 +1,18 @@
-import dotenv from "dotenv";
+"use strict";
 
-dotenv.config();
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-const mongooseOptions = {
+var _dotenv = require("dotenv");
+
+var _dotenv2 = _interopRequireDefault(_dotenv);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_dotenv2.default.config();
+
+var mongooseOptions = {
     useNewUrlParser: true,
     autoIndex: true, // Don't build indexes
     dbName: "peace",
@@ -21,8 +31,8 @@ const mongooseOptions = {
     keepAliveInitialDelay: 300000
 };
 
-const getCredentials = () => {
-    const development = {
+var getCredentials = function getCredentials() {
+    var development = {
         uri: "mongodb://localhost:27017/school",
         options: Object.assign(mongooseOptions, {
             dbName: "school",
@@ -31,7 +41,7 @@ const getCredentials = () => {
         })
     };
 
-    const production = {
+    var production = {
         uri: process.env.MONGODB_URI,
         options: Object.assign(mongooseOptions, {
             reconnectTries: 500,
@@ -52,7 +62,7 @@ const getCredentials = () => {
     }
 };
 
-const credentials = getCredentials();
+var credentials = getCredentials();
 
-export default credentials;
+exports.default = credentials;
 //# sourceMappingURL=credentials.js.map

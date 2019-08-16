@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord, login } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/staff?id={recordId} Retrieve Staff records
@@ -20,7 +32,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/staff", [checkAuth, isValidStaff], fetchRecord);
+router.get("/staff", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
  * @api {post} /api/staff Create a Staff record
@@ -99,7 +111,7 @@ router.get("/staff", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Staff not found.
  * @apiError 401 master access only.
  */
-router.post("/staff", [checkAuth, isValidStaff], createRecord);
+router.post("/staff", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {put} /api/staff/{recordId} Update a Staff record
@@ -180,7 +192,7 @@ router.post("/staff", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 Staff not found.
  * @apiError 401 master access only.
  */
-router.put("/staff/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/staff/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/staff/{recordId} Delete a Staff record
@@ -192,7 +204,7 @@ router.put("/staff/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiError 404 Staff not found.
  * @apiError 401 master access only.
  */
-router.delete("/staff/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/staff/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
 /**
  * @api {post} /api/staff/login Login Staff
@@ -207,7 +219,7 @@ router.delete("/staff/:recordId", [checkAuth, isValidStaff], deleteRecord);
  * @apiSuccess (Success 200) 200 Login Successful.
  * @apiError 404 Staff not found.
  */
-router.post("/staff/login", login);
+router.post("/staff/login", _controller.login);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

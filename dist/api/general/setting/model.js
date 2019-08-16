@@ -1,3 +1,35 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaFetch = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line camelcase
 /**
  * @author 4Decoder
  * @property {Number} id Setting primaryKey
@@ -8,32 +40,23 @@
  * @property {String} description Setting description
  * @description Setting holds record of all cities with terminals
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaFetch = {
-    names: Joi.string().optional(),
-    fields: Joi.string().optional()
+var Schema = _mongoose2.default.Schema;
+var ObjectId = Schema.Types.ObjectId;
+var schemaFetch = exports.schemaFetch = {
+    names: _joi2.default.string().optional(),
+    fields: _joi2.default.string().optional()
 };
 
-export const schemaUpdate = {
-    name: Joi.string().trim().optional(),
-    access: Joi.string().trim().valid("public", "private").optional(),
-    value: Joi.string().trim().optional(),
-    category: Joi.string().optional(),
-    description: Joi.string().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    name: _joi2.default.string().trim().optional(),
+    access: _joi2.default.string().trim().valid("public", "private").optional(),
+    value: _joi2.default.string().trim().optional(),
+    category: _joi2.default.string().optional(),
+    description: _joi2.default.string().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     name: {
         type: String,
         uppercase: true,
@@ -47,19 +70,19 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.index({ name: 1 }, { unique: true });
 newSchema.set("collection", "setting");
-newSchema.plugin(mongoose_csv);
+newSchema.plugin(_mongooseCsv2.default);
 
-const Setting = mongoose.model("Setting", newSchema);
+var Setting = _mongoose2.default.model("Setting", newSchema);
 
 if (preload) {
-    Setting.insertMany(table);
+    Setting.insertMany(_table2.default);
 }
 
-export default Setting;
+exports.default = Setting;
 //# sourceMappingURL=model.js.map

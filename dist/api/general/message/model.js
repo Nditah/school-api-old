@@ -1,3 +1,32 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdated = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Schema = _mongoose2.default.Schema;
+// eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
  * @property {Number} id Message primaryKey
@@ -15,37 +44,29 @@
  * For multiple recepient, a record is created for each to enable tracking of
  * individual status
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE } from "../../../constants";
-import Staff from "../staff/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    sender: Joi.string().valid(["STAFF", "CUSTOMER", "SUPPLIER", "PARTNER"]).required(),
-    recipient: Joi.string().valid(["STAFF", "CUSTOMER", "SUPPLIER", "PARTNER"]).required(),
-    staff_id: Joi.string().optional(),
-    supplier_id: Joi.string().optional(),
-    customer_id: Joi.string().optional(),
-    partner_id: Joi.string().optional(),
-    subject: Joi.string().required(),
-    body: Joi.string().required(),
-    receive_status: Joi.string().valid("UNREAD", "READ").optional(),
-    sent_status: Joi.string().valid("DRAFT", "SENT").optional(),
-    created_by: Joi.string().required()
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    sender: _joi2.default.string().valid(["STAFF", "CUSTOMER", "SUPPLIER", "PARTNER"]).required(),
+    recipient: _joi2.default.string().valid(["STAFF", "CUSTOMER", "SUPPLIER", "PARTNER"]).required(),
+    staff_id: _joi2.default.string().optional(),
+    supplier_id: _joi2.default.string().optional(),
+    customer_id: _joi2.default.string().optional(),
+    partner_id: _joi2.default.string().optional(),
+    subject: _joi2.default.string().required(),
+    body: _joi2.default.string().required(),
+    receive_status: _joi2.default.string().valid("UNREAD", "READ").optional(),
+    sent_status: _joi2.default.string().valid("DRAFT", "SENT").optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdated = {
-    receive_status: Joi.string().valid("UNREAD", "READ").optional(),
-    sent_status: Joi.string().valid("DRAFT", "SENT").optional(),
-    updated_by: Joi.string().required()
+var schemaUpdated = exports.schemaUpdated = {
+    receive_status: _joi2.default.string().valid("UNREAD", "READ").optional(),
+    sent_status: _joi2.default.string().valid("DRAFT", "SENT").optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     sender: { type: String, enum: ["STAFF", "CUSTOMER", "SUPPLIER", "PARTNER"], required: true },
     recipient: { type: String, enum: ["STAFF", "CUSTOMER", "SUPPLIER", "PARTNER"], required: true },
     supplier_id: { type: ObjectId, ref: "Supplier" },
@@ -61,12 +82,12 @@ export const schema = {
     updated_by: { type: ObjectId }
 };
 
-const options = DATABASE.OPTIONS;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "message");
 
-const Message = mongoose.model("Message", newSchema);
+var Message = _mongoose2.default.model("Message", newSchema);
 
-export default Message;
+exports.default = Message;
 //# sourceMappingURL=model.js.map

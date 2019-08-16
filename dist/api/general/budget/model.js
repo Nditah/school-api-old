@@ -1,3 +1,42 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _model3 = require("../office/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
+var _model5 = require("../account-heading/model");
+
+var _model6 = _interopRequireDefault(_model5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Schema = _mongoose2.default.Schema;
+// eslint-disable-next-line import/no-cycle
+
+// eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
  * @property {ObjectId} id Budget primaryKey
@@ -12,46 +51,35 @@
  * @property {ObjectId} account_heading Budget AccountHeading
  * @description Budget model holds records of the expenditure limit for a year
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE, SUBSIDIARY } from "../../../constants";
-// eslint-disable-next-line import/no-cycle
-import Staff from "../staff/model";
-import Office from "../office/model";
-import AccountHeading from "../account-heading/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    name: Joi.string().optional(),
-    description: Joi.string().optional(),
-    type: Joi.string().trim().valid(["ACCOUNT", "OFFICE", "SUBSIDIARY", "TERMINAL"]).optional(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
-    year: Joi.number().optional(),
-    amount: Joi.number().optional(),
-    office: Joi.string().optional(),
-    terminal: Joi.string().optional(),
-    account_heading: Joi.string().optional(),
-    created_by: Joi.string().required()
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    name: _joi2.default.string().optional(),
+    description: _joi2.default.string().optional(),
+    type: _joi2.default.string().trim().valid(["ACCOUNT", "OFFICE", "SUBSIDIARY", "TERMINAL"]).optional(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
+    year: _joi2.default.number().optional(),
+    amount: _joi2.default.number().optional(),
+    office: _joi2.default.string().optional(),
+    terminal: _joi2.default.string().optional(),
+    account_heading: _joi2.default.string().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    name: Joi.string().optional(),
-    description: Joi.string().optional(),
-    type: Joi.string().trim().valid(["ACCOUNT", "OFFICE", "SUBSIDIARY", "TERMINAL"]).optional(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
-    year: Joi.number().optional(),
-    amount: Joi.number().optional(),
-    office: Joi.string().optional(),
-    terminal: Joi.string().optional(),
-    account_heading: Joi.string().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    name: _joi2.default.string().optional(),
+    description: _joi2.default.string().optional(),
+    type: _joi2.default.string().trim().valid(["ACCOUNT", "OFFICE", "SUBSIDIARY", "TERMINAL"]).optional(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
+    year: _joi2.default.number().optional(),
+    amount: _joi2.default.number().optional(),
+    office: _joi2.default.string().optional(),
+    terminal: _joi2.default.string().optional(),
+    account_heading: _joi2.default.string().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     name: { type: String, required: true },
     type: { type: String, enum: ["ACCOUNT", "OFFICE", "SUBSIDIARY", "TERMINAL"], required: true },
     description: { type: String, required: true },
@@ -59,7 +87,7 @@ export const schema = {
     amount: { type: Number, required: true },
     subsidiary: {
         type: String,
-        enum: Object.values(SUBSIDIARY),
+        enum: Object.values(_constants.SUBSIDIARY),
         required: true
     },
     terminal: { type: ObjectId, ref: "Terminal" },
@@ -69,12 +97,12 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const options = DATABASE.OPTIONS;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "budget");
 
-const Budget = mongoose.model("Budget", newSchema);
+var Budget = _mongoose2.default.model("Budget", newSchema);
 
-export default Budget;
+exports.default = Budget;
 //# sourceMappingURL=model.js.map

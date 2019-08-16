@@ -1,3 +1,32 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _model = require("../../general/staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Schema = _mongoose2.default.Schema;
+// eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
  * @property {Number} flwId FlutterwaveTransaction flwId // 125837,
@@ -33,51 +62,43 @@
  * payment gateway like InterSwitch, Flutterwave, Paystack, Paypal. It mainly has the
  * webhook for flutterwave payment for now.
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE } from "../../../constants";
-import Staff from "../../general/staff/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    flwId: Joi.number().optional(),
-    txRef: Joi.string().optional(),
-    flwRef: Joi.string().optional(),
-    orderRef: Joi.string().optional(),
-    paymentPlan: Joi.string().optional(),
-    flwCreatedAt: Joi.date().optional(),
-    amount: Joi.number().optional(),
-    charged_amount: Joi.number().optional(),
-    status: Joi.string().optional(),
-    IP: Joi.string().optional(),
-    currency: Joi.string().optional(),
-    customer: Joi.object().optional(),
-    entity: Joi.object().optional(),
-    created_by: Joi.string().optional()
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    flwId: _joi2.default.number().optional(),
+    txRef: _joi2.default.string().optional(),
+    flwRef: _joi2.default.string().optional(),
+    orderRef: _joi2.default.string().optional(),
+    paymentPlan: _joi2.default.string().optional(),
+    flwCreatedAt: _joi2.default.date().optional(),
+    amount: _joi2.default.number().optional(),
+    charged_amount: _joi2.default.number().optional(),
+    status: _joi2.default.string().optional(),
+    IP: _joi2.default.string().optional(),
+    currency: _joi2.default.string().optional(),
+    customer: _joi2.default.object().optional(),
+    entity: _joi2.default.object().optional(),
+    created_by: _joi2.default.string().optional()
 };
 
-export const schemaUpdate = {
-    flwId: Joi.number().optional(),
-    txRef: Joi.string().optional(),
-    flwRef: Joi.string().optional(),
-    orderRef: Joi.string().optional(),
-    paymentPlan: Joi.string().optional(),
-    flwCreatedAt: Joi.date().optional(),
-    amount: Joi.number().optional(),
-    charged_amount: Joi.number().optional(),
-    status: Joi.string().optional(),
-    IP: Joi.string().optional(),
-    currency: Joi.string().optional(),
-    customer: Joi.object().optional(),
-    entity: Joi.object().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    flwId: _joi2.default.number().optional(),
+    txRef: _joi2.default.string().optional(),
+    flwRef: _joi2.default.string().optional(),
+    orderRef: _joi2.default.string().optional(),
+    paymentPlan: _joi2.default.string().optional(),
+    flwCreatedAt: _joi2.default.date().optional(),
+    amount: _joi2.default.number().optional(),
+    charged_amount: _joi2.default.number().optional(),
+    status: _joi2.default.string().optional(),
+    IP: _joi2.default.string().optional(),
+    currency: _joi2.default.string().optional(),
+    customer: _joi2.default.object().optional(),
+    entity: _joi2.default.object().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     flwId: { type: Number }, // 125837,
     txRef: { type: String }, // "rave-pos-272519815315",
     flwRef: { type: String }, // "FLWACHMOCK-1523118279396",
@@ -111,12 +132,12 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const options = DATABASE.OPTIONS;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "flutterwave_transaction");
 
-const FlutterwaveTransaction = mongoose.model("FlutterwaveTransaction", newSchema);
+var FlutterwaveTransaction = _mongoose2.default.model("FlutterwaveTransaction", newSchema);
 
-export default FlutterwaveTransaction;
+exports.default = FlutterwaveTransaction;
 //# sourceMappingURL=model.js.map

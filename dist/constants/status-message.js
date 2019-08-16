@@ -1,5 +1,10 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 // eslint-disable-next-line import/prefer-default-export
-export const STATUS_MSG = {
+var STATUS_MSG = exports.STATUS_MSG = {
     ERROR: {
         ALREADY_EXISTS: {
             statusCode: 400,

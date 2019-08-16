@@ -1,3 +1,35 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
  * @property {ObjectId} id admission primaryKey
@@ -21,51 +53,43 @@
  * @property {ObjectId} phone_number Admission Assistant Head Staff Id
  * @description Admission model holds record of all admissions in Peace Group
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE, OFFICE_TYPE, SUBSIDIARY } from "../../../constants";
-import table from "./table";
+var Schema = _mongoose2.default.Schema;
 // eslint-disable-next-line import/no-cycle
-import Staff from "../staff/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    name: Joi.string().trim().required(),
-    code: Joi.string().trim().optional(),
-    email: Joi.string().trim().optional(),
-    phone: Joi.string().trim().optional(),
-    functions: Joi.string().optional(),
-    description: Joi.string().optional(),
-    hierarchy: Joi.number().optional(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
-    admission_type: Joi.string().valid(Object.values(OFFICE_TYPE)).optional(),
-    admission_above: Joi.string().optional(),
-    head: Joi.string().optional(),
-    assistant: Joi.string().optional(),
-    created_by: Joi.string().required()
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    name: _joi2.default.string().trim().required(),
+    code: _joi2.default.string().trim().optional(),
+    email: _joi2.default.string().trim().optional(),
+    phone: _joi2.default.string().trim().optional(),
+    functions: _joi2.default.string().optional(),
+    description: _joi2.default.string().optional(),
+    hierarchy: _joi2.default.number().optional(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
+    admission_type: _joi2.default.string().valid(Object.values(_constants.OFFICE_TYPE)).optional(),
+    admission_above: _joi2.default.string().optional(),
+    head: _joi2.default.string().optional(),
+    assistant: _joi2.default.string().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    name: Joi.string().trim().optional(),
-    code: Joi.string().trim().optional(),
-    email: Joi.string().trim().optional(),
-    phone: Joi.string().trim().optional(),
-    functions: Joi.string().optional(),
-    description: Joi.string().optional(),
-    hierarchy: Joi.number().optional(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
-    admission_type: Joi.string().valid(Object.values(OFFICE_TYPE)).optional(),
-    admission_above: Joi.string().optional(),
-    head: Joi.string().optional(),
-    assistant: Joi.string().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    name: _joi2.default.string().trim().optional(),
+    code: _joi2.default.string().trim().optional(),
+    email: _joi2.default.string().trim().optional(),
+    phone: _joi2.default.string().trim().optional(),
+    functions: _joi2.default.string().optional(),
+    description: _joi2.default.string().optional(),
+    hierarchy: _joi2.default.number().optional(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
+    admission_type: _joi2.default.string().valid(Object.values(_constants.OFFICE_TYPE)).optional(),
+    admission_above: _joi2.default.string().optional(),
+    head: _joi2.default.string().optional(),
+    assistant: _joi2.default.string().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     name: { type: String, required: [true, "Why no input?"] },
     code: { type: String },
     phone: { type: String },
@@ -82,14 +106,14 @@ export const schema = {
     hierarchy: { type: Number },
     admission_type: {
         type: String,
-        enum: Object.values(OFFICE_TYPE),
+        enum: Object.values(_constants.OFFICE_TYPE),
         required: [true, "Why no input?"]
     },
     subsidiary: {
         type: String,
-        enum: Object.values(SUBSIDIARY),
+        enum: Object.values(_constants.SUBSIDIARY),
         required: [true, "Why no input?"],
-        default: SUBSIDIARY.PEACEGROUP
+        default: _constants.SUBSIDIARY.PEACEGROUP
     },
     admission_above: { type: ObjectId, ref: "Admission" },
     head: { type: ObjectId, ref: "Staff" },
@@ -98,18 +122,18 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "admission");
-newSchema.plugin(mongoose_csv);
+newSchema.plugin(_mongooseCsv2.default);
 
-const Admission = mongoose.model("Admission", newSchema);
+var Admission = _mongoose2.default.model("Admission", newSchema);
 
 if (preload) {
-    Admission.insertMany(table);
+    Admission.insertMany(_table2.default);
 }
 
-export default Admission;
+exports.default = Admission;
 //# sourceMappingURL=model.js.map

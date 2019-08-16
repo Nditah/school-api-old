@@ -1,56 +1,97 @@
-import "babel-polyfill";
-import express from "express";
-import bodyParser from "body-parser";
-import morgan from "morgan";
-import dotenv from "dotenv";
-import cors from "cors";
+"use strict";
 
-import compression from "compression";
-import path from "path";
-import helmet from "helmet";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-import http from "http";
+require("babel-polyfill");
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _bodyParser = require("body-parser");
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _morgan = require("morgan");
+
+var _morgan2 = _interopRequireDefault(_morgan);
+
+var _dotenv = require("dotenv");
+
+var _dotenv2 = _interopRequireDefault(_dotenv);
+
+var _cors = require("cors");
+
+var _cors2 = _interopRequireDefault(_cors);
+
+var _compression = require("compression");
+
+var _compression2 = _interopRequireDefault(_compression);
+
+var _path = require("path");
+
+var _path2 = _interopRequireDefault(_path);
+
+var _helmet = require("helmet");
+
+var _helmet2 = _interopRequireDefault(_helmet);
+
+var _http = require("http");
+
+var _http2 = _interopRequireDefault(_http);
+
+var _model = require("./api/general/chat/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _api = require("./api");
+
+var _config = require("./config");
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_dotenv2.default.config();
 
 // import routes
-import Chat from "./api/general/chat/model";
-import { peacegroupApi, pmtApi, pmlApi } from "./api";
-import database from "./config";
 
-dotenv.config();
-const app = express();
-const server = http.createServer(app);
-const io = require("socket.io")(server);
+var app = (0, _express2.default)();
+var server = _http2.default.createServer(app);
+var io = require("socket.io")(server);
 
-const hostname = "0.0.0.0"; // "localhost";
-const port = process.env.PORT || 5000;
-const chatPort = process.env.PORT_CHAT || 7000;
-const defaultPath = path.join(__dirname, "/public");
+var hostname = "0.0.0.0"; // "localhost";
+var port = process.env.PORT || 5000;
+var chatPort = process.env.PORT_CHAT || 7000;
+var defaultPath = _path2.default.join(__dirname, "/public");
 
-app.use(helmet());
-app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-app.use(bodyParser.json({ limit: "50mb" }));
-app.use(morgan("dev"));
-app.use(cors());
-app.use(compression());
-app.use(express.static(defaultPath));
+app.use((0, _helmet2.default)());
+app.use(_bodyParser2.default.urlencoded({ extended: true, limit: "50mb" }));
+app.use(_bodyParser2.default.json({ limit: "50mb" }));
+app.use((0, _morgan2.default)("dev"));
+app.use((0, _cors2.default)());
+app.use((0, _compression2.default)());
+app.use(_express2.default.static(defaultPath));
 
-database.on("error", console.error.bind(console, "Connection error:"));
-database.once("open", () => {
+_config2.default.on("error", console.error.bind(console, "Connection error:"));
+_config2.default.once("open", function () {
     console.log("Successfully connected to the database!");
 });
 
-app.get("/", (req, res) => {
+app.get("/", function (req, res) {
     console.log("defaultPath ", defaultPath);
-    res.render(`${defaultPath}/index.html`);
+    res.render(defaultPath + "/index.html");
 });
 
-app.get("/chat", (req, res) => {
-    console.log(`${defaultPath}/index.html`);
-    res.render(`${defaultPath}/index.html`);
+app.get("/chat", function (req, res) {
+    console.log(defaultPath + "/index.html");
+    res.render(defaultPath + "/index.html");
 });
 
 // modify request object
-app.use((req, res, next) => {
+app.use(function (req, res, next) {
     res.locals.userId = 0.0;
     res.locals.userType = "anonymous";
     res.locals.role = "";
@@ -58,41 +99,41 @@ app.use((req, res, next) => {
 });
 
 // Use Routes
-app.use("/api", peacegroupApi);
-app.use("/api", pmtApi);
-app.use("/api", pmlApi);
+app.use("/api", _api.peacegroupApi);
+app.use("/api", _api.pmtApi);
+app.use("/api", _api.pmlApi);
 
-app.use((req, res, next) => {
-    const error = new Error("Not found!");
+app.use(function (req, res, next) {
+    var error = new Error("Not found!");
     error.status = 404;
     next(error);
 });
 
-app.use((error, req, res, next) => {
+app.use(function (error, req, res, next) {
     res.status(error.status || 500);
     res.json({
         success: false,
         payload: null,
-        message: `SCHOOL API says ${error.message}`
+        message: "SCHOOL API says " + error.message
     });
     next();
 });
 
 // listen for requests
-app.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(port, hostname, function () {
+    console.log("Server running at http://" + hostname + ":" + port + "/");
 });
 
 // setup event listener
-io.on("connection", socket => {
+io.on("connection", function (socket) {
     console.log("user connected");
 
-    socket.on("disconnect", () => {
+    socket.on("disconnect", function () {
         console.log("user disconnected");
     });
 
     // Someone is typing
-    socket.on("typing", data => {
+    socket.on("typing", function (data) {
         socket.broadcast.emit("notifyTyping", {
             user: data.user,
             message: data.message
@@ -100,35 +141,35 @@ io.on("connection", socket => {
     });
 
     // when soemone stops typing
-    socket.on("stopTyping", () => {
+    socket.on("stopTyping", function () {
         socket.broadcast.emit("notifyStopTyping");
     });
 
-    socket.on("chat message", msg => {
-        console.log(`message: ${msg}`);
+    socket.on("chat message", function (msg) {
+        console.log("message: " + msg);
 
         // broadcast message to everyone in port:5000 except yourself.
         socket.broadcast.emit("received", { message: msg });
 
         // save chat to the database
-        const chatMessage = new Chat({ message: msg, sender: "Anonymous" });
+        var chatMessage = new _model2.default({ message: msg, sender: "Anonymous" });
         chatMessage.save();
 
-        socket.on("disconnect", () => {
+        socket.on("disconnect", function () {
             console.log("client disconnect...", socket.id);
             // handleDisconnect();
         });
 
-        socket.on("error", err => {
+        socket.on("error", function (err) {
             console.log("received error from client:", socket.id);
             console.log(err);
         });
     });
 });
 
-server.listen(chatPort, () => {
-    console.log(`ChatApp listens on port ${chatPort}`);
+server.listen(chatPort, function () {
+    console.log("ChatApp listens on port " + chatPort);
 });
 
-export default app;
+exports.default = app;
 //# sourceMappingURL=chat.js.map

@@ -1,11 +1,28 @@
-export const EMPLOYEE_TYPE = {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _statusMessage = require("./status-message");
+
+Object.keys(_statusMessage).forEach(function (key) {
+    if (key === "default" || key === "__esModule") return;
+    Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function get() {
+            return _statusMessage[key];
+        }
+    });
+});
+var EMPLOYEE_TYPE = exports.EMPLOYEE_TYPE = {
     STAFF: "STAFF",
     PARTNER: "PARTNER",
     CONTRACTOR: "CONTRACTOR",
     UNKNOWN: "UNKNOWN"
 };
 
-export const OFFICE_TYPE = {
+var OFFICE_TYPE = exports.OFFICE_TYPE = {
     BOARD: "BOARD",
     DIRECTORATE: "DIRECTORATE",
     SUBSIDIARY: "SUBSIDIARY",
@@ -15,7 +32,7 @@ export const OFFICE_TYPE = {
     UNKNOWN: "UNKNOWN"
 };
 
-export const PMT = {
+var PMT = exports.PMT = {
     BOARDING_STATUS: { CLOSED: "CLOSED", OPEN: "OPEN" },
     BOOKING_METHOD: { LIVE: "LIVE", RESERVATION: "RESERVATION", OFFLINE: "OFFLINE" },
     HIRING_STATUS: { CLOSED: "CLOSED", PENDING: "PENDING" },
@@ -49,7 +66,7 @@ export const PMT = {
     }
 };
 
-export const PAYMENT = {
+var PAYMENT = exports.PAYMENT = {
     GATEWAY: {
         FLUTTERWAVE: "FLUTTERWAVE",
         INTERSWITCH: "INTERSWITCH",
@@ -71,7 +88,7 @@ export const PAYMENT = {
 
 };
 
-export const PML = {
+var PML = exports.PML = {
     RECIPIENT_TYPE: { INDIVIDUAL: "INDIVIDUAL", ORGANIZATION: "ORGANIZATION" },
     ROUTING_STATUS: { STORE: "STORE", TRANSIT: "TRANSIT" },
     DELIVERY_STATUS: { PENDING: "PENDING", WAYBILLED: "WAYBILLED", SHIPPED: "SHIPPED", ARRIVED: "ARRIVED", DELIVERED: "DELIVERED", DISPATCHED: "DISPATCHED" },
@@ -85,12 +102,12 @@ export const PML = {
     UNIQUENESS: { ORDINARY: "ORDINARY", EXTRAORDINARY: "EXTRAORDINARY" }
 };
 
-export const GENDER = {
+var GENDER = exports.GENDER = {
     MALE: "MALE",
     FEMALE: "FEMALE"
 };
 
-export const MARITAL_STATUS = {
+var MARITAL_STATUS = exports.MARITAL_STATUS = {
     SINGLE: "SINGLE",
     MARRIED: "MARRIED",
     DIVORSED: "DIVORSED",
@@ -99,13 +116,13 @@ export const MARITAL_STATUS = {
     UNKNOWN: "UNKNOWN"
 };
 
-export const CUSTOMER_TYPE = {
+var CUSTOMER_TYPE = exports.CUSTOMER_TYPE = {
     INDIVIDUAL: "INDIVIDUAL",
     ORGANIZATION: "ORGANIZATION",
     UNKNOWN: "UNKNOWN"
 };
 
-export const PERSONAL_TITLE = {
+var PERSONAL_TITLE = exports.PERSONAL_TITLE = {
     MR: "MR",
     MISS: "MISS",
     MRS: "MRS",
@@ -123,7 +140,7 @@ export const PERSONAL_TITLE = {
     UNKNOWN: "UNKNOWN"
 };
 
-export const EMPLOYMENT_STATUS = {
+var EMPLOYMENT_STATUS = exports.EMPLOYMENT_STATUS = {
     PENDING: "PENDING",
     VERIFIED: "VERIFIED",
     APPROVED: "APPROVED",
@@ -136,7 +153,7 @@ export const EMPLOYMENT_STATUS = {
     UNKNOWN: "UNKNOWN"
 };
 
-export const SUBSIDIARY = {
+var SUBSIDIARY = exports.SUBSIDIARY = {
     PMT: "PMT",
     PML: "PML",
     PET: "PET",
@@ -148,7 +165,7 @@ export const SUBSIDIARY = {
     PEACEGROUP: "PEACEGROUP"
 };
 
-export const VEHICLE = {
+var VEHICLE = exports.VEHICLE = {
     VEHICLE_MAKE: {
         TOYOTA: "TOYOTA",
         UGAMA: "UGAMA",
@@ -205,27 +222,27 @@ export const VEHICLE = {
     }
 };
 
-export const PARTNER_TYPE = {
+var PARTNER_TYPE = exports.PARTNER_TYPE = {
     OWNER: "OWNER",
     DTO: "DTO",
     PMT: "PMT",
     PARTNER: "PARTNER"
 };
 
-export const ASSET_WORTHINESS = {
+var ASSET_WORTHINESS = exports.ASSET_WORTHINESS = {
     APPRECIATE: "APPRECIATE",
     DEPRECIATE: "DEPRECIATE",
     UNKNOWN: "UNKNOWN"
 };
 
-export const BANK_ACCOUNT_TYPE = {
+var BANK_ACCOUNT_TYPE = exports.BANK_ACCOUNT_TYPE = {
     SAVINGS: "SAVINGS",
     CORPORATE: "CORPORATE",
     DOMICIARY: "DOMICIARY",
     UNKNOWN: "UNKNOWN"
 };
 
-export const BANK_ACCOUNT_USAGE = {
+var BANK_ACCOUNT_USAGE = exports.BANK_ACCOUNT_USAGE = {
     WEBPAY: "WEBPAY",
     POS: "POS",
     REMITTANCE: "REMITTANCE",
@@ -233,7 +250,7 @@ export const BANK_ACCOUNT_USAGE = {
     UNKNOWN: "UNKNOWN"
 };
 
-export const ACCOUNT_CLASS_TYPE = {
+var ACCOUNT_CLASS_TYPE = exports.ACCOUNT_CLASS_TYPE = {
     ASSETS: "ASSETS",
     LIABILITIES: "LIABILITIES",
     CAPITAL: "CAPITAL",
@@ -242,19 +259,19 @@ export const ACCOUNT_CLASS_TYPE = {
     UNKNOWN: "UNKNOWN"
 };
 
-export const ACCOUNT_CLASS_CATEGORY = {
+var ACCOUNT_CLASS_CATEGORY = exports.ACCOUNT_CLASS_CATEGORY = {
     ADMINISTRATIVE: "ADMINISTRATIVE",
     OPERATION: "OPERATION",
     UNKNOWN: "UNKNOWN"
 };
 
-export const ACCESS_LEVEL = [{ name: "LOW", level: 0, user: "EMPLOYEE", description: "Cannot Access the ERP" }, { name: "NORMAL", level: 1, user: "OFFICER", description: "Can only login and view ERP" }, { name: "HIGH", level: 2, user: "UNIT_HEAD", description: "Can carry out all basic operations" }, { name: "VERY_HIGH", level: 3, user: "DEPT_HEAD", description: "Record Acknowledgement" }, { name: "ULTRA_HIGH", level: 4, user: "DIRECTOR", description: "Record Approval" }, { name: "UNLIMITED", level: 5, user: "CHAIRMAN", description: "Unlimited Privilege" }];
+var ACCESS_LEVEL = exports.ACCESS_LEVEL = [{ name: "LOW", level: 0, user: "EMPLOYEE", description: "Cannot Access the ERP" }, { name: "NORMAL", level: 1, user: "OFFICER", description: "Can only login and view ERP" }, { name: "HIGH", level: 2, user: "UNIT_HEAD", description: "Can carry out all basic operations" }, { name: "VERY_HIGH", level: 3, user: "DEPT_HEAD", description: "Record Acknowledgement" }, { name: "ULTRA_HIGH", level: 4, user: "DIRECTOR", description: "Record Approval" }, { name: "UNLIMITED", level: 5, user: "CHAIRMAN", description: "Unlimited Privilege" }];
 
-export const RATING = {
+var RATING = exports.RATING = {
     SUBJECT: ["STAFF", "PARTNER", "TERMINAL", "VEHICLE"]
 };
 
-export const DATABASE = {
+var DATABASE = exports.DATABASE = {
     TABLES: ["STAFF", "PARTNER", "OWNER", "VEHICLE", "ASSET"],
     PRELOAD_TABLE_DATA: { TRUE: true, FALSE: false, DEFAULT: false },
     RECORD_STATUS: {
@@ -303,7 +320,7 @@ export const DATABASE = {
             virtuals: true,
             // eslint-disable-next-line func-names
             // eslint-disable-next-line object-shorthand
-            transform: function (doc, ret) {
+            transform: function transform(doc, ret) {
                 ret.id = ret._id;
                 delete ret._id;
                 // eslint-disable-next-line no-underscore-dangle
@@ -313,13 +330,13 @@ export const DATABASE = {
     }
 };
 
-export const JWT = {
+var JWT = exports.JWT = {
     saltRounds: 2,
     jwtSecret: "yo-it`s-a_hidden-secret",
     tokenExpireTime: "20h"
 };
 
-export const EMAIL = {
+var EMAIL = exports.EMAIL = {
     CONTACT: "nditah@gmail.com",
     PEACEGROUP: "nditah@gmail.com",
     PMT: "nditah@gmail.com",
@@ -328,15 +345,15 @@ export const EMAIL = {
     PET: "nditah@gmail.com"
 };
 
-export const SMS = {
+var SMS = exports.SMS = {
     PEACE_SMS_SENDER: "+13234981706"
 };
 
-export const API = {
+var API = exports.API = {
     URL: "https://jibrila.herokuapp.com"
 };
 
-export const FLUTTERWAVE = {
+var FLUTTERWAVE = exports.FLUTTERWAVE = {
     LIVE_URL: "https://api.ravepay.co",
     TEST_URL: "https://ravesandboxapi.flutterwave.com",
     PAY: "/flwv3-pug/getpaidx/api/v2/hosted/pay",
@@ -349,7 +366,7 @@ export const FLUTTERWAVE = {
     BVN: "/v2/kyc/bvn"
 };
 
-export const PAYSTACK = {
+var PAYSTACK = exports.PAYSTACK = {
     LIVE_URL: "https://api.paystack.co",
     TEST_URL: "https://ravesandboxapi.flutterwave.com",
     PAY: "/flwv3-pug/getpaidx/api/v2/hosted/pay",
@@ -361,7 +378,7 @@ export const PAYSTACK = {
     BVN: "/v2/kyc/bvn"
 };
 
-export const USER_ROLES = {
+var USER_ROLES = exports.USER_ROLES = {
     ADMIN: "ADMIN",
     CUSTOMER: "CUSTOMER",
     PARTNER: "PARTNER",
@@ -370,7 +387,7 @@ export const USER_ROLES = {
     OTHERS: "OTHERS"
 };
 
-export const TRANSPORT_DOC = {
+var TRANSPORT_DOC = exports.TRANSPORT_DOC = {
     LOGO: "LOGO",
     DOCUMENT: "DOCUMENT",
     OTHERS: "OTHERS",
@@ -381,7 +398,7 @@ export const TRANSPORT_DOC = {
     VEHICLE: "VEHICLE"
 };
 
-export const INPUT_TYPE = {
+var INPUT_TYPE = exports.INPUT_TYPE = {
     TEXT: "TEXT",
     TEXTAREA: "TEXTAREA",
     DROPDOWN: "DROPDOWN",
@@ -396,12 +413,10 @@ export const INPUT_TYPE = {
     NUMBER: "NUMBER"
 };
 
-export const ISSUE_PRIORITY = {
+var ISSUE_PRIORITY = exports.ISSUE_PRIORITY = {
     EMERGENCY: "P1",
     HIGH: "P2",
     NORMAL: "P3",
     LOW: "P4"
 };
-
-export * from "./status-message";
 //# sourceMappingURL=index.js.map
