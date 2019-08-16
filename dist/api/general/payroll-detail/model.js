@@ -1,3 +1,40 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _model3 = require("../payroll/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Schema = _mongoose2.default.Schema;
+// eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /* eslint-disable no-unused-vars */
 /**
@@ -16,49 +53,39 @@
  * @property {String} payment_status PayrollDetail transaction status (prohibited)
  * @description PayrollDetail model holds record of all Inventories except vehicles
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE, PAYMENT } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-import Payroll from "../payroll/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    payroll_id: Joi.string().optional(),
-    code: Joi.string().trim().required(),
-    staff_id: Joi.string().optional(),
-    salary: Joi.number().optional(),
-    is_paid: Joi.boolean().optional(),
-    paid_date: Joi.date().optional(),
-    paid_by: Joi.string().optional(),
-    remark: Joi.string().optional(),
-    payment_method: Joi.string().valid(Object.values(PAYMENT.METHOD)).optional(),
-    payment_gateway: Joi.string().valid(Object.values(PAYMENT.GATEWAY)).optional(),
-    payment_status: Joi.string().valid(Object.values(PAYMENT.STATUS)).optional(),
-    created_by: Joi.string().required()
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    payroll_id: _joi2.default.string().optional(),
+    code: _joi2.default.string().trim().required(),
+    staff_id: _joi2.default.string().optional(),
+    salary: _joi2.default.number().optional(),
+    is_paid: _joi2.default.boolean().optional(),
+    paid_date: _joi2.default.date().optional(),
+    paid_by: _joi2.default.string().optional(),
+    remark: _joi2.default.string().optional(),
+    payment_method: _joi2.default.string().valid(Object.values(_constants.PAYMENT.METHOD)).optional(),
+    payment_gateway: _joi2.default.string().valid(Object.values(_constants.PAYMENT.GATEWAY)).optional(),
+    payment_status: _joi2.default.string().valid(Object.values(_constants.PAYMENT.STATUS)).optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    payroll_id: Joi.string().optional(),
-    code: Joi.string().trim().optional(),
-    staff_id: Joi.string().optional(),
-    salary: Joi.number().optional(),
-    is_paid: Joi.boolean().optional(),
-    paid_date: Joi.date().optional(),
-    paid_by: Joi.string().optional(),
-    remark: Joi.string().optional(),
-    payment_method: Joi.string().valid(Object.values(PAYMENT.METHOD)).optional(),
-    payment_gateway: Joi.string().valid(Object.values(PAYMENT.GATEWAY)).optional(),
-    payment_status: Joi.string().valid(Object.values(PAYMENT.STATUS)).optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    payroll_id: _joi2.default.string().optional(),
+    code: _joi2.default.string().trim().optional(),
+    staff_id: _joi2.default.string().optional(),
+    salary: _joi2.default.number().optional(),
+    is_paid: _joi2.default.boolean().optional(),
+    paid_date: _joi2.default.date().optional(),
+    paid_by: _joi2.default.string().optional(),
+    remark: _joi2.default.string().optional(),
+    payment_method: _joi2.default.string().valid(Object.values(_constants.PAYMENT.METHOD)).optional(),
+    payment_gateway: _joi2.default.string().valid(Object.values(_constants.PAYMENT.GATEWAY)).optional(),
+    payment_status: _joi2.default.string().valid(Object.values(_constants.PAYMENT.STATUS)).optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     payroll_id: { type: ObjectId, ref: "Payroll", required: true },
     code: { type: String, required: true, comment: "Transaction code" },
     staff_id: { type: ObjectId, ref: "Staff", required: true },
@@ -69,37 +96,37 @@ export const schema = {
     remark: { type: String },
     payment_method: {
         type: String,
-        enum: Object.values(PAYMENT.METHOD),
+        enum: Object.values(_constants.PAYMENT.METHOD),
         required: [true, "Why no payment_method?"],
-        default: PAYMENT.METHOD.CASH
+        default: _constants.PAYMENT.METHOD.CASH
     },
     payment_gateway: {
         type: String,
-        enum: Object.values(PAYMENT.GATEWAY),
+        enum: Object.values(_constants.PAYMENT.GATEWAY),
         required: [true, "Why no payment_method?"],
-        default: PAYMENT.GATEWAY.UNIONBANK
+        default: _constants.PAYMENT.GATEWAY.UNIONBANK
     },
     payment_status: {
         type: String,
-        enum: Object.values(PAYMENT.STATUS),
+        enum: Object.values(_constants.PAYMENT.STATUS),
         required: [true, "Why no payment_status?"],
-        default: PAYMENT.STATUS.PENDING
+        default: _constants.PAYMENT.STATUS.PENDING
     },
     created_by: { type: ObjectId, required: true },
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "payroll_detail");
 
-const PayrollDetail = mongoose.model("PayrollDetail", newSchema);
+var PayrollDetail = _mongoose2.default.model("PayrollDetail", newSchema);
 
 if (preload) {
-    PayrollDetail.insertMany(table);
+    PayrollDetail.insertMany(_table2.default);
 }
 
-export default PayrollDetail;
+exports.default = PayrollDetail;
 //# sourceMappingURL=model.js.map

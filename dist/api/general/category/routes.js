@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/categories?id={recordId} Retrieve one or all records
@@ -19,7 +31,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/categories", [checkAuth, isValidStaff], fetchRecord);
+router.get("/categories", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
  * @api {post} /api/categories Create categories
@@ -36,7 +48,7 @@ router.get("/categories", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Category not found.
  * @apiError 401 master access only.
  */
-router.post("/categories", [checkAuth, isValidStaff], createRecord);
+router.post("/categories", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {put} /api/categories/{recordId} Update categories
@@ -54,7 +66,7 @@ router.post("/categories", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 Category not found.
  * @apiError 401 master access only.
  */
-router.put("/categories/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/categories/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/categories/{recordId} Delete categories
@@ -66,7 +78,7 @@ router.put("/categories/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiError 404 Category not found.
  * @apiError 401 master access only.
  */
-router.delete("/categories/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/categories/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

@@ -1,1 +1,1 @@
-{"version":3,"sources":["../../src/config/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,YAAxB","file":"index.js","sourcesContent":["export { default } from \"./database\";\n"]}
+{"version":3,"sources":["../../src/config/index.js"],"names":["default"],"mappings":";;;;;;;;;;;6CAASA,O","file":"index.js","sourcesContent":["export { default } from \"./database\";\n"]}

@@ -1,9 +1,28 @@
-import rp from "request-promise";
-import { FLUTTERWAVE } from "../constants";
+"use strict";
 
-const secretKey = "FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.verifyTransaction = verifyTransaction;
+exports.getTransaction = getTransaction;
+exports.getSettlement = getSettlement;
+exports.getSubaccount = getSubaccount;
+exports.createSubaccount = createSubaccount;
+exports.updateSubaccount = updateSubaccount;
+exports.deleteSubaccount = deleteSubaccount;
+exports.getBVn = getBVn;
 
-let FLW_URL = FLUTTERWAVE.TEST_URL;
+var _requestPromise = require("request-promise");
+
+var _requestPromise2 = _interopRequireDefault(_requestPromise);
+
+var _constants = require("../constants");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var secretKey = "FLWSECK-e6db11d1f8a6208de8cb2f94e293450e-X";
+
+var FLW_URL = _constants.FLUTTERWAVE.TEST_URL;
 if (process.env.NODE_ENV === "production") {
     //  FLW_URL = FLUTTERWAVE.LIVE_URL;
     // publicKey = process.env.FLUTTERWAVE_PUBLIC_KEY;
@@ -11,113 +30,151 @@ if (process.env.NODE_ENV === "production") {
     // tnxHash = process.env.FLUTTERWAVE_HASH;
 }
 
-const headersObj = {
+var headersObj = {
     Accept: "application/json",
     "Content-Type": "application/json",
     json: true
 };
 
-export function verifyTransaction(txRef) {
-    const payload = { SECKEY: secretKey, txref: txRef };
-    const options = {
+function verifyTransaction(txRef) {
+    var payload = { SECKEY: secretKey, txref: txRef };
+    var options = {
         method: "POST",
-        uri: `${FLW_URL}${FLUTTERWAVE.VERIFY}`,
+        uri: "" + FLW_URL + _constants.FLUTTERWAVE.VERIFY,
         body: payload,
         headers: headersObj,
         json: true // Automatically stringifies the body to JSON
     };
-    return rp(options).then(response => response) // const { status, message, data } = response;
-    .catch(e => {
+    return (0, _requestPromise2.default)(options).then(function (response) {
+        return response;
+    }) // const { status, message, data } = response;
+    .catch(function (e) {
         throw new Error(e.error);
         // const { name, statusCode, message, error, options, response } = e;
     });
 }
 
-export function getTransaction(payload = {}, timeline = false) {
+function getTransaction() {
+    var payload = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var timeline = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
     payload.seckey = secretKey;
-    let url = `${FLW_URL}${FLUTTERWAVE.TRANSACTION}/query`;
+    var url = "" + FLW_URL + _constants.FLUTTERWAVE.TRANSACTION + "/query";
     if (timeline) {
-        url = `${FLW_URL}${FLUTTERWAVE.TRANSACTION_EVENTS}`;
+        url = "" + FLW_URL + _constants.FLUTTERWAVE.TRANSACTION_EVENTS;
     }
-    const options = {
+    var options = {
         method: "POST",
         uri: url,
         headers: headersObj,
         body: payload,
         json: true
     };
-    return rp(options).then(response => response).catch(err => err);
+    return (0, _requestPromise2.default)(options).then(function (response) {
+        return response;
+    }).catch(function (err) {
+        return err;
+    });
 }
 
-export function getSettlement(payload = {}) {
+function getSettlement() {
+    var payload = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
     payload.seckey = secretKey;
-    const options = {
+    var options = {
         method: "POST",
-        uri: `${FLW_URL}${FLUTTERWAVE.SETTLEMENT}`,
+        uri: "" + FLW_URL + _constants.FLUTTERWAVE.SETTLEMENT,
         headers: headersObj,
         body: payload,
         json: true
     };
-    return rp(options).then(response => response).catch(err => err);
+    return (0, _requestPromise2.default)(options).then(function (response) {
+        return response;
+    }).catch(function (err) {
+        return err;
+    });
 }
 
-export function getSubaccount(id = "", page = 1) {
-    let url = `${FLW_URL}${FLUTTERWAVE.SUBACCOUNT}?seckey=${secretKey}&page=${page}`;
-    if (id) url = `${FLW_URL}${FLUTTERWAVE.SUBACCOUNT}/get/${id}?seckey=${secretKey}`;
-    const options = {
+function getSubaccount() {
+    var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+    var page = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
+    var url = "" + FLW_URL + _constants.FLUTTERWAVE.SUBACCOUNT + "?seckey=" + secretKey + "&page=" + page;
+    if (id) url = "" + FLW_URL + _constants.FLUTTERWAVE.SUBACCOUNT + "/get/" + id + "?seckey=" + secretKey;
+    var options = {
         method: "GET",
         uri: url,
         headers: headersObj,
         json: true
     };
-    return rp(options).then(response => response).catch(err => err);
+    return (0, _requestPromise2.default)(options).then(function (response) {
+        return response;
+    }).catch(function (err) {
+        return err;
+    });
 }
 
-export function createSubaccount(payload) {
+function createSubaccount(payload) {
     payload.seckey = secretKey;
-    const options = {
+    var options = {
         method: "POST",
-        uri: `${FLW_URL}${FLUTTERWAVE.SUBACCOUNT}/create`,
+        uri: "" + FLW_URL + _constants.FLUTTERWAVE.SUBACCOUNT + "/create",
         body: payload,
         headers: headersObj,
         json: true
     };
     console.log(options);
-    return rp(options).then(response => response).catch(err => err);
+    return (0, _requestPromise2.default)(options).then(function (response) {
+        return response;
+    }).catch(function (err) {
+        return err;
+    });
 }
 
-export function updateSubaccount(payload) {
+function updateSubaccount(payload) {
     payload.seckey = secretKey;
-    const options = {
+    var options = {
         method: "POST",
-        uri: `${FLW_URL}${FLUTTERWAVE.SUBACCOUNT}/edit`,
+        uri: "" + FLW_URL + _constants.FLUTTERWAVE.SUBACCOUNT + "/edit",
         body: payload,
         headers: headersObj,
         json: true
     };
-    return rp(options).then(response => response).catch(err => err);
+    return (0, _requestPromise2.default)(options).then(function (response) {
+        return response;
+    }).catch(function (err) {
+        return err;
+    });
 }
 
-export function deleteSubaccount(id) {
-    const payload = { id, seckey: secretKey };
-    const options = {
+function deleteSubaccount(id) {
+    var payload = { id: id, seckey: secretKey };
+    var options = {
         method: "POST",
-        uri: `${FLW_URL}${FLUTTERWAVE.SUBACCOUNT}/delete`,
+        uri: "" + FLW_URL + _constants.FLUTTERWAVE.SUBACCOUNT + "/delete",
         body: payload,
         headers: headersObj,
         json: true
     };
-    return rp(options).then(response => response).catch(err => err);
+    return (0, _requestPromise2.default)(options).then(function (response) {
+        return response;
+    }).catch(function (err) {
+        return err;
+    });
 }
 
-export function getBVn(bvn) {
-    const url = `${FLW_URL}${FLUTTERWAVE.BVN}/${bvn}?seckey=${secretKey}`;
-    const options = {
+function getBVn(bvn) {
+    var url = "" + FLW_URL + _constants.FLUTTERWAVE.BVN + "/" + bvn + "?seckey=" + secretKey;
+    var options = {
         method: "GET",
         uri: url,
         headers: headersObj,
         json: true
     };
-    return rp(options).then(response => response).catch(err => err);
+    return (0, _requestPromise2.default)(options).then(function (response) {
+        return response;
+    }).catch(function (err) {
+        return err;
+    });
 }
 //# sourceMappingURL=flutterwave.js.map

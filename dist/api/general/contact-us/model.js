@@ -1,3 +1,32 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Schema = _mongoose2.default.Schema;
+// eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
  * @property {Number} id contact_us primaryKey
@@ -14,33 +43,25 @@
  * @property {Boolean} has_ticket ContactUs has_ticket (prohibited)
  * @description ContactUs model holds record of all contact_us info from site visitors
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE } from "../../../constants";
-import Staff from "../staff/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    fullname: Joi.string().required(),
-    email: Joi.string().trim().email().required(),
-    phone: Joi.string().trim().required(),
-    subject: Joi.string().required(),
-    message: Joi.string().required(),
-    request_type: Joi.string().trim().valid("COMPLAINT", "ENQUIRY", "SUGGESTION").required()
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    fullname: _joi2.default.string().required(),
+    email: _joi2.default.string().trim().email().required(),
+    phone: _joi2.default.string().trim().required(),
+    subject: _joi2.default.string().required(),
+    message: _joi2.default.string().required(),
+    request_type: _joi2.default.string().trim().valid("COMPLAINT", "ENQUIRY", "SUGGESTION").required()
 };
 
-export const schemaUpdate = {
-    request_status: Joi.string().trim().valid("ACTIVE", "CLOSED").optional(),
-    remark: Joi.string(),
-    has_ticket: Joi.boolean(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    request_status: _joi2.default.string().trim().valid("ACTIVE", "CLOSED").optional(),
+    remark: _joi2.default.string(),
+    has_ticket: _joi2.default.boolean(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     fullname: { type: String, required: [true, "Why no input?"] },
     email: { type: String, required: [true, "Why no input?"] },
     phone: { type: String, required: [true, "Why no input?"] },
@@ -61,12 +82,12 @@ export const schema = {
     has_ticket: { type: Boolean, required: [true, "Why no input?"], default: false },
     updated_by: { type: ObjectId }
 };
-const options = DATABASE.OPTIONS;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "contact_us");
 
-const ContactUs = mongoose.model("ContactUs", newSchema);
+var ContactUs = _mongoose2.default.model("ContactUs", newSchema);
 
-export default ContactUs;
+exports.default = ContactUs;
 //# sourceMappingURL=model.js.map

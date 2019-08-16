@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/banks?id={recordId} Retrieve one or all records
@@ -19,7 +31,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/banks", [checkAuth, isValidStaff], fetchRecord);
+router.get("/banks", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
  * @api {post} /api/banks Create banks
@@ -38,7 +50,7 @@ router.get("/banks", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Bank not found.
  * @apiError 401 master access only.
  */
-router.post("/banks", [checkAuth, isValidStaff], createRecord);
+router.post("/banks", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {put} /api/banks/{recordId} Update banks
@@ -57,7 +69,7 @@ router.post("/banks", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 Bank not found.
  * @apiError 401 master access only.
  */
-router.put("/banks/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/banks/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/banks/{recordId} Delete banks
@@ -69,7 +81,7 @@ router.put("/banks/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiError 404 Bank not found.
  * @apiError 401 master access only.
  */
-router.delete("/banks/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/banks/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

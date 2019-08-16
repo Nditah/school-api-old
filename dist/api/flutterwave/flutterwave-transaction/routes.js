@@ -1,13 +1,20 @@
-/**
- * @author 4Decoder
- * @description FlutterwaveTransaction holds record of all transactions via
- * Flutterwave payment gateway
- */
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, verifyBvn, queryOnlineTnx, fetchSettlement, verifyOnlineTnx } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/flutterwave-transactions?id={recordId} Retrieve one or all records
@@ -24,7 +31,12 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/flutterwave-transactions", [checkAuth, isValidStaff], fetchRecord);
+/**
+ * @author 4Decoder
+ * @description FlutterwaveTransaction holds record of all transactions via
+ * Flutterwave payment gateway
+ */
+router.get("/flutterwave-transactions", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
  * @api {get} /api/flutterwave-transactions/online?id={recordId} Retrieve one or all online Tnx
@@ -44,7 +56,7 @@ router.get("/flutterwave-transactions", [checkAuth, isValidStaff], fetchRecord);
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/flutterwave-transactions/online", [checkAuth, isValidStaff], queryOnlineTnx);
+router.get("/flutterwave-transactions/online", [_authorization.checkAuth, _authorization.isValidStaff], _controller.queryOnlineTnx);
 
 /**
  * @api {get} /api/flutterwave-transactions/settlement?id={recordId} Retrieve one or all records
@@ -59,7 +71,7 @@ router.get("/flutterwave-transactions/online", [checkAuth, isValidStaff], queryO
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/flutterwave-transactions/settlement", [checkAuth, isValidStaff], fetchSettlement);
+router.get("/flutterwave-transactions/settlement", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchSettlement);
 
 /**
  * @api {post} /api/flutterwave-transactions Create flutterwave-transactions
@@ -99,7 +111,7 @@ router.get("/flutterwave-transactions/settlement", [checkAuth, isValidStaff], fe
  * @apiError 404 FlutterwaveTransaction not found.
  * @apiError 401 master access only.
  */
-router.post("/flutterwave-transactions", createRecord);
+router.post("/flutterwave-transactions", _controller.createRecord);
 
 /**
  * @api {get} /api/flutterwave-transactions/bvn/:bvn verify BVN
@@ -110,7 +122,7 @@ router.post("/flutterwave-transactions", createRecord);
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/flutterwave-transactions/bvn/:bvn", verifyBvn);
+router.get("/flutterwave-transactions/bvn/:bvn", _controller.verifyBvn);
 
 /**
  * @api {get} /api/flutterwave-transactions/payment/{txref} verify Payment
@@ -122,7 +134,7 @@ router.get("/flutterwave-transactions/bvn/:bvn", verifyBvn);
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/flutterwave-transactions/payment/:txref", verifyOnlineTnx);
+router.get("/flutterwave-transactions/payment/:txref", _controller.verifyOnlineTnx);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

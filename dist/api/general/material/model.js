@@ -1,3 +1,43 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _model3 = require("../category/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line import/no-cycle
+var Schema = _mongoose2.default.Schema;
+// eslint-disable-next-line import/no-cycle
+
+// eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
  * @property {String} name  Material name (required)
@@ -22,65 +62,53 @@
  * @property {String} photo  Material photo
  * @description Material model holds record of all Petroleum Raw  Materials
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE, SUBSIDIARY } from "../../../constants";
-import table from "./table";
-// eslint-disable-next-line import/no-cycle
-import Staff from "../staff/model";
-// eslint-disable-next-line import/no-cycle
-import Category from "../category/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    name: Joi.string().required(),
-    type: Joi.string().optional(),
-    code: Joi.string().optional(),
-    description: Joi.string().required(),
-    category_id: Joi.string().optional(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).required(),
-    measure: Joi.string().optional(),
-    volume: Joi.number().optional(),
-    mass: Joi.number().optional(),
-    unit: Joi.string().optional(),
-    cost: Joi.number().optional(),
-    variants: Joi.string().optional(),
-    surface_area: Joi.number().optional(),
-    dimension: Joi.string().optional(),
-    attributes: Joi.object().optional(),
-    photo: Joi.string().optional(),
-    reorder_level: Joi.number().optional(),
-    reorder_quantity: Joi.number().optional(),
-    created_by: Joi.string().required()
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    name: _joi2.default.string().required(),
+    type: _joi2.default.string().optional(),
+    code: _joi2.default.string().optional(),
+    description: _joi2.default.string().required(),
+    category_id: _joi2.default.string().optional(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).required(),
+    measure: _joi2.default.string().optional(),
+    volume: _joi2.default.number().optional(),
+    mass: _joi2.default.number().optional(),
+    unit: _joi2.default.string().optional(),
+    cost: _joi2.default.number().optional(),
+    variants: _joi2.default.string().optional(),
+    surface_area: _joi2.default.number().optional(),
+    dimension: _joi2.default.string().optional(),
+    attributes: _joi2.default.object().optional(),
+    photo: _joi2.default.string().optional(),
+    reorder_level: _joi2.default.number().optional(),
+    reorder_quantity: _joi2.default.number().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    name: Joi.string().optional(),
-    type: Joi.string().optional(),
-    code: Joi.string().optional(),
-    description: Joi.string().optional(),
-    category_id: Joi.string().optional(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
-    measure: Joi.string().optional(),
-    volume: Joi.number().optional(),
-    mass: Joi.number().optional(),
-    unit: Joi.string().optional(),
-    cost: Joi.number().optional(),
-    variants: Joi.string().optional(),
-    surface_area: Joi.number().optional(),
-    dimension: Joi.string().optional(),
-    attributes: Joi.object().optional(),
-    photo: Joi.string().optional(),
-    reorder_level: Joi.number().optional(),
-    reorder_quantity: Joi.number().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    name: _joi2.default.string().optional(),
+    type: _joi2.default.string().optional(),
+    code: _joi2.default.string().optional(),
+    description: _joi2.default.string().optional(),
+    category_id: _joi2.default.string().optional(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
+    measure: _joi2.default.string().optional(),
+    volume: _joi2.default.number().optional(),
+    mass: _joi2.default.number().optional(),
+    unit: _joi2.default.string().optional(),
+    cost: _joi2.default.number().optional(),
+    variants: _joi2.default.string().optional(),
+    surface_area: _joi2.default.number().optional(),
+    dimension: _joi2.default.string().optional(),
+    attributes: _joi2.default.object().optional(),
+    photo: _joi2.default.string().optional(),
+    reorder_level: _joi2.default.number().optional(),
+    reorder_quantity: _joi2.default.number().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     name: { type: String, required: true },
     type: { type: String },
     description: { type: String, required: true },
@@ -91,7 +119,7 @@ export const schema = {
     },
     subsidiary: {
         type: String,
-        enum: Object.values(SUBSIDIARY),
+        enum: Object.values(_constants.SUBSIDIARY),
         required: [false, "Why no input?"]
     },
     unit: { type: String },
@@ -113,17 +141,17 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "material");
 
-const Material = mongoose.model("Material", newSchema);
+var Material = _mongoose2.default.model("Material", newSchema);
 
 if (preload) {
-    Material.insertMany(table);
+    Material.insertMany(_table2.default);
 }
 
-export default Material;
+exports.default = Material;
 //# sourceMappingURL=model.js.map

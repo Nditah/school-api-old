@@ -1,35 +1,32 @@
-import { DATABASE } from "../../../constants";
-import { toObjectId } from "../../../lib";
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _constants = require("../../../constants");
+
+var _lib = require("../../../lib");
 
 // ///////////////////////////////////////
 //              ABOUT US                //
 // ///////////////////////////////////////
 
-const aboutPeacegroup = `
-    <h2> About Peace Group </h2>
-`;
+var aboutPeacegroup = "\n    <h2> About Peace Group </h2>\n";
 
-const aboutPmt = `
-    <h2> About Peace Mass Transit </h2>
-`;
+var aboutPmt = "\n    <h2> About Peace Mass Transit </h2>\n";
 
-const aboutPml = `
-    <h2> About Peace Mass Logistics </h2>
-`;
+var aboutPml = "\n    <h2> About Peace Mass Logistics </h2>\n";
 
-const aboutPet = `
-    <h2> About Peace Petrochemicals </h2>
-`;
+var aboutPet = "\n    <h2> About Peace Petrochemicals </h2>\n";
 
 // ///////////////////////////////////////
 //    FREQUENTLY ASKED QUESTIONS        //
 // ///////////////////////////////////////
 
-const faqPeacegroup = `
-    <h2> Peace Group Frequently Asked Questions </h2>
-`;
+var faqPeacegroup = "\n    <h2> Peace Group Frequently Asked Questions </h2>\n";
 
-let faqPmt = [{
+var faqPmt = [{
     q: "What if I miss my bus?",
     a: "Our tickets are valid for a period of seven days. Just present the initial ticket to our ticketing agents and if there is a change in price, offset the balance. Otherwise, they will issue you a new ticket for the new trip."
 }, {
@@ -56,71 +53,51 @@ let faqPmt = [{
 }];
 faqPmt = JSON.stringify(faqPmt);
 
-const faqPml = `
-    <h2> Peace Mass Logistics Frequently Asked Questions </h2>
-`;
+var faqPml = "\n    <h2> Peace Mass Logistics Frequently Asked Questions </h2>\n";
 
-const faqPet = `
-    <h2> Peace Petrochemicals Frequently Asked Questions </h2>
-`;
+var faqPet = "\n    <h2> Peace Petrochemicals Frequently Asked Questions </h2>\n";
 
 // ///////////////////////////////////////
 //          TERMS AND CONDITIONS        //
 // ///////////////////////////////////////
 
-const termsPeacegroup = `
-    <h2> Peace Group Terms and Conditions </h2>
-`;
+var termsPeacegroup = "\n    <h2> Peace Group Terms and Conditions </h2>\n";
 
-const termsPmt = `
-    <h2> Peace Mass Transit Terms and Conditions </h2>
-`;
+var termsPmt = "\n    <h2> Peace Mass Transit Terms and Conditions </h2>\n";
 
-const termsPml = `
-    <h2> Peace Mass Logistics Terms and Conditions </h2>
-`;
+var termsPml = "\n    <h2> Peace Mass Logistics Terms and Conditions </h2>\n";
 
-const termsPet = `
-    <h2> Peace Petrochemicals Terms and Conditions </h2>
-`;
+var termsPet = "\n    <h2> Peace Petrochemicals Terms and Conditions </h2>\n";
 
 // ///////////////////////////////////////
 //          POLICY STATEMENT            //
 // ///////////////////////////////////////
 
-const policyPeacegroup = `
-    <h2> Peace Group Policy Statement </h2>
-`;
+var policyPeacegroup = "\n    <h2> Peace Group Policy Statement </h2>\n";
 
-const policyPmt = `
-    <h2> Peace Mass Transit Policy Statement </h2>
-`;
+var policyPmt = "\n    <h2> Peace Mass Transit Policy Statement </h2>\n";
 
-const policyPml = `
-    <h2> Peace Mass Logistics Policy Statement </h2>
-`;
+var policyPml = "\n    <h2> Peace Mass Logistics Policy Statement </h2>\n";
 
-const policyPet = `
-    <h2> Peace Petrochemicals Policy Statement </h2>
-`;
+var policyPet = "\n    <h2> Peace Petrochemicals Policy Statement </h2>\n";
 
-const pmlArrivalSms = "Please be informed that your item is ready for pickup. Come with your ID and Waybill # 6.am to 6.pm daily";
-const pmlTransitSms = "Please be informed that your item is on transit to ";
-const pmlDeliverySms = "Please be informed that your item has been received by ";
-const pmlDispatchSms = "Please be informed that your shipment has been dispatched to the recipient's address. Thanks using Peace Mass Logictic";
+var pmlArrivalSms = "Please be informed that your item is ready for pickup. Come with your ID and Waybill # 6.am to 6.pm daily";
+var pmlTransitSms = "Please be informed that your item is on transit to ";
+var pmlDeliverySms = "Please be informed that your item has been received by ";
+var pmlDispatchSms = "Please be informed that your shipment has been dispatched to the recipient's address. Thanks using Peace Mass Logictic";
 
-const table = [{ access: "private", name: "ACCESS", value: "3", category: "ERP", description: "[ 1 - 7 ] Required Privilege to access the ERP" }, { access: "public", name: "BOOKING", value: "SCHEDULE", category: "PMT", description: "[ OFFLINE | DUMMY | SCHEDULE ] Mode of PMT Booking online" }, { access: "private", name: "ERP", value: "LIVE", category: "ERP", description: "[ OFFLINE | TESTING | LIVE ] Administrative shutdown of ERP" }, { access: "public", name: "BOOKING_FARE", value: "FARE1", category: "PMT", description: "[ FARE1 | FARE2 ] Online Booking Fare based on Bus Class" }, { access: "public", name: "BOOKING_DISCOUNT", value: "0", category: "PMT", description: "[ 0 - 50 ] Percentage Discount for Online Booking " }, { access: "private", name: "TAX", value: "2", category: "BOOKING", description: "[ 0 - 100 ] Percentage Tax-rate" }, { access: "private", name: "PAYE", value: "2", category: "SALARY", description: "Pay As You Earn Tax Percentage deductible" }, { access: "private", name: "FUEL_COST", value: "210", category: "PMT", description: "Fuel Cost Per Litres in Naira" }, { access: "private", name: "DTO_INITIAL_DEPOSIT", value: "10", category: "PMT", description: "Percentage of Vehicle Cost (evaluated at current worth) to be paid by Partner for DTO Scheme" }, { access: "private", name: "DTO_REPAYMENT_FOR_HIGHWAY", value: "40", category: "PMT", description: "Percentage of revenue withheld by PMT for vehicle repayment for highway routes" }, { access: "private", name: "DTO_SERVICE_CHARGE_FOR_HIGHWAY", value: "20", category: "PMT", description: "Percentage of revenue withheld by PMT for Insurance, Tax, Admin duties, and other overhead for highway routes" }, { access: "private", name: "DTO_MAINTENANCE_FOR_HIGHWAY", value: "10", category: "PMT", description: "Percentage of revenue withheld by PMT for vehicle regular maintenance for highway routes" }, { access: "private", name: "DTO_FUEL_FOR_HIGHWAY", value: "25", category: "PMT", description: "Percentage of revenue given to Partner for vehicle fuel for the trip for highway routes" }, { access: "private", name: "DTO_ALLOWANCE_FOR_HIGHWAY", value: "5", category: "PMT", description: "Percentage of revenue given to Partner for his Welfare for highway routes" }, { access: "private", name: "DTO_REPAYMENT_FOR_LOCAL", value: "35", category: "PMT", description: "Percentage of revenue withheld by PMT for vehicle repayment for highway routes" }, { access: "private", name: "DTO_SERVICE_CHARGE_FOR_LOCAL", value: "20", category: "PMT", description: "Percentage of revenue withheld by PMT for Insurance, Tax, Admin duties, and other overhead for highway routes" }, { access: "private", name: "DTO_MAINTENANCE_FOR_LOCAL", value: "15", category: "PMT", description: "Percentage of revenue withheld by PMT for vehicle regular maintenance for highway routes" }, { access: "private", name: "DTO_FUEL_FOR_LOCAL", value: "25", category: "PMT", description: "Percentage of revenue given to Partner for vehicle fuel for the trip for highway routes" }, { access: "private", name: "DTO_ALLOWANCE_FOR_LOCAL", value: "5", category: "PMT", description: "Percentage of revenue given to Partner for his Welfare for highway routes" }, { access: "public", name: "ABOUT_PEACEGROUP", value: aboutPeacegroup, category: "WEBSITE", description: "About Peace Mass Transit Company. The html formatted body contains the history, philosophy, values, mission, vision of PMT" }, { access: "public", name: "ABOUT_PMT", value: aboutPmt, category: "WEBSITE", description: "About PeaceGroup of Company. The html formatted body contains the subsidiaries: PMT, PML, PET, PRESS, UGAMA, etc." }, { access: "public", name: "ABOUT_PML", value: aboutPml, category: "WEBSITE", description: "About Peace Mass Logistics. " }, { access: "public", name: "ABOUT_PET", value: aboutPet, category: "WEBSITE", description: "About Peace Mass Logistics. " }, { access: "public", name: "FAQ_PEACEGROUP", value: faqPeacegroup, category: "WEBSITE", description: "Frequently Asked Questions about Peace Group. " }, { access: "public", name: "FAQ_PMT", value: faqPmt, category: "WEBSITE", description: "Frequently Asked Questions about Peace Mass Transit. " }, { access: "public", name: "FAQ_PML", value: faqPml, category: "WEBSITE", description: "Frequently Asked Questions about Peace Mass Logistics. " }, { access: "public", name: "FAQ_PET", value: faqPet, category: "WEBSITE", description: "Frequently Asked Questions about Peace Petroleum. " }, { access: "public", name: "TERMS_PEACEGROUP", value: termsPeacegroup, category: "WEBSITE", description: "Terms and Conditions of Peace Group " }, { access: "public", name: "TERMS_PMT", value: termsPmt, category: "WEBSITE", description: "Terms and Conditions of Peace Mass Transit. " }, { access: "public", name: "TERMS_PML", value: termsPml, category: "WEBSITE", description: "Terms and Conditions of Peace Mass Logistics. " }, { access: "public", name: "TERMS_PET", value: termsPet, category: "WEBSITE", description: "Terms and Conditions of Peace Petroleum " }, { access: "public", name: "POLICY_PEACEGROUP", value: policyPeacegroup, category: "WEBSITE", description: "Policy Statement of Peace Group " }, { access: "public", name: "POLICY_PMT", value: policyPmt, category: "WEBSITE", description: "Policy Statement of Peace Mass Transit. " }, { access: "public", name: "POLICY_PML", value: policyPml, category: "WEBSITE", description: "Policy Statement of Peace Mass Logistics. " }, { access: "public", name: "POLICY_PET", value: policyPet, category: "WEBSITE", description: "Policy Statement of Peace Petroleum " }, { access: "private", name: "SMS_TRANSIT", value: pmlTransitSms, category: "PML", description: "SMS to be sent when shipment is delivered at Terminal" }, { access: "private", name: "SMS_ARRIVAL", value: pmlArrivalSms, category: "PML", description: "SMS to be sent when shipment is delivered at Terminal" }, { access: "private", name: "SMS_DELIVERED", value: pmlDeliverySms, category: "PML", description: "SMS to be sent when shipment is delivered at Terminal" }, { access: "private", name: "SMS_DISPATCHED", value: pmlDispatchSms, category: "PML", description: "SMS to be sent when shipment is Dispatched for door delivery" }];
+var table = [{ access: "private", name: "ACCESS", value: "3", category: "ERP", description: "[ 1 - 7 ] Required Privilege to access the ERP" }, { access: "public", name: "BOOKING", value: "SCHEDULE", category: "PMT", description: "[ OFFLINE | DUMMY | SCHEDULE ] Mode of PMT Booking online" }, { access: "private", name: "ERP", value: "LIVE", category: "ERP", description: "[ OFFLINE | TESTING | LIVE ] Administrative shutdown of ERP" }, { access: "public", name: "BOOKING_FARE", value: "FARE1", category: "PMT", description: "[ FARE1 | FARE2 ] Online Booking Fare based on Bus Class" }, { access: "public", name: "BOOKING_DISCOUNT", value: "0", category: "PMT", description: "[ 0 - 50 ] Percentage Discount for Online Booking " }, { access: "private", name: "TAX", value: "2", category: "BOOKING", description: "[ 0 - 100 ] Percentage Tax-rate" }, { access: "private", name: "PAYE", value: "2", category: "SALARY", description: "Pay As You Earn Tax Percentage deductible" }, { access: "private", name: "FUEL_COST", value: "210", category: "PMT", description: "Fuel Cost Per Litres in Naira" }, { access: "private", name: "DTO_INITIAL_DEPOSIT", value: "10", category: "PMT", description: "Percentage of Vehicle Cost (evaluated at current worth) to be paid by Partner for DTO Scheme" }, { access: "private", name: "DTO_REPAYMENT_FOR_HIGHWAY", value: "40", category: "PMT", description: "Percentage of revenue withheld by PMT for vehicle repayment for highway routes" }, { access: "private", name: "DTO_SERVICE_CHARGE_FOR_HIGHWAY", value: "20", category: "PMT", description: "Percentage of revenue withheld by PMT for Insurance, Tax, Admin duties, and other overhead for highway routes" }, { access: "private", name: "DTO_MAINTENANCE_FOR_HIGHWAY", value: "10", category: "PMT", description: "Percentage of revenue withheld by PMT for vehicle regular maintenance for highway routes" }, { access: "private", name: "DTO_FUEL_FOR_HIGHWAY", value: "25", category: "PMT", description: "Percentage of revenue given to Partner for vehicle fuel for the trip for highway routes" }, { access: "private", name: "DTO_ALLOWANCE_FOR_HIGHWAY", value: "5", category: "PMT", description: "Percentage of revenue given to Partner for his Welfare for highway routes" }, { access: "private", name: "DTO_REPAYMENT_FOR_LOCAL", value: "35", category: "PMT", description: "Percentage of revenue withheld by PMT for vehicle repayment for highway routes" }, { access: "private", name: "DTO_SERVICE_CHARGE_FOR_LOCAL", value: "20", category: "PMT", description: "Percentage of revenue withheld by PMT for Insurance, Tax, Admin duties, and other overhead for highway routes" }, { access: "private", name: "DTO_MAINTENANCE_FOR_LOCAL", value: "15", category: "PMT", description: "Percentage of revenue withheld by PMT for vehicle regular maintenance for highway routes" }, { access: "private", name: "DTO_FUEL_FOR_LOCAL", value: "25", category: "PMT", description: "Percentage of revenue given to Partner for vehicle fuel for the trip for highway routes" }, { access: "private", name: "DTO_ALLOWANCE_FOR_LOCAL", value: "5", category: "PMT", description: "Percentage of revenue given to Partner for his Welfare for highway routes" }, { access: "public", name: "ABOUT_PEACEGROUP", value: aboutPeacegroup, category: "WEBSITE", description: "About Peace Mass Transit Company. The html formatted body contains the history, philosophy, values, mission, vision of PMT" }, { access: "public", name: "ABOUT_PMT", value: aboutPmt, category: "WEBSITE", description: "About PeaceGroup of Company. The html formatted body contains the subsidiaries: PMT, PML, PET, PRESS, UGAMA, etc." }, { access: "public", name: "ABOUT_PML", value: aboutPml, category: "WEBSITE", description: "About Peace Mass Logistics. " }, { access: "public", name: "ABOUT_PET", value: aboutPet, category: "WEBSITE", description: "About Peace Mass Logistics. " }, { access: "public", name: "FAQ_PEACEGROUP", value: faqPeacegroup, category: "WEBSITE", description: "Frequently Asked Questions about Peace Group. " }, { access: "public", name: "FAQ_PMT", value: faqPmt, category: "WEBSITE", description: "Frequently Asked Questions about Peace Mass Transit. " }, { access: "public", name: "FAQ_PML", value: faqPml, category: "WEBSITE", description: "Frequently Asked Questions about Peace Mass Logistics. " }, { access: "public", name: "FAQ_PET", value: faqPet, category: "WEBSITE", description: "Frequently Asked Questions about Peace Petroleum. " }, { access: "public", name: "TERMS_PEACEGROUP", value: termsPeacegroup, category: "WEBSITE", description: "Terms and Conditions of Peace Group " }, { access: "public", name: "TERMS_PMT", value: termsPmt, category: "WEBSITE", description: "Terms and Conditions of Peace Mass Transit. " }, { access: "public", name: "TERMS_PML", value: termsPml, category: "WEBSITE", description: "Terms and Conditions of Peace Mass Logistics. " }, { access: "public", name: "TERMS_PET", value: termsPet, category: "WEBSITE", description: "Terms and Conditions of Peace Petroleum " }, { access: "public", name: "POLICY_PEACEGROUP", value: policyPeacegroup, category: "WEBSITE", description: "Policy Statement of Peace Group " }, { access: "public", name: "POLICY_PMT", value: policyPmt, category: "WEBSITE", description: "Policy Statement of Peace Mass Transit. " }, { access: "public", name: "POLICY_PML", value: policyPml, category: "WEBSITE", description: "Policy Statement of Peace Mass Logistics. " }, { access: "public", name: "POLICY_PET", value: policyPet, category: "WEBSITE", description: "Policy Statement of Peace Petroleum " }, { access: "private", name: "SMS_TRANSIT", value: pmlTransitSms, category: "PML", description: "SMS to be sent when shipment is delivered at Terminal" }, { access: "private", name: "SMS_ARRIVAL", value: pmlArrivalSms, category: "PML", description: "SMS to be sent when shipment is delivered at Terminal" }, { access: "private", name: "SMS_DELIVERED", value: pmlDeliverySms, category: "PML", description: "SMS to be sent when shipment is delivered at Terminal" }, { access: "private", name: "SMS_DISPATCHED", value: pmlDispatchSms, category: "PML", description: "SMS to be sent when shipment is Dispatched for door delivery" }];
 
-const staffBaseId = DATABASE.BASE_ID.STAFF;
-const settingBaseId = DATABASE.BASE_ID.SETTING;
+var staffBaseId = _constants.DATABASE.BASE_ID.STAFF;
+var settingBaseId = _constants.DATABASE.BASE_ID.SETTING;
 
-const result = table.map((record, index) => {
-    const obj = Object.assign({}, record);
-    const id = index + 1;
-    obj._id = toObjectId(settingBaseId, id);
-    obj.created_by = toObjectId(staffBaseId, 1);
+var result = table.map(function (record, index) {
+    var obj = Object.assign({}, record);
+    var id = index + 1;
+    obj._id = (0, _lib.toObjectId)(settingBaseId, id);
+    obj.created_by = (0, _lib.toObjectId)(staffBaseId, 1);
     return obj;
 });
 
-export default result;
+exports.default = result;
 //# sourceMappingURL=table.js.map
