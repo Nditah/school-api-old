@@ -1,3 +1,42 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _model3 = require("../vehicle/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import Hostel from "../hostel/model";
+
+var Schema = _mongoose2.default.Schema;
+// eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Dcoder
@@ -12,44 +51,33 @@
  * @description Rating model holds record of customer feedback about serveice rendered
  * by Staff, Partner or experience about a Terminal or Vehicle
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE, RATING } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-import Vehicle from "../vehicle/model";
-// import Hostel from "../hostel/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    star: Joi.number().required(),
-    subject: Joi.string().valid(RATING.SUBJECT).optional(),
-    staff_id: Joi.string().optional(),
-    partner_id: Joi.string().optional(),
-    terminal_id: Joi.string().optional(),
-    vehicle_id: Joi.string().optional(),
-    review: Joi.string().optional(),
-    created_by: Joi.string().required()
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    star: _joi2.default.number().required(),
+    subject: _joi2.default.string().valid(_constants.RATING.SUBJECT).optional(),
+    staff_id: _joi2.default.string().optional(),
+    partner_id: _joi2.default.string().optional(),
+    terminal_id: _joi2.default.string().optional(),
+    vehicle_id: _joi2.default.string().optional(),
+    review: _joi2.default.string().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    star: Joi.number().optional(),
-    subject: Joi.string().valid(RATING.SUBJECT).optional(),
-    staff_id: Joi.string().optional(),
-    partner_id: Joi.string().optional(),
-    terminal_id: Joi.string().optional(),
-    vehicle_id: Joi.string().optional(),
-    review: Joi.string().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    star: _joi2.default.number().optional(),
+    subject: _joi2.default.string().valid(_constants.RATING.SUBJECT).optional(),
+    staff_id: _joi2.default.string().optional(),
+    partner_id: _joi2.default.string().optional(),
+    terminal_id: _joi2.default.string().optional(),
+    vehicle_id: _joi2.default.string().optional(),
+    review: _joi2.default.string().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     star: { type: Number, min: 0, max: 5, required: [true, "Why no star?"] },
-    subject: { type: String, enum: RATING.SUBJECT, required: [true, "Why no subject?"] },
+    subject: { type: String, enum: _constants.RATING.SUBJECT, required: [true, "Why no subject?"] },
     staff_id: { type: ObjectId, ref: "Staff" },
     partner_id: { type: ObjectId, ref: "Partner" },
     terminal_id: { type: ObjectId, ref: "Terminal" },
@@ -59,17 +87,17 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = true; // DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = true; // DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "rating");
 
-const Rating = mongoose.model("Rating", newSchema);
+var Rating = _mongoose2.default.model("Rating", newSchema);
 
 if (preload) {
-    Rating.insertMany(table);
+    Rating.insertMany(_table2.default);
 }
 
-export default Rating;
+exports.default = Rating;
 //# sourceMappingURL=model.js.map

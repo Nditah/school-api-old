@@ -1,9 +1,24 @@
-import express from "express";
-import appRoot from "app-root-path";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { addImageAws, createRecord, fetchRecord, updateRecord, deleteRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _appRootPath = require("app-root-path");
+
+var _appRootPath2 = _interopRequireDefault(_appRootPath);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/upload to get the form for uploading images
@@ -12,8 +27,8 @@ const router = express.Router();
  * @apiDescription The sample form allows you to test the API by uploading
  * and image and entering the image name that would be saved on db
  */
-router.get("/upload", (req, res) => {
-  res.sendFile(`${appRoot}/src/upload/index.html`);
+router.get("/upload", function (req, res) {
+  res.sendFile(_appRootPath2.default + "/src/upload/index.html");
 });
 
 /**
@@ -26,7 +41,7 @@ router.get("/upload", (req, res) => {
  * @apiSuccess {Object[]} rows List of image-assets.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/images", fetchRecord);
+router.get("/images", _controller.fetchRecord);
 
 /**
  * @api {post} /api/images Create image-assets
@@ -41,7 +56,7 @@ router.get("/images", fetchRecord);
  * on the backend server. This is only a fall back option when AWS is
  * no longer available.
  */
-router.post("/images", [checkAuth, isValidStaff], createRecord);
+router.post("/images", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {post} /api/images-aws Create image-assets
@@ -54,7 +69,7 @@ router.post("/images", [checkAuth, isValidStaff], createRecord);
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiDescription Images uploaded to this endpoint are stored on AWS.
  */
-router.post("/images-aws", [checkAuth, isValidStaff], addImageAws);
+router.post("/images-aws", [_authorization.checkAuth, _authorization.isValidStaff], _controller.addImageAws);
 
 /**
  * @api {put} /api/images/{ImageId} Update image-assets
@@ -65,7 +80,7 @@ router.post("/images-aws", [checkAuth, isValidStaff], addImageAws);
  * @apiParam {String} url required image-asset url on cloud
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.put("/images/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/images/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/images/{recordId} Delete image-assets
@@ -76,7 +91,7 @@ router.put("/images/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 404 image-asset not found.
  */
-router.delete("/images/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/images/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

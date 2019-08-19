@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff, isValidCustomer } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/ratings?id={recordId} Retrieve one or all records
@@ -19,7 +31,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/ratings", [checkAuth], fetchRecord);
+router.get("/ratings", [_authorization.checkAuth], _controller.fetchRecord);
 
 /**
  * @api {post} /api/ratings Create ratings
@@ -37,7 +49,7 @@ router.get("/ratings", [checkAuth], fetchRecord);
  * @apiError 404 Rating not found.
  * @apiError 401 master access only.
  */
-router.post("/ratings", [checkAuth, isValidCustomer], createRecord);
+router.post("/ratings", [_authorization.checkAuth, _authorization.isValidCustomer], _controller.createRecord);
 
 /**
  * @api {put} /api/ratings/{recordId} Update ratings
@@ -56,7 +68,7 @@ router.post("/ratings", [checkAuth, isValidCustomer], createRecord);
  * @apiError 404 Rating not found.
  * @apiError 401 master access only.
  */
-router.put("/ratings/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/ratings/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/ratings/{recordId} Delete ratings
@@ -68,7 +80,7 @@ router.put("/ratings/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiError 404 Rating not found.
  * @apiError 401 master access only.
  */
-router.delete("/ratings/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/ratings/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

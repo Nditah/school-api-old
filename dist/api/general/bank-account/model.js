@@ -1,3 +1,40 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _model3 = require("../bank/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Schema = _mongoose2.default.Schema;
+// eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Dcoder
@@ -25,69 +62,59 @@
  * @property {Number} total_debit Bank-Account total_debit (optional)
  * @description BankAccount model holds record of all banks acccounts the company has
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE, BANK_ACCOUNT_TYPE, BANK_ACCOUNT_USAGE } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-import Bank from "../bank/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    name: Joi.string().trim().required(),
-    signatory: Joi.string().optional(),
-    subsidiary: Joi.string().trim().required(),
-    terminal_id: Joi.string().required(),
-    bank_id: Joi.string().required(),
-    account_name: Joi.string().required(),
-    account_number: Joi.number().required(),
-    account_type: Joi.string().valid(Object.values(BANK_ACCOUNT_TYPE)).required(),
-    usage: Joi.string().valid(Object.values(BANK_ACCOUNT_USAGE)).required(),
-    category: Joi.string().valid(["INCOME", "EXPENSES", "BOTH"]).required(),
-    description: Joi.string().required(),
-    country_iso2: Joi.string().required(),
-    currency: Joi.string().required(),
-    opening_date: Joi.date().optional(),
-    closing_date: Joi.date().optional(),
-    opening_balance: Joi.number().optional(),
-    closing_balance: Joi.number().optional(),
-    lien_amount: Joi.number().optional(),
-    available_balance: Joi.number().optional(),
-    total_credit: Joi.number().optional(),
-    total_debit: Joi.number().optional(),
-    created_by: Joi.string().required()
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    name: _joi2.default.string().trim().required(),
+    signatory: _joi2.default.string().optional(),
+    subsidiary: _joi2.default.string().trim().required(),
+    terminal_id: _joi2.default.string().required(),
+    bank_id: _joi2.default.string().required(),
+    account_name: _joi2.default.string().required(),
+    account_number: _joi2.default.number().required(),
+    account_type: _joi2.default.string().valid(Object.values(_constants.BANK_ACCOUNT_TYPE)).required(),
+    usage: _joi2.default.string().valid(Object.values(_constants.BANK_ACCOUNT_USAGE)).required(),
+    category: _joi2.default.string().valid(["INCOME", "EXPENSES", "BOTH"]).required(),
+    description: _joi2.default.string().required(),
+    country_iso2: _joi2.default.string().required(),
+    currency: _joi2.default.string().required(),
+    opening_date: _joi2.default.date().optional(),
+    closing_date: _joi2.default.date().optional(),
+    opening_balance: _joi2.default.number().optional(),
+    closing_balance: _joi2.default.number().optional(),
+    lien_amount: _joi2.default.number().optional(),
+    available_balance: _joi2.default.number().optional(),
+    total_credit: _joi2.default.number().optional(),
+    total_debit: _joi2.default.number().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    name: Joi.string().trim().optional(),
-    signatory: Joi.string().optional(),
-    subsidiary: Joi.string().trim().optional(),
-    terminal_id: Joi.string().optional(),
-    bank_id: Joi.string().optional(),
-    account_name: Joi.string().optional(),
-    account_number: Joi.number().optional(),
-    account_type: Joi.string().valid(Object.values(BANK_ACCOUNT_TYPE)).optional(),
-    usage: Joi.string().valid(Object.values(BANK_ACCOUNT_USAGE)).optional(),
-    category: Joi.string().valid(["INCOME", "EXPENSES", "BOTH"]).optional(),
-    description: Joi.string().optional(),
-    country_iso2: Joi.string().optional(),
-    currency: Joi.string().optional(),
-    opening_date: Joi.date().optional(),
-    closing_date: Joi.date().optional(),
-    opening_balance: Joi.number().optional(),
-    closing_balance: Joi.number().optional(),
-    lien_amount: Joi.number().optional(),
-    available_balance: Joi.number().optional(),
-    total_credit: Joi.number().optional(),
-    total_debit: Joi.number().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    name: _joi2.default.string().trim().optional(),
+    signatory: _joi2.default.string().optional(),
+    subsidiary: _joi2.default.string().trim().optional(),
+    terminal_id: _joi2.default.string().optional(),
+    bank_id: _joi2.default.string().optional(),
+    account_name: _joi2.default.string().optional(),
+    account_number: _joi2.default.number().optional(),
+    account_type: _joi2.default.string().valid(Object.values(_constants.BANK_ACCOUNT_TYPE)).optional(),
+    usage: _joi2.default.string().valid(Object.values(_constants.BANK_ACCOUNT_USAGE)).optional(),
+    category: _joi2.default.string().valid(["INCOME", "EXPENSES", "BOTH"]).optional(),
+    description: _joi2.default.string().optional(),
+    country_iso2: _joi2.default.string().optional(),
+    currency: _joi2.default.string().optional(),
+    opening_date: _joi2.default.date().optional(),
+    closing_date: _joi2.default.date().optional(),
+    opening_balance: _joi2.default.number().optional(),
+    closing_balance: _joi2.default.number().optional(),
+    lien_amount: _joi2.default.number().optional(),
+    available_balance: _joi2.default.number().optional(),
+    total_credit: _joi2.default.number().optional(),
+    total_debit: _joi2.default.number().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     name: { type: String },
     signatory: { type: String },
     subsidiary: { type: String },
@@ -97,11 +124,11 @@ export const schema = {
     account_number: { type: String },
     account_type: {
         type: String,
-        enum: Object.values(BANK_ACCOUNT_TYPE)
+        enum: Object.values(_constants.BANK_ACCOUNT_TYPE)
     },
     usage: {
         type: String,
-        enum: Object.values(BANK_ACCOUNT_USAGE)
+        enum: Object.values(_constants.BANK_ACCOUNT_USAGE)
     },
     category: { type: String, enum: ["INCOME", "EXPENSES", "BOTH"] },
     description: { type: String },
@@ -118,17 +145,17 @@ export const schema = {
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId, ref: "Staff" }
 };
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "bank_account");
 
-const BankAccount = mongoose.model("BankAccount", newSchema);
+var BankAccount = _mongoose2.default.model("BankAccount", newSchema);
 
 if (preload) {
-    BankAccount.insertMany(table);
+    BankAccount.insertMany(_table2.default);
 }
 
-export default BankAccount;
+exports.default = BankAccount;
 //# sourceMappingURL=model.js.map

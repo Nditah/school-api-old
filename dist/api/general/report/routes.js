@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, generateReport, updateRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/reports?id={recordId} Retrieve Report records
@@ -20,7 +32,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/reports", [checkAuth, isValidStaff], fetchRecord);
+router.get("/reports", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
  * @api {post} /api/reports Create a Report record
@@ -35,7 +47,7 @@ router.get("/reports", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Report not found.
  * @apiError 401 master access only.
  */
-router.post("/reports", [checkAuth, isValidStaff], generateReport);
+router.post("/reports", [_authorization.checkAuth, _authorization.isValidStaff], _controller.generateReport);
 
 /**
  * @api {put} /api/reports/{recordId} Update a Report record
@@ -51,7 +63,7 @@ router.post("/reports", [checkAuth, isValidStaff], generateReport);
  * @apiError 404 Report not found.
  * @apiError 401 master access only.
  */
-router.put("/reports/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/reports/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

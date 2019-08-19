@@ -1,3 +1,35 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _model3 = require("../account-heading/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
  * @property {ObjectId} id AccountPosting primaryKey
@@ -12,44 +44,35 @@
  * @property {ObjectId} account_heading_id AccountPosting AccountHeading ObjectId
  * @description AccountPosting model holds record of transactions posting into the General Ledger
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE } from "../../../constants";
-import Staff from "../staff/model";
-import AccountHeading from "../account-heading/model";
-
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    code: Joi.string().optional(),
-    amount: Joi.number().optional(),
-    description: Joi.string().optional(),
-    transaction_date: Joi.date().optional(),
-    transaction_code: Joi.string().optional(),
-    transaction_details: Joi.object().optional(),
-    posting_type: Joi.string().valid("DEBIT", "CREDIT").optional(),
-    category: Joi.string().valid("INCOME", "EXPENSES").optional(),
-    account_heading_id: Joi.string().optional(),
-    created_by: Joi.string().required()
+var Schema = _mongoose2.default.Schema;
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    code: _joi2.default.string().optional(),
+    amount: _joi2.default.number().optional(),
+    description: _joi2.default.string().optional(),
+    transaction_date: _joi2.default.date().optional(),
+    transaction_code: _joi2.default.string().optional(),
+    transaction_details: _joi2.default.object().optional(),
+    posting_type: _joi2.default.string().valid("DEBIT", "CREDIT").optional(),
+    category: _joi2.default.string().valid("INCOME", "EXPENSES").optional(),
+    account_heading_id: _joi2.default.string().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    code: Joi.string().optional(),
-    amount: Joi.number().optional(),
-    description: Joi.string().optional(),
-    transaction_date: Joi.date().optional(),
-    transaction_code: Joi.string().optional(),
-    transaction_details: Joi.object().optional(),
-    posting_type: Joi.string().valid("DEBIT", "CREDIT").optional(),
-    category: Joi.string().valid("INCOME", "EXPENSES").optional(),
-    account_heading_id: Joi.string().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    code: _joi2.default.string().optional(),
+    amount: _joi2.default.number().optional(),
+    description: _joi2.default.string().optional(),
+    transaction_date: _joi2.default.date().optional(),
+    transaction_code: _joi2.default.string().optional(),
+    transaction_details: _joi2.default.object().optional(),
+    posting_type: _joi2.default.string().valid("DEBIT", "CREDIT").optional(),
+    category: _joi2.default.string().valid("INCOME", "EXPENSES").optional(),
+    account_heading_id: _joi2.default.string().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     code: { type: String, required: true },
     amount: { type: Number, required: true },
     description: { type: String },
@@ -63,13 +86,13 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "account_posting");
 
-const AccountPosting = mongoose.model("AccountPosting", newSchema);
+var AccountPosting = _mongoose2.default.model("AccountPosting", newSchema);
 
-export default AccountPosting;
+exports.default = AccountPosting;
 //# sourceMappingURL=model.js.map

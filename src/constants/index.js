@@ -1,7 +1,6 @@
 export const EMPLOYEE_TYPE = {
-    STAFF: "STAFF",
-    PARTNER: "PARTNER",
-    CONTRACTOR: "CONTRACTOR",
+    TEACHING: "TEACHING",
+    NONTEACHING: "NON-TEACHING",
     UNKNOWN: "UNKNOWN",
 };
 
@@ -120,6 +119,27 @@ export const PERSONAL_TITLE = {
     HON: "HON",
     SIR: "SIR",
     MADAM: "MADAM",
+    ALH: "ALH",
+    AMB: "AMB",
+    GEN: "GEN",
+    MAJGEN: "MAJ-GEN",
+    CAPT: "CAPT",
+    CDR: "CDR",
+    COL: "COL",
+    HE: "H E",
+    HH: "H H",
+    HM: "H M",
+    HRH: "H R H",
+    HRM: "H R M",
+    LIEUT: "LIEUT",
+    LIEUTCOL: "LIEUT-COL",
+    MAJ: "MAJ",
+    PRINCE: "PRINCE",
+    PRINCESS: "PRINCESS",
+    SEN: "SEN",
+    SRG: "SRG",
+    LADY: "LADY",
+    DAME: "DAME",
     UNKNOWN: "UNKNOWN",
 };
 
@@ -137,15 +157,11 @@ export const EMPLOYMENT_STATUS = {
 };
 
 export const SUBSIDIARY = {
-    PMT: "PMT",
-    PML: "PML",
-    PET: "PET",
-    SHOP: "SHOP",
-    PRESS: "PRESS",
-    SPARES: "SPARES",
-    ASSEMBLY: "ASSEMBLY",
-    CHEMICAL: "CHEMICAL",
-    PEACEGROUP: "PEACEGROUP",
+    SECONDARY: "SECONDARY",
+    PRIMARY: "PRIMARY",
+    NURSERY: "NURSERY",
+    CRECHE: "CRECHE",
+    DAYCARE: "DAYCARE",
 };
 
 export const VEHICLE = {
@@ -276,7 +292,7 @@ export const DATABASE = {
     BASE_ID: {
         TABLE: "5a51bc91860d8b5aa",
         STAFF: "5a51bc91860d8b5ba",
-        PARTNER: "5b51bc91860d8b5bb",
+        PARENT: "5b51bc91860d8b5bb",
         SUPPLIER: "5b52bc92860d8b5bb",
         TERMINAL: "5c51bc91860d8b5bc",
         VEHICLE: "5d51bc91860d8b5bd",

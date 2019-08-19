@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/assets?id={recordId} Retrieve Asset records
@@ -20,7 +32,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/assets", [checkAuth, isValidStaff], fetchRecord);
+router.get("/assets", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
  * @api {post} /api/assets Create an Asset record
@@ -60,7 +72,7 @@ router.get("/assets", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Asset not found.
  * @apiError 401 master access only.
  */
-router.post("/assets", [checkAuth, isValidStaff], createRecord);
+router.post("/assets", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {put} /api/assets/{recordId} Update an Asset record
@@ -101,7 +113,7 @@ router.post("/assets", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 Asset not found.
  * @apiError 401 master access only.
  */
-router.put("/assets/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/assets/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/assets/{recordId} Delete an Asset record
@@ -113,7 +125,7 @@ router.put("/assets/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiError 404 Asset not found.
  * @apiError 401 master access only.
  */
-router.delete("/assets/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/assets/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

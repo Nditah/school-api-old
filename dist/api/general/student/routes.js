@@ -1,12 +1,20 @@
-/**
- * @author 4Decoder
- * @description Customer holds record of all customers with terminals
- */
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord, login } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/customers?id={recordId} Retrieve one or all records
@@ -23,7 +31,11 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/customers", [checkAuth, isValidStaff], fetchRecord);
+/**
+ * @author 4Decoder
+ * @description Customer holds record of all customers with terminals
+ */
+router.get("/customers", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
  * @api {post} /api/customers Create customers
@@ -71,7 +83,7 @@ router.get("/customers", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Customer not found.
  * @apiError 401 master access only.
  */
-router.post("/customers", createRecord);
+router.post("/customers", _controller.createRecord);
 
 /**
  * @api {put} /api/customers/{recordId} Update customers
@@ -132,7 +144,7 @@ router.post("/customers", createRecord);
  * @apiError 404 Customer not found.
  * @apiError 401 master access only.
  */
-router.put("/customers/:recordId", [checkAuth], updateRecord);
+router.put("/customers/:recordId", [_authorization.checkAuth], _controller.updateRecord);
 
 /**
  * @api {delete} /api/customers/{recordId} Delete customers
@@ -143,7 +155,7 @@ router.put("/customers/:recordId", [checkAuth], updateRecord);
  * @apiError 404 Customer not found.
  * @apiError 401 master access only.
  */
-router.delete("/customers/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/customers/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
 /**
  * @api {post} /api/customers/login Login Customer
@@ -158,7 +170,7 @@ router.delete("/customers/:recordId", [checkAuth, isValidStaff], deleteRecord);
  * @apiSuccess (Success 200) 200 Login Successful.
  * @apiError 404 Customer not found.
  */
-router.post("/customers/login", login);
+router.post("/customers/login", _controller.login);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map
