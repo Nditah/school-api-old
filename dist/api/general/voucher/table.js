@@ -1,4 +1,9 @@
-const table = [];
+"use strict";
 
-export default table;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var table = [];
+
+exports.default = table;
 //# sourceMappingURL=table.js.map

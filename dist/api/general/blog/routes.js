@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/blogs?id={recordId} Retrieve one or all records
@@ -19,7 +31,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/blogs", [checkAuth, isValidStaff], fetchRecord);
+router.get("/blogs", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
  * @api {post} /api/blogs Create blogs
@@ -39,7 +51,7 @@ router.get("/blogs", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Blog not found.
  * @apiError 401 master access only.
  */
-router.post("/blogs", [checkAuth, isValidStaff], createRecord);
+router.post("/blogs", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {put} /api/blogs/{recordId} Update blogs
@@ -60,7 +72,7 @@ router.post("/blogs", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 Blog not found.
  * @apiError 401 master access only.
  */
-router.put("/blogs/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/blogs/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/blogs/{recordId} Delete blogs
@@ -72,7 +84,7 @@ router.put("/blogs/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiError 404 Blog not found.
  * @apiError 401 master access only.
  */
-router.delete("/blogs/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/blogs/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

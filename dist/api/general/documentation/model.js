@@ -1,3 +1,43 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _model3 = require("../vehicle/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
+var _model5 = require("../document-type/model");
+
+var _model6 = _interopRequireDefault(_model5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
  * @property {ObjectId} id Documentation primaryKey
@@ -21,62 +61,51 @@
  * @property {Boolean} is_validity Documentation is_validity
  * @description Documentation model holds all Company documents
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-import Vehicle from "../vehicle/model";
-import DocumentType from "../document-type/model";
-
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    document_type_id: Joi.string().optional(),
-    type: Joi.string().trim().valid(["ASSET", "PARTNER", "STAFF", "VEHICLE", "SALESORDER", "PURCHASE"]).required(),
-    asset_id: Joi.string().optional(),
-    staff_id: Joi.string().optional(),
-    partner_id: Joi.string().optional(),
-    customer_id: Joi.string().optional(),
-    vehicle_id: Joi.string().optional(),
-    sales_order_id: Joi.string().optional(),
-    purchase_order_id: Joi.string().optional(),
-    reference: Joi.string().optional(),
-    last_renewal: Joi.date().optional(),
-    next_renewal: Joi.date().optional(),
-    renewal_by: Joi.string().optional(),
-    amount: Joi.number().optional(),
-    description: Joi.string().optional(),
-    is_renewed: Joi.boolean().optional(),
-    is_validity: Joi.boolean().optional(),
-    created_by: Joi.string().required()
+var Schema = _mongoose2.default.Schema;
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    document_type_id: _joi2.default.string().optional(),
+    type: _joi2.default.string().trim().valid(["ASSET", "PARTNER", "STAFF", "VEHICLE", "SALESORDER", "PURCHASE"]).required(),
+    asset_id: _joi2.default.string().optional(),
+    staff_id: _joi2.default.string().optional(),
+    partner_id: _joi2.default.string().optional(),
+    customer_id: _joi2.default.string().optional(),
+    vehicle_id: _joi2.default.string().optional(),
+    sales_order_id: _joi2.default.string().optional(),
+    purchase_order_id: _joi2.default.string().optional(),
+    reference: _joi2.default.string().optional(),
+    last_renewal: _joi2.default.date().optional(),
+    next_renewal: _joi2.default.date().optional(),
+    renewal_by: _joi2.default.string().optional(),
+    amount: _joi2.default.number().optional(),
+    description: _joi2.default.string().optional(),
+    is_renewed: _joi2.default.boolean().optional(),
+    is_validity: _joi2.default.boolean().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    document_type_id: Joi.string().optional(),
-    type: Joi.string().trim().valid(["ASSET", "PARTNER", "STAFF", "VEHICLE", "SALESORDER", "PURCHASE"]).required(),
-    asset_id: Joi.string().optional(),
-    staff_id: Joi.string().optional(),
-    partner_id: Joi.string().optional(),
-    customer_id: Joi.string().optional(),
-    vehicle_id: Joi.string().optional(),
-    sales_order_id: Joi.string().optional(),
-    purchase_order_id: Joi.string().optional(),
-    reference: Joi.string().optional(),
-    last_renewal: Joi.date().optional(),
-    next_renewal: Joi.date().optional(),
-    renewal_by: Joi.string().optional(),
-    amount: Joi.number().optional(),
-    description: Joi.string().optional(),
-    is_renewed: Joi.boolean().optional(),
-    is_validity: Joi.boolean().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    document_type_id: _joi2.default.string().optional(),
+    type: _joi2.default.string().trim().valid(["ASSET", "PARTNER", "STAFF", "VEHICLE", "SALESORDER", "PURCHASE"]).required(),
+    asset_id: _joi2.default.string().optional(),
+    staff_id: _joi2.default.string().optional(),
+    partner_id: _joi2.default.string().optional(),
+    customer_id: _joi2.default.string().optional(),
+    vehicle_id: _joi2.default.string().optional(),
+    sales_order_id: _joi2.default.string().optional(),
+    purchase_order_id: _joi2.default.string().optional(),
+    reference: _joi2.default.string().optional(),
+    last_renewal: _joi2.default.date().optional(),
+    next_renewal: _joi2.default.date().optional(),
+    renewal_by: _joi2.default.string().optional(),
+    amount: _joi2.default.number().optional(),
+    description: _joi2.default.string().optional(),
+    is_renewed: _joi2.default.boolean().optional(),
+    is_validity: _joi2.default.boolean().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     document_type_id: { type: ObjectId, ref: "DocumentType", required: true },
     type: {
         type: String,
@@ -101,30 +130,31 @@ export const schema = {
     url: {
         type: String,
         validate: {
-            validator(text) {
+            validator: function validator(text) {
                 if (text !== null && text.length > 0) {
                     return text.indexOf("https://") === 0 || text.indexOf("http://") === 0;
                 }
                 return true;
             },
+
             message: "Image url must start with https://uniform-resource/locator/images"
         }
     },
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId, ref: "Staff" }
 };
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "documentation");
-newSchema.plugin(mongoose_csv);
+newSchema.plugin(_mongooseCsv2.default);
 
-const Documentation = mongoose.model("Documentation", newSchema);
+var Documentation = _mongoose2.default.model("Documentation", newSchema);
 
 if (preload) {
-    Documentation.insertMany(table);
+    Documentation.insertMany(_table2.default);
 }
 
-export default Documentation;
+exports.default = Documentation;
 //# sourceMappingURL=model.js.map

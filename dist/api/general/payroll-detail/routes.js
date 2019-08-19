@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/payroll-details?id={recordId} Retrieve PayrollDetail records
@@ -20,7 +32,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/payroll-details", [checkAuth, isValidStaff], fetchRecord);
+router.get("/payroll-details", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
  * @api {post} /api/payroll-details Create a PayrollDetail record
@@ -43,7 +55,7 @@ router.get("/payroll-details", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 PayrollDetail not found.
  * @apiError 401 master access only.
  */
-router.post("/payroll-details", [checkAuth, isValidStaff], createRecord);
+router.post("/payroll-details", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {put} /api/payroll-details/{recordId} Update a PayrollDetail record
@@ -67,7 +79,7 @@ router.post("/payroll-details", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 PayrollDetail not found.
  * @apiError 401 master access only.
  */
-router.put("/payroll-details/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/payroll-details/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/payroll-details/{recordId} Delete a PayrollDetail record
@@ -79,7 +91,7 @@ router.put("/payroll-details/:recordId", [checkAuth, isValidStaff], updateRecord
  * @apiError 404 PayrollDetail not found.
  * @apiError 401 master access only.
  */
-router.delete("/payroll-details/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/payroll-details/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

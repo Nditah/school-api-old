@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { checkAuthorization, getTransaction, timelineTransaction, listTransaction, verifyTransaction, totalTransaction } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/paystack-transactions/get/{id} Retrieve one record
@@ -15,7 +27,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/paystack-transactions/get/:id", [checkAuth, isValidStaff], getTransaction);
+router.get("/paystack-transactions/get/:id", [_authorization.checkAuth, _authorization.isValidStaff], _controller.getTransaction);
 
 /**
  * @api {get} /api/paystack-transactions/timeline/{id} View Transaction Timeline
@@ -28,7 +40,7 @@ router.get("/paystack-transactions/get/:id", [checkAuth, isValidStaff], getTrans
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/paystack-transactions/timeline/:id", [checkAuth, isValidStaff], timelineTransaction);
+router.get("/paystack-transactions/timeline/:id", [_authorization.checkAuth, _authorization.isValidStaff], _controller.timelineTransaction);
 
 /**
  * @api {get} /api/paystack-transactions/list?perPage={perPage} Retrieve one or all records
@@ -51,7 +63,7 @@ router.get("/paystack-transactions/timeline/:id", [checkAuth, isValidStaff], tim
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/paystack-transactions/list", [checkAuth, isValidStaff], listTransaction);
+router.get("/paystack-transactions/list", [_authorization.checkAuth, _authorization.isValidStaff], _controller.listTransaction);
 
 /**
  * @api {get} /api/paystack-transactions/verify/{reference} Retrieve one record
@@ -64,7 +76,7 @@ router.get("/paystack-transactions/list", [checkAuth, isValidStaff], listTransac
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/paystack-transactions/verify/:reference", [checkAuth, isValidStaff], verifyTransaction);
+router.get("/paystack-transactions/verify/:reference", [_authorization.checkAuth, _authorization.isValidStaff], _controller.verifyTransaction);
 
 /**
  * @api {get} /api/paystack-transactions/totals Total amount received on your account
@@ -78,7 +90,7 @@ router.get("/paystack-transactions/verify/:reference", [checkAuth, isValidStaff]
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/paystack-transactions/totals", [checkAuth, isValidStaff], totalTransaction);
+router.get("/paystack-transactions/totals", [_authorization.checkAuth, _authorization.isValidStaff], _controller.totalTransaction);
 
 /**
  * @api {get} /api/paystack-transactions/check-authorization Check Authorization
@@ -94,7 +106,7 @@ router.get("/paystack-transactions/totals", [checkAuth, isValidStaff], totalTran
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/paystack-transactions/check-authorization", [checkAuth, isValidStaff], checkAuthorization);
+router.get("/paystack-transactions/check-authorization", [_authorization.checkAuth, _authorization.isValidStaff], _controller.checkAuthorization);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

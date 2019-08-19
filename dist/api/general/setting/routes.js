@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecordPublic, fetchRecord, updateRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/settings/public Retrieve Public Settings record(s)
@@ -20,7 +32,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/settings/public", fetchRecordPublic);
+router.get("/settings/public", _controller.fetchRecordPublic);
 
 /**
  * @api {get} /api/settings?id={recordId} Retrieve Settings record(s)
@@ -31,7 +43,7 @@ router.get("/settings/public", fetchRecordPublic);
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/settings", [checkAuth], fetchRecord);
+router.get("/settings", [_authorization.checkAuth], _controller.fetchRecord);
 
 /**
  * @api {put} /api/settings/{recordId} Update Settings record
@@ -49,7 +61,7 @@ router.get("/settings", [checkAuth], fetchRecord);
  * @apiError 404 Setting not found.
  * @apiError 401 master access only.
  */
-router.put("/settings/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/settings/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

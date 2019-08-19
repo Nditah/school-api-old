@@ -1,3 +1,35 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Dcoder
@@ -10,59 +42,50 @@
  * @property {String} subsidiary AccountClass subsidiary (required)
  * @description AccountClass model holds record of all Accounting Classification
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE, SUBSIDIARY, ACCOUNT_CLASS_TYPE, ACCOUNT_CLASS_CATEGORY } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    code: Joi.string().trim().required(),
-    name: Joi.string().trim().optional(),
-    description: Joi.string().optional(),
-    category: Joi.string().valid(Object.values(ACCOUNT_CLASS_CATEGORY)).required(),
-    class_type: Joi.string().valid(Object.values(ACCOUNT_CLASS_TYPE)).required(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).required(),
-    created_by: Joi.string().required()
+var Schema = _mongoose2.default.Schema;
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    code: _joi2.default.string().trim().required(),
+    name: _joi2.default.string().trim().optional(),
+    description: _joi2.default.string().optional(),
+    category: _joi2.default.string().valid(Object.values(_constants.ACCOUNT_CLASS_CATEGORY)).required(),
+    class_type: _joi2.default.string().valid(Object.values(_constants.ACCOUNT_CLASS_TYPE)).required(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).required(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    code: Joi.string().trim().optional(),
-    name: Joi.string().trim().optional(),
-    description: Joi.string().optional(),
-    category: Joi.string().valid(Object.values(ACCOUNT_CLASS_CATEGORY)).optional(),
-    class_type: Joi.string().valid(Object.values(ACCOUNT_CLASS_TYPE)).optional(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    code: _joi2.default.string().trim().optional(),
+    name: _joi2.default.string().trim().optional(),
+    description: _joi2.default.string().optional(),
+    category: _joi2.default.string().valid(Object.values(_constants.ACCOUNT_CLASS_CATEGORY)).optional(),
+    class_type: _joi2.default.string().valid(Object.values(_constants.ACCOUNT_CLASS_TYPE)).optional(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     code: { type: String, required: [true, "Why no input?"] },
     name: { type: String },
     description: { type: String },
-    category: { type: String, enum: Object.values(ACCOUNT_CLASS_CATEGORY) },
-    class_type: { type: String, enum: Object.values(ACCOUNT_CLASS_TYPE) },
-    subsidiary: { type: String, enum: Object.values(SUBSIDIARY), required: [true, "Why no input?"] },
+    category: { type: String, enum: Object.values(_constants.ACCOUNT_CLASS_CATEGORY) },
+    class_type: { type: String, enum: Object.values(_constants.ACCOUNT_CLASS_TYPE) },
+    subsidiary: { type: String, enum: Object.values(_constants.SUBSIDIARY), required: [true, "Why no input?"] },
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "account_class");
-newSchema.plugin(mongoose_csv);
+newSchema.plugin(_mongooseCsv2.default);
 
-const AccountClass = mongoose.model("AccountClass", newSchema);
+var AccountClass = _mongoose2.default.model("AccountClass", newSchema);
 if (preload) {
-    AccountClass.insertMany(table);
+    AccountClass.insertMany(_table2.default);
 }
 
-export default AccountClass;
+exports.default = AccountClass;
 //# sourceMappingURL=model.js.map

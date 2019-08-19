@@ -1,3 +1,43 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _model3 = require("../asset/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
+var _model5 = require("../vehicle/model");
+
+var _model6 = _interopRequireDefault(_model5);
+
+var _model7 = require("../task/model");
+
+var _model8 = _interopRequireDefault(_model7);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Dcoder
@@ -29,66 +69,55 @@
  *  then it can be re-issued. For multiple assets, multiple request should be made
  *  to track them individually.
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE } from "../../../constants";
-import Staff from "../staff/model";
-import Asset from "../asset/model";
-import Vehicle from "../vehicle/model";
-import Task from "../task/model";
-
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    user_type: Joi.string().trim().valid(["STAFF", "PARTNER"]).required(),
-    staff_id: Joi.string().optional(),
-    partner_id: Joi.string().optional(),
-    request_date: Joi.date().optional(),
-    task_id: Joi.string().optional(),
-    asset_type: Joi.string().trim().valid(["VEHICLE", "INVENTORY"]).required(),
-    vehicle_id: Joi.string().optional(),
-    asset_id: Joi.string().optional(),
-    issued_date: Joi.date().optional(),
-    issued_by: Joi.string().optional(),
-    issuer_remark: Joi.string().optional(),
-    request_status: Joi.string().trim().valid(["PENDING", "COLLECTED", "REVOKED"]).optional(),
-    assignment_status: Joi.string().trim().valid(["PENDING", "APPROVED", "ISSUED", "COLLECTED", "REJECTED"]).optional(),
-    is_returnable: Joi.boolean().optional(),
-    expected_returned_date: Joi.date().optional(),
-    actual_returned_date: Joi.date().optional(),
-    collected_date: Joi.date().optional(),
-    collected_by: Joi.string().optional(),
-    collected_remark: Joi.string().optional(),
-    created_by: Joi.string().required()
+var Schema = _mongoose2.default.Schema;
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    user_type: _joi2.default.string().trim().valid(["STAFF", "PARTNER"]).required(),
+    staff_id: _joi2.default.string().optional(),
+    partner_id: _joi2.default.string().optional(),
+    request_date: _joi2.default.date().optional(),
+    task_id: _joi2.default.string().optional(),
+    asset_type: _joi2.default.string().trim().valid(["VEHICLE", "INVENTORY"]).required(),
+    vehicle_id: _joi2.default.string().optional(),
+    asset_id: _joi2.default.string().optional(),
+    issued_date: _joi2.default.date().optional(),
+    issued_by: _joi2.default.string().optional(),
+    issuer_remark: _joi2.default.string().optional(),
+    request_status: _joi2.default.string().trim().valid(["PENDING", "COLLECTED", "REVOKED"]).optional(),
+    assignment_status: _joi2.default.string().trim().valid(["PENDING", "APPROVED", "ISSUED", "COLLECTED", "REJECTED"]).optional(),
+    is_returnable: _joi2.default.boolean().optional(),
+    expected_returned_date: _joi2.default.date().optional(),
+    actual_returned_date: _joi2.default.date().optional(),
+    collected_date: _joi2.default.date().optional(),
+    collected_by: _joi2.default.string().optional(),
+    collected_remark: _joi2.default.string().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    user_type: Joi.string().valid(["STAFF", "PARTNER"]).optional(),
-    staff_id: Joi.string().optional(),
-    partner_id: Joi.string().optional(),
-    request_date: Joi.date().optional(),
-    task_id: Joi.string().optional(),
-    asset_type: Joi.string().valid(["VEHICLE", "INVENTORY"]).optional(),
-    vehicle_id: Joi.string().optional(),
-    asset_id: Joi.string().optional(),
-    issued_date: Joi.date().optional(),
-    issued_by: Joi.string().optional(),
-    issuer_remark: Joi.string().optional(),
-    request_status: Joi.string().valid(["PENDING", "COLLECTED", "REVOKED"]).optional(),
-    assignment_status: Joi.string().valid(["PENDING", "APPROVED", "ISSUED", "COLLECTED", "REJECTED"]).optional(),
-    is_returnable: Joi.boolean().optional(),
-    expected_returned_date: Joi.date().optional(),
-    actual_returned_date: Joi.date().optional(),
-    collected_date: Joi.date().optional(),
-    collected_by: Joi.string().optional(),
-    collected_remark: Joi.string().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    user_type: _joi2.default.string().valid(["STAFF", "PARTNER"]).optional(),
+    staff_id: _joi2.default.string().optional(),
+    partner_id: _joi2.default.string().optional(),
+    request_date: _joi2.default.date().optional(),
+    task_id: _joi2.default.string().optional(),
+    asset_type: _joi2.default.string().valid(["VEHICLE", "INVENTORY"]).optional(),
+    vehicle_id: _joi2.default.string().optional(),
+    asset_id: _joi2.default.string().optional(),
+    issued_date: _joi2.default.date().optional(),
+    issued_by: _joi2.default.string().optional(),
+    issuer_remark: _joi2.default.string().optional(),
+    request_status: _joi2.default.string().valid(["PENDING", "COLLECTED", "REVOKED"]).optional(),
+    assignment_status: _joi2.default.string().valid(["PENDING", "APPROVED", "ISSUED", "COLLECTED", "REJECTED"]).optional(),
+    is_returnable: _joi2.default.boolean().optional(),
+    expected_returned_date: _joi2.default.date().optional(),
+    actual_returned_date: _joi2.default.date().optional(),
+    collected_date: _joi2.default.date().optional(),
+    collected_by: _joi2.default.string().optional(),
+    collected_remark: _joi2.default.string().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     user_type: { type: String, enum: ["STAFF", "PARTNER"], required: true },
     staff_id: { type: ObjectId, ref: "Staff" },
     partner_id: { type: ObjectId, ref: "Partner" },
@@ -122,12 +151,12 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const options = DATABASE.OPTIONS;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "asset_assignment");
 
-const AssetAssignment = mongoose.model("AssetAssignment", newSchema);
+var AssetAssignment = _mongoose2.default.model("AssetAssignment", newSchema);
 
-export default AssetAssignment;
+exports.default = AssetAssignment;
 //# sourceMappingURL=model.js.map

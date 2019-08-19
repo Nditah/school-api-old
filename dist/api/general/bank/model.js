@@ -1,3 +1,35 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Dcoder
@@ -10,38 +42,29 @@
  * @property {String} website Bank website (optional)
  * @description Bank model holds record of all banks the company deals with
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    name: Joi.string().trim().required(),
-    sort_code: Joi.string().trim().required(),
-    bank_code: Joi.string().required(),
-    country_iso2: Joi.string().optional(),
-    contact_person: Joi.string().optional(),
-    website: Joi.string().optional(),
-    created_by: Joi.string().required()
+var Schema = _mongoose2.default.Schema;
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    name: _joi2.default.string().trim().required(),
+    sort_code: _joi2.default.string().trim().required(),
+    bank_code: _joi2.default.string().required(),
+    country_iso2: _joi2.default.string().optional(),
+    contact_person: _joi2.default.string().optional(),
+    website: _joi2.default.string().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    name: Joi.string().trim().optional(),
-    sort_code: Joi.string().trim().optional(),
-    bank_code: Joi.string().optional(),
-    country_iso2: Joi.string().optional(),
-    contact_person: Joi.string().optional(),
-    website: Joi.string().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    name: _joi2.default.string().trim().optional(),
+    sort_code: _joi2.default.string().trim().optional(),
+    bank_code: _joi2.default.string().optional(),
+    country_iso2: _joi2.default.string().optional(),
+    contact_person: _joi2.default.string().optional(),
+    website: _joi2.default.string().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     name: { type: String, required: [true, "Why no input?"], unique: true },
     sort_code: { type: String, required: [true, "Why no input?"] },
     bank_code: { type: String, required: [true, "Why no input?"] },
@@ -52,17 +75,17 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "bank");
-newSchema.plugin(mongoose_csv);
+newSchema.plugin(_mongooseCsv2.default);
 
-const Bank = mongoose.model("Bank", newSchema);
+var Bank = _mongoose2.default.model("Bank", newSchema);
 if (preload) {
-    Bank.insertMany(table);
+    Bank.insertMany(_table2.default);
 }
 
-export default Bank;
+exports.default = Bank;
 //# sourceMappingURL=model.js.map

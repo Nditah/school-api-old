@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, createWebhook, createOtp } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/sms?id={recordId} Retrieve SMS records
@@ -20,7 +32,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/sms", [checkAuth, isValidStaff], fetchRecord);
+router.get("/sms", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
  * @api {post} /api/sms Create an SMS record
@@ -37,7 +49,7 @@ router.get("/sms", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Sms not found.
  * @apiError 401 master access only.
  */
-router.post("/sms", [checkAuth, isValidStaff], createRecord);
+router.post("/sms", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {post} /api/sms/otp Create send SMS otp
@@ -50,7 +62,7 @@ router.post("/sms", [checkAuth, isValidStaff], createRecord);
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Sms not found.
  */
-router.post("/sms/otp", createOtp);
+router.post("/sms/otp", _controller.createOtp);
 
 /**
  * @api {post} /api/sms/webhook Create incoming SMS webhook
@@ -67,7 +79,7 @@ router.post("/sms/otp", createOtp);
  * @apiError 404 Sms not found.
  * @apiError 401 master access only.
  */
-router.post("/sms/webhook", createWebhook);
+router.post("/sms/webhook", _controller.createWebhook);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

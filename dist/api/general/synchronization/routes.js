@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/synchronizations?id={recordId} Retrieve Synchronization records
@@ -21,7 +33,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/synchronizations", fetchRecord);
+router.get("/synchronizations", _controller.fetchRecord);
 
 /**
  * @api {post} /api/synchronizations Create a Synchronization record
@@ -39,7 +51,7 @@ router.get("/synchronizations", fetchRecord);
  * @apiError 404 Synchronization not found.
  * @apiError 401 master access only.
  */
-router.post("/synchronizations", [checkAuth, isValidStaff], createRecord);
+router.post("/synchronizations", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {put} /api/synchronizations/{recordId} Update a Synchronization record
@@ -58,7 +70,7 @@ router.post("/synchronizations", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 Synchronization not found.
  * @apiError 401 master access only.
  */
-router.put("/synchronizations/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/synchronizations/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/synchronizations/{recordId} Delete a Synchronization record
@@ -70,7 +82,7 @@ router.put("/synchronizations/:recordId", [checkAuth, isValidStaff], updateRecor
  * @apiError 404 Synchronization not found.
  * @apiError 401 master access only.
  */
-router.delete("/synchronizations/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/synchronizations/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

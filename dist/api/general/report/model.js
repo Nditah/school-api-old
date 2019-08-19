@@ -1,3 +1,35 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaGenerate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
  * @property {ObjectId} id Report primaryKey
@@ -6,45 +38,36 @@
  * @property {String} subsidiary Report subsidiary
  * @description Report holds the model for generating financial reports.
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE, SUBSIDIARY } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaGenerate = {
-    id: Joi.string().optional(),
-    code: Joi.string().optional(),
-    from: Joi.date().optional(), // start period
-    to: Joi.date().optional(), // end period
-    terminal: Joi.string().optional(), // ObjectId
-    pmtroute: Joi.string().optional(), // ObjectId
-    partner: Joi.string().optional(), // ObjectId
-    staff: Joi.string().optional(), // ObjectId
-    customer: Joi.string().optional(), // ObjectId
-    task: Joi.string().optional(), // ObjectId
-    office: Joi.string().optional(), // ObjectId
-    product: Joi.string().optional(), // ObjectId
-    store: Joi.string().optional(), // ObjectId
-    sales: Joi.string().optional(), // Sales ObjectId
-    purchase: Joi.string().optional(), // Sales ObjectId
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional()
+var Schema = _mongoose2.default.Schema;
+var ObjectId = Schema.Types.ObjectId;
+var schemaGenerate = exports.schemaGenerate = {
+    id: _joi2.default.string().optional(),
+    code: _joi2.default.string().optional(),
+    from: _joi2.default.date().optional(), // start period
+    to: _joi2.default.date().optional(), // end period
+    terminal: _joi2.default.string().optional(), // ObjectId
+    pmtroute: _joi2.default.string().optional(), // ObjectId
+    partner: _joi2.default.string().optional(), // ObjectId
+    staff: _joi2.default.string().optional(), // ObjectId
+    customer: _joi2.default.string().optional(), // ObjectId
+    task: _joi2.default.string().optional(), // ObjectId
+    office: _joi2.default.string().optional(), // ObjectId
+    product: _joi2.default.string().optional(), // ObjectId
+    store: _joi2.default.string().optional(), // ObjectId
+    sales: _joi2.default.string().optional(), // Sales ObjectId
+    purchase: _joi2.default.string().optional(), // Sales ObjectId
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional()
 };
 
-export const schemaUpdate = {
-    code: Joi.string().optional(),
-    type: Joi.string().optional(),
-    name: Joi.string().optional(),
-    description: Joi.string().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    code: _joi2.default.string().optional(),
+    type: _joi2.default.string().optional(),
+    name: _joi2.default.string().optional(),
+    description: _joi2.default.string().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     code: { type: String },
     type: {
         type: String,
@@ -57,17 +80,17 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "report");
 
-const Report = mongoose.model("Report", newSchema);
+var Report = _mongoose2.default.model("Report", newSchema);
 
 if (preload) {
-    Report.insertMany(table);
+    Report.insertMany(_table2.default);
 }
 
-export default Report;
+exports.default = Report;
 //# sourceMappingURL=model.js.map
