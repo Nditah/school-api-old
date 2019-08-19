@@ -15,7 +15,6 @@ import mongoose from "mongoose";
 import mongoose_csv from "mongoose-csv";
 import { DATABASE, SUBSIDIARY } from "../../../constants";
 import table from "./table";
-import Staff from "../staff/model";
 import Subject from "../subject/model";
 import Assessment from "../assessment/model";
 import Staff from "../staff/model";
