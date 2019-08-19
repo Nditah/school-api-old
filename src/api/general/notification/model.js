@@ -3,8 +3,8 @@
  * @property {ObjectId} id Notification primaryKey
  * @property {String} user_type Notification user type "STAFF|PARENT|STUDENT"
  * @property {ObjectId} staff_id Notification staff ObjectId
- * @property {ObjectId} student_id Notification customer ObjectId
- * @property {ObjectId} parent_id Notification partner ObjectId
+ * @property {ObjectId} student_id Notification student ObjectId
+ * @property {ObjectId} parent_id Notification parent ObjectId
  * @property {String} message Notification message
  * @property {String} notification_status Notification record status "PENDING|CLOSED"
  * @description Notification model holds record of all Notification
@@ -41,7 +41,7 @@ export const schemaUpdate = {
 };
 
 export const schema = {
-    user_type: { type: String, enum: ["STAFF", "PARENT", "CUSTOMER"], required: true },
+    user_type: { type: String, enum: ["STAFF", "PARENT", "STUDENT"], required: true },
     staff_id: { type: ObjectId, ref: "Staff" },
     student_id: { type: ObjectId, ref: "Student" },
     parent_id: { type: ObjectId, ref: "Parent" },

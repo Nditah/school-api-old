@@ -2,7 +2,7 @@ import Joi from "joi";
 import log4js from "log4js";
 import aqp from "api-query-params";
 import Staff, { schemaCreate, schemaUpdate, schemaLogin } from "./model";
-import { success, fail, notFound, isObjecId, hasProp, hash } from "../../../lib";
+import { success, fail, notFound, hasProp, hash } from "../../../lib";
 import { STATUS_MSG } from "../../../constants";
 import { staffAuthenticate } from "../../../services";
 
@@ -23,15 +23,14 @@ export async function fetchRecord(req, res) {
             delete filter.q;
         }
         const result = await Staff.find(filter)
-            .populate("terminal_id")
             .populate("office_id")
             .populate("role")
-            .populate("bank_id")
-            .populate("vehicle_id")
-            .populate("asset_assigment_ids")
-            .populate("rating_ids")
-            .populate("state_id")
-            .populate("county_id")
+            .populate("bank")
+            .populate("classe")
+            .populate("subject")
+            .populate("bank_name")
+            .populate("state")
+            .populate("county")
             .skip(skip)
             .limit(limit)
             .sort(sort)

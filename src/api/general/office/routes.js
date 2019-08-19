@@ -29,11 +29,12 @@ router.get("/offices", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {String} name Office name (required)
  * @apiParam {String} code Office code
  * @apiParam {String} email Office email
- * @apiParam {String} phone Office phone
- * @apiParam {String} functions Office description tasks the office performs
+ * @apiParam {String} phone Office phone number
+ * @apiParam {String} functions Office list tasks the office performs
+ * @apiParam {String} description Office job-description staff performs
  * @apiParam {Number} hierarchy Office hierarchy [1-7]
- * @apiParam {Enum} office_type Office office_type "BOARD|DEPARTMENT|UNIT"
- * @apiParam {Enum} subsidiary Office subsidiary "PMT|PML|PET|PRESS"
+ * @apiParam {Enum} office_type Office office_type "PRINCIPAL|VICE-PRINCIPAL|ACADEMIC|ADMINISTRATIVE"
+ * @apiParam {Enum} subsidiary Office subsidiary "NURSRY|PRIMARY|SECONDARY|PRE-NURSRY"
  * @apiParam {ObjectId} office_above Office above this.
  * @apiParam {ObjectId} head Office Head Staff Id
  * @apiParam {ObjectId} assistant Office Assistant Head Staff Id
@@ -49,15 +50,15 @@ router.post("/offices", [checkAuth, isValidStaff], createRecord);
  * @apiName UpdateOffice
  * @apiGroup Office
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
  * @apiParam {String} name Office name (required)
  * @apiParam {String} code Office code
  * @apiParam {String} email Office email
- * @apiParam {String} phone Office phone
- * @apiParam {String} functions Office description tasks the office performs
+ * @apiParam {String} phone Office phone number
+ * @apiParam {String} functions Office list tasks the office performs
+ * @apiParam {String} description Office job-description staff performs
  * @apiParam {Number} hierarchy Office hierarchy [1-7]
- * @apiParam {Enum} office_type Office office_type "BOARD|DEPARTMENT|UNIT"
- * @apiParam {Enum} subsidiary Office subsidiary "PMT|PML|PET|PRESS"
+ * @apiParam {Enum} office_type Office office_type "PRINCIPAL|VICE-PRINCIPAL|ACADEMIC|ADMINISTRATIVE"
+ * @apiParam {Enum} subsidiary Office subsidiary "NURSRY|PRIMARY|SECONDARY|PRE-NURSRY"
  * @apiParam {ObjectId} office_above Office above this.
  * @apiParam {ObjectId} head Office Head Staff Id
  * @apiParam {ObjectId} assistant Office Assistant Head Staff Id

@@ -84,7 +84,7 @@ export const schema = {
         type: String,
         enum: Object.values(SUBSIDIARY),
         required: [true, "Why no input?"],
-        default: SUBSIDIARY.PEACEGROUP,
+        default: SUBSIDIARY.SCHOOL,
     },
     office_above: { type: ObjectId, ref: "Office" },
     head: { type: ObjectId, ref: "Staff" },
