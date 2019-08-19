@@ -1,19 +1,15 @@
 import express from "express";
 
 // Routes
-import accessRoute from "./access";
-import accidentCauseRoute from "./accident-cause";
-import accidentRoute from "./accident";
-import accidentVictimRoute from "./accident-victim";
+
 import accountClassRoute from "./account-class";
 import accountHeadingRoute from "./account-heading";
 import accountPostingRoute from "./account-posting";
-import ancillaryRevenueRoute from "./ancillary-revenue";
+import admission from "./admission";
 import assetAssignmentRoute from "./asset-assignment";
 import assetRoute from "./asset";
 import attendanceRoute from "./attendance";
 import bankAccountRoute from "./bank-account";
-import bankRegisterRoute from "./bank-register";
 import bankRoute from "./bank";
 import bankTransactionRoute from "./bank-transaction";
 import blogCommentRoute from "./blog-comment";
