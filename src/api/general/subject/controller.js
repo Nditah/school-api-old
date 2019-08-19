@@ -1,15 +1,14 @@
 import Joi from "joi";
 import log4js from "log4js";
 import aqp from "api-query-params";
-import Student, { schemaCreate, schemaUpdate, schemaLogin } from "./model";
-import { success, fail, notFound, hash, hasProp } from "../../../lib";
+import Subject, { schemaCreate, schemaUpdate } from "./model";
+import { success, fail, notFound, hasProp, hash } from "../../../lib";
 import { STATUS_MSG } from "../../../constants";
-import { studentAuthenticate } from "../../../services/authenticate";
 
 // Logging
-const logger = log4js.getLogger("[student]");
+const logger = log4js.getLogger("[subject]");
 log4js.configure({
-    appenders: { file: { type: "file", filename: "logs/student.log" } },
+    appenders: { file: { type: "file", filename: "logs/subject.log" } },
     categories: { default: { appenders: ["file"], level: "debug" } },
 });
 
@@ -22,12 +21,8 @@ export async function fetchRecord(req, res) {
             filter.$text = { $search: searchString };
             delete filter.q;
         }
-        console.log(filter);
-        const result = await Student.find(filter)
-            .populate("classe")
-            .populate("hostel")
-            .populate("state")
-            .populate("county")
+        const result = await Subject.find(filter)
+            .populate("hod")
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -51,11 +46,11 @@ export async function createRecord(req, res) {
     const { error } = Joi.validate(data, schemaCreate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
     const { email, phone } = data;
-    const duplicate = await Student.findOne({ $or: [{ email }, { phone }] }).exec();
+    const duplicate = await Subject.findOne({ $or: [{ email }, { phone }] }).exec();
     if (duplicate) {
         return fail(res, 422, `Error! Record already exist for ${email} or ${phone}`);
     }
-    const newRecord = new Student(data);
+    const newRecord = new Subject(data);
     try {
         const result = await newRecord.save();
         if (!result) {
@@ -76,7 +71,7 @@ export async function updateRecord(req, res) {
     const { error } = Joi.validate(data, schemaUpdate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
     try {
-        const result = await Student.findOneAndUpdate({ _id: id }, data, { new: true });
+        const result = await Subject.findOneAndUpdate({ _id: id }, data, { new: true });
         if (!result) {
             return notFound(res, `Bad Request: Model not found with id ${id}`);
         }
@@ -90,7 +85,7 @@ export async function updateRecord(req, res) {
 export async function deleteRecord(req, res) {
     const { recordId: id } = req.params;
     try {
-        const result = await Student.findOneAndRemove({ _id: id });
+        const result = await Subject.findOneAndRemove({ _id: id });
         if (!result) {
             return notFound(res, `Bad Request: Model not found with id ${id}`);
         }
@@ -99,12 +94,4 @@ export async function deleteRecord(req, res) {
         logger.error(err);
         return fail(res, 500, `Error deleting record. ${err.message}`);
     }
-}
-
-export async function login(req, res) {
-    const { error } = Joi.validate(req.body, schemaLogin);
-    if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
-    return studentAuthenticate(req.body)
-        .then(({ token, user }) => success(res, 201, { token, user }, "Login was successful!"))
-        .catch(err => fail(res, 422, err.message));
 }
