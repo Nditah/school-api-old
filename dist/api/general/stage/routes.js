@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/stages?id={recordId} Retrieve Stage records
@@ -19,7 +31,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/stages", [checkAuth, isValidStaff], fetchRecord);
+router.get("/stages", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
  * @api {post} /api/stages Create stages
@@ -38,7 +50,7 @@ router.get("/stages", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Stage not found.
  * @apiError 401 master access only.
  */
-router.post("/stages", [checkAuth, isValidStaff], createRecord);
+router.post("/stages", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {put} /api/stages/{recordId} Update stages
@@ -57,7 +69,7 @@ router.post("/stages", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 Stage not found.
  * @apiError 401 master access only.
  */
-router.put("/stages/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/stages/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/stages/{recordId} Delete stages
@@ -69,7 +81,7 @@ router.put("/stages/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiError 404 Stage not found.
  * @apiError 401 master access only.
  */
-router.delete("/stages/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/stages/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

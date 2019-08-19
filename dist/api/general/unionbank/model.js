@@ -1,3 +1,27 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
  * @property {Number} branchid UnionBank Branch code the transaction originated from
@@ -19,33 +43,26 @@
  * @property {String} branchname UnionBank branchname Branch name the transaction originated from
  * @description UnionbankTransaction model holds record of all transactions via Unionbank
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE } from "../../../constants";
-
-const { Schema } = mongoose;
-
-export const schemaCreate = {
-    branchid: Joi.number().required(),
-    amount: Joi.string().required(),
-    channel: Joi.string().required(),
-    trandate: Joi.date().required(),
-    trancode: Joi.string().required(),
-    destaccountno: Joi.string().required(),
-    balance: Joi.number().required(),
-    originbank: Joi.string().required(),
-    narration: Joi.string().optional(),
-    currency: Joi.string().required(),
-    trantype: Joi.string().trim().valid(["CREDIT", "DEBIT"]).required(),
-    valuedate: Joi.date().required(),
-    business_id: Joi.number().required(),
-    transaction_ref: Joi.string().required(),
-    branchname: Joi.string().required()
+var Schema = _mongoose2.default.Schema;
+var schemaCreate = exports.schemaCreate = {
+    branchid: _joi2.default.number().required(),
+    amount: _joi2.default.string().required(),
+    channel: _joi2.default.string().required(),
+    trandate: _joi2.default.date().required(),
+    trancode: _joi2.default.string().required(),
+    destaccountno: _joi2.default.string().required(),
+    balance: _joi2.default.number().required(),
+    originbank: _joi2.default.string().required(),
+    narration: _joi2.default.string().optional(),
+    currency: _joi2.default.string().required(),
+    trantype: _joi2.default.string().trim().valid(["CREDIT", "DEBIT"]).required(),
+    valuedate: _joi2.default.date().required(),
+    business_id: _joi2.default.number().required(),
+    transaction_ref: _joi2.default.string().required(),
+    branchname: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     branchid: { type: Number, required: [true, "Why no branchid?"] },
     amount: { type: String, required: [true, "Why no amount?"] },
     channel: { type: String, required: [true, "Why no channel?"] },
@@ -63,12 +80,12 @@ export const schema = {
     branchname: { type: String, required: [true, "Why no branch name?"] }
 };
 
-const options = DATABASE.OPTIONS;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "unionbank_transaction");
 
-const UnionbankTransaction = mongoose.model("UnionbankTransaction", newSchema);
+var UnionbankTransaction = _mongoose2.default.model("UnionbankTransaction", newSchema);
 
-export default UnionbankTransaction;
+exports.default = UnionbankTransaction;
 //# sourceMappingURL=model.js.map

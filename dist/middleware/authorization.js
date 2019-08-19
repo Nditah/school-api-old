@@ -1,23 +1,47 @@
-import { verify } from "jsonwebtoken";
-import { JWT } from "../constants";
-import { fail } from "../lib/response";
-import { hasProp } from "../lib/helpers";
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getToken = getToken;
+exports.checkAuth = checkAuth;
+exports.isValidStaff = isValidStaff;
+exports.isValidPartner = isValidPartner;
+exports.isValidDriver = isValidDriver;
+exports.isValidCustomer = isValidCustomer;
+exports.isValidPmlTerminalClerk = isValidPmlTerminalClerk;
+exports.isValidPmtTerminalClerk = isValidPmtTerminalClerk;
+exports.isValidPmlTerminalSupervisor = isValidPmlTerminalSupervisor;
+exports.isValidPmtTerminalSupervisor = isValidPmtTerminalSupervisor;
+exports.isValidPmtTerminalAccountant = isValidPmtTerminalAccountant;
+exports.isValidPmlTerminalAccountant = isValidPmlTerminalAccountant;
+exports.isValidPmlDispatchRider = isValidPmlDispatchRider;
+exports.isValidPmtTerminalLoader = isValidPmtTerminalLoader;
+exports.isValidTerminalSecurity = isValidTerminalSecurity;
+
+var _jsonwebtoken = require("jsonwebtoken");
+
+var _constants = require("../constants");
+
+var _response = require("../lib/response");
+
+var _helpers = require("../lib/helpers");
 
 // Retrieve token from request header
-export function getToken(req) {
+function getToken(req) {
     if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
         return req.headers.authorization.split(" ")[1];
-    }if (req.query && hasProp(req.query, "token")) {
+    }if (req.query && (0, _helpers.hasProp)(req.query, "token")) {
         return req.query.token;
     }
     return null;
 }
 
-export function checkAuth(req, res, next) {
-    const token = getToken(req);
-    if (!token) return fail(res, 403, "No token found in request header!");
-    return verify(token, JWT.jwtSecret, (err, decoded) => {
-        if (err) return fail(res, 403, "Failed to authenticate token.!");
+function checkAuth(req, res, next) {
+    var token = getToken(req);
+    if (!token) return (0, _response.fail)(res, 403, "No token found in request header!");
+    return (0, _jsonwebtoken.verify)(token, _constants.JWT.jwtSecret, function (err, decoded) {
+        if (err) return (0, _response.fail)(res, 403, "Failed to authenticate token.!");
         req.user = {
             userType: decoded.userType,
             id: decoded.id,
@@ -36,110 +60,144 @@ export function checkAuth(req, res, next) {
     });
 }
 
-export function isValidStaff(req, res, next) {
-    const { userType, id, email, terminal, phone, role } = req.user;
-    if (userType !== "staff") return fail(res, 403, "Invalid Staff credentials!");
-    console.log(`\nValidating userType ${userType}, id ${id}, email ${email}, 
-    Terminal ${terminal}, phone ${phone}, role ${role}`);
+function isValidStaff(req, res, next) {
+    var _req$user = req.user,
+        userType = _req$user.userType,
+        id = _req$user.id,
+        email = _req$user.email,
+        terminal = _req$user.terminal,
+        phone = _req$user.phone,
+        role = _req$user.role;
+
+    if (userType !== "staff") return (0, _response.fail)(res, 403, "Invalid Staff credentials!");
+    console.log("\nValidating userType " + userType + ", id " + id + ", email " + email + ", \n    Terminal " + terminal + ", phone " + phone + ", role " + role);
     return next();
 }
 
-export function isValidPartner(req, res, next) {
-    const { userType, id, email } = req.user;
-    if (userType !== "partner") return fail(res, 403, "Invalid Partner credentials!");
-    console.log(`\nValidating userType ${userType}, id ${id}, email ${email}`);
+function isValidPartner(req, res, next) {
+    var _req$user2 = req.user,
+        userType = _req$user2.userType,
+        id = _req$user2.id,
+        email = _req$user2.email;
+
+    if (userType !== "partner") return (0, _response.fail)(res, 403, "Invalid Partner credentials!");
+    console.log("\nValidating userType " + userType + ", id " + id + ", email " + email);
     return next();
 }
 
-export function isValidDriver(req, res, next) {
-    const { userType, id, email, vehicle } = req.user;
-    if (userType !== "driver") return fail(res, 403, "Invalid Partner credentials!");
-    console.log(`\nValidating userType ${userType}, id ${id}, email ${email} vehicle ${vehicle}`);
+function isValidDriver(req, res, next) {
+    var _req$user3 = req.user,
+        userType = _req$user3.userType,
+        id = _req$user3.id,
+        email = _req$user3.email,
+        vehicle = _req$user3.vehicle;
+
+    if (userType !== "driver") return (0, _response.fail)(res, 403, "Invalid Partner credentials!");
+    console.log("\nValidating userType " + userType + ", id " + id + ", email " + email + " vehicle " + vehicle);
     return next();
 }
 
-export function isValidCustomer(req, res, next) {
-    const { userType, id, email, phone } = req.user;
-    if (userType !== "customer") return fail(res, 403, "Invalid Customer credentials!");
-    console.log(`\nValidating userType ${userType}, id ${id}, email ${email} phone ${phone}`);
+function isValidCustomer(req, res, next) {
+    var _req$user4 = req.user,
+        userType = _req$user4.userType,
+        id = _req$user4.id,
+        email = _req$user4.email,
+        phone = _req$user4.phone;
+
+    if (userType !== "customer") return (0, _response.fail)(res, 403, "Invalid Customer credentials!");
+    console.log("\nValidating userType " + userType + ", id " + id + ", email " + email + " phone " + phone);
     return next();
 }
 
-function isValidRole(officeArray = [], roleCode) {
-    const result = officeArray.find(office => office.code === roleCode);
+function isValidRole() {
+    var officeArray = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var roleCode = arguments[1];
+
+    var result = officeArray.find(function (office) {
+        return office.code === roleCode;
+    });
     return result != null;
 }
 
 //* =============== TERMINAL ROLES ===================== //
 
-export function isValidPmlTerminalClerk(req, res, next) {
-    const { role } = req.user;
+function isValidPmlTerminalClerk(req, res, next) {
+    var role = req.user.role;
+
     if (!isValidRole(role, "PML_TERMINAL_CLERK")) {
-        return fail(res, 403, "Invalid user-role. Required: PML_TERMINAL_CLERK");
+        return (0, _response.fail)(res, 403, "Invalid user-role. Required: PML_TERMINAL_CLERK");
     }
     return next();
 }
 
-export function isValidPmtTerminalClerk(req, res, next) {
-    const { role } = req.user;
+function isValidPmtTerminalClerk(req, res, next) {
+    var role = req.user.role;
+
     if (!isValidRole(role, "PMT_TERMINAL_CLERK")) {
-        return fail(res, 403, "Invalid user-role. Required: PMT_TERMINAL_CLERK");
+        return (0, _response.fail)(res, 403, "Invalid user-role. Required: PMT_TERMINAL_CLERK");
     }
     return next();
 }
 
-export function isValidPmlTerminalSupervisor(req, res, next) {
-    const { role } = req.user;
+function isValidPmlTerminalSupervisor(req, res, next) {
+    var role = req.user.role;
+
     if (!isValidRole(role, "PML_TERMINAL_SUPERVISOR")) {
-        return fail(res, 403, "Invalid user-role. Required: PML_TERMINAL_SUPERVISOR");
+        return (0, _response.fail)(res, 403, "Invalid user-role. Required: PML_TERMINAL_SUPERVISOR");
     }
     return next();
 }
 
-export function isValidPmtTerminalSupervisor(req, res, next) {
-    const { role } = req.user;
+function isValidPmtTerminalSupervisor(req, res, next) {
+    var role = req.user.role;
+
     if (!isValidRole(role, "PMT_TERMINAL_SUPERVISOR")) {
-        return fail(res, 403, "Invalid user-role. Required: PMT_TERMINAL_SUPERVISOR");
+        return (0, _response.fail)(res, 403, "Invalid user-role. Required: PMT_TERMINAL_SUPERVISOR");
     }
     return next();
 }
 
-export function isValidPmtTerminalAccountant(req, res, next) {
-    const { role } = req.user;
+function isValidPmtTerminalAccountant(req, res, next) {
+    var role = req.user.role;
+
     if (!isValidRole(role, "PMT_TERMINAL_ACCOUNTANT")) {
-        return fail(res, 403, "Invalid user-role. Required: PMT_TERMINAL_ACCOUNTANT");
+        return (0, _response.fail)(res, 403, "Invalid user-role. Required: PMT_TERMINAL_ACCOUNTANT");
     }
     return next();
 }
 
-export function isValidPmlTerminalAccountant(req, res, next) {
-    const { role } = req.user;
+function isValidPmlTerminalAccountant(req, res, next) {
+    var role = req.user.role;
+
     if (!isValidRole(role, "PML_TERMINAL_ACCOUNTANT")) {
-        return fail(res, 403, "Invalid user-role. Required: PML_TERMINAL_ACCOUNTANT");
+        return (0, _response.fail)(res, 403, "Invalid user-role. Required: PML_TERMINAL_ACCOUNTANT");
     }
     return next();
 }
 
-export function isValidPmlDispatchRider(req, res, next) {
-    const { role } = req.user;
+function isValidPmlDispatchRider(req, res, next) {
+    var role = req.user.role;
+
     if (!isValidRole(role, "PML_DISPATCH_RIDER")) {
-        return fail(res, 403, "Invalid user-role. Required: PML_DISPATCH_RIDER");
+        return (0, _response.fail)(res, 403, "Invalid user-role. Required: PML_DISPATCH_RIDER");
     }
     return next();
 }
 
-export function isValidPmtTerminalLoader(req, res, next) {
-    const { role } = req.user;
+function isValidPmtTerminalLoader(req, res, next) {
+    var role = req.user.role;
+
     if (!isValidRole(role, "PMT_TERMINAL_LOADER")) {
-        return fail(res, 403, "Invalid user-role. Required: PMT_TERMINAL_LOADER");
+        return (0, _response.fail)(res, 403, "Invalid user-role. Required: PMT_TERMINAL_LOADER");
     }
     return next();
 }
 
-export function isValidTerminalSecurity(req, res, next) {
-    const { role } = req.user;
+function isValidTerminalSecurity(req, res, next) {
+    var role = req.user.role;
+
     if (!isValidRole(role, "TERMINAL_SECURITY")) {
-        return fail(res, 403, "Invalid user-role. Required: TERMINAL_SECURITY");
+        return (0, _response.fail)(res, 403, "Invalid user-role. Required: TERMINAL_SECURITY");
     }
     return next();
 }

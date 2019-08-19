@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, auditRecord, deleteRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/vouchers?id={recordId} Retrieve Voucher record(s)
@@ -19,7 +31,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/vouchers", [checkAuth, isValidStaff], fetchRecord);
+router.get("/vouchers", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
  * @api {post} /api/vouchers Create vouchers
@@ -63,7 +75,7 @@ router.get("/vouchers", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Voucher not found.
  * @apiError 401 master access only.
  */
-router.post("/vouchers", [checkAuth, isValidStaff], createRecord);
+router.post("/vouchers", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {put} /api/vouchers/{recordId} Update vouchers
@@ -108,7 +120,7 @@ router.post("/vouchers", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 Voucher not found.
  * @apiError 401 master access only.
  */
-router.put("/vouchers/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/vouchers/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {put} /api/vouchers/audit/{recordId} Audit vouchers
@@ -124,7 +136,7 @@ router.put("/vouchers/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiError {Object} 422 Some parameters may contain invalid values.
  * @apiError 404 Voucher not found.
  */
-router.put("/vouchers/audit/:recordId", [checkAuth, isValidStaff], auditRecord);
+router.put("/vouchers/audit/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.auditRecord);
 
 /**
  * @api {delete} /api/vouchers/{recordId} Delete vouchers
@@ -136,7 +148,7 @@ router.put("/vouchers/audit/:recordId", [checkAuth, isValidStaff], auditRecord);
  * @apiError 404 Voucher not found.
  * @apiError 401 master access only.
  */
-router.delete("/vouchers/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/vouchers/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map

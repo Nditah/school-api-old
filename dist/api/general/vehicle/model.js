@@ -1,3 +1,35 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
@@ -48,118 +80,105 @@
  * @property {Boolean} is_active Vehicle is it active or retired  (optional)
  * @description Vehicle holds record of all cities with terminal_list
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { VEHICLE, SUBSIDIARY, EMPLOYEE_TYPE, ASSET_WORTHINESS, DATABASE } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-const {
-    VEHICLE_MAKE,
-    VEHICLE_TYPE,
-    VEHICLE_CATEGORY,
-    VEHICLE_CLASS,
-    VEHICLE_LOCATION,
-    VEHICLE_ASSIGNMENT,
-    VEHICLE_CUSTODIAN
-} = VEHICLE;
-
-const { RECORD_STATUS } = DATABASE;
-
-export const schemaCreate = {
-    name: Joi.string().required(),
-    description: Joi.string().optional(),
-    engine_number: Joi.string().optional(),
-    chasis_number: Joi.string().optional(),
-    plate_number: Joi.string().optional(),
-    registration_number: Joi.string().optional(),
-    vehicle_make: Joi.string().optional(),
-    seating_capacity: Joi.number().optional(),
-    vehicle_type: Joi.string().valid(Object.values(VEHICLE_TYPE)).optional(),
-    vehicle_class: Joi.string().valid(Object.values(VEHICLE_CLASS)).required(),
-    vehicle_category: Joi.string().valid(Object.values(VEHICLE_CATEGORY)).required(),
-    vehicle_custodian: Joi.string().valid(Object.values(EMPLOYEE_TYPE)).optional(),
-    current_staff_id: Joi.string().optional(),
-    current_partner_id: Joi.string().optional(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).required(),
-    color: Joi.string().optional(),
-    photo: Joi.string().optional(),
-    vehicle_location: Joi.string().valid(Object.values(VEHICLE_LOCATION)).optional(),
-    vehicle_assignment: Joi.string().valid(Object.values(VEHICLE_ASSIGNMENT)).optional(),
-    asset_worthiness: Joi.string().valid(Object.values(ASSET_WORTHINESS)).optional(),
-    purchase_date: Joi.date().optional(),
-    launch_date: Joi.date().optional(),
-    expiry_date: Joi.date().optional(),
-    lifespan: Joi.number().optional(),
-    purchase_value: Joi.number().optional(),
-    opening_value: Joi.number().optional(),
-    closing_value: Joi.number().optional(),
-    salvage_value: Joi.number().optional(),
-    current_value: Joi.number().optional(),
-    total_depreciable_cost: Joi.number().optional(),
-    depreciation_rate: Joi.number().optional(),
-    depreciation_expense: Joi.number().optional(),
-    accumulated_depreciation: Joi.number().optional(),
-    remark: Joi.string().optional(),
-    is_dto: Joi.boolean().required(),
-    dto_initial_deposit: Joi.string().optional(),
-    is_healthy: Joi.boolean().optional(),
-    is_active: Joi.boolean().optional(),
-    created_by: Joi.string().required()
+var Schema = _mongoose2.default.Schema;
+var ObjectId = Schema.Types.ObjectId;
+var VEHICLE_MAKE = _constants.VEHICLE.VEHICLE_MAKE,
+    VEHICLE_TYPE = _constants.VEHICLE.VEHICLE_TYPE,
+    VEHICLE_CATEGORY = _constants.VEHICLE.VEHICLE_CATEGORY,
+    VEHICLE_CLASS = _constants.VEHICLE.VEHICLE_CLASS,
+    VEHICLE_LOCATION = _constants.VEHICLE.VEHICLE_LOCATION,
+    VEHICLE_ASSIGNMENT = _constants.VEHICLE.VEHICLE_ASSIGNMENT,
+    VEHICLE_CUSTODIAN = _constants.VEHICLE.VEHICLE_CUSTODIAN;
+var RECORD_STATUS = _constants.DATABASE.RECORD_STATUS;
+var schemaCreate = exports.schemaCreate = {
+    name: _joi2.default.string().required(),
+    description: _joi2.default.string().optional(),
+    engine_number: _joi2.default.string().optional(),
+    chasis_number: _joi2.default.string().optional(),
+    plate_number: _joi2.default.string().optional(),
+    registration_number: _joi2.default.string().optional(),
+    vehicle_make: _joi2.default.string().optional(),
+    seating_capacity: _joi2.default.number().optional(),
+    vehicle_type: _joi2.default.string().valid(Object.values(VEHICLE_TYPE)).optional(),
+    vehicle_class: _joi2.default.string().valid(Object.values(VEHICLE_CLASS)).required(),
+    vehicle_category: _joi2.default.string().valid(Object.values(VEHICLE_CATEGORY)).required(),
+    vehicle_custodian: _joi2.default.string().valid(Object.values(_constants.EMPLOYEE_TYPE)).optional(),
+    current_staff_id: _joi2.default.string().optional(),
+    current_partner_id: _joi2.default.string().optional(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).required(),
+    color: _joi2.default.string().optional(),
+    photo: _joi2.default.string().optional(),
+    vehicle_location: _joi2.default.string().valid(Object.values(VEHICLE_LOCATION)).optional(),
+    vehicle_assignment: _joi2.default.string().valid(Object.values(VEHICLE_ASSIGNMENT)).optional(),
+    asset_worthiness: _joi2.default.string().valid(Object.values(_constants.ASSET_WORTHINESS)).optional(),
+    purchase_date: _joi2.default.date().optional(),
+    launch_date: _joi2.default.date().optional(),
+    expiry_date: _joi2.default.date().optional(),
+    lifespan: _joi2.default.number().optional(),
+    purchase_value: _joi2.default.number().optional(),
+    opening_value: _joi2.default.number().optional(),
+    closing_value: _joi2.default.number().optional(),
+    salvage_value: _joi2.default.number().optional(),
+    current_value: _joi2.default.number().optional(),
+    total_depreciable_cost: _joi2.default.number().optional(),
+    depreciation_rate: _joi2.default.number().optional(),
+    depreciation_expense: _joi2.default.number().optional(),
+    accumulated_depreciation: _joi2.default.number().optional(),
+    remark: _joi2.default.string().optional(),
+    is_dto: _joi2.default.boolean().required(),
+    dto_initial_deposit: _joi2.default.string().optional(),
+    is_healthy: _joi2.default.boolean().optional(),
+    is_active: _joi2.default.boolean().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    name: Joi.string().optional(),
-    description: Joi.string().optional(),
-    engine_number: Joi.string().optional(),
-    chasis_number: Joi.string().optional(),
-    plate_number: Joi.string().optional(),
-    registration_number: Joi.string().optional(),
-    vehicle_make: Joi.string().optional(),
-    seating_capacity: Joi.number().optional(),
-    vehicle_type: Joi.string().valid(Object.values(VEHICLE_TYPE)).optional(),
-    vehicle_class: Joi.string().valid(Object.values(VEHICLE_CLASS)).optional(),
-    vehicle_category: Joi.string().valid(Object.values(VEHICLE_CATEGORY)).optional(),
-    vehicle_custodian: Joi.string().valid(Object.values(EMPLOYEE_TYPE)).optional(),
-    current_staff_id: Joi.string().optional(),
-    current_partner_id: Joi.string().optional(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
-    color: Joi.string().optional(),
-    photo: Joi.string().optional(),
-    vehicle_location: Joi.string().valid(Object.values(VEHICLE_LOCATION)).optional(),
-    vehicle_assignment: Joi.string().valid(Object.values(VEHICLE_ASSIGNMENT)).optional(),
-    asset_worthiness: Joi.string().valid(Object.values(ASSET_WORTHINESS)).optional(),
-    purchase_date: Joi.date().optional(),
-    launch_date: Joi.date().optional(),
-    expiry_date: Joi.date().optional(),
-    lifespan: Joi.number().optional(),
-    purchase_value: Joi.number().optional(),
-    opening_value: Joi.number().optional(),
-    closing_value: Joi.number().optional(),
-    salvage_value: Joi.number().optional(),
-    current_value: Joi.number().optional(),
-    total_depreciable_cost: Joi.number().optional(),
-    depreciation_rate: Joi.number().optional(),
-    depreciation_expense: Joi.number().optional(),
-    accumulated_depreciation: Joi.number().optional(),
-    record_status: Joi.string().optional(),
-    approved_by: Joi.string().optional(),
-    approved_date: Joi.date().optional(),
-    remark: Joi.string().optional(),
-    ownership: Joi.string().optional(),
-    is_dto: Joi.boolean().optional(),
-    dto_initial_deposit: Joi.string().optional(),
-    is_healthy: Joi.boolean().optional(),
-    is_active: Joi.boolean().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    name: _joi2.default.string().optional(),
+    description: _joi2.default.string().optional(),
+    engine_number: _joi2.default.string().optional(),
+    chasis_number: _joi2.default.string().optional(),
+    plate_number: _joi2.default.string().optional(),
+    registration_number: _joi2.default.string().optional(),
+    vehicle_make: _joi2.default.string().optional(),
+    seating_capacity: _joi2.default.number().optional(),
+    vehicle_type: _joi2.default.string().valid(Object.values(VEHICLE_TYPE)).optional(),
+    vehicle_class: _joi2.default.string().valid(Object.values(VEHICLE_CLASS)).optional(),
+    vehicle_category: _joi2.default.string().valid(Object.values(VEHICLE_CATEGORY)).optional(),
+    vehicle_custodian: _joi2.default.string().valid(Object.values(_constants.EMPLOYEE_TYPE)).optional(),
+    current_staff_id: _joi2.default.string().optional(),
+    current_partner_id: _joi2.default.string().optional(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
+    color: _joi2.default.string().optional(),
+    photo: _joi2.default.string().optional(),
+    vehicle_location: _joi2.default.string().valid(Object.values(VEHICLE_LOCATION)).optional(),
+    vehicle_assignment: _joi2.default.string().valid(Object.values(VEHICLE_ASSIGNMENT)).optional(),
+    asset_worthiness: _joi2.default.string().valid(Object.values(_constants.ASSET_WORTHINESS)).optional(),
+    purchase_date: _joi2.default.date().optional(),
+    launch_date: _joi2.default.date().optional(),
+    expiry_date: _joi2.default.date().optional(),
+    lifespan: _joi2.default.number().optional(),
+    purchase_value: _joi2.default.number().optional(),
+    opening_value: _joi2.default.number().optional(),
+    closing_value: _joi2.default.number().optional(),
+    salvage_value: _joi2.default.number().optional(),
+    current_value: _joi2.default.number().optional(),
+    total_depreciable_cost: _joi2.default.number().optional(),
+    depreciation_rate: _joi2.default.number().optional(),
+    depreciation_expense: _joi2.default.number().optional(),
+    accumulated_depreciation: _joi2.default.number().optional(),
+    record_status: _joi2.default.string().optional(),
+    approved_by: _joi2.default.string().optional(),
+    approved_date: _joi2.default.date().optional(),
+    remark: _joi2.default.string().optional(),
+    ownership: _joi2.default.string().optional(),
+    is_dto: _joi2.default.boolean().optional(),
+    dto_initial_deposit: _joi2.default.string().optional(),
+    is_healthy: _joi2.default.boolean().optional(),
+    is_active: _joi2.default.boolean().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     name: { type: String, required: [true, "Why no input?"] },
     description: { type: String },
     engine_number: { type: String },
@@ -201,8 +220,8 @@ export const schema = {
     current_partner_id: { type: ObjectId, ref: "Partner" },
     subsidiary: {
         type: String,
-        enum: Object.values(SUBSIDIARY),
-        default: SUBSIDIARY.PMT,
+        enum: Object.values(_constants.SUBSIDIARY),
+        default: _constants.SUBSIDIARY.PMT,
         required: [true, "Why no input?"]
     },
     vehicle_location: {
@@ -219,8 +238,8 @@ export const schema = {
     },
     asset_worthiness: {
         type: String,
-        enum: Object.values(ASSET_WORTHINESS),
-        default: ASSET_WORTHINESS.UNKNOWN,
+        enum: Object.values(_constants.ASSET_WORTHINESS),
+        default: _constants.ASSET_WORTHINESS.UNKNOWN,
         required: [true, "Why no input?"]
     },
     color: { type: String },
@@ -265,17 +284,17 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "vehicle");
-newSchema.plugin(mongoose_csv);
+newSchema.plugin(_mongooseCsv2.default);
 
-const Vehicle = mongoose.model("Vehicle", newSchema);
+var Vehicle = _mongoose2.default.model("Vehicle", newSchema);
 if (preload) {
-    Vehicle.insertMany(table);
+    Vehicle.insertMany(_table2.default);
 }
 
-export default Vehicle;
+exports.default = Vehicle;
 //# sourceMappingURL=model.js.map

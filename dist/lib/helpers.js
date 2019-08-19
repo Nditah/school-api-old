@@ -1,37 +1,81 @@
-import bcryptjs from "bcryptjs";
-import { JWT } from "../constants";
+"use strict";
 
-export function toObjectId(baseId = "5951bc91860d8b5ba", mysqlId = 1) {
-    const oldId = mysqlId.toString(10);
-    const a = "0".repeat(7 - oldId.length);
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.toObjectId = toObjectId;
+exports.pmtName = pmtName;
+exports.timestamp = timestamp;
+exports.dateDaysAgo = dateDaysAgo;
+exports.randomNum = randomNum;
+exports.cloneObject = cloneObject;
+exports.getObjectByKey = getObjectByKey;
+exports.getSettings = getSettings;
+exports.default = addToArrayOfObjects;
+exports.getClientAccess = getClientAccess;
+exports.hasProp = hasProp;
+exports.isObjecId = isObjecId;
+exports.generateOtp = generateOtp;
+exports.hash = hash;
+exports.cleanDeepObject = cleanDeepObject;
+exports.cleanObject = cleanObject;
+exports.nextDate = nextDate;
+exports.genCode = genCode;
+exports.hasNull = hasNull;
+exports.stringToArrayPhone = stringToArrayPhone;
+
+var _bcryptjs = require("bcryptjs");
+
+var _bcryptjs2 = _interopRequireDefault(_bcryptjs);
+
+var _constants = require("../constants");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function toObjectId() {
+    var baseId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "5951bc91860d8b5ba";
+    var mysqlId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
+    var oldId = mysqlId.toString(10);
+    var a = "0".repeat(7 - oldId.length);
     return baseId + a + oldId;
 }
 
-export function pmtName(mysqlId) {
+function pmtName(mysqlId) {
     if (mysqlId) {
-        const oldId = mysqlId.toString(10);
-        const a = "0".repeat(4 - oldId.length);
+        var oldId = mysqlId.toString(10);
+        var a = "0".repeat(4 - oldId.length);
         return a + oldId;
     }
     return mysqlId;
 }
 
-export function timestamp() {
-    return `${new Date().toISOString().slice(0, 22)}Z`;
+function timestamp() {
+    return new Date().toISOString().slice(0, 22) + "Z";
     //   return new Date().toISOString().slice(0, 19).replace("T", " ")+"Z";
 }
 
-export function dateDaysAgo(since = 0) {
-    const today = new Date();
+function dateDaysAgo() {
+    var since = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+    var today = new Date();
     today.setDate(today.getDate() - since);
     return today.toISOString();
 }
 
-export function randomNum() {
+function randomNum() {
     return Math.floor(Math.random() * 1000000);
 }
 
-export function cloneObject(model = {}, source) {
+function cloneObject() {
+    var model = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var source = arguments[1];
+
     return Object.assign(model, source);
 }
 
@@ -42,12 +86,19 @@ export function cloneObject(model = {}, source) {
  * @param {String} key Object key could be a String or Integer
  * @param {String} value Object value could be a String or Integer
  */
-export function getObjectByKey(arrayObject, key, value) {
-    return arrayObject.find(obj => obj[key] === value);
+function getObjectByKey(arrayObject, key, value) {
+    return arrayObject.find(function (obj) {
+        return obj[key] === value;
+    });
 }
 
-export function getSettings(arrObj = [{}], value = "") {
-    const Obj = arrObj.find(item => item.name === value);
+function getSettings() {
+    var arrObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [{}];
+    var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+
+    var Obj = arrObj.find(function (item) {
+        return item.name === value;
+    });
     if (Obj) {
         return Obj.value;
     }
@@ -61,8 +112,8 @@ export function getSettings(arrObj = [{}], value = "") {
  * @param {Object} newObjectElement the new item to be added to the array of objects
  * @returns {Object} the new array of Objects
  */
-export default function addToArrayOfObjects(arrayOfObjects, limit, newObjectElement) {
-    const size = Object.keys(arrayOfObjects).length;
+function addToArrayOfObjects(arrayOfObjects, limit, newObjectElement) {
+    var size = Object.keys(arrayOfObjects).length;
     if (size < limit) {
         arrayOfObjects.push(newObjectElement);
     } else {
@@ -78,18 +129,18 @@ export default function addToArrayOfObjects(arrayOfObjects, limit, newObjectElem
  * @param {String} req the request object
  * @returns {Object} { accessDate, ipAddress } access date and the ip address
  */
-export function getClientAccess(req) {
-    const ipAddress = req.ip || req._remoteAddress;
+function getClientAccess(req) {
+    var ipAddress = req.ip || req._remoteAddress;
     // const lang = req.get("accept-language");
-    const accessDate = req._startTime || "";
-    return { accessDate, ipAddress };
+    var accessDate = req._startTime || "";
+    return { accessDate: accessDate, ipAddress: ipAddress };
 }
 
-export function hasProp(obj, prop) {
+function hasProp(obj, prop) {
     return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-export function isObjecId(id) {
+function isObjecId(id) {
     if (id.match(/^[0-9a-fA-F]{24}$/)) return true;
     return false;
 }
@@ -97,79 +148,93 @@ export function isObjecId(id) {
 /**
  * @returns a five-digit random number
  */
-export function generateOtp() {
-    const num = Math.floor(Math.random() * 90000) + 10000;
+function generateOtp() {
+    var num = Math.floor(Math.random() * 90000) + 10000;
     return num;
 }
 
-export function hash(str = "") {
-    return bcryptjs.hashSync(str, JWT.saltRounds);
+function hash() {
+    var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+
+    return _bcryptjs2.default.hashSync(str, _constants.JWT.saltRounds);
 }
 
-export function cleanDeepObject(obj) {
+function cleanDeepObject(obj) {
     // eslint-disable-next-line no-restricted-syntax
-    for (const propName in obj) {
+    for (var propName in obj) {
         if (!obj[propName] || obj[propName].length === 0) {
             delete obj[propName];
-        } else if (typeof obj === "object") {
+        } else if ((typeof obj === "undefined" ? "undefined" : _typeof(obj)) === "object") {
             cleanDeepObject(obj[propName]);
         }
     }
     return obj;
 }
 
-let depth = 0;
+var depth = 0;
 
 // eslint-disable-next-line complexity
-export function cleanObject(obj) {
+function cleanObject(obj) {
     depth += 1;
     // eslint-disable-next-line no-restricted-syntax
-    for (const propName in obj) {
+    for (var propName in obj) {
         if (!obj[propName] || obj[propName].length === 0) {
             delete obj[propName];
-        } else if (typeof obj === "object") {
+        } else if ((typeof obj === "undefined" ? "undefined" : _typeof(obj)) === "object") {
             if (depth <= 3) cleanObject(obj[propName]);
         }
     }
     return obj;
 }
 
-export function nextDate(d = 1) {
+function nextDate() {
+    var d = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
     return new Date(new Date().setDate(new Date().getDate() + d));
 }
 
 function genString(length) {
-    let text = "";
+    var text = "";
     // "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    const possible = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    var possible = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
     // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < length; i++) {
+    for (var i = 0; i < length; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
 }
 
-function daysIntoYear(date = new Date()) {
+function daysIntoYear() {
+    var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Date();
+
     // eslint-disable-next-line max-len
     return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
 }
 
-export function genCode(len = 9) {
-    let d = new Date().getFullYear().toString().substr(-2);
+function genCode() {
+    var len = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 9;
+
+    var d = new Date().getFullYear().toString().substr(-2);
     d += daysIntoYear();
     if (len - d.length > 0) return d + genString(len - d.length);
     return genString(len);
 }
 
-export function hasNull(Obj = {}) {
-    const val = Object.values(Obj);
+function hasNull() {
+    var Obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    var val = Object.values(Obj);
     if (val.includes(null) || val.includes(undefined) || val.includes("")) return true;
     return false;
 }
 
-export function stringToArrayPhone(str) {
-    const arr = str.split(",").map(st => st.trim()) || []; // remove spaces
-    const filtered = arr.filter((value, index) => value.length >= 11 && value.length < 15);
-    return [...new Set(filtered)]; // Remove duplicates
+function stringToArrayPhone(str) {
+    var arr = str.split(",").map(function (st) {
+        return st.trim();
+    }) || []; // remove spaces
+    var filtered = arr.filter(function (value, index) {
+        return value.length >= 11 && value.length < 15;
+    });
+    return [].concat(_toConsumableArray(new Set(filtered))); // Remove duplicates
 }
 //# sourceMappingURL=helpers.js.map

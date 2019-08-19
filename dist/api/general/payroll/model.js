@@ -1,3 +1,43 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _model3 = require("../voucher/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
+var _model5 = require("../payroll-detail/model");
+
+var _model6 = _interopRequireDefault(_model5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
  * @property {ObjectId} id Payroll primaryKey
@@ -11,50 +51,40 @@
  * @property {String} remark Payroll remark or any comment
  * @description Payroll model holds record of Salary payment summary
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE, SUBSIDIARY } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-import Voucher from "../voucher/model";
+var Schema = _mongoose2.default.Schema;
 // eslint-disable-next-line import/no-cycle
-import PayrollDetail from "../payroll-detail/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    period: Joi.date().required(),
-    code: Joi.string().trim().required(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).required(),
-    voucher: Joi.string().required(),
-    payroll_detail_ids: Joi.array().optional(),
-    total: Joi.number().optional(),
-    pay_start: Joi.date().optional(),
-    remark: Joi.string().optional(),
-    created_by: Joi.string().required()
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    period: _joi2.default.date().required(),
+    code: _joi2.default.string().trim().required(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).required(),
+    voucher: _joi2.default.string().required(),
+    payroll_detail_ids: _joi2.default.array().optional(),
+    total: _joi2.default.number().optional(),
+    pay_start: _joi2.default.date().optional(),
+    remark: _joi2.default.string().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    period: Joi.date().optional(),
-    code: Joi.string().trim().optional(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
-    voucher: Joi.string().optional(),
-    payroll_detail_ids: Joi.array().optional(),
-    total: Joi.number().optional(),
-    pay_start: Joi.date().optional(),
-    remark: Joi.string().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    period: _joi2.default.date().optional(),
+    code: _joi2.default.string().trim().optional(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
+    voucher: _joi2.default.string().optional(),
+    payroll_detail_ids: _joi2.default.array().optional(),
+    total: _joi2.default.number().optional(),
+    pay_start: _joi2.default.date().optional(),
+    remark: _joi2.default.string().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     period: { type: Date, required: true, comment: "Salary yyyy-mm date" },
     code: { type: String, required: true, comment: "Transaction code" },
     subsidiary: {
         type: String,
-        enum: Object.values(SUBSIDIARY),
+        enum: Object.values(_constants.SUBSIDIARY),
         required: [false, "Why no input?"]
     },
     voucher: { type: ObjectId, ref: "Voucher" },
@@ -66,17 +96,17 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "payroll");
 
-const Payroll = mongoose.model("Payroll", newSchema);
+var Payroll = _mongoose2.default.model("Payroll", newSchema);
 
 if (preload) {
-    Payroll.insertMany(table);
+    Payroll.insertMany(_table2.default);
 }
 
-export default Payroll;
+exports.default = Payroll;
 //# sourceMappingURL=model.js.map

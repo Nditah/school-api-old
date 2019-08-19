@@ -1,3 +1,35 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
  * @property {String} offender_type Offence offender_type (required)
@@ -17,56 +49,47 @@
  * @property {Number} payment Offence paymentId (required)
  * @description Offence model holds record of all Inventories except vehicles
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    offender_type: Joi.string().required(),
-    staff_id: Joi.string().required(),
-    partner_id: Joi.string().optional(),
-    offence: Joi.string().optional(),
-    offence_date: Joi.date().optional(),
-    description: Joi.string().optional(),
-    offence_status: Joi.string().valid("PENDING", "ARBITRATED").optional(),
-    verdict: Joi.string().valid("INNOCENT", "GUILTY").optional(),
-    verdict_by: Joi.string().optional(),
-    verdict_date: Joi.date().optional(),
-    verdict_remark: Joi.string().optional(),
-    fine: Joi.number().optional(),
-    discipline: Joi.string().valid("WARNING", "SUSPENSION", "DISMISSED").required(),
-    suspension: Joi.string().optional(),
-    payment: Joi.string().optional(),
-    created_by: Joi.string().required()
+var Schema = _mongoose2.default.Schema;
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    offender_type: _joi2.default.string().required(),
+    staff_id: _joi2.default.string().required(),
+    partner_id: _joi2.default.string().optional(),
+    offence: _joi2.default.string().optional(),
+    offence_date: _joi2.default.date().optional(),
+    description: _joi2.default.string().optional(),
+    offence_status: _joi2.default.string().valid("PENDING", "ARBITRATED").optional(),
+    verdict: _joi2.default.string().valid("INNOCENT", "GUILTY").optional(),
+    verdict_by: _joi2.default.string().optional(),
+    verdict_date: _joi2.default.date().optional(),
+    verdict_remark: _joi2.default.string().optional(),
+    fine: _joi2.default.number().optional(),
+    discipline: _joi2.default.string().valid("WARNING", "SUSPENSION", "DISMISSED").required(),
+    suspension: _joi2.default.string().optional(),
+    payment: _joi2.default.string().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    offender_type: Joi.string().optional(),
-    staff_id: Joi.string().optional(),
-    partner_id: Joi.string().optional(),
-    offence: Joi.string().optional(),
-    offence_date: Joi.date().optional(),
-    description: Joi.string().optional(),
-    offence_status: Joi.string().valid("PENDING", "ARBITRATED").optional(),
-    verdict: Joi.string().valid("INNOCENT", "GUILTY").optional(),
-    verdict_by: Joi.string().optional(),
-    verdict_date: Joi.date().optional(),
-    verdict_remark: Joi.string().optional(),
-    fine: Joi.number().optional(),
-    discipline: Joi.string().valid("WARNING", "SUSPENSION", "DISMISSED").optional(),
-    suspension: Joi.string().optional(),
-    payment: Joi.string().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    offender_type: _joi2.default.string().optional(),
+    staff_id: _joi2.default.string().optional(),
+    partner_id: _joi2.default.string().optional(),
+    offence: _joi2.default.string().optional(),
+    offence_date: _joi2.default.date().optional(),
+    description: _joi2.default.string().optional(),
+    offence_status: _joi2.default.string().valid("PENDING", "ARBITRATED").optional(),
+    verdict: _joi2.default.string().valid("INNOCENT", "GUILTY").optional(),
+    verdict_by: _joi2.default.string().optional(),
+    verdict_date: _joi2.default.date().optional(),
+    verdict_remark: _joi2.default.string().optional(),
+    fine: _joi2.default.number().optional(),
+    discipline: _joi2.default.string().valid("WARNING", "SUSPENSION", "DISMISSED").optional(),
+    suspension: _joi2.default.string().optional(),
+    payment: _joi2.default.string().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     offender_type: { type: String, enum: ["PARTNER", "STAFF"], comment: "userType" },
     staff_id: { type: ObjectId, ref: "Staff" },
     partner_id: { type: ObjectId, ref: "Partner" },
@@ -86,17 +109,17 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "offence");
 
-const Offence = mongoose.model("Offence", newSchema);
+var Offence = _mongoose2.default.model("Offence", newSchema);
 
 if (preload) {
-    Offence.insertMany(table);
+    Offence.insertMany(_table2.default);
 }
 
-export default Offence;
+exports.default = Offence;
 //# sourceMappingURL=model.js.map

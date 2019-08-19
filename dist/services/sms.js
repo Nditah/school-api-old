@@ -1,63 +1,126 @@
-const twilio = require("twilio");
-const dotenv = require("dotenv");
-const { SMS } = require("../constants");
+"use strict";
 
-//  * https://www.twilio.com/docs/sms/api/message-resource#read-multiple-message-resources
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-dotenv.config();
+var sendSmsAsync = function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(recipient, message) {
+        var data, result;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        data = {
+                            from: formatPhone(sender),
+                            body: message,
+                            to: formatPhone(recipient)
+                        };
+                        _context.next = 3;
+                        return client.messages.create(data);
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-// eslint-disable-next-line new-cap
-const client = new twilio(accountSid, authToken);
-const sender = SMS.PEACE_SMS_SENDER;
+                    case 3:
+                        result = _context.sent;
+                        return _context.abrupt("return", result);
 
-function formatPhone(phone) {
-    let str = phone.toString();
-    str = str.trim();
-    if (str.length === 11 && str[0] === "0") {
-        str = `+234${str.slice(1)}`;
-    }
-    if (str.length === 10) {
-        str = `+234${str}`;
-    }
-    return str;
-}
+                    case 5:
+                    case "end":
+                        return _context.stop();
+                }
+            }
+        }, _callee);
+    }));
 
-function sendSms(recipient, message) {
-    const data = {
-        from: formatPhone(sender),
-        body: message,
-        to: formatPhone(recipient)
+    return function sendSmsAsync(_x, _x2) {
+        return _ref.apply(this, arguments);
     };
-    client.messages.create(data).then(result => console.log(result.sid));
-}
-
-async function sendSmsAsync(recipient, message) {
-    const data = {
-        from: formatPhone(sender),
-        body: message,
-        to: formatPhone(recipient)
-    };
-    const result = await client.messages.create(data);
-    return result;
-}
+}();
 
 /**
  * Twilio Webhook for receiving sms
  * Receive message via this webhook set at the twilio user settings
  */
-async function receiveSms(req, res) {
-    const twiml = new twilio.TwimlResponse();
-    twiml.message("Twilio incoming message:");
-    const message = twiml.toString();
-    res.send(message);
-}
+
+
+var receiveSms = function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(req, res) {
+        var twiml, message;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        twiml = new twilio.TwimlResponse();
+
+                        twiml.message("Twilio incoming message:");
+                        message = twiml.toString();
+
+                        res.send(message);
+
+                    case 4:
+                    case "end":
+                        return _context2.stop();
+                }
+            }
+        }, _callee2);
+    }));
+
+    return function receiveSms(_x3, _x4) {
+        return _ref2.apply(this, arguments);
+    };
+}();
 
 // Read Multiple SMS Records
-function readMultipleSms() {
-    client.messages.each(messages => console.log(messages.sid));
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var twilio = require("twilio");
+var dotenv = require("dotenv");
+
+var _require = require("../constants"),
+    SMS = _require.SMS;
+
+//  * https://www.twilio.com/docs/sms/api/message-resource#read-multiple-message-resources
+
+dotenv.config();
+
+var accountSid = process.env.TWILIO_ACCOUNT_SID;
+var authToken = process.env.TWILIO_AUTH_TOKEN;
+// eslint-disable-next-line new-cap
+var client = new twilio(accountSid, authToken);
+var sender = SMS.PEACE_SMS_SENDER;
+
+function formatPhone(phone) {
+    var str = phone.toString();
+    str = str.trim();
+    if (str.length === 11 && str[0] === "0") {
+        str = "+234" + str.slice(1);
+    }
+    if (str.length === 10) {
+        str = "+234" + str;
+    }
+    return str;
 }
 
-export { sendSms, sendSmsAsync, receiveSms, readMultipleSms };
+function sendSms(recipient, message) {
+    var data = {
+        from: formatPhone(sender),
+        body: message,
+        to: formatPhone(recipient)
+    };
+    client.messages.create(data).then(function (result) {
+        return console.log(result.sid);
+    });
+}
+
+function readMultipleSms() {
+    client.messages.each(function (messages) {
+        return console.log(messages.sid);
+    });
+}
+
+exports.sendSms = sendSms;
+exports.sendSmsAsync = sendSmsAsync;
+exports.receiveSms = receiveSms;
+exports.readMultipleSms = readMultipleSms;
 //# sourceMappingURL=sms.js.map

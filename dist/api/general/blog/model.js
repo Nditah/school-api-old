@@ -1,3 +1,42 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+
+var _joi = require("joi");
+
+var _joi2 = _interopRequireDefault(_joi);
+
+var _mongoose = require("mongoose");
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _mongooseCsv = require("mongoose-csv");
+
+var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
+
+var _constants = require("../../../constants");
+
+var _table = require("./table");
+
+var _table2 = _interopRequireDefault(_table);
+
+var _model = require("../staff/model");
+
+var _model2 = _interopRequireDefault(_model);
+
+var _model3 = require("../blog-comment/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Schema = _mongoose2.default.Schema;
+// eslint-disable-next-line import/no-cycle
+
+// eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
  * @property {ObjectId} id Blog primaryKey
@@ -11,40 +50,29 @@
  * @property {String} is_published Blog published status
  * @description Blog model holds record of all popublications
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-// eslint-disable-next-line import/no-cycle
-import BlogComment from "../blog-comment/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
-    title: Joi.string().required(),
-    body: Joi.string().required(),
-    tags: Joi.array().required(),
-    author_id: Joi.string().optional(),
-    slug: Joi.string().required(),
-    is_published: Joi.boolean().optional(),
-    created_by: Joi.string().required()
+var ObjectId = Schema.Types.ObjectId;
+var schemaCreate = exports.schemaCreate = {
+    title: _joi2.default.string().required(),
+    body: _joi2.default.string().required(),
+    tags: _joi2.default.array().required(),
+    author_id: _joi2.default.string().optional(),
+    slug: _joi2.default.string().required(),
+    is_published: _joi2.default.boolean().optional(),
+    created_by: _joi2.default.string().required()
 };
 
-export const schemaUpdate = {
-    title: Joi.string().optional(),
-    body: Joi.string().optional(),
-    tags: Joi.array().optional(),
-    author_id: Joi.string().optional(),
-    slug: Joi.string().optional(),
-    is_published: Joi.boolean().optional(),
-    updated_by: Joi.string().required()
+var schemaUpdate = exports.schemaUpdate = {
+    title: _joi2.default.string().optional(),
+    body: _joi2.default.string().optional(),
+    tags: _joi2.default.array().optional(),
+    author_id: _joi2.default.string().optional(),
+    slug: _joi2.default.string().optional(),
+    is_published: _joi2.default.boolean().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
-export const schema = {
+var schema = exports.schema = {
     title: { type: String, required: [true, "Why no input?"] },
     body: { type: String, required: [true, "Why no input?"] },
     tags: [{ type: String, required: [true, "Why no input?"] }],
@@ -55,17 +83,17 @@ export const schema = {
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId, ref: "Staff" }
 };
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+var options = _constants.DATABASE.OPTIONS;
 
-const newSchema = new Schema(schema, options);
+var newSchema = new Schema(schema, options);
 newSchema.set("collection", "blog");
 
-const Blog = mongoose.model("Blog", newSchema);
+var Blog = _mongoose2.default.model("Blog", newSchema);
 
 if (preload) {
-    Blog.insertMany(table);
+    Blog.insertMany(_table2.default);
 }
 
-export default Blog;
+exports.default = Blog;
 //# sourceMappingURL=model.js.map

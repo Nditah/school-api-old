@@ -1,17 +1,24 @@
-import { DATABASE } from "../../../constants";
-import { toObjectId } from "../../../lib";
+"use strict";
 
-const table = [{ star: 4.5, subject: "PARTNER", subject_id: "1", created_by: 1 }];
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-const driverBaseId = DATABASE.BASE_ID.PARTNER;
-const customerBaseId = DATABASE.BASE_ID.CUSTOMER;
+var _constants = require("../../../constants");
 
-const result = table.map(record => {
-    const obj = Object.assign({}, record);
-    obj.subject_id = toObjectId(driverBaseId, record.subject_id);
-    obj.created_by = toObjectId(customerBaseId, record.created_by);
+var _lib = require("../../../lib");
+
+var table = [{ star: 4.5, subject: "PARTNER", subject_id: "1", created_by: 1 }];
+
+var driverBaseId = _constants.DATABASE.BASE_ID.PARTNER;
+var customerBaseId = _constants.DATABASE.BASE_ID.CUSTOMER;
+
+var result = table.map(function (record) {
+    var obj = Object.assign({}, record);
+    obj.subject_id = (0, _lib.toObjectId)(driverBaseId, record.subject_id);
+    obj.created_by = (0, _lib.toObjectId)(customerBaseId, record.created_by);
     return obj;
 });
 
-export default result;
+exports.default = result;
 //# sourceMappingURL=table.js.map

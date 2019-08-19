@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/asset-assignments?id={recordId} Retrieve one or all records
@@ -19,7 +31,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/asset-assignments", [checkAuth], fetchRecord);
+router.get("/asset-assignments", [_authorization.checkAuth], _controller.fetchRecord);
 
 /**
  * @api {post} /api/asset-assignments Create asset-assignments
@@ -52,7 +64,7 @@ router.get("/asset-assignments", [checkAuth], fetchRecord);
  * @apiError 404 AssetAssignment not found.
  * @apiError 401 master access only.
  */
-router.post("/asset-assignments", [checkAuth, isValidStaff], createRecord);
+router.post("/asset-assignments", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {put} /api/asset-assignments/{recordId} Update asset-assignments
@@ -86,7 +98,7 @@ router.post("/asset-assignments", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 AssetAssignment not found.
  * @apiError 401 master access only.
  */
-router.put("/asset-assignments/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/asset-assignments/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/asset-assignments/{recordId} Delete asset-assignments
@@ -98,7 +110,7 @@ router.put("/asset-assignments/:recordId", [checkAuth, isValidStaff], updateReco
  * @apiError 404 AssetAssignment not found.
  * @apiError 401 master access only.
  */
-router.delete("/asset-assignments/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/asset-assignments/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
-export default router;
+exports.default = router;
 //# sourceMappingURL=routes.js.map
