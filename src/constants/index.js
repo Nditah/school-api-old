@@ -160,8 +160,8 @@ export const SUBSIDIARY = {
     SECONDARY: "SECONDARY",
     PRIMARY: "PRIMARY",
     NURSERY: "NURSERY",
-    PRENURSERY: "PRE-NURSERY",
-    DAYCARE: "DAY-CARE",
+    CRECHE: "CRECHE",
+    DAYCARE: "DAYCARE",
 };
 
 export const VEHICLE = {
