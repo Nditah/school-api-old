@@ -137,15 +137,11 @@ export const EMPLOYMENT_STATUS = {
 };
 
 export const SUBSIDIARY = {
-    PMT: "PMT",
-    PML: "PML",
-    PET: "PET",
-    SHOP: "SHOP",
-    PRESS: "PRESS",
-    SPARES: "SPARES",
-    ASSEMBLY: "ASSEMBLY",
-    CHEMICAL: "CHEMICAL",
-    PEACEGROUP: "PEACEGROUP",
+    SECONDARY: "SECONDARY",
+    PRIMARY: "PRIMARY",
+    NURSERY: "NURSERY",
+    CRECHE: "CRECHE",
+    DAYCARE: "DAYCARE",
 };
 
 export const VEHICLE = {

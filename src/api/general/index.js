@@ -28,6 +28,7 @@ import taskRoute from "./task";
 import vehicleRoute from "./vehicle";
 import voucherRoute from "./voucher";
 import unionbankRoute from "./unionbank";
+import hostelRoute from "./hostel";
 
 const router = express.Router();
 
