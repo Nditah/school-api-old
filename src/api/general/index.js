@@ -72,6 +72,7 @@ import vehicleTrackingRoute from "./vehicle-tracking";
 import voucherRoute from "./voucher";
 import paystackRoute from "./paystack";
 import unionbankRoute from "./unionbank";
+import hostelRoute from "./hostel";
 
 const router = express.Router();
 
