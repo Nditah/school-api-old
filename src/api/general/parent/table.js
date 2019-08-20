@@ -3,10 +3,10 @@ import { toObjectId, hash, cleanObject } from "../../../lib";
 
 const table = {
     title: "Mr",
-    first_name: "Victor",
-    last_name: "Ikenna",
+    surname: "Victor",
+    given_name: "Ikenna",
     gender: GENDER.FEMALE,
-    date_of_birth: "1987-03-21",
+    birth_date: "1987-03-21",
     marital_status: MARITAL_STATUS.MARRIED,
     address: "No 12 Garden Avenue, G.R.A, Enugu",
     state: "1",
@@ -29,8 +29,8 @@ const result = table.map((record, index) => {
     const obj = Object.assign({}, record);
     obj._id = toObjectId(parentBaseId, 1 + index);
     obj.password = record.password ? hash(record.password) : hash("peace700");
-    obj.county = record.lga_id ? toObjectId(countyBaseId, record.lga_id) : null;
-    obj.state = record.state ? toObjectId(stateBaseId, record.state_id) : null;
+    obj.county_id = record.lga_id ? toObjectId(countyBaseId, record.lga_id) : null;
+    obj.state_id = record.state_id ? toObjectId(stateBaseId, record.state_id) : null;
     obj.approved_by = record.approved_by ? toObjectId(parentBaseId, record.approved_by) : null;
     obj.created_by = record.created_by ? toObjectId(parentBaseId, record.created_by) : null;
     delete obj.date_of_birth;

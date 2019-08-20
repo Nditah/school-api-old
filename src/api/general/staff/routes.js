@@ -16,7 +16,7 @@ const router = express.Router();
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
  * @apiParam {String} sort how records would be arranged in alphabet (optional)
  * @apiParam {String} projection list of record's attributes to retrieve (optional)
- * @apiDescription Records of staff in the school.
+ * @apiDescription Records of staffs in the school.
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
@@ -28,11 +28,10 @@ router.get("/staff", [checkAuth, isValidStaff], fetchRecord);
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} title Staff title (optional)
- * @apiParam {String} first_name Staff first_name (optional)
- * @apiParam {String} middle_name Staff middle_name (optional)
- * @apiParam {String} last_name Staff first_name (optional)
+ * @apiParam {String} surname Staff surname (optional)
+ * @apiParam {String} given_name Staff given_name (optional)
  * @apiParam {String} gender Staff gender (optional)
- * @apiParam {Date} date_of_birth Staff date_of_birth (optional)
+ * @apiParam {Date} birth_date Staff birth_date (optional)
  * @apiParam {String} marital_status Staff marital_status (optional)
  * @apiParam {String} phone Staff office phone (optional)
  * @apiParam {String} phone_personal Staff phone_personal (optional)
@@ -72,7 +71,7 @@ router.get("/staff", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {String} bank_account_number Staff bank_account_number (optional)
  * @apiParam {String} bank_account_name Staff bank_account_name (optional)
  * @apiParam {String} rank Staff rank (optional)
- * @apiParam {String} office_id Staff office_id (required)
+ * @apiParam {String} office Staff office (required)
  * @apiParam {Array} role Staff role is an array of office duties (required)
  * @apiParam {String} subsidiary Staff subsidiary (required)
  * @apiParam {String} remark Staff remark (optional)
@@ -97,9 +96,8 @@ router.post("/staff", [checkAuth, isValidStaff], createRecord);
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} recordId required record ObjectId
  * @apiParam {String} title Staff title (optional)
- * @apiParam {String} first_name Staff first_name (optional)
- * @apiParam {String} middle_name Staff middle_name (optional)
- * @apiParam {String} last_name Staff first_name (optional)
+ * @apiParam {String} surname Staff surname (optional)
+ * @apiParam {String} given_name Staff given_name (optional)
  * @apiParam {String} gender Staff gender (optional)
  * @apiParam {Date} date_of_birth Staff date_of_birth (optional)
  * @apiParam {String} marital_status Staff marital_status (optional)
@@ -141,7 +139,7 @@ router.post("/staff", [checkAuth, isValidStaff], createRecord);
  * @apiParam {String} bank_account_number Staff bank_account_number (optional)
  * @apiParam {String} bank_account_name Staff bank_account_name (optional)
  * @apiParam {String} rank Staff rank (optional)
- * @apiParam {String} office_id Staff office_id (required)
+ * @apiParam {String} office Staff office (required)
  * @apiParam {Array} role Staff role is an array of office duties (required)
  * @apiParam {String} subsidiary Staff subsidiary (required)
  * @apiParam {String} remark Staff remark (optional)
