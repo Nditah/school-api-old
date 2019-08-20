@@ -86,8 +86,8 @@ app.use(function (req, res, next) {
 });
 
 // Use Routes
-app.use("/api", _api.schoolApi);
-app.use("/api", _api.flutterwaveApi);
+app.use("/api/v1", _api.schoolApi);
+app.use("/api/v1", _api.flutterwaveApi);
 
 app.use(function (req, res, next) {
     var error = new Error("Not found!");

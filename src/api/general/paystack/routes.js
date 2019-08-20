@@ -16,7 +16,7 @@ const router = express.Router();
  * @apiName RetrieveOnePaystackTransaction
  * @apiGroup PaystackTransaction
  * @apiExample {curl} Example usage for retieving a single record:
- *      curl -i http://localhost/api/paystack-transactions/get/2
+ *      curl -i https://mis-api.herokuapp.com/api/v1/paystack-transactions/get/2
   * @apiParam {Number} id Unique id of the record to retrieve (optional)
  * @apiDescription Records  of account headings belonging to one classification
  * @apiSuccess {Object[]} Array of Objects of records.
@@ -29,7 +29,7 @@ router.get("/paystack-transactions/get/:id", [checkAuth, isValidStaff], getTrans
  * @apiName TimelinePaystackTransaction
  * @apiGroup PaystackTransaction
  * @apiExample {curl} Example usage for retieving a single record:
- *      curl -i http://localhost/api/paystack-transactions/timeline/2
+ *      curl -i https://mis-api.herokuapp.com/api/v1/paystack-transactions/timeline/2
   * @apiParam {Number} id Unique id of the record to retrieve (optional)
  * @apiDescription View Transaction Timeline
  * @apiSuccess {Object[]} Array of Objects of records.
@@ -42,7 +42,7 @@ router.get("/paystack-transactions/timeline/:id", [checkAuth, isValidStaff], tim
  * @apiName ListPaystackTransaction
  * @apiGroup PaystackTransaction
  * @apiExample {curl} Example usage for retieving a single record:
- *      curl -i http://localhost/api/paystack-transactions/list?perPage=50&page=1
+ *      curl -i https://mis-api.herokuapp.com/api/v1/paystack-transactions/list?perPage=50&page=1
  * @apiParam {Number} perPage Specify how many records you want to retrieve per page
  * @apiParam {Number} page Specify exactly what page you want to retrieve
  * @apiParam {Number} customer Specify an ID for the customer whose transactions
@@ -65,7 +65,7 @@ router.get("/paystack-transactions/list", [checkAuth, isValidStaff], listTransac
  * @apiName VerifyPaystackTransaction
  * @apiGroup PaystackTransaction
  * @apiExample {curl} Example usage for retieving a record:
- *      curl -i http://localhost/api/paystack-transactions/verify/123abc123fkfk
+ *      curl -i https://mis-api.herokuapp.com/api/v1/paystack-transactions/verify/123abc123fkfk
  * @apiParam {String} reference PaystackTransaction reference
  * @apiDescription Records  of account headings belonging to one classification
  * @apiSuccess {Object[]} Array of Objects of records.
@@ -78,7 +78,7 @@ router.get("/paystack-transactions/verify/:reference", [checkAuth, isValidStaff]
  * @apiName TotalPaystackTransaction
  * @apiGroup PaystackTransaction
  * @apiExample {curl} Example usage for retieving a single record:
- *      curl -i http://localhost/api/paystack-transactions?from=12-12-2018&to=12-12-2019
+ *      curl -i https://mis-api.herokuapp.com/api/v1/paystack-transactions?from=12-12-2018&to=12-12-2019
  * @apiParam {Date} from Paystack Transaction begining date
  * @apiParam {Date} to Paystack Transaction ending date
  * @apiDescription Records of the Total amount received on your account

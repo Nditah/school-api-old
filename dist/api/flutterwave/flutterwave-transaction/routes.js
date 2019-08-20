@@ -63,7 +63,7 @@ router.get("/flutterwave-transactions/online", [_authorization.checkAuth, _autho
  * @apiName RetrieveFlutterwaveTransactionSettlement
  * @apiGroup FlutterwaveTransaction
  * @apiExample {curl} Example usage for retieving multiple records:
- *      curl -i http://localhost/api/flutterwave-transactions?page=1&limit=50&status=completed
+ *      curl -i https://mis-api.herokuapp.com/api/v1/flutterwave-transactions?page=1&limit=50&status=completed
  * @apiParam {Number} page to retrieve (optional)
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
  * @apiParam {String} status Transaction status to retrieve e.g. "completed"
