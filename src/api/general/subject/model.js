@@ -1,14 +1,14 @@
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
- * @property {String} id Subject ObjectId primaryKey
+ * @property {ObjectId} id Subject ObjectId primaryKey
  * @property {String} name Subject name (optional)
- * @property {String} hod Subject hod (optional)
- * @property {String} course Subject course (optional)
- * @property {String} teacher Subject teacher (optional)
+ * @property {ObjectId} hod Subject hod (optional)
+ * @property {ObjectId} course Subject course (optional)
+ * @property {ObjectId} teacher Subject teacher (optional)
  * @property {String} description Subject description (optional)
- * @property {String} created_by Subject record created by
- * @property {String} updated_by Subject record modified by
+ * @property {ObjectId} created_by Subject record created by
+ * @property {ObjectId} updated_by Subject record modified by
  * @description Subject holds record of all subjects in the school.
  */
 
