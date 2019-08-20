@@ -3,7 +3,7 @@
  * @property {ObjectId} id admission primaryKey
  * @property {String} passport Admission passport (required)
  * @property {String} surname Admission surname (required)
- * @property {String} other_name Admission First Name
+ * @property {String} given_name Admission First Name
  * @property {String} home_town Admission Home Town
  * @property {String} address Admission village
  * @property {String} county_id Admission county
@@ -37,7 +37,7 @@ const { ObjectId } = Schema.Types;
 export const schemaCreate = {
     passport: Joi.string().optional(),
     surname: Joi.string().optional(),
-    other_name: Joi.string().optional(),
+    given_name: Joi.string().optional(),
     home_town: Joi.string().optional(),
     address: Joi.string().optional(),
     state_id: Joi.string().optional(),
@@ -58,7 +58,7 @@ export const schemaCreate = {
 export const schemaUpdate = {
     passport: Joi.string().optional(),
     surname: Joi.string().optional(),
-    other_name: Joi.string().optional(),
+    given_name: Joi.string().optional(),
     home_town: Joi.string().optional(),
     address: Joi.string().optional(),
     state_id: Joi.string().optional(),

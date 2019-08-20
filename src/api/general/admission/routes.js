@@ -28,7 +28,7 @@ router.get("/admissions", [checkAuth, isValidStaff], fetchRecord);
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} passport Admission passport (required)
  * @apiParam {String} surname Admission surname (required)
- * @apiParam {String} other_name Admission First Name
+ * @apiParam {String} given_name Admission First Name
  * @apiParam {String} home_town Admission Home Town
  * @apiParam {String} address Admission village
  * @apiParam {String} county_id Admission county
@@ -56,7 +56,7 @@ router.post("/admissions", [checkAuth, isValidStaff], createRecord);
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} passport Admission passport (required)
  * @apiParam {String} surname Admission surname (required)
- * @apiParam {String} other_name Admission First Name
+ * @apiParam {String} given_name Admission First Name
  * @apiParam {String} home_town Admission Home Town
  * @apiParam {String} address Admission village
  * @apiParam {String} county_id Admission county
