@@ -1,15 +1,15 @@
 /**
  * @author 4Dcoder
- * @property {ObjectId} id Cbt-question primaryKey
- * @property {String} code Cbt-question code ObjectId
- * @property {String} questionaire Cbt-question questionaire 
- * @property {String} answer Cbt-question answer
- * @property {String} correct_answer Cbt-question correct_answer
- * @property {String} score Cbt-question score
- * @property {String} course_name Cbt-question course_name
- * @property {ObjectId} created_by Cbt-question created_by
- * @property {ObjectId} updated_by Cbt-question updated_by 
- * @description Cbt-question model holds record of all Cbt-question
+ * @property {ObjectId} id Question primaryKey
+ * @property {String} code Question code ObjectId
+ * @property {String} question Questionnaire question
+ * @property {String} answer Questionnaire answer
+ * @property {String} correct_answer Questionnaire correct_answer
+ * @property {String} score Questionnaire score
+ * @property {String} course_name Questionnaire course_name
+ * @property {ObjectId} created_by Questionnaire created_by
+ * @property {ObjectId} updated_by Questionnaire updated_by
+ * @description Questionnaire model holds record of all Questionnaire
  */
 import Joi from "joi";
 import mongoose from "mongoose";
@@ -45,13 +45,13 @@ export const schemaUpdate = {
 };
 
 export const schema = {
-    code: { type: String, },
+    code: { type: String },
     questionaire: { type: String, enum: ["OBJECTIVE", "THEORY", "SUBJECTIVE"], required: true},
     question: { type: String, required: true },
     answer: { type: String },
-    correct_answer: [{ type: String, enum: ["ANSWER1","ANSWER2", "ANSWER3", "ANSWER4", "ANSWER5"], required: true }],
-    score: { type: Number, required: true, default: 1},
-    course_name: {type: String, required: true},
+    correct_answer: [{ type: String, enum: ["ANSWER1", "ANSWER2", "ANSWER3", "ANSWER4", "ANSWER5"], required: true }],
+    score: { type: Number, required: true, default: 1 },
+    course_name: { type: String, required: true },
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId, ref: "Staff" },
 };
@@ -59,8 +59,8 @@ export const schema = {
 const options = DATABASE.OPTIONS;
 
 const newSchema = new Schema(schema, options);
-newSchema.set("collection", "cbt-question");
+newSchema.set("collection", "questionnaire");
 
-const Notification = mongoose.model("Cbt-question", newSchema);
+const Questionnaire = mongoose.model("Questionnaire", newSchema);
 
-export default Cbt-question;
+export default Questionnaire;
