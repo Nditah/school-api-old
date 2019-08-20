@@ -43,12 +43,12 @@ export const schema = {
     name: { type: String },
     block: { type: String },
     level: { type: String },
-    classe: { type: String, ref: "Classe"},
+    classe: { type: String, ref: "Classe" },
     subsidiary: {
         type: String,
         enum: Object.values(SUBSIDIARY),
         required: [false, "Why no input?"],
-    },    
+    },
     created_by: { type: ObjectId, required: true, ref: "Staff" },
     updated_by: { type: ObjectId, ref: "Staff" },
 };

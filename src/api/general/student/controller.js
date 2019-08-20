@@ -26,7 +26,7 @@ export async function fetchRecord(req, res) {
         const result = await Student.find(filter)
             .populate("classe")
             .populate("hostel")
-            .populate("state")
+            .populate("state_id")
             .populate("county")
             .skip(skip)
             .limit(limit)

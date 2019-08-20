@@ -8,7 +8,7 @@
  * @property {String} gender Student gender (optional)
  * @property {Date} date_of_birth Student date_of_birth (optional)
  * @property {String} address Student address (optional)
- * @property {String} state Student state (optional)
+ * @property {String} state_id Student state_id (optional)
  * @property {String} county Student county (optional)
  * @property {String} email Student email (optional)
  * @property {String} phone Student office phone (optional)
@@ -34,7 +34,7 @@ import table from "./table";
 import State from "../state/model";
 import County from "../county/model";
 import Parent from "../parent/model";
-// import Hostel from "../hostel/model";
+import Hostel from "../hostel/model";
 import Classe from "../classe/model";
 
 const { Schema } = mongoose;
@@ -55,7 +55,7 @@ export const schemaCreate = {
     gender: Joi.string().optional(),
     date_of_birth: Joi.date().optional(),
     address: Joi.string().optional(),
-    state: Joi.string().optional(),
+    state_id: Joi.string().optional(),
     county: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
@@ -77,7 +77,7 @@ export const schemaUpdate = {
     gender: Joi.string().optional(),
     date_of_birth: Joi.date().optional(),
     address: Joi.string().optional(),
-    state: Joi.string().optional(),
+    state_id: Joi.string().optional(),
     county: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
@@ -104,7 +104,7 @@ export const schema = {
     },
     date_of_birth: { type: Date, required: [false, "Why no Date?"] },
     address: { type: String, required: [false, "Why no Address?"] },
-    state: { type: String, required: [false, "Why no State?"] },
+    state_id: { type: String, required: [false, "Why no State?"] },
     county: { type: String, required: [false, "Why no Country?"] },
     email: {
         type: String,
@@ -132,8 +132,8 @@ export const schema = {
     hostel: { type: ObjectId, ref: "Hostel" },
     photo: { type: String },
     parents_name: { type: ObjectId, ref: "Parent", required: [false, "Why no Parent's name?"] },
-    created_by: { type: ObjectId, ref: "Student", required: true },
-    updated_by: { type: ObjectId, ref: "Student", required: true },
+    created_by: { type: ObjectId, ref: "Staff", required: true },
+    updated_by: { type: ObjectId, ref: "Staff", required: true },
 };
 
 const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;

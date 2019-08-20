@@ -25,6 +25,7 @@ export async function fetchRecord(req, res) {
             .populate("teacher")
             .populate("classe")
             .populate("subject")
+            .populate("staff")
             .skip(skip)
             .limit(limit)
             .sort(sort)

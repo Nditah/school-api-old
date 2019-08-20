@@ -126,6 +126,7 @@ export async function parentAuthenticate(loginPayload) {
             .populate("students_name")
             .populate("state")
             .populate("county")
+            .populate("staff")
             .exec();
 
         if (!user) {

@@ -10,8 +10,8 @@
  * @property {Date} date_of_birth Parent date_of_birth (optional)
  * @property {String} marital_status Parent marital_status (optional)
  * @property {String} address Parent address (optional)
- * @property {String} state Parent state (optional)
- * @property {String} county Parent county (optional)
+ * @property {String} state_id Parent state_id (optional)
+ * @property {String} county_id Parent county_id (optional)
  * @property {String} email Parent email (optional)
  * @property {String} phone Parent office phone (optional)
  * @property {String} password Parent password (optional)
@@ -32,6 +32,7 @@ import { DATABASE, GENDER, EMPLOYMENT_STATUS, MARITAL_STATUS } from "../../../co
 import Student from "../student/model";
 import State from "../state/model";
 import County from "../county/model";
+import Staff from "../staff/model";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
@@ -53,8 +54,8 @@ export const schemaCreate = {
     date_of_birth: Joi.date().optional(),
     marital_status: Joi.string().optional(),
     address: Joi.string().optional(),
-    state: Joi.string().optional(),
-    county: Joi.string().optional(),
+    state_id: Joi.string().optional(),
+    county_id: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
@@ -74,8 +75,8 @@ export const schemaUpdate = {
     date_of_birth: Joi.date().optional(),
     marital_status: Joi.string().optional(),
     address: Joi.string().optional(),
-    state: Joi.string().optional(),
-    county: Joi.string().optional(),
+    state_id: Joi.string().optional(),
+    county_id: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
@@ -104,8 +105,8 @@ export const schema = {
         required: [false, "Why no marital_status?"],
     },
     address: { type: String, required: [false, "Why no Address"] },
-    state: { type: String, required: [false, "Why no State?"] },
-    county: { type: String, required: [false, "Why no County?"] },
+    state_id: { type: String, required: [false, "Why no State?"] },
+    county_id: { type: String, required: [false, "Why no County?"] },
     email: {
         type: String,
         trim: true,
@@ -128,11 +129,10 @@ export const schema = {
         required: [false, "Why no input?"],
     },
     students_name: { type: ObjectId, ref: "Student", required: [false, "Why no Parent's name"] },
-    created_by: { type: ObjectId, ref: "Parent", required: true },
-    updated_by: { type: ObjectId, ref: "Parent", required: true },
+    created_by: { type: ObjectId, ref: "Staff", required: true },
+    updated_by: { type: ObjectId, ref: "Staff", required: true },
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
 const options = DATABASE.OPTIONS;
 
 const newSchema = new Schema(schema, options);
