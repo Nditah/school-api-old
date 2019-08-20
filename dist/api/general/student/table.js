@@ -10,7 +10,7 @@ var _lib = require("../../../lib");
 
 var table = [{
     last_name: "Jave",
-    first_name: "Scott",
+    given_name: "Scott",
     gender: _constants.GENDER.FEMALE,
     date_of_birth: new Date(1987, 6, 20),
     phone: "08134836164",

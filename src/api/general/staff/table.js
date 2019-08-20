@@ -7,7 +7,7 @@ const staff1 = {
     category: "ABC",
     title: "Mrs",
     surname: "Eve",
-    other_name: "Tera",
+    given_name: "Tera",
     gender: GENDER.FEMALE,
     birth_date: "1987-6-20",
     marital_status: MARITAL_STATUS.MARRIED,
@@ -30,7 +30,7 @@ const staff1 = {
     terminal_id: "1",
     superior_id: "1",
     office_id: "1",
-    subsidiary: SUBSIDIARY.PMT,
+    subsidiary: SUBSIDIARY.SECONDARY,
     created_by: "1",
 };
 
@@ -41,8 +41,6 @@ const staffBaseId = DATABASE.BASE_ID.STAFF;
 const countyBaseId = DATABASE.BASE_ID.COUNTY;
 const stateBaseId = DATABASE.BASE_ID.STATE;
 const officeBaseId = DATABASE.BASE_ID.OFFICE;
-const terminalBaseId = DATABASE.BASE_ID.TERMINAL;
-const vehicleBaseId = DATABASE.BASE_ID.VEHICLE;
 
 // eslint-disable-next-line complexity
 const result = arr.map((record, index) => {
@@ -52,8 +50,6 @@ const result = arr.map((record, index) => {
     obj.password = record.password ? hash(record.password) : hash("peace700");
     obj.county_id = record.lga_id ? toObjectId(countyBaseId, record.lga_id) : null;
     obj.state_id = record.state_id ? toObjectId(stateBaseId, record.state_id) : null;
-    obj.vehicle_id = record.vehicle_id ? toObjectId(vehicleBaseId, record.vehicle_id) : null;
-    obj.terminal_id = record.terminal_id ? toObjectId(terminalBaseId, record.terminal_id) : null;
     obj.superior_id = record.superior_id ? toObjectId(staffBaseId, record.superior_id) : null;
     obj.office_id = record.office_id ? toObjectId(officeBaseId, record.office_id) : null;
     obj.role = [obj.office_id];

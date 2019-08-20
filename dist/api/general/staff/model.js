@@ -51,11 +51,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 4Decoder
  * @property {String} id Staff ObjectId primaryKey
  * @property {String} title Staff title (optional)
- * @property {String} first_name Staff first_name (optional)
+ * @property {String} surname Staff surname (optional)
  * @property {String} middle_name Staff middle_name (optional)
- * @property {String} last_name Staff first_name (optional)
+ * @property {String} given_name Staff surname (optional)
  * @property {String} gender Staff gender (optional)
- * @property {Date} date_of_birth Staff date_of_birth (optional)
+ * @property {Date} birth_date Staff birth_date (optional)
  * @property {String} marital_status Staff marital_status (optional)
  * @property {String} phone Staff office phone (optional)
  * @property {String} phone_personal Staff phone_personal (optional)
@@ -122,11 +122,11 @@ var schemaLogin = exports.schemaLogin = {
 
 var schemaCreate = exports.schemaCreate = {
     title: _joi2.default.string().optional(),
-    first_name: _joi2.default.string().optional(),
+    surname: _joi2.default.string().optional(),
     middle_name: _joi2.default.string().optional(),
-    last_name: _joi2.default.string().optional(),
+    given_name: _joi2.default.string().optional(),
     gender: _joi2.default.string().optional(),
-    date_of_birth: _joi2.default.date().optional(),
+    birth_date: _joi2.default.date().optional(),
     marital_status: _joi2.default.string().optional(),
     phone: _joi2.default.string().optional(),
     phone_personal: _joi2.default.string().optional(),
@@ -181,11 +181,11 @@ var schemaCreate = exports.schemaCreate = {
 
 var schemaUpdate = exports.schemaUpdate = {
     title: _joi2.default.string().optional(),
-    first_name: _joi2.default.string().optional(),
+    surname: _joi2.default.string().optional(),
     middle_name: _joi2.default.string().optional(),
-    last_name: _joi2.default.string().optional(),
+    given_name: _joi2.default.string().optional(),
     gender: _joi2.default.string().optional(),
-    date_of_birth: _joi2.default.date().optional(),
+    birth_date: _joi2.default.date().optional(),
     marital_status: _joi2.default.string().optional(),
     phone: _joi2.default.string().optional(),
     phone_personal: _joi2.default.string().optional(),
@@ -240,16 +240,15 @@ var schemaUpdate = exports.schemaUpdate = {
 
 var schema = exports.schema = {
     title: { type: String },
-    first_name: { type: String, required: [false, "Why no firstname?"] },
-    middle_name: { type: String },
-    last_name: { type: String, required: [false, "Why no lastname?"] },
+    surname: { type: String, required: true },
+    given_name: { type: String, required: true },
     gender: {
         type: String,
         enum: Object.values(_constants.GENDER),
         default: _constants.GENDER.MALE,
         required: [false, "Why no gender?"]
     },
-    date_of_birth: { type: Date, required: [false, "Why no birth_date?"] },
+    birth_date: { type: Date, required: [false, "Why no birth_date?"] },
     marital_status: {
         type: String,
         enum: Object.values(_constants.MARITAL_STATUS),
@@ -333,7 +332,7 @@ var schema = exports.schema = {
     disengaged_date: { type: Date },
     last_login: { type: Date },
     created_by: { type: ObjectId, ref: "Staff", required: true },
-    updated_by: { type: ObjectId, ref: "Staff", required: true }
+    updated_by: { type: ObjectId, ref: "Staff" }
 };
 
 var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;

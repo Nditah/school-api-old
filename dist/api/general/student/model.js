@@ -49,11 +49,11 @@ var Schema = _mongoose2.default.Schema;
 /**
  * @author 4Decoder
  * @property {String} id Student ObjectId primaryKey
- * @property {String} first_name Student first_name (optional)
- * @property {String} middle_name Student middle_name (optional)
- * @property {String} last_name Student first_name (optional)
+ * @property {String} surname Student surname (optional)
+ * @property {String} given_name Student given_name (optional)
+ * @property {String} last_name Student surname (optional)
  * @property {String} gender Student gender (optional)
- * @property {Date} date_of_birth Student date_of_birth (optional)
+ * @property {Date} birth_date Student birth_date (optional)
  * @property {String} address Student address (optional)
  * @property {String} state Student state (optional)
  * @property {String} county Student county (optional)
@@ -66,9 +66,9 @@ var Schema = _mongoose2.default.Schema;
  * @property {String} subsidiary Student subsidiary (required)
  * @property {String} hostel Student hostel (optional)
  * @property {String} photo Student photo (optional)
- * @property {String} parents_name Student parents_name (optional)
- * @property {String} created_by Student record created by
- * @property {String} updated_by Student record modified by
+ * @property {Array} parents Student parents Array<ObjectId> (optional)
+ * @property {ObjectId} created_by Student record created by
+ * @property {ObjectId} updated_by Student record modified by
  * @description Student holds record of all students in the school.
  */
 
@@ -82,11 +82,10 @@ var schemaLogin = exports.schemaLogin = {
 };
 
 var schemaCreate = exports.schemaCreate = {
-    first_name: _joi2.default.string().trim().optional(),
-    middle_name: _joi2.default.string().trim().optional(),
-    last_name: _joi2.default.string().trim().optional(),
+    surname: _joi2.default.string().trim().optional(),
+    given_name: _joi2.default.string().trim().optional(),
     gender: _joi2.default.string().optional(),
-    date_of_birth: _joi2.default.date().optional(),
+    birth_date: _joi2.default.date().optional(),
     address: _joi2.default.string().optional(),
     state: _joi2.default.string().optional(),
     county: _joi2.default.string().optional(),
@@ -99,16 +98,15 @@ var schemaCreate = exports.schemaCreate = {
     subsidiary: _joi2.default.string().trim().valid(Object.values(_constants.SUBSIDIARY)).optional(),
     hostel: _joi2.default.string().trim().optional(),
     photo: _joi2.default.string().optional(),
-    parents_name: _joi2.default.string().trim().optional(),
+    parents: _joi2.default.array().optional(),
     created_by: _joi2.default.string().required()
 };
 
 var schemaUpdate = exports.schemaUpdate = {
-    first_name: _joi2.default.string().trim().optional(),
-    middle_name: _joi2.default.string().trim().optional(),
-    last_name: _joi2.default.string().trim().optional(),
+    surname: _joi2.default.string().trim().optional(),
+    given_name: _joi2.default.string().trim().optional(),
     gender: _joi2.default.string().optional(),
-    date_of_birth: _joi2.default.date().optional(),
+    birth_date: _joi2.default.date().optional(),
     address: _joi2.default.string().optional(),
     state: _joi2.default.string().optional(),
     county: _joi2.default.string().optional(),
@@ -121,21 +119,20 @@ var schemaUpdate = exports.schemaUpdate = {
     subsidiary: _joi2.default.string().trim().valid(Object.values(_constants.SUBSIDIARY)).optional(),
     hostel: _joi2.default.string().trim().optional(),
     photo: _joi2.default.string().optional(),
-    parents_name: _joi2.default.string().trim().optional(),
+    parents: _joi2.default.array().optional(),
     updated_by: _joi2.default.string().required()
 };
 
 var schema = exports.schema = {
-    first_name: { type: String, required: [true, "Why no firstname?"] },
-    middle_name: { type: String },
-    last_name: { type: String, required: [true, "Why no lastname?"] },
+    surname: { type: String, required: [true, "Why no first name?"] },
+    given_name: { type: String, required: [true, "Why no given name?"] },
     gender: {
         type: String,
         enum: Object.values(_constants.GENDER),
         default: _constants.GENDER.MALE,
-        required: [false, "Why no gender?"]
+        required: true
     },
-    date_of_birth: { type: Date, required: [false, "Why no Date?"] },
+    birth_date: { type: Date, required: [false, "Why no Date?"] },
     address: { type: String, required: [false, "Why no Address?"] },
     state: { type: String, required: [false, "Why no State?"] },
     county: { type: String, required: [false, "Why no Country?"] },
@@ -163,9 +160,9 @@ var schema = exports.schema = {
     },
     hostel: { type: ObjectId, ref: "Hostel" },
     photo: { type: String },
-    parents_name: { type: ObjectId, ref: "Parent", required: [false, "Why no Parent's name?"] },
-    created_by: { type: ObjectId, ref: "Student", required: true },
-    updated_by: { type: ObjectId, ref: "Student", required: true }
+    parents: [{ type: ObjectId, ref: "Parent" }],
+    created_by: { type: ObjectId, ref: "Staff", required: true },
+    updated_by: { type: ObjectId, ref: "Staff" }
 };
 
 var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;

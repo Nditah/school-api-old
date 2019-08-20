@@ -27,7 +27,7 @@ var _model = require("../staff/model");
 
 var _model2 = _interopRequireDefault(_model);
 
-var _model3 = require("../fee/model");
+var _model3 = require("../fees-type/model");
 
 var _model4 = _interopRequireDefault(_model3);
 
@@ -45,7 +45,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {String} block Hostel block name (required)
  * @property {Number} room_no Hostel room_no (required)
  * @property {Number} no_of_beds Hostel no_of_beds (required)
- * @property {String} fee_id Hostel fee_id (optional)
+ * @property {String} fees Hostel fees (optional)
  * @property {String} description Hostel description (optional)
  * @property {String} status Hostel Status (Occupied or not Occupied)(optional)
  * @description Hostel model holds record of all hostels the company deals with
@@ -57,7 +57,7 @@ var schemaCreate = exports.schemaCreate = {
     classe_id: _joi2.default.string().optional(),
     room_no: _joi2.default.number().optional(),
     no_of_beds: _joi2.default.number().optional(),
-    fee_id: _joi2.default.string().optional(),
+    fee: _joi2.default.string().optional(),
     description: _joi2.default.string().optional(),
     status: _joi2.default.string().optional(),
     created_by: _joi2.default.string().required()
@@ -68,7 +68,7 @@ var schemaUpdate = exports.schemaUpdate = {
     classe_id: _joi2.default.string().optional(),
     room_no: _joi2.default.number().optional(),
     no_of_beds: _joi2.default.number().optional(),
-    fee_id: _joi2.default.string().optional(),
+    fee: _joi2.default.string().optional(),
     description: _joi2.default.string().optional(),
     status: _joi2.default.string().optional(),
     updated_by: _joi2.default.string().required()
@@ -79,7 +79,7 @@ var schema = exports.schema = {
     classe: { type: ObjectId, ref: "Classe" },
     room_no: { type: Number },
     no_of_beds: { type: Number },
-    fee: { type: ObjectId, ref: "Fee" },
+    fees: { type: ObjectId, ref: "FeeType" },
     description: { type: String },
     status: { type: String },
     created_by: { type: ObjectId, required: true, ref: "Staff" },

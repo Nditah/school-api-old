@@ -27,7 +27,7 @@ var _model = require("../staff/model");
 
 var _model2 = _interopRequireDefault(_model);
 
-var _model3 = require("../terminal/model");
+var _model3 = require("../classe/model");
 
 var _model4 = _interopRequireDefault(_model3);
 
@@ -68,7 +68,7 @@ var schemaUpdate = exports.schemaUpdate = {
 var schema = exports.schema = {
     type: { type: String },
     classe: { type: ObjectId, required: true },
-    amount: { type: number, required: true },
+    amount: { type: Number, required: true },
     description: { type: String },
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId }
