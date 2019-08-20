@@ -1,9 +1,9 @@
 {
-  "name": "PEACE API",
+  "name": "EDUCATION MANAGEMENT INFORMATION SYSTEM - EMIS API",
   "version": "0.1.0",
-  "description": "apiDoc basic example",
+  "description": "ApiDoc for a Crech, Nursery, Primary, Secondary school and University",
   "apidoc": {
-    "title": "PEACE apiDoc",
-    "url" : "https://api.github.com/v1"
+    "title": "MIS ApiDoc",
+    "url" : "https://mis-api.herokuapp.com/api/v1"
   }
 }

@@ -9,9 +9,9 @@ const router = express.Router();
  * @apiName RetrieveUnionbankTransaction
  * @apiGroup UnionbankTransaction
  * @apiExample {curl} Example usage for retieving a single record:
- *      curl -i http://localhost/api/unionbank-transactions?id=2&fields=id,created_at,updated_at
+ *      curl -i https://mis-api.herokuapp.com/api/v1/unionbank-transactions?id=2&fields=id,created_at,updated_at
  * @apiExample {curl} Example usage for retieving multiple records:
- *      curl -i http://localhost/api/unionbank-transactions?offset=10&limit=50
+ *      curl -i https://mis-api.herokuapp.com/api/v1/unionbank-transactions?offset=10&limit=50
  * @apiParam {Number} id Unique id of the record to retrieve (optional)
  * @apiParam {Number} offset Number of records to skip (optional)
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
