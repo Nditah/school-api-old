@@ -39,34 +39,9 @@ router.get("/assets", [_authorization.checkAuth, _authorization.isValidStaff], _
  * @apiName CreateAsset
  * @apiGroup Asset
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} label Asset label or barcode tag
- * @apiParam {String} serial Asset serial
  * @apiParam {String} name Asset name
  * @apiParam {String} type Asset type or model
- * @apiParam {String} make Asset make or manufacturer
- * @apiParam {String} measure Asset measure
- * @apiParam {ObjectId} category_id Asset category_id
- * @apiParam {String} description Asset description
- * @apiParam {ObjectId} terminal_id Asset terminal_id
- * @apiParam {String} subsidiary Asset subsidiary
- * @apiParam {String} location Asset location
- * @apiParam {String} is_consumable Asset is_consumable
- * @apiParam {String} usability Asset usability "DUTY|SCRAP|SHOP|SOLD|DISPOSED"
- * @apiParam {String} worth Asset worth "APPRECIATE|DEPRECIATE"
- * @apiParam {ObjectId} staff_id Asset custodian staff ObjectId
- * @apiParam {Date} launch_date Asset launch_date
- * @apiParam {Date} expire_date Asset expire_date
- * @apiParam {ObjectId} purchase_id Asset purchase_id
- * @apiParam {Number} opening_value Asset opening_value
- * @apiParam {Number} closing_value Asset closing_value
- * @apiParam {Number} salvage_value Asset salvage_value
- * @apiParam {Number} current_value Asset current_value
- * @apiParam {String} photo Asset photo
- * @apiParam {Number} lifespan Asset lifespan in Years
- * @apiParam {Number} total_depreciable_cost Asset total_depreciable_cost
- * @apiParam {Number} depreciation_rate Asset depreciation_rate
- * @apiParam {Number} depreciation_expense Asset depreciation_expense
- * @apiParam {Number} accumulated_depreciation Asset accumulated_depreciation
+ * @apiParam {String} value Asset value
  * @apiSuccess {Object} Asset Asset's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Asset not found.
@@ -79,35 +54,9 @@ router.post("/assets", [_authorization.checkAuth, _authorization.isValidStaff], 
  * @apiName UpdateAsset
  * @apiGroup Asset
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
- * @apiParam {String} label Asset label or barcode tag
- * @apiParam {String} serial Asset serial
  * @apiParam {String} name Asset name
  * @apiParam {String} type Asset type or model
- * @apiParam {String} make Asset make or manufacturer
- * @apiParam {String} measure Asset measure
- * @apiParam {ObjectId} category_id Asset category_id
- * @apiParam {String} description Asset description
- * @apiParam {ObjectId} terminal_id Asset terminal_id
- * @apiParam {String} subsidiary Asset subsidiary
- * @apiParam {String} location Asset location
- * @apiParam {String} is_consumable Asset is_consumable
- * @apiParam {String} usability Asset usability "DUTY|SCRAP|SHOP|SOLD|DISPOSED"
- * @apiParam {String} worth Asset worth "APPRECIATE|DEPRECIATE"
- * @apiParam {ObjectId} staff_id Asset custodian staff ObjectId
- * @apiParam {Date} launch_date Asset launch_date
- * @apiParam {Date} expire_date Asset expire_date
- * @apiParam {ObjectId} purchase_id Asset purchase_id
- * @apiParam {Number} opening_value Asset opening_value
- * @apiParam {Number} closing_value Asset closing_value
- * @apiParam {Number} salvage_value Asset salvage_value
- * @apiParam {Number} current_value Asset current_value
- * @apiParam {String} photo Asset photo
- * @apiParam {Number} lifespan Asset lifespan in Years
- * @apiParam {Number} total_depreciable_cost Asset total_depreciable_cost
- * @apiParam {Number} depreciation_rate Asset depreciation_rate
- * @apiParam {Number} depreciation_expense Asset depreciation_expense
- * @apiParam {Number} accumulated_depreciation Asset accumulated_depreciation
+ * @apiParam {String} value Asset value
  * @apiSuccess {Object} Asset Asset's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Asset not found.

@@ -3,17 +3,17 @@
  * @author 4Decoder
  * @property {String} id Staff ObjectId primaryKey
  * @property {String} title Staff title (optional)
- * @property {String} first_name Staff first_name (optional)
+ * @property {String} surname Staff surname (optional)
  * @property {String} middle_name Staff middle_name (optional)
- * @property {String} last_name Staff first_name (optional)
+ * @property {String} given_name Staff surname (optional)
  * @property {String} gender Staff gender (optional)
- * @property {Date} date_of_birth Staff date_of_birth (optional)
+ * @property {Date} birth_date Staff birth_date (optional)
  * @property {String} marital_status Staff marital_status (optional)
  * @property {String} phone Staff office phone (optional)
  * @property {String} phone_personal Staff phone_personal (optional)
  * @property {String} address Staff address (optional)
- * @property {String} state Staff state (optional)
- * @property {String} county Staff county (optional)
+ * @property {String} state_id Staff state_id (optional)
+ * @property {String} county_id Staff county_id (optional)
  * @property {String} email Staff email (optional)
  * @property {String} staff_type Staff staff_type (optional)
  * @property {String} classe Staff classe (optional)
@@ -32,7 +32,7 @@
  * @property {String} qualification Staff qualification (optional)
  * @property {String} employment_status Staff employment_status (required)
  * @property {Number} tax Staff tax (optional)
- * @property {Number} basic_salary Staff basic_salary (optional)
+ * @property {Number} basic_first_namesalary Staff basic_salary (optional)
  * @property {Number} bonus Staff bonus (optional)
  * @property {Number} entertainment_allowance Staff entertainment_allowance (optional)
  * @property {Number} house_allowance Staff house_allowance (optional)
@@ -87,17 +87,17 @@ export const schemaLogin = {
 
 export const schemaCreate = {
     title: Joi.string().optional(),
-    first_name: Joi.string().optional(),
+    surname: Joi.string().optional(),
     middle_name: Joi.string().optional(),
-    last_name: Joi.string().optional(),
+    given_name: Joi.string().optional(),
     gender: Joi.string().optional(),
-    date_of_birth: Joi.date().optional(),
+    birth_date: Joi.date().optional(),
     marital_status: Joi.string().optional(),
     phone: Joi.string().optional(),
     phone_personal: Joi.string().optional(),
     address: Joi.string().optional(),
-    state: Joi.string().optional(),
-    county: Joi.string().optional(),
+    state_id: Joi.string().optional(),
+    county_id: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     staff_type: Joi.string().trim().optional(),
     classe: Joi.string().trim().optional(),
@@ -146,17 +146,17 @@ export const schemaCreate = {
 
 export const schemaUpdate = {
     title: Joi.string().optional(),
-    first_name: Joi.string().optional(),
+    surname: Joi.string().optional(),
     middle_name: Joi.string().optional(),
-    last_name: Joi.string().optional(),
+    given_name: Joi.string().optional(),
     gender: Joi.string().optional(),
-    date_of_birth: Joi.date().optional(),
+    birth_date: Joi.date().optional(),
     marital_status: Joi.string().optional(),
     phone: Joi.string().optional(),
     phone_personal: Joi.string().optional(),
     address: Joi.string().optional(),
-    state: Joi.string().optional(),
-    county: Joi.string().optional(),
+    state_id: Joi.string().optional(),
+    county_id: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     staff_type: Joi.string().trim().optional(),
     classe: Joi.string().trim().optional(),
@@ -205,16 +205,15 @@ export const schemaUpdate = {
 
 export const schema = {
     title: { type: String },
-    first_name: { type: String, required: [false, "Why no firstname?"] },
-    middle_name: { type: String },
-    last_name: { type: String, required: [false, "Why no lastname?"] },
+    surname: { type: String, required: true },
+    given_name: { type: String, required: true },
     gender: {
         type: String,
         enum: Object.values(GENDER),
         default: GENDER.MALE,
         required: [false, "Why no gender?"],
     },
-    date_of_birth: { type: Date, required: [false, "Why no birth_date?"] },
+    birth_date: { type: Date, required: [false, "Why no birth_date?"] },
     marital_status: {
         type: String,
         enum: Object.values(MARITAL_STATUS),
@@ -232,8 +231,8 @@ export const schema = {
         alias: "phone_home",
     },
     address: { type: String },
-    state: { type: String, required: [false, "Why no State?"] },
-    county: { type: String, required: [false, "Why no Country?"] },
+    state_id: { type: String, required: [false, "Why no State?"] },
+    county_id: { type: String, required: [false, "Why no Country?"] },
     email: {
         type: String,
         trim: true,
@@ -299,7 +298,7 @@ export const schema = {
     disengaged_date: { type: Date },
     last_login: { type: Date },
     created_by: { type: ObjectId, ref: "Staff", required: true },
-    updated_by: { type: ObjectId, ref: "Staff", required: true },
+    updated_by: { type: ObjectId, ref: "Staff" },
 };
 
 const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;

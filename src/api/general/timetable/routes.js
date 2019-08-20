@@ -9,9 +9,9 @@ const router = express.Router();
  * @apiName RetrieveStore
  * @apiGroup Store
  * @apiExample {curl} Example usage for retieving a single record:
- *      curl -i http://localhost/api/timetables?id=2&fields=id,created_at,updated_at
+ *      curl -i https://mis-api.herokuapp.com/api/v1/timetables?id=2&fields=id,created_at,updated_at
  * @apiExample {curl} Example usage for retieving multiple records:
- *      curl -i http://localhost/api/timetables?offset=10&limit=50
+ *      curl -i https://mis-api.herokuapp.com/api/v1/timetables?offset=10&limit=50
  * @apiParam {Number} id Unique id of the record to retrieve (optional)
  * @apiParam {Number} offset Number of records to skip (optional)
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
@@ -30,7 +30,7 @@ router.get("/timetables", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {String} recordId required record ObjectId
  * @apiParam {String} name Timetable name
  * @apiParam {String} description Timetable description
- * @apiParam {ObjectId} classe School Classes 
+ * @apiParam {ObjectId} classe School Classes
  * @apiParam {ObjectId} subject_id Subject ObjectId
  * @apiParam {Array} teacher_id Timetable teacher_id
  * @apiParam {Number} duration Duration of subject
@@ -49,7 +49,7 @@ router.post("/timetables", [checkAuth, isValidStaff], createRecord);
  * @apiParam {String} recordId required record ObjectId
  * @apiParam {String} name Timetable name
  * @apiParam {String} description Timetable description
- * @apiParam {ObjectId} classe School Classes 
+ * @apiParam {ObjectId} classe School Classes
  * @apiParam {ObjectId} subject_id Subject ObjectId
  * @apiParam {Array} teacher_id Timetable teacher_id
  * @apiParam {Number} duration Duration of subject

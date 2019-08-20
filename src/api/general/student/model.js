@@ -2,14 +2,14 @@
 /**
  * @author 4Decoder
  * @property {String} id Student ObjectId primaryKey
- * @property {String} first_name Student first_name (optional)
- * @property {String} middle_name Student middle_name (optional)
- * @property {String} last_name Student first_name (optional)
+ * @property {String} surname Student surname (optional)
+ * @property {String} given_name Student given_name (optional)
+ * @property {String} last_name Student surname (optional)
  * @property {String} gender Student gender (optional)
- * @property {Date} date_of_birth Student date_of_birth (optional)
+ * @property {Date} birth_date Student birth_date (optional)
  * @property {String} address Student address (optional)
- * @property {String} state Student state (optional)
- * @property {String} county Student county (optional)
+ * @property {String} state_id Student state_id (optional)
+ * @property {String} county_id Student county_id (optional)
  * @property {String} email Student email (optional)
  * @property {String} phone Student office phone (optional)
  * @property {String} password Student password (optional)
@@ -19,9 +19,9 @@
  * @property {String} subsidiary Student subsidiary (required)
  * @property {String} hostel Student hostel (optional)
  * @property {String} photo Student photo (optional)
- * @property {String} parents_name Student parents_name (optional)
- * @property {String} created_by Student record created by
- * @property {String} updated_by Student record modified by
+ * @property {Array} parents Student parents Array<ObjectId> (optional)
+ * @property {ObjectId} created_by Student record created by
+ * @property {ObjectId} updated_by Student record modified by
  * @description Student holds record of all students in the school.
  */
 
@@ -34,7 +34,7 @@ import table from "./table";
 import State from "../state/model";
 import County from "../county/model";
 import Parent from "../parent/model";
-// import Hostel from "../hostel/model";
+import Hostel from "../hostel/model";
 import Classe from "../classe/model";
 
 const { Schema } = mongoose;
@@ -49,14 +49,13 @@ export const schemaLogin = {
 };
 
 export const schemaCreate = {
-    first_name: Joi.string().trim().optional(),
-    middle_name: Joi.string().trim().optional(),
-    last_name: Joi.string().trim().optional(),
+    surname: Joi.string().trim().optional(),
+    given_name: Joi.string().trim().optional(),
     gender: Joi.string().optional(),
-    date_of_birth: Joi.date().optional(),
+    birth_date: Joi.date().optional(),
     address: Joi.string().optional(),
-    state: Joi.string().optional(),
-    county: Joi.string().optional(),
+    state_id: Joi.string().optional(),
+    county_id: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
@@ -66,19 +65,18 @@ export const schemaCreate = {
     subsidiary: Joi.string().trim().valid(Object.values(SUBSIDIARY)).optional(),
     hostel: Joi.string().trim().optional(),
     photo: Joi.string().optional(),
-    parents_name: Joi.string().trim().optional(),
+    parents: Joi.array().optional(),
     created_by: Joi.string().required(),
 };
 
 export const schemaUpdate = {
-    first_name: Joi.string().trim().optional(),
-    middle_name: Joi.string().trim().optional(),
-    last_name: Joi.string().trim().optional(),
+    surname: Joi.string().trim().optional(),
+    given_name: Joi.string().trim().optional(),
     gender: Joi.string().optional(),
-    date_of_birth: Joi.date().optional(),
+    birth_date: Joi.date().optional(),
     address: Joi.string().optional(),
-    state: Joi.string().optional(),
-    county: Joi.string().optional(),
+    state_id: Joi.string().optional(),
+    county_id: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
@@ -88,24 +86,23 @@ export const schemaUpdate = {
     subsidiary: Joi.string().trim().valid(Object.values(SUBSIDIARY)).optional(),
     hostel: Joi.string().trim().optional(),
     photo: Joi.string().optional(),
-    parents_name: Joi.string().trim().optional(),
+    parents: Joi.array().optional(),
     updated_by: Joi.string().required(),
 };
 
 export const schema = {
-    first_name: { type: String, required: [true, "Why no firstname?"] },
-    middle_name: { type: String },
-    last_name: { type: String, required: [true, "Why no lastname?"] },
+    surname: { type: String, required: [true, "Why no first name?"] },
+    given_name: { type: String, required: [true, "Why no given name?"] },
     gender: {
         type: String,
         enum: Object.values(GENDER),
         default: GENDER.MALE,
-        required: [false, "Why no gender?"],
+        required: true,
     },
-    date_of_birth: { type: Date, required: [false, "Why no Date?"] },
+    birth_date: { type: Date, required: [false, "Why no Date?"] },
     address: { type: String, required: [false, "Why no Address?"] },
-    state: { type: String, required: [false, "Why no State?"] },
-    county: { type: String, required: [false, "Why no Country?"] },
+    state_id: { type: String, required: [false, "Why no State?"] },
+    county_id: { type: String, required: [false, "Why no Country?"] },
     email: {
         type: String,
         trim: true,
@@ -131,9 +128,9 @@ export const schema = {
     },
     hostel: { type: ObjectId, ref: "Hostel" },
     photo: { type: String },
-    parents_name: { type: ObjectId, ref: "Parent", required: [false, "Why no Parent's name?"] },
-    created_by: { type: ObjectId, ref: "Student", required: true },
-    updated_by: { type: ObjectId, ref: "Student", required: true },
+    parents: [{ type: ObjectId, ref: "Parent" }],
+    created_by: { type: ObjectId, ref: "Staff", required: true },
+    updated_by: { type: ObjectId, ref: "Staff" },
 };
 
 const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;

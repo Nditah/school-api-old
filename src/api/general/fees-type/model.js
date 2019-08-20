@@ -17,7 +17,7 @@ import mongoose_csv from "mongoose-csv";
 import { DATABASE } from "../../../constants";
 import table from "./table";
 import Staff from "../staff/model";
-import Terminal from "../terminal/model";
+import Classes from "../classe/model";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
@@ -41,7 +41,7 @@ export const schemaUpdate = {
 export const schema = {
     type: { type: String },
     classe: { type: ObjectId, required: true },
-    amount: { type: number, required: true },
+    amount: { type: Number, required: true },
     description: { type: String },
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId },

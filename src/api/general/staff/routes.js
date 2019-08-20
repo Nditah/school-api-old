@@ -16,7 +16,7 @@ const router = express.Router();
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
  * @apiParam {String} sort how records would be arranged in alphabet (optional)
  * @apiParam {String} projection list of record's attributes to retrieve (optional)
- * @apiDescription Records of staff in the school.
+ * @apiDescription Records of staffs in the school.
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
@@ -37,7 +37,7 @@ router.get("/staff", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {String} phone Staff office phone (optional)
  * @apiParam {String} phone_personal Staff phone_personal (optional)
  * @apiParam {String} address Staff address (optional)
- * @apiParam {String} state Staff state (optional)
+ * @apiParam {String} state_id Staff state_id (optional)
  * @apiParam {String} county Staff county (optional)
  * @apiParam {String} email Staff email (optional)
  * @apiParam {String} staff_type Staff staff_type (optional)
@@ -106,7 +106,7 @@ router.post("/staff", [checkAuth, isValidStaff], createRecord);
  * @apiParam {String} phone Staff office phone (optional)
  * @apiParam {String} phone_personal Staff phone_personal (optional)
  * @apiParam {String} address Staff address (optional)
- * @apiParam {String} state Staff state (optional)
+ * @apiParam {String} state_id Staff state_id (optional)
  * @apiParam {String} county Staff county (optional)
  * @apiParam {String} email Staff email (optional)
  * @apiParam {String} staff_type Staff staff_type (optional)

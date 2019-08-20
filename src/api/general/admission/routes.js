@@ -1,6 +1,6 @@
 import express from "express";
 import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-// import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
 
 const router = express.Router();
 

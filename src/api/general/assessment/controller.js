@@ -4,7 +4,6 @@ import aqp from "api-query-params";
 import Assessment, { schemaCreate, schemaUpdate } from "./model";
 import { success, fail, notFound } from "../../../lib";
 import { STATUS_MSG } from "../../../constants";
-import Assessment from "./model";
 
 // Logging
 const logger = log4js.getLogger("[assessment]");
@@ -65,7 +64,7 @@ export async function updateRecord(req, res) {
     const { error } = Joi.validate(data, schemaUpdate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
     try {
-        const result = await AccountClass.findOneAndUpdate({ _id: id }, data, { new: true });
+        const result = await Assessment.findOneAndUpdate({ _id: id }, data, { new: true });
         if (!result) {
             return notFound(res, `Bad Request: Model not found with id ${id}`);
         }
