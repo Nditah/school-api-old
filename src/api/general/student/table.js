@@ -4,9 +4,9 @@ import { toObjectId, hash } from "../../../lib";
 const table = [
     {
         last_name: "Jave",
-        first_name: "Scott",
+        given_name: "Scott",
         gender: GENDER.FEMALE,
-        date_of_birth: new Date(1987, 6, 20),
+        birth_date: new Date(1987, 6, 20),
         phone: "08134836164",
         email: "student@royalacademy.ng",
         password: hash("peace"),

@@ -27,7 +27,7 @@ export async function fetchRecord(req, res) {
             .populate("classe")
             .populate("hostel")
             .populate("state_id")
-            .populate("county")
+            .populate("county_id")
             .skip(skip)
             .limit(limit)
             .sort(sort)

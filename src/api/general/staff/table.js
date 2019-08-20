@@ -5,8 +5,8 @@ import * as table from "./table.json";
 const staff1 = {
     staff_type: EMPLOYEE_TYPE.TEACHING,
     title: "Mrs",
-    first_name: "Eve",
-    last_name: "Tera",
+    surname: "Eve",
+    given_name: "Tera",
     gender: GENDER.FEMALE,
     date_of_birth: "1987-6-20",
     marital_status: MARITAL_STATUS.MARRIED,
@@ -26,6 +26,7 @@ const staff1 = {
     employment_status: EMPLOYMENT_STATUS.ON_DUTY,
     office_id: "1",
     subsidiary: SUBSIDIARY.SECONDARY,
+    superior_id: "Victor",
     created_by: "1",
 };
 
@@ -45,6 +46,7 @@ const result = arr.map((record, index) => {
     obj.password = record.password ? hash(record.password) : hash("peace700");
     obj.county_id = record.lga_id ? toObjectId(countyBaseId, record.lga_id) : null;
     obj.state_id = record.state_id ? toObjectId(stateBaseId, record.state_id) : null;
+    obj.superior_id = record.superior_id ? toObjectId(staffBaseId, record.superior_id) : null;
     obj.office_id = record.office_id ? toObjectId(officeBaseId, record.office_id) : null;
     obj.role = [obj.office_id];
     obj.approved_by = record.approved_by ? toObjectId(staffBaseId, record.approved_by) : null;

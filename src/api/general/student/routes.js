@@ -1,6 +1,6 @@
 /**
  * @author 4Decoder
- * @description Student holds record of all students with terminals
+ * @description Student holds record of all students
  */
 import express from "express";
 import { checkAuth, isValidStaff } from "../../../middleware/authorization";
@@ -30,14 +30,14 @@ router.get("/students", [checkAuth, isValidStaff], fetchRecord);
  * @apiName CreateStudent
  * @apiGroup Student
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} first_name Student first_name (optional)
- * @apiParam {String} middle_name Student middle_name (optional)
- * @apiParam {String} last_name Student first_name (optional)
+ * @apiParam {String} surname Student surname (optional)
+ * @apiParam {String} given_name Student given_name (optional)
+ * @apiParam {String} last_name Student surname (optional)
  * @apiParam {String} gender Student gender (optional)
- * @apiParam {Date} date_of_birth Student date_of_birth (optional)
+ * @apiParam {Date} birth_date Student birth_date (optional)
  * @apiParam {String} address Student address (optional)
  * @apiParam {String} state_id Student state_id (optional)
- * @apiParam {String} county Student county (optional)
+ * @apiParam {String} county_id Student county_id (optional)
  * @apiParam {String} email Student email (optional)
  * @apiParam {String} phone Student office phone (optional)
  * @apiParam {String} password Student password (optional)
@@ -47,7 +47,7 @@ router.get("/students", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {String} subsidiary Student subsidiary (required)
  * @apiParam {String} hostel Student hostel (optional)
  * @apiParam {String} photo Student photo (optional)
- * @apiParam {String} parents_name Student parents_name (optional)
+ * @apiParam {Array} parents Student parents Array<ObjectId> (optional)
  * @apiSuccess {Object} Student Student's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Student not found.
@@ -61,14 +61,14 @@ router.post("/students", createRecord);
  * @apiGroup Student
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} recordId required record ObjectId
- * @apiParam {String} first_name Student first_name (optional)
- * @apiParam {String} middle_name Student middle_name (optional)
- * @apiParam {String} last_name Student first_name (optional)
+ * @apiParam {String} surname Student surname (optional)
+ * @apiParam {String} given_name Student given_name (optional)
+ * @apiParam {String} last_name Student surname (optional)
  * @apiParam {String} gender Student gender (optional)
- * @apiParam {Date} date_of_birth Student date_of_birth (optional)
+ * @apiParam {Date} birth_date Student birth_date (optional)
  * @apiParam {String} address Student address (optional)
  * @apiParam {String} state_id Student state_id (optional)
- * @apiParam {String} county Student county (optional)
+ * @apiParam {String} county_id Student county_id (optional)
  * @apiParam {String} email Student email (optional)
  * @apiParam {String} phone Student office phone (optional)
  * @apiParam {String} password Student password (optional)
@@ -78,8 +78,7 @@ router.post("/students", createRecord);
  * @apiParam {String} subsidiary Student subsidiary (required)
  * @apiParam {String} hostel Student hostel (optional)
  * @apiParam {String} photo Student photo (optional)
- * @apiParam {String} parents_name Student parents_name (optional)
- * @apiParam {ObjectId} updated_by id of the staff who created the record
+ * @apiParam {Array} parents Student parents Array<ObjectId> (optional)
  * @apiSuccess {Object} Student Student's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Student not found.

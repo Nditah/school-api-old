@@ -15,7 +15,7 @@
 import Joi from "joi";
 import mongoose from "mongoose";
 // eslint-disable-next-line camelcase
-import DATABASE from "../../../constants";
+import { DATABASE } from "../../../constants";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;

@@ -19,7 +19,7 @@ var staff1 = {
     category: "ABC",
     title: "Mrs",
     surname: "Eve",
-    other_name: "Tera",
+    given_name: "Tera",
     gender: _constants.GENDER.FEMALE,
     birth_date: "1987-6-20",
     marital_status: _constants.MARITAL_STATUS.MARRIED,
@@ -42,7 +42,7 @@ var staff1 = {
     terminal_id: "1",
     superior_id: "1",
     office_id: "1",
-    subsidiary: _constants.SUBSIDIARY.PMT,
+    subsidiary: _constants.SUBSIDIARY.SECONDARY,
     created_by: "1"
 };
 
@@ -53,8 +53,6 @@ var staffBaseId = _constants.DATABASE.BASE_ID.STAFF;
 var countyBaseId = _constants.DATABASE.BASE_ID.COUNTY;
 var stateBaseId = _constants.DATABASE.BASE_ID.STATE;
 var officeBaseId = _constants.DATABASE.BASE_ID.OFFICE;
-var terminalBaseId = _constants.DATABASE.BASE_ID.TERMINAL;
-var vehicleBaseId = _constants.DATABASE.BASE_ID.VEHICLE;
 
 // eslint-disable-next-line complexity
 var result = arr.map(function (record, index) {
@@ -64,8 +62,6 @@ var result = arr.map(function (record, index) {
     obj.password = record.password ? (0, _lib.hash)(record.password) : (0, _lib.hash)("peace700");
     obj.county_id = record.lga_id ? (0, _lib.toObjectId)(countyBaseId, record.lga_id) : null;
     obj.state_id = record.state_id ? (0, _lib.toObjectId)(stateBaseId, record.state_id) : null;
-    obj.vehicle_id = record.vehicle_id ? (0, _lib.toObjectId)(vehicleBaseId, record.vehicle_id) : null;
-    obj.terminal_id = record.terminal_id ? (0, _lib.toObjectId)(terminalBaseId, record.terminal_id) : null;
     obj.superior_id = record.superior_id ? (0, _lib.toObjectId)(staffBaseId, record.superior_id) : null;
     obj.office_id = record.office_id ? (0, _lib.toObjectId)(officeBaseId, record.office_id) : null;
     obj.role = [obj.office_id];

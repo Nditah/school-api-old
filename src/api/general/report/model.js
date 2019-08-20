@@ -13,6 +13,7 @@ import mongoose_csv from "mongoose-csv";
 import { DATABASE, SUBSIDIARY } from "../../../constants";
 import table from "./table";
 import Staff from "../staff/model";
+import Student from "../student/model";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
@@ -22,17 +23,10 @@ export const schemaGenerate = {
     code: Joi.string().optional(),
     from: Joi.date().optional(), // start period
     to: Joi.date().optional(), // end period
-    terminal: Joi.string().optional(), // ObjectId
-    pmtroute: Joi.string().optional(), // ObjectId
-    partner: Joi.string().optional(), // ObjectId
+    classe_id: Joi.string().optional(), // ObjectId
+    student: Joi.string().optional(), // ObjectId
     staff: Joi.string().optional(), // ObjectId
-    customer: Joi.string().optional(), // ObjectId
-    task: Joi.string().optional(), // ObjectId
     office: Joi.string().optional(), // ObjectId
-    product: Joi.string().optional(), // ObjectId
-    store: Joi.string().optional(), // ObjectId
-    sales: Joi.string().optional(), // Sales ObjectId
-    purchase: Joi.string().optional(), // Sales ObjectId
     subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
 };
 

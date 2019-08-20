@@ -26,7 +26,6 @@ import mongoose from "mongoose";
 // eslint-disable-next-line camelcase
 import mongoose_csv from "mongoose-csv";
 import { DATABASE } from "../../../constants";
-import table from "./table";
 // eslint-disable-next-line import/no-cycle
 import Staff from "../staff/model";
 import State from "../state/model";
@@ -54,7 +53,6 @@ export const schemaCreate = {
     father_name: Joi.string().optional(),
     mother_name: Joi.string().optional(),
     home_address: Joi.string().optional(),
-    phone: Joi.string().optional(),
     created_by: Joi.string().required(),
 };
 
@@ -76,7 +74,6 @@ export const schemaUpdate = {
     father_name: Joi.string().optional(),
     mother_name: Joi.string().optional(),
     home_address: Joi.string().optional(),
-    phone: Joi.string().optional(),
     updated_by: Joi.string().required(),
 };
 
@@ -88,10 +85,10 @@ export const schema = {
     state_id: { type: ObjectId, ref: "State" },
     county_id: { type: ObjectId, ref: "County" },
     birth_date: { type: Date },
-    religion: { type: String},
+    religion: { type: String },
     denomination: { type: String },
-    last_class: { type: ObjectId, ref: "Classe"},
-    intending_class: { type: ObjectId, ref: "Classe"},
+    last_class: { type: ObjectId, ref: "Classe" },
+    intending_class: { type: ObjectId, ref: "Classe" },
     last_school: { type: String },
     father_name: { type: String },
     mother_name: { type: String },
@@ -104,12 +101,11 @@ export const schema = {
         unique: true,
         alias: "phone_office",
     },
-    status : { type:String },
+    status: { type: String },
     created_by: { type: ObjectId, required: true, ref: "Staff" },
     updated_by: { type: ObjectId, ref: "Staff" },
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
 const options = DATABASE.OPTIONS;
 
 const newSchema = new Schema(schema, options);
@@ -117,7 +113,5 @@ newSchema.set("collection", "admission");
 newSchema.plugin(mongoose_csv);
 
 const Admission = mongoose.model("Admission", newSchema);
-
-if (preload) { Admission.insertMany(table); }
 
 export default Admission;

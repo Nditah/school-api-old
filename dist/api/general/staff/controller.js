@@ -23,7 +23,7 @@ var fetchRecord = exports.fetchRecord = function () {
                             delete filter.q;
                         }
                         _context.next = 7;
-                        return _model2.default.find(filter).populate("terminal_id").populate("office_id").populate("role").populate("bank_id").populate("vehicle_id").populate("asset_assigment_ids").populate("rating_ids").populate("state_id").populate("county_id").skip(skip).limit(limit).sort(sort).select(projection).exec();
+                        return _model2.default.find(filter).populate("office_id").populate("role").populate("bank").populate("classe").populate("subject").populate("bank_name").populate("state").populate("county").skip(skip).limit(limit).sort(sort).select(projection).exec();
 
                     case 7:
                         result = _context.sent;
