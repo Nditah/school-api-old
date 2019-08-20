@@ -8,11 +8,11 @@ const staff1 = {
     surname: "Eve",
     given_name: "Tera",
     gender: GENDER.FEMALE,
-    date_of_birth: "1987-6-20",
+    birth_date: "1987-6-20",
     marital_status: MARITAL_STATUS.MARRIED,
     country_iso2: "ng",
-    state_id: "1",
-    county_id: "1",
+    state: "1",
+    county: "1",
     email: "admin@royalacademy.ng",
     password: "peace",
     kin: "Joel",
@@ -24,7 +24,7 @@ const staff1 = {
     guarantor1_phone: "ABC",
     guarantor1_address: "ABC",
     employment_status: EMPLOYMENT_STATUS.ON_DUTY,
-    office_id: "1",
+    office: "1",
     subsidiary: SUBSIDIARY.SECONDARY,
     superior_id: "Victor",
     created_by: "1",
@@ -44,14 +44,14 @@ const result = arr.map((record, index) => {
     obj._id = toObjectId(staffBaseId, 1 + index);
     obj.serial = record.emp_id ? record.emp_id : null;
     obj.password = record.password ? hash(record.password) : hash("peace700");
-    obj.county_id = record.lga_id ? toObjectId(countyBaseId, record.lga_id) : null;
+    obj.county = record.lga_id ? toObjectId(countyBaseId, record.lga_id) : null;
     obj.state_id = record.state_id ? toObjectId(stateBaseId, record.state_id) : null;
     obj.superior_id = record.superior_id ? toObjectId(staffBaseId, record.superior_id) : null;
     obj.office_id = record.office_id ? toObjectId(officeBaseId, record.office_id) : null;
     obj.role = [obj.office_id];
     obj.approved_by = record.approved_by ? toObjectId(staffBaseId, record.approved_by) : null;
     obj.created_by = record.created_by ? toObjectId(staffBaseId, record.created_by) : null;
-    delete obj.date_of_birth;
+    delete obj.birth_date;
     return cleanObject(obj);
 });
 

@@ -1,23 +1,23 @@
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
- * @property {String} id Student ObjectId primaryKey
+ * @property {ObjectId} id Student ObjectId primaryKey
  * @property {String} surname Student surname (optional)
  * @property {String} given_name Student given_name (optional)
  * @property {String} last_name Student surname (optional)
  * @property {String} gender Student gender (optional)
  * @property {Date} birth_date Student birth_date (optional)
  * @property {String} address Student address (optional)
- * @property {String} state_id Student state_id (optional)
- * @property {String} county_id Student county_id (optional)
+ * @property {ObjectId} state Student state (optional)
+ * @property {ObjectId} county Student county (optional)
  * @property {String} email Student email (optional)
  * @property {String} phone Student office phone (optional)
  * @property {String} password Student password (optional)
  * @property {String} blood_group Student blood_group (optional)
- * @property {String} classe Student classe (optional)
+ * @property {ObjectId} classe Student classe (optional)
  * @property {String} level Student level (optional)
  * @property {String} subsidiary Student subsidiary (required)
- * @property {String} hostel Student hostel (optional)
+ * @property {ObjectId} hostel Student hostel (optional)
  * @property {String} photo Student photo (optional)
  * @property {Array} parents Student parents Array<ObjectId> (optional)
  * @property {ObjectId} created_by Student record created by
@@ -54,8 +54,8 @@ export const schemaCreate = {
     gender: Joi.string().optional(),
     birth_date: Joi.date().optional(),
     address: Joi.string().optional(),
-    state_id: Joi.string().optional(),
-    county_id: Joi.string().optional(),
+    state: Joi.string().optional(),
+    county: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
@@ -75,8 +75,8 @@ export const schemaUpdate = {
     gender: Joi.string().optional(),
     birth_date: Joi.date().optional(),
     address: Joi.string().optional(),
-    state_id: Joi.string().optional(),
-    county_id: Joi.string().optional(),
+    state: Joi.string().optional(),
+    county: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
@@ -101,8 +101,8 @@ export const schema = {
     },
     birth_date: { type: Date, required: [false, "Why no Date?"] },
     address: { type: String, required: [false, "Why no Address?"] },
-    state_id: { type: String, required: [false, "Why no State?"] },
-    county_id: { type: String, required: [false, "Why no Country?"] },
+    state: { type: String, required: [false, "Why no State?"] },
+    county: { type: String, required: [false, "Why no Country?"] },
     email: {
         type: String,
         trim: true,

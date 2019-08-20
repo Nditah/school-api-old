@@ -30,22 +30,21 @@ router.get("/parents", [checkAuth, isValidStaff], fetchRecord);
  * @apiName CreateParent
  * @apiGroup Parent
  * @apiHeader {String} Authorization Bearer token
- * @property {String} title Parent title (optional)
- * @property {String} first_name Parent first_name (optional)
- * @property {String} middle_name Parent middle_name (optional)
- * @property {String} last_name Parent first_name (optional)
- * @property {String} gender Parent gender (optional)
- * @property {Date} date_of_birth Parent date_of_birth (optional)
- * @property {String} marital_status Parent marital_status (optional)
- * @property {String} address Parent address (optional)
- * @property {String} state_id Parent state_id (optional)
- * @property {String} county_id Parent county_id (optional)
- * @property {String} email Parent email (optional)
- * @property {String} phone Parent office phone (optional)
- * @property {String} password Parent password (optional)
- * @property {String} profession Parent profession (optional)
- * @property {String} employment_status Parent employment_status (required)
- * @property {String} students_name Parent students_name (optional)
+ * @apiParam {String} title Parent title (optional)
+ * @apiParam {String} surname Parent surname (optional)
+ * @apiParam {String} given_name Parent given_name (optional)
+ * @apiParam {String} gender Parent gender (optional)
+ * @apiParam {Date} birth_date Parent birth_date (optional)
+ * @apiParam {String} marital_status Parent marital_status (optional)
+ * @apiParam {String} address Parent address (optional)
+ * @apiParam {ObjectId} state Parent state (optional)
+ * @apiParam {ObjectId} county Parent county (optional)
+ * @apiParam {String} email Parent email (optional)
+ * @apiParam {String} phone Parent office phone (optional)
+ * @apiParam {String} password Parent password (optional)
+ * @apiParam {String} profession Parent profession (optional)
+ * @apiParam {String} employment_status Parent employment_status (required)
+ * @apiParam {ObjectId} students_name Parent students_name (optional)
  * @apiSuccess {Object} Parent Parent's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Parent not found.
@@ -58,23 +57,22 @@ router.post("/parents", createRecord);
  * @apiName UpdateParent
  * @apiGroup Parent
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
- * @property {String} title Parent title (optional)
- * @property {String} first_name Parent first_name (optional)
- * @property {String} middle_name Parent middle_name (optional)
- * @property {String} last_name Parent first_name (optional)
- * @property {String} gender Parent gender (optional)
- * @property {Date} date_of_birth Parent date_of_birth (optional)
- * @property {String} marital_status Parent marital_status (optional)
- * @property {String} address Parent address (optional)
- * @property {String} state_id Parent state_id (optional)
- * @property {String} county_id Parent county_id (optional)
- * @property {String} email Parent email (optional)
- * @property {String} phone Parent office phone (optional)
- * @property {String} password Parent password (optional)
- * @property {String} profession Parent profession (optional)
- * @property {String} employment_status Parent employment_status (required)
- * @property {String} students_name Parent students_name (optional)
+ * @apiParam {ObjectId} recordId required record ObjectId
+ * @apiParam {String} title Parent title (optional)
+ * @apiParam {String} surname Parent surname (optional)
+ * @apiParam {String} given_name Parent given_name (optional)
+ * @apiParam {String} gender Parent gender (optional)
+ * @apiParam {Date} birth_date Parent birth_date (optional)
+ * @apiParam {String} marital_status Parent marital_status (optional)
+ * @apiParam {String} address Parent address (optional)
+ * @apiParam {ObjectId} state Parent state (optional)
+ * @apiParam {ObjectId} county Parent county (optional)
+ * @apiParam {String} email Parent email (optional)
+ * @apiParam {String} phone Parent office phone (optional)
+ * @apiParam {String} password Parent password (optional)
+ * @apiParam {String} profession Parent profession (optional)
+ * @apiParam {String} employment_status Parent employment_status (required)
+ * @apiParam {ObjectId} students_name Parent students_name (optional)
  * @apiParam {ObjectId} updated_by id of the staff who created the record
  * @apiSuccess {Object} Parent Parent's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
@@ -87,7 +85,7 @@ router.put("/parents/:recordId", [checkAuth], updateRecord);
  * @api {delete} /api/parents/{recordId} Delete parents
  * @apiName DeleteParent
  * @apiGroup Parent
- * @apiParam {String} recordId record ObjectId
+ * @apiParam {ObjectId} recordId record ObjectId
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 404 Parent not found.
  * @apiError 401 master access only.

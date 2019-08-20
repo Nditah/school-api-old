@@ -1,23 +1,23 @@
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
- * @property {String} id Parent ObjectId primaryKey
+ * @property {ObjectId} id Parent ObjectId primaryKey
  * @property {String} title Parent title (optional)
  * @property {String} first_name Parent first_name (optional)
  * @property {String} middle_name Parent middle_name (optional)
  * @property {String} last_name Parent first_name (optional)
  * @property {String} gender Parent gender (optional)
- * @property {Date} date_of_birth Parent date_of_birth (optional)
+ * @property {Date} birth_date Parent birth_date (optional)
  * @property {String} marital_status Parent marital_status (optional)
  * @property {String} address Parent address (optional)
- * @property {String} state_id Parent state_id (optional)
- * @property {String} county_id Parent county_id (optional)
+ * @property {ObjectId} state Parent state (optional)
+ * @property {ObjectId} county Parent county (optional)
  * @property {String} email Parent email (optional)
  * @property {String} phone Parent office phone (optional)
  * @property {String} password Parent password (optional)
  * @property {String} profession Parent profession (optional)
  * @property {String} employment_status Parent employment_status (required)
- * @property {String} students_name Parent students_name (optional)
+ * @property {ObjectId} students_name Parent students_name (optional)
  * @property {String} created_by Parent record created by
  * @property {String} updated_by Parent record modified by
  * @description Parent holds record of all student's parents in the school
@@ -47,15 +47,14 @@ export const schemaLogin = {
 
 export const schemaCreate = {
     title: Joi.string().optional(),
-    first_name: Joi.string().trim().optional(),
-    middle_name: Joi.string().trim().optional(),
-    last_name: Joi.string().trim().optional(),
+    surname: Joi.string().optional(),
+    given_name: Joi.string().optional(),
     gender: Joi.string().optional(),
-    date_of_birth: Joi.date().optional(),
+    birth_date: Joi.date().optional(),
     marital_status: Joi.string().optional(),
     address: Joi.string().optional(),
-    state_id: Joi.string().optional(),
-    county_id: Joi.string().optional(),
+    state: Joi.string().optional(),
+    county: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
@@ -68,15 +67,14 @@ export const schemaCreate = {
 
 export const schemaUpdate = {
     title: Joi.string().optional(),
-    first_name: Joi.string().trim().optional(),
-    middle_name: Joi.string().trim().optional(),
-    last_name: Joi.string().trim().optional(),
+    surname: Joi.string().optional(),
+    given_name: Joi.string().optional(),
     gender: Joi.string().optional(),
-    date_of_birth: Joi.date().optional(),
+    birth_date: Joi.date().optional(),
     marital_status: Joi.string().optional(),
     address: Joi.string().optional(),
-    state_id: Joi.string().optional(),
-    county_id: Joi.string().optional(),
+    state: Joi.string().optional(),
+    county: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
@@ -89,24 +87,23 @@ export const schemaUpdate = {
 
 export const schema = {
     title: { type: String },
-    first_name: { type: String, required: [true, "Why no firstname?"] },
-    middle_name: { type: String },
-    last_name: { type: String, required: [true, "Why no lastname?"] },
+    surname: { type: String, required: [true, "Why no Surname?"] },
+    given_name: { type: String, required: [true, "Why no Given name?"] },
     gender: {
         type: String,
         enum: Object.values(GENDER),
         default: GENDER.MALE,
         required: [false, "Why no gender?"],
     },
-    date_of_birth: { type: Date, required: [true, "Date is required"] },
+    birth_date: { type: Date, required: [true, "Date is required"] },
     marital_status: {
         type: String,
         enum: Object.values(MARITAL_STATUS),
         required: [false, "Why no marital_status?"],
     },
     address: { type: String, required: [false, "Why no Address"] },
-    state_id: { type: String, required: [false, "Why no State?"] },
-    county_id: { type: String, required: [false, "Why no County?"] },
+    state: { type: String, required: [false, "Why no State?"] },
+    county: { type: String, required: [false, "Why no County?"] },
     email: {
         type: String,
         trim: true,

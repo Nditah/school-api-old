@@ -23,14 +23,14 @@ export async function fetchRecord(req, res) {
             delete filter.q;
         }
         const result = await Staff.find(filter)
-            .populate("office_id")
+            .populate("office")
             .populate("role")
             .populate("bank")
             .populate("classe")
             .populate("subject")
             .populate("bank_name")
-            .populate("state_id")
-            .populate("county_id")
+            .populate("state")
+            .populate("county")
             .skip(skip)
             .limit(limit)
             .sort(sort)

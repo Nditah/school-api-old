@@ -24,8 +24,8 @@ export async function fetchRecord(req, res) {
         }
         const result = await Parent.find(filter)
             .populate("students_name")
-            .populate("state_id")
-            .populate("county_id")
+            .populate("state")
+            .populate("county")
             .populate("staff")
             .skip(skip)
             .limit(limit)
