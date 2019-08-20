@@ -1,6 +1,6 @@
 /**
  * @author 4Decoder
- * @description Student holds record of all students with terminals
+ * @description Student holds record of all students
  */
 import express from "express";
 import { checkAuth, isValidStaff } from "../../../middleware/authorization";
@@ -19,7 +19,7 @@ const router = express.Router();
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
  * @apiParam {String} sort how records would be arranged in alphabet (optional)
  * @apiParam {String} projection list of record's attributes to retrieve (optional)
- * @apiDescription Records of consolidated list of students from PMT, PML, PET, Shop etc
+ * @apiDescription Records of consolidated list of students from SECONDARY, PRIMARY, NURSERY etc
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
@@ -36,8 +36,8 @@ router.get("/students", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {String} gender Student gender (optional)
  * @apiParam {Date} birth_date Student birth_date (optional)
  * @apiParam {String} address Student address (optional)
- * @apiParam {String} state Student state (optional)
- * @apiParam {String} county Student county (optional)
+ * @apiParam {String} state_id Student state_id (optional)
+ * @apiParam {String} county_id Student county_id (optional)
  * @apiParam {String} email Student email (optional)
  * @apiParam {String} phone Student office phone (optional)
  * @apiParam {String} password Student password (optional)
@@ -67,8 +67,8 @@ router.post("/students", createRecord);
  * @apiParam {String} gender Student gender (optional)
  * @apiParam {Date} birth_date Student birth_date (optional)
  * @apiParam {String} address Student address (optional)
- * @apiParam {String} state Student state (optional)
- * @apiParam {String} county Student county (optional)
+ * @apiParam {String} state_id Student state_id (optional)
+ * @apiParam {String} county_id Student county_id (optional)
  * @apiParam {String} email Student email (optional)
  * @apiParam {String} phone Student office phone (optional)
  * @apiParam {String} password Student password (optional)

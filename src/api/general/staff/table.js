@@ -1,23 +1,20 @@
-import { DATABASE, GENDER, MARITAL_STATUS, EMPLOYMENT_STATUS, SUBSIDIARY } from "../../../constants";
+import { DATABASE, GENDER, MARITAL_STATUS, EMPLOYMENT_STATUS, SUBSIDIARY, EMPLOYEE_TYPE } from "../../../constants";
 import { toObjectId, hash, cleanObject } from "../../../lib";
 import * as table from "./table.json";
 
 const staff1 = {
-    serial: "ABC",
-    category: "ABC",
+    staff_type: EMPLOYEE_TYPE.TEACHING,
     title: "Mrs",
     surname: "Eve",
     given_name: "Tera",
     gender: GENDER.FEMALE,
-    birth_date: "1987-6-20",
+    date_of_birth: "1987-6-20",
     marital_status: MARITAL_STATUS.MARRIED,
     country_iso2: "ng",
     state_id: "1",
     county_id: "1",
     email: "admin@royalacademy.ng",
     password: "peace",
-    otp: "1234",
-    otp_count: 1,
     kin: "Joel",
     kin_phone: "ABC",
     kin_address: "ABC",
@@ -27,10 +24,9 @@ const staff1 = {
     guarantor1_phone: "ABC",
     guarantor1_address: "ABC",
     employment_status: EMPLOYMENT_STATUS.ON_DUTY,
-    terminal_id: "1",
-    superior_id: "1",
     office_id: "1",
     subsidiary: SUBSIDIARY.SECONDARY,
+    superior_id: "Victor",
     created_by: "1",
 };
 
@@ -55,7 +51,7 @@ const result = arr.map((record, index) => {
     obj.role = [obj.office_id];
     obj.approved_by = record.approved_by ? toObjectId(staffBaseId, record.approved_by) : null;
     obj.created_by = record.created_by ? toObjectId(staffBaseId, record.created_by) : null;
-    delete obj.birth_date;
+    delete obj.date_of_birth;
     return cleanObject(obj);
 });
 

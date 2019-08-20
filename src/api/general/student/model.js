@@ -8,8 +8,8 @@
  * @property {String} gender Student gender (optional)
  * @property {Date} birth_date Student birth_date (optional)
  * @property {String} address Student address (optional)
- * @property {String} state Student state (optional)
- * @property {String} county Student county (optional)
+ * @property {String} state_id Student state_id (optional)
+ * @property {String} county_id Student county_id (optional)
  * @property {String} email Student email (optional)
  * @property {String} phone Student office phone (optional)
  * @property {String} password Student password (optional)
@@ -34,7 +34,7 @@ import table from "./table";
 import State from "../state/model";
 import County from "../county/model";
 import Parent from "../parent/model";
-// import Hostel from "../hostel/model";
+import Hostel from "../hostel/model";
 import Classe from "../classe/model";
 
 const { Schema } = mongoose;
@@ -54,8 +54,8 @@ export const schemaCreate = {
     gender: Joi.string().optional(),
     birth_date: Joi.date().optional(),
     address: Joi.string().optional(),
-    state: Joi.string().optional(),
-    county: Joi.string().optional(),
+    state_id: Joi.string().optional(),
+    county_id: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
@@ -75,8 +75,8 @@ export const schemaUpdate = {
     gender: Joi.string().optional(),
     birth_date: Joi.date().optional(),
     address: Joi.string().optional(),
-    state: Joi.string().optional(),
-    county: Joi.string().optional(),
+    state_id: Joi.string().optional(),
+    county_id: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
@@ -101,8 +101,8 @@ export const schema = {
     },
     birth_date: { type: Date, required: [false, "Why no Date?"] },
     address: { type: String, required: [false, "Why no Address?"] },
-    state: { type: String, required: [false, "Why no State?"] },
-    county: { type: String, required: [false, "Why no Country?"] },
+    state_id: { type: String, required: [false, "Why no State?"] },
+    county_id: { type: String, required: [false, "Why no Country?"] },
     email: {
         type: String,
         trim: true,

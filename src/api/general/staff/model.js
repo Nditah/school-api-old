@@ -12,8 +12,8 @@
  * @property {String} phone Staff office phone (optional)
  * @property {String} phone_personal Staff phone_personal (optional)
  * @property {String} address Staff address (optional)
- * @property {String} state Staff state (optional)
- * @property {String} county Staff county (optional)
+ * @property {String} state_id Staff state_id (optional)
+ * @property {String} county_id Staff county_id (optional)
  * @property {String} email Staff email (optional)
  * @property {String} staff_type Staff staff_type (optional)
  * @property {String} classe Staff classe (optional)
@@ -32,7 +32,7 @@
  * @property {String} qualification Staff qualification (optional)
  * @property {String} employment_status Staff employment_status (required)
  * @property {Number} tax Staff tax (optional)
- * @property {Number} basic_salary Staff basic_salary (optional)
+ * @property {Number} basic_first_namesalary Staff basic_salary (optional)
  * @property {Number} bonus Staff bonus (optional)
  * @property {Number} entertainment_allowance Staff entertainment_allowance (optional)
  * @property {Number} house_allowance Staff house_allowance (optional)
@@ -96,8 +96,8 @@ export const schemaCreate = {
     phone: Joi.string().optional(),
     phone_personal: Joi.string().optional(),
     address: Joi.string().optional(),
-    state: Joi.string().optional(),
-    county: Joi.string().optional(),
+    state_id: Joi.string().optional(),
+    county_id: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     staff_type: Joi.string().trim().optional(),
     classe: Joi.string().trim().optional(),
@@ -155,8 +155,8 @@ export const schemaUpdate = {
     phone: Joi.string().optional(),
     phone_personal: Joi.string().optional(),
     address: Joi.string().optional(),
-    state: Joi.string().optional(),
-    county: Joi.string().optional(),
+    state_id: Joi.string().optional(),
+    county_id: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
     staff_type: Joi.string().trim().optional(),
     classe: Joi.string().trim().optional(),
@@ -231,8 +231,8 @@ export const schema = {
         alias: "phone_home",
     },
     address: { type: String },
-    state: { type: String, required: [false, "Why no State?"] },
-    county: { type: String, required: [false, "Why no Country?"] },
+    state_id: { type: String, required: [false, "Why no State?"] },
+    county_id: { type: String, required: [false, "Why no Country?"] },
     email: {
         type: String,
         trim: true,
