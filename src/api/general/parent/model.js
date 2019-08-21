@@ -60,7 +60,7 @@ export const schemaCreate = {
     password: Joi.string().optional(),
     profession: Joi.string().optional(),
     employment_status: Joi.string().trim().valid(Object.values(EMPLOYMENT_STATUS)).optional(),
-    students_name: Joi.array().trim().optional(),
+    students_name: Joi.array().optional(),
     created_by: Joi.string().optional(),
 };
 
@@ -79,7 +79,7 @@ export const schemaUpdate = {
     password: Joi.string().optional(),
     profession: Joi.string().optional(),
     employment_status: Joi.string().trim().valid(Object.values(EMPLOYMENT_STATUS)).optional(),
-    students_name: Joi.array().trim().optional(),
+    students_name: Joi.array().optional(),
     updated_by: Joi.string().required(),
 };
 
