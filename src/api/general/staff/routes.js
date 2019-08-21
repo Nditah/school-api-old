@@ -5,12 +5,12 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord, login } from "./
 const router = express.Router();
 
 /**
- * @api {get} /api/v1/staff?id={recordId} Retrieve Staff records
+ * @api {get} /api/v1/staffs?id={recordId} Retrieve Staff records
  * @apiName RetrieveStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
  * @apiExample {curl} Example usage for retieving a single record:
- *      curl -i api/staff?
+ *      curl -i api/staffs?
  * @apiParam {Object} filter query condition (optional)
  * @apiParam {Number} skip Number of records to offset by (optional)
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
@@ -20,10 +20,10 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/staff", [checkAuth, isValidStaff], fetchRecord);
+router.get("/staffs", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/v1/staff Create a Staff record
+ * @api {post} /api/v1/staffs Create a Staff record
  * @apiName CreateStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -87,10 +87,10 @@ router.get("/staff", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Staff not found.
  * @apiError 401 master access only.
  */
-router.post("/staff", [checkAuth, isValidStaff], createRecord);
+router.post("/staffs", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/v1/staff/{recordId} Update a Staff record
+ * @api {put} /api/v1/staffs/{recordId} Update a Staff record
  * @apiName UpdateStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -155,10 +155,10 @@ router.post("/staff", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 Staff not found.
  * @apiError 401 master access only.
  */
-router.put("/staff/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/staffs/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/v1/staff/{recordId} Delete a Staff record
+ * @api {delete} /api/v1/staffs/{recordId} Delete a Staff record
  * @apiName DeleteStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -167,7 +167,7 @@ router.put("/staff/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiError 404 Staff not found.
  * @apiError 401 master access only.
  */
-router.delete("/staff/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/staffs/:recordId", [checkAuth, isValidStaff], deleteRecord);
 
 /**
  * @api {post} /api/v1/staff/login Login Staff
