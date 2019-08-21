@@ -3,10 +3,9 @@
  * @property {ObjectId} id admission primaryKey
  * @property {String} passport Admission passport (required)
  * @property {String} surname Admission surname (required)
- * @property {String} first_name Admission First Name
- * @property {String} middle_name Admission Middle Name
+ * @property {String} given_name Admission First Name
  * @property {String} home_town Admission Home Town
- * @property {String} village Admission village
+ * @property {String} address Admission village
  * @property {String} county_id Admission county
  * @property {String} state_id Admission state
  * @property {Date}   birth_date Admission date
@@ -18,7 +17,7 @@
  * @property {String} father_name Admission father's name
  * @property {String} mgiven_name Admission mother's name
  * @property {String} home_address Admission guadians home address
- * @property {String} phone_number Admission guadians phone number
+ * @property {String} phone Admission guadians phone number
  * @description Admission model holds record of all admissions in Peace Group
  */
 import Joi from "joi";
@@ -80,7 +79,7 @@ export const schemaUpdate = {
 export const schema = {
     passport: { type: String },
     surname: { type: String, required: [false, "Why no surname?"] },
-    given_names: { type: String, required: [false, "Why no given_names?"] },
+    given_name: { type: String, required: [false, "Why no given_names?"] },
     home_town: { type: String },
     state_id: { type: ObjectId, ref: "State" },
     county_id: { type: ObjectId, ref: "County" },

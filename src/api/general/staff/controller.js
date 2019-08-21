@@ -23,7 +23,7 @@ export async function fetchRecord(req, res) {
             delete filter.q;
         }
         const result = await Staff.find(filter)
-            .populate("office_id")
+            .populate("office")
             .populate("role")
             .populate("bank")
             .populate("classe")

@@ -25,6 +25,7 @@ export const schemaCreate = {
     block: Joi.string().optional(),
     level: Joi.string().optional(),
     classe: Joi.string().optional(),
+    capacity: Joi.string().optional(),
     subsidiary: Joi.string().optional(),
     created_by: Joi.string().required(),
 };
@@ -34,6 +35,7 @@ export const schemaUpdate = {
     block: Joi.string().optional(),
     level: Joi.string().optional(),
     classe: Joi.string().optional(),
+    capacity: Joi.string().optional(),
     subsidiary: Joi.string().optional(),
     updated_by: Joi.string().required(),
 };
@@ -43,6 +45,7 @@ export const schema = {
     block: { type: String },
     level: { type: String },
     classe: { type: String, ref: "Classe" },
+    capacity: { type: Number, comment: "capacity in number"},
     subsidiary: {
         type: String,
         enum: Object.values(SUBSIDIARY),

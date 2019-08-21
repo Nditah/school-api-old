@@ -28,11 +28,11 @@ router.get("/admissions", [checkAuth, isValidStaff], fetchRecord);
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} passport Admission passport (required)
  * @apiParam {String} surname Admission surname (required)
- * @apiParam {String} first_name Admission First Name
- * @apiParam {String} middle_name Admission Middle Name
- * @apiParam {String} village Admission village
- * @apiParam {String} county Admission county
- * @apiParam {String} state Admission state
+ * @apiParam {String} given_name Admission First Name
+ * @apiParam {String} home_town Admission Home Town
+ * @apiParam {String} address Admission village
+ * @apiParam {String} county_id Admission county
+ * @apiParam {String} state_id Admission state
  * @apiParam {Date}   birth_date Admission date
  * @apiParam {String} religion Admission Religion
  * @apiParam {String} denomination Admission Denomination
@@ -42,7 +42,7 @@ router.get("/admissions", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {String} father_name Admission father's name
  * @apiParam {String} mgiven_name Admission mother's name
  * @apiParam {String} home_address Admission guadians home address
- * @apiParam {String} phone_number Admission guadians phone number
+ * @apiParam {String} phone Admission guadians phone number
  * @apiError {Object} 422 Some parameters may contain invalid values.
  * @apiError 404 Admission not found.
  * @apiError 500 server error.
@@ -56,11 +56,11 @@ router.post("/admissions", [checkAuth, isValidStaff], createRecord);
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} passport Admission passport (required)
  * @apiParam {String} surname Admission surname (required)
- * @apiParam {String} first_name Admission First Name
- * @apiParam {String} middle_name Admission Middle Name
- * @apiParam {String} village Admission village
- * @apiParam {String} county Admission county
- * @apiParam {String} state Admission state
+ * @apiParam {String} given_name Admission First Name
+ * @apiParam {String} home_town Admission Home Town
+ * @apiParam {String} address Admission village
+ * @apiParam {String} county_id Admission county
+ * @apiParam {String} state_id Admission state
  * @apiParam {Date}   birth_date Admission date
  * @apiParam {String} religion Admission Religion
  * @apiParam {String} denomination Admission Denomination
@@ -70,7 +70,7 @@ router.post("/admissions", [checkAuth, isValidStaff], createRecord);
  * @apiParam {String} father_name Admission father's name
  * @apiParam {String} mgiven_name Admission mother's name
  * @apiParam {String} home_address Admission guadians home address
- * @apiParam {String} phone_number Admission guadians phone number
+ * @apiParam {String} phone Admission guadians phone number
  * @apiError {Object} 422 Some parameters may contain invalid values.
  * @apiError 404 Admission not found.
  * @apiError 500 server error.

@@ -1,23 +1,23 @@
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
- * @property {String} id Student ObjectId primaryKey
+ * @property {ObjectId} id Student ObjectId primaryKey
  * @property {String} surname Student surname (optional)
  * @property {String} given_name Student given_name (optional)
  * @property {String} last_name Student surname (optional)
  * @property {String} gender Student gender (optional)
  * @property {Date} birth_date Student birth_date (optional)
  * @property {String} address Student address (optional)
- * @property {String} state Student state (optional)
- * @property {String} county Student county (optional)
+ * @property {ObjectId} state Student state (optional)
+ * @property {ObjectId} county Student county (optional)
  * @property {String} email Student email (optional)
  * @property {String} phone Student office phone (optional)
  * @property {String} password Student password (optional)
  * @property {String} blood_group Student blood_group (optional)
- * @property {String} classe Student classe (optional)
+ * @property {ObjectId} classe Student classe (optional)
  * @property {String} level Student level (optional)
  * @property {String} subsidiary Student subsidiary (required)
- * @property {String} hostel Student hostel (optional)
+ * @property {ObjectId} hostel Student hostel (optional)
  * @property {String} photo Student photo (optional)
  * @property {Array} parents Student parents Array<ObjectId> (optional)
  * @property {ObjectId} created_by Student record created by
@@ -34,7 +34,7 @@ import table from "./table";
 import State from "../state/model";
 import County from "../county/model";
 import Parent from "../parent/model";
-// import Hostel from "../hostel/model";
+import Hostel from "../hostel-allocation/model";
 import Classe from "../classe/model";
 
 const { Schema } = mongoose;

@@ -4,7 +4,6 @@
  * @property {String} id Staff ObjectId primaryKey
  * @property {String} title Staff title (optional)
  * @property {String} surname Staff surname (optional)
- * @property {String} middle_name Staff middle_name (optional)
  * @property {String} given_name Staff surname (optional)
  * @property {String} gender Staff gender (optional)
  * @property {Date} birth_date Staff birth_date (optional)
@@ -32,7 +31,7 @@
  * @property {String} qualification Staff qualification (optional)
  * @property {String} employment_status Staff employment_status (required)
  * @property {Number} tax Staff tax (optional)
- * @property {Number} basic_salary Staff basic_salary (optional)
+ * @property {Number} basic_first_namesalary Staff basic_salary (optional)
  * @property {Number} bonus Staff bonus (optional)
  * @property {Number} entertainment_allowance Staff entertainment_allowance (optional)
  * @property {Number} house_allowance Staff house_allowance (optional)
@@ -47,7 +46,7 @@
  * @property {String} bank_account_number Staff bank_account_number (optional)
  * @property {String} bank_account_name Staff bank_account_name (optional)
  * @property {String} rank Staff rank (optional)
- * @property {String} office_id Staff office_id (required)
+ * @property {String} office Staff office (required)
  * @property {Array} role Staff role is an array of office duties (required)
  * @property {String} subsidiary Staff subsidiary (required)
  * @property {String} remark Staff remark (optional)
@@ -88,7 +87,6 @@ export const schemaLogin = {
 export const schemaCreate = {
     title: Joi.string().optional(),
     surname: Joi.string().optional(),
-    middle_name: Joi.string().optional(),
     given_name: Joi.string().optional(),
     gender: Joi.string().optional(),
     birth_date: Joi.date().optional(),
@@ -130,7 +128,7 @@ export const schemaCreate = {
     bank_account_number: Joi.number().optional(),
     bank_account_name: Joi.string().optional(),
     rank: Joi.string().optional(),
-    office_id: Joi.string().optional(),
+    office: Joi.string().optional(),
     role: Joi.array().optional(),
     subsidiary: Joi.string().trim().valid(Object.values(SUBSIDIARY)).optional(),
     remark: Joi.string().optional(),
@@ -147,7 +145,6 @@ export const schemaCreate = {
 export const schemaUpdate = {
     title: Joi.string().optional(),
     surname: Joi.string().optional(),
-    middle_name: Joi.string().optional(),
     given_name: Joi.string().optional(),
     gender: Joi.string().optional(),
     birth_date: Joi.date().optional(),
@@ -189,7 +186,7 @@ export const schemaUpdate = {
     bank_account_number: Joi.number().optional(),
     bank_account_name: Joi.string().optional(),
     rank: Joi.string().optional(),
-    office_id: Joi.string().optional(),
+    office: Joi.string().optional(),
     role: Joi.array().optional(),
     subsidiary: Joi.string().trim().valid(Object.values(SUBSIDIARY)).optional(),
     remark: Joi.string().optional(),
@@ -281,7 +278,7 @@ export const schema = {
     bank_account_number: { type: Number },
     bank_account_name: { type: String },
     rank: { type: String },
-    office_id: { type: ObjectId, ref: "Office", required: [false, "Why no input?"] },
+    office: { type: ObjectId, ref: "Office", required: [false, "Why no input?"] },
     role: [{ type: ObjectId, ref: "Office", required: [false, "Why no input?"] }],
     subsidiary: {
         type: String,

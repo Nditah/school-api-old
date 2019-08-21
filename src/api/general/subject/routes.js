@@ -15,45 +15,46 @@ const router = express.Router();
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
  * @apiParam {String} sort how records would be arranged in alphabet (optional)
  * @apiParam {String} projection list of record's attributes to retrieve (optional)
- * @apiDescription Records of Hostel the school.
+ * @apiDescription Records  of subjects in the school
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/hostels", [checkAuth, isValidStaff], fetchRecord);
+router.get("/subjects", [checkAuth, isValidStaff], fetchRecord);
 
 /**
  * @api {post} /api/v1/hostels Create hostels
  * @apiName CreateHostel
  * @apiGroup Hostel
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} block Hostel block name (required)
- * @apiParam {Number} room_no Hostel room_no (required)
- * @apiParam {Number} no_of_beds Hostel no_of_beds (required)
- * @apiParam {String} fee_id Hostel fee_id (optional)
- * @apiParam {String} description Hostel description (optional)
- * @apiParam {String} status Hostel Status (Occupied or not Occupied)(optional)
- * @apiError {Object} 422 Some parameters may contain invalid values.
- * @apiError 404 Hostel not found.
- * @apiError 500 server error.
+ * @apiParam {String} name Subject name (optional)
+ * @apiParam {String} hod Subject hod (optional)
+ * @apiParam {String} course Subject course (optional)
+ * @apiParam {String} teacher Subject teacher (optional)
+ * @apiParam {String} description Subject description (optional)
+ * @apiSuccess {Object} Subject Subject's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Subject not found.
+ * @apiError 401 master access only.
  */
-router.post("/hostels", [checkAuth, isValidStaff], createRecord);
+router.post("/subjects", [checkAuth, isValidStaff], createRecord);
 
 /**
  * @api {put} /api/v1/hostels/{recordId} Update hostels
  * @apiName UpdateHostel
  * @apiGroup Hostel
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} block Hostel block name (required)
- * @apiParam {Number} room_no Hostel room_no (required)
- * @apiParam {Number} no_of_beds Hostel no_of_beds (required)
- * @apiParam {String} fee_id Hostel fee_id (optional)
- * @apiParam {String} description Hostel description (optional)
- * @apiParam {String} status Hostel Status (Occupied or not Occupied)(optional)
- * @apiError {Object} 422 Some parameters may contain invalid values.
- * @apiError 404 Hostel not found.
- * @apiError 500 server error.
+ * @apiParam {String} recordId required record ObjectId
+ * @apiParam {String} name Subject name (optional)
+ * @apiParam {String} hod Subject hod (optional)
+ * @apiParam {String} course Subject course (optional)
+ * @apiParam {String} teacher Subject teacher (optional)
+ * @apiParam {String} description Subject description (optional)
+ * @apiSuccess {Object} Subject Subject's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Subject not found.
+ * @apiError 401 master access only.
  */
-router.put("/hostels/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/subjects/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
  * @api {delete} /api/v1/hostels/{recordId} Delete hostels
@@ -62,9 +63,9 @@ router.put("/hostels/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} recordId required record ObjectId
  * @apiSuccess (Success 204) 204 No Content.
- * @apiError 404 Hostel not found.
- * @apiError 401 master Hostel only.
+ * @apiError 404 Subject not found.
+ * @apiError 401 master access only.
  */
-router.delete("/hostels/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/subjects/:recordId", [checkAuth, isValidStaff], deleteRecord);
 
 export default router;
