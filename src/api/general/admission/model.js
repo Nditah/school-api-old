@@ -79,7 +79,7 @@ export const schemaUpdate = {
 export const schema = {
     passport: { type: String },
     surname: { type: String, required: [false, "Why no surname?"] },
-    given_names: { type: String, required: [false, "Why no given_names?"] },
+    given_name: { type: String, required: [false, "Why no given_names?"] },
     home_town: { type: String },
     state_id: { type: ObjectId, ref: "State" },
     county_id: { type: ObjectId, ref: "County" },
