@@ -61,9 +61,10 @@ var schemaUpdate = exports.schemaUpdate = {
 
 var schema = exports.schema = {
     name: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
+    email: { type: String, required: false },
+    password: { type: String, required: false },
     phone: { type: String },
+    amount: { type: Number },
     description: { type: String },
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId, ref: "Staff" }

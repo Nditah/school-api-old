@@ -40,13 +40,10 @@ router.get("/fees_types", _controller.fetchRecord);
  * @apiName CreateFeesType
  * @apiGroup FeesType
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} label FeesType label or FeesType title,
- * @apiParam {String} name FeesType name (required)
- * @apiParam {String} url FeesType url segment /api/{url} (required),
- * @apiParam {Boolean} pullable FeesType pullable i.e. collection can be downloaded
- * @apiParam {Boolean} pushable FeesType pushable i.e. collection can be uploaded
- * @apiParam {Boolean} changes FeesType changes if there are changes to be synchronized
- * @apiParam {String} description FeesType description about operation status or feedback
+ * @apiParam {String} type FeesType type String,
+ * @apiParam {ObjectId} classe_id FeesType classe_id (required)
+ * @apiParam {String} amount FeesType amount (required),
+ * @apiParam {String} description FeesType description String
  * @apiSuccess {Object} FeesType FeesType's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 FeesType not found.
@@ -59,14 +56,10 @@ router.post("/fees_types", [_authorization.checkAuth, _authorization.isValidStaf
  * @apiName UpdateFeesType
  * @apiGroup FeesType
  * @apiHeader {String} Authorization authorization token
- * @apiParam {String} recordId required record ObjectId
- * @apiParam {String} label FeesType label or FeesType title,
- * @apiParam {String} name FeesType name (required)
- * @apiParam {String} url FeesType url segment /api/{url} (required),
- * @apiParam {Boolean} pullable FeesType pullable i.e. collection can be downloaded
- * @apiParam {Boolean} pushable FeesType pushable i.e. collection can be uploaded
- * @apiParam {Boolean} changes FeesType changes if there are changes to be synchronized
- * @apiParam {String} description FeesType description about operation status or feedback
+ * @apiParam {String} type FeesType type String,
+ * @apiParam {ObjectId} classe_id FeesType classe_id (required)
+ * @apiParam {String} amount FeesType amount (required),
+ * @apiParam {String} description FeesType description String
  * @apiSuccess {Object} FeesType FeesType's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 FeesType not found.

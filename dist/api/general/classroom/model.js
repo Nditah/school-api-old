@@ -48,6 +48,7 @@ var schemaCreate = exports.schemaCreate = {
     block: _joi2.default.string().optional(),
     level: _joi2.default.string().optional(),
     classe: _joi2.default.string().optional(),
+    capacity: _joi2.default.string().optional(),
     subsidiary: _joi2.default.string().optional(),
     created_by: _joi2.default.string().required()
 };
@@ -57,6 +58,7 @@ var schemaUpdate = exports.schemaUpdate = {
     block: _joi2.default.string().optional(),
     level: _joi2.default.string().optional(),
     classe: _joi2.default.string().optional(),
+    capacity: _joi2.default.string().optional(),
     subsidiary: _joi2.default.string().optional(),
     updated_by: _joi2.default.string().required()
 };
@@ -66,6 +68,7 @@ var schema = exports.schema = {
     block: { type: String },
     level: { type: String },
     classe: { type: String, ref: "Classe" },
+    capacity: { type: Number, comment: "capacity in number" },
     subsidiary: {
         type: String,
         enum: Object.values(_constants.SUBSIDIARY),

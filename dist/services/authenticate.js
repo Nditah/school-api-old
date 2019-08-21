@@ -128,7 +128,7 @@ var parentAuthenticate = exports.parentAuthenticate = function () {
                             filter.email = email;
                         }
                         _context2.next = 8;
-                        return _model4.default.findOne(filter).populate("students_name").populate("state").populate("county").exec();
+                        return _model4.default.findOne(filter).populate("students_name").populate("state").populate("county").populate("staff").exec();
 
                     case 8:
                         user = _context2.sent;
