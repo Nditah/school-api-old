@@ -1,56 +1,56 @@
 import express from "express";
 import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, generateReport, updateRecord } from "./controller";
+import { fetchRecord, generateMarksheet, updateRecord } from "./controller";
 
 const router = express.Router();
 
 /**
- * @api {get} /api/reports?id={recordId} Retrieve Report records
- * @apiName RetrieveReport
- * @apiGroup Report
+ * @api {get} /api/marksheets?id={recordId} Retrieve Marksheet records
+ * @apiName RetrieveMarksheet
+ * @apiGroup Marksheet
  * @apiHeader {String} Authorization Bearer token
-  * @apiExample {curl} Example usage for retieving a single record:
- *      curl -i api/reports?
- * @apiParam {Object} filter query condition (optional)
- * @apiParam {Number} skip Number of records to offset by (optional)
- * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
- * @apiParam {String} sort how records would be arranged in alphabet (optional)
- * @apiParam {String} projection list of record's attributes to retrieve (optional)
- * @apiDescription Records  of account headings belonging to one classification
+ * @apiParam {ObjectId} subject_id Subject name
+ * @apiParam {ObjectId} ca_id Continous Assessment
+ * @apiParam {ObjectId} exam_id Examination detail
+ * @apiParam {ObjectId} student_id Student name
+ * @apiParam {ObjectId} classe_id Student class
+ * @apiParam {ObjectId} teacher_id Teacher's name
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/reports", [checkAuth, isValidStaff], fetchRecord);
+router.get("/marksheets", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/reports Create a Report record
- * @apiName CreateReport
- * @apiGroup Report
+ * @api {post} /api/marksheets Create a Marksheet record
+ * @apiName CreateMarksheet
+ * @apiGroup Marksheet
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} name Report name
- * @apiParam {String} description Report description
- * @apiParam {String} subsidiary Report subsidiary
- * @apiSuccess {Object} Report Report's data.
+ * @apiParam {ObjectId} subject_id Subject name
+ * @apiParam {ObjectId} ca_id Continous Assessment
+ * @apiParam {ObjectId} exam_id Examination detail
+ * @apiParam {ObjectId} student_id Student name
+ * @apiParam {ObjectId} classe_id Student class
+ * @apiParam {ObjectId} teacher_id Teacher's name
  * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Report not found.
+ * @apiError 404 Marksheet not found.
  * @apiError 401 master access only.
  */
-router.post("/reports", [checkAuth, isValidStaff], generateReport);
+router.post("/marksheets", [checkAuth, isValidStaff], generateMarksheet);
 
 /**
- * @api {put} /api/reports/{recordId} Update a Report record
- * @apiName UpdateReport
- * @apiGroup Report
+ * @api {put} /api/marksheets/{recordId} Update a Marksheet record
+ * @apiName UpdateMarksheet
+ * @apiGroup Marksheet
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} recordId required record ObjectId
- * @apiParam {String} name Report name
- * @apiParam {String} description Report description
- * @apiParam {String} subsidiary Report subsidiary
- * @apiSuccess {Object} Report Report's data.
+ * @apiParam {String} name Marksheet name
+ * @apiParam {String} description Marksheet description
+ * @apiParam {String} subsidiary Marksheet subsidiary
+ * @apiSuccess {Object} Marksheet Marksheet's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Report not found.
+ * @apiError 404 Marksheet not found.
  * @apiError 401 master access only.
  */
-router.put("/reports/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/marksheets/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 export default router;
