@@ -4,8 +4,6 @@
  * @property {ObjectId} id Subject ObjectId primaryKey
  * @property {String} name Subject name (optional)
  * @property {ObjectId} hod Subject hod (optional)
- * @property {ObjectId} course Subject course (optional)
- * @property {ObjectId} teacher Subject teacher (optional)
  * @property {String} description Subject description (optional)
  * @property {ObjectId} created_by Subject record created by
  * @property {ObjectId} updated_by Subject record modified by
@@ -30,7 +28,6 @@ export const schemaLogin = {
 
 export const schemaCreate = {
     name: Joi.string().trim().optional(),
-    teacher: Joi.string().trim().optional(),
     hod: Joi.string().optional(),
     description: Joi.string().trim().optional(),
     updated_by: Joi.string().required(),
@@ -38,7 +35,6 @@ export const schemaCreate = {
 
 export const schemaUpdate = {
     name: Joi.string().trim().optional(),
-    teacher: Joi.string().trim().optional(),
     hod: Joi.string().optional(),
     description: Joi.string().trim().optional(),
     updated_by: Joi.string().required(),
@@ -46,7 +42,6 @@ export const schemaUpdate = {
 
 export const schema = {
     name: { type: String, required: [true, "Why no name?"] },
-    teacher: { type: ObjectId, ref: "Staff" },
     hod: { type: ObjectId, ref: "Staff" },
     description: { type: String },
     created_by: { type: ObjectId, ref: "Staff", required: true },
