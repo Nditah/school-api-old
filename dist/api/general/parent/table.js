@@ -10,10 +10,10 @@ var _lib = require("../../../lib");
 
 var table = {
     title: "Mr",
-    first_name: "Victor",
-    last_name: "Ikenna",
+    surname: "Victor",
+    given_name: "Ikenna",
     gender: _constants.GENDER.FEMALE,
-    date_of_birth: "1987-03-21",
+    birth_date: "1987-03-21",
     marital_status: _constants.MARITAL_STATUS.MARRIED,
     address: "No 12 Garden Avenue, G.R.A, Enugu",
     state: "1",
@@ -36,8 +36,8 @@ var result = table.map(function (record, index) {
     var obj = Object.assign({}, record);
     obj._id = (0, _lib.toObjectId)(parentBaseId, 1 + index);
     obj.password = record.password ? (0, _lib.hash)(record.password) : (0, _lib.hash)("peace700");
-    obj.county = record.lga_id ? (0, _lib.toObjectId)(countyBaseId, record.lga_id) : null;
-    obj.state = record.state ? (0, _lib.toObjectId)(stateBaseId, record.state_id) : null;
+    obj.county_id = record.lga_id ? (0, _lib.toObjectId)(countyBaseId, record.lga_id) : null;
+    obj.state_id = record.state_id ? (0, _lib.toObjectId)(stateBaseId, record.state_id) : null;
     obj.approved_by = record.approved_by ? (0, _lib.toObjectId)(parentBaseId, record.approved_by) : null;
     obj.created_by = record.created_by ? (0, _lib.toObjectId)(parentBaseId, record.created_by) : null;
     delete obj.date_of_birth;

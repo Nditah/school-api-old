@@ -28,13 +28,13 @@ router.get("/fees_payments", fetchRecord);
  * @apiName CreateFeesPayments
  * @apiGroup FeesPayments
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} label Fees Payments label or FeesPayments title,
- * @apiParam {String} name Fees Payments name (required)
- * @apiParam {String} url Fees Payments url segment /api/{url} (required),
- * @apiParam {Boolean} pullable Fees Payments pullable i.e. collection can be downloaded
- * @apiParam {Boolean} pushable Fees Payments pushable i.e. collection can be uploaded
- * @apiParam {Boolean} changes Fees Payments changes if there are changes to be synchronized
- * @apiParam {String} description Fees Payments description about operation status or feedback
+ * @apiParam {String} fees_type_id Fees Payments ,
+ * @apiParam {String} student_id Fees Payments student_id (required)
+ * @apiParam {String} payment_method Fees Payments payment_method (required),
+ * @apiParam {Number} amount Fees Payments amount number
+ * @apiParam {String} deposition Fees Payments deposition String
+ * @apiParam {Date} pay_date Fees Payments pay_date Date
+ * @apiParam {String} remark Fees Payments remark String
  * @apiSuccess {Object} FeesPayments FeesPayments's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Fees Payments not found.
@@ -47,14 +47,13 @@ router.post("/fees_payments", [checkAuth, isValidStaff], createRecord);
  * @apiName UpdateFeesPayments
  * @apiGroup FeesPayments
  * @apiHeader {String} Authorization authorization token
- * @apiParam {String} recordId required record ObjectId
- * @apiParam {String} label FeesPayments label or FeesPayments title,
- * @apiParam {String} name FeesPayments name (required)
- * @apiParam {String} url FeesPayments url segment /api/{url} (required),
- * @apiParam {Boolean} pullable FeesPayments pullable i.e. collection can be downloaded
- * @apiParam {Boolean} pushable FeesPayments pushable i.e. collection can be uploaded
- * @apiParam {Boolean} changes FeesPayments changes if there are changes to be synchronized
- * @apiParam {String} description FeesPayments description about operation status or feedback
+ * @apiParam {String} fees_type_id Fees Payments ,
+ * @apiParam {String} student_id Fees Payments student_id (required)
+ * @apiParam {String} payment_method Fees Payments payment_method (required),
+ * @apiParam {Number} amount Fees Payments amount number
+ * @apiParam {String} deposition Fees Payments deposition String
+ * @apiParam {Date} pay_date Fees Payments pay_date Date
+ * @apiParam {String} remark Fees Payments remark String
  * @apiSuccess {Object} FeesPayments FeesPayments's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 FeesPayments not found.

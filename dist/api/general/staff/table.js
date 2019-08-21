@@ -15,8 +15,7 @@ var table = _interopRequireWildcard(_table);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var staff1 = {
-    serial: "ABC",
-    category: "ABC",
+    staff_type: _constants.EMPLOYEE_TYPE.TEACHING,
     title: "Mrs",
     surname: "Eve",
     given_name: "Tera",
@@ -24,12 +23,10 @@ var staff1 = {
     birth_date: "1987-6-20",
     marital_status: _constants.MARITAL_STATUS.MARRIED,
     country_iso2: "ng",
-    state_id: "1",
-    county_id: "1",
+    state: "1",
+    county: "1",
     email: "admin@royalacademy.ng",
     password: "peace",
-    otp: "1234",
-    otp_count: 1,
     kin: "Joel",
     kin_phone: "ABC",
     kin_address: "ABC",
@@ -39,10 +36,8 @@ var staff1 = {
     guarantor1_phone: "ABC",
     guarantor1_address: "ABC",
     employment_status: _constants.EMPLOYMENT_STATUS.ON_DUTY,
-    terminal_id: "1",
-    superior_id: "1",
-    office_id: "1",
     subsidiary: _constants.SUBSIDIARY.SECONDARY,
+    superior_id: "Victor",
     created_by: "1"
 };
 
@@ -60,7 +55,7 @@ var result = arr.map(function (record, index) {
     obj._id = (0, _lib.toObjectId)(staffBaseId, 1 + index);
     obj.serial = record.emp_id ? record.emp_id : null;
     obj.password = record.password ? (0, _lib.hash)(record.password) : (0, _lib.hash)("peace700");
-    obj.county_id = record.lga_id ? (0, _lib.toObjectId)(countyBaseId, record.lga_id) : null;
+    obj.county = record.lga_id ? (0, _lib.toObjectId)(countyBaseId, record.lga_id) : null;
     obj.state_id = record.state_id ? (0, _lib.toObjectId)(stateBaseId, record.state_id) : null;
     obj.superior_id = record.superior_id ? (0, _lib.toObjectId)(staffBaseId, record.superior_id) : null;
     obj.office_id = record.office_id ? (0, _lib.toObjectId)(officeBaseId, record.office_id) : null;

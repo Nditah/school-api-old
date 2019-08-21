@@ -49,10 +49,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
- * @property {String} id Staff ObjectId primaryKey
+ * @property {ObjectId} id Staff ObjectId primaryKey
  * @property {String} title Staff title (optional)
  * @property {String} surname Staff surname (optional)
- * @property {String} middle_name Staff middle_name (optional)
  * @property {String} given_name Staff surname (optional)
  * @property {String} gender Staff gender (optional)
  * @property {Date} birth_date Staff birth_date (optional)
@@ -60,12 +59,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {String} phone Staff office phone (optional)
  * @property {String} phone_personal Staff phone_personal (optional)
  * @property {String} address Staff address (optional)
- * @property {String} state Staff state (optional)
- * @property {String} county Staff county (optional)
+ * @property {ObjectId} state Staff state (optional)
+ * @property {ObjectId} county Staff county (optional)
  * @property {String} email Staff email (optional)
  * @property {String} staff_type Staff staff_type (optional)
- * @property {String} classe Staff classe (optional)
- * @property {String} subject Staff subject (optional)
+ * @property {ObjectId} classe Staff classe (optional)
+ * @property {ObjectId} subject Staff subject (optional)
  * @property {String} password Staff password (optional)
  * @property {String} kin Staff kin (required)
  * @property {String} kin_phone Staff kin_phone (required)
@@ -95,19 +94,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {String} bank_account_number Staff bank_account_number (optional)
  * @property {String} bank_account_name Staff bank_account_name (optional)
  * @property {String} rank Staff rank (optional)
- * @property {String} office_id Staff office_id (required)
- * @property {Array} role Staff role is an array of office duties (required)
+ * @property {ObjectId} office Staff office (required)
+ * @property {ObjectId} role Staff role is an array of office duties (required)
  * @property {String} subsidiary Staff subsidiary (required)
  * @property {String} remark Staff remark (optional)
  * @property {String} photo Staff photo (optional)
  * @property {Boolean} is_salary_payable Staff is_salary_payable (optional)
  * @property {Boolean} is_document_complete Staff is_document_complete (optional)
- * @property {String} approved_by Staff approved_by (optional)
+ * @property {ObjectId} approved_by Staff approved_by (optional)
  * @property {Date} approved_date Staff approved_date (optional)
- * @property {String} disengaged_by Staff disengaged_by (optional)
+ * @property {ObjectId} disengaged_by Staff disengaged_by (optional)
  * @property {Date} disengaged_date Staff disengaged_date (optional)
- * @property {String} created_by Staff record created by
- * @property {String} updated_by Staff record modified by
+ * @property {ObjectId} created_by Staff record created by
+ * @property {ObjectId} updated_by Staff record modified by
  * @description Staff holds record of all staffs in the school
  */
 var Schema = _mongoose2.default.Schema;
@@ -123,7 +122,6 @@ var schemaLogin = exports.schemaLogin = {
 var schemaCreate = exports.schemaCreate = {
     title: _joi2.default.string().optional(),
     surname: _joi2.default.string().optional(),
-    middle_name: _joi2.default.string().optional(),
     given_name: _joi2.default.string().optional(),
     gender: _joi2.default.string().optional(),
     birth_date: _joi2.default.date().optional(),
@@ -165,7 +163,7 @@ var schemaCreate = exports.schemaCreate = {
     bank_account_number: _joi2.default.number().optional(),
     bank_account_name: _joi2.default.string().optional(),
     rank: _joi2.default.string().optional(),
-    office_id: _joi2.default.string().optional(),
+    office: _joi2.default.string().optional(),
     role: _joi2.default.array().optional(),
     subsidiary: _joi2.default.string().trim().valid(Object.values(_constants.SUBSIDIARY)).optional(),
     remark: _joi2.default.string().optional(),
@@ -182,7 +180,6 @@ var schemaCreate = exports.schemaCreate = {
 var schemaUpdate = exports.schemaUpdate = {
     title: _joi2.default.string().optional(),
     surname: _joi2.default.string().optional(),
-    middle_name: _joi2.default.string().optional(),
     given_name: _joi2.default.string().optional(),
     gender: _joi2.default.string().optional(),
     birth_date: _joi2.default.date().optional(),
@@ -224,7 +221,7 @@ var schemaUpdate = exports.schemaUpdate = {
     bank_account_number: _joi2.default.number().optional(),
     bank_account_name: _joi2.default.string().optional(),
     rank: _joi2.default.string().optional(),
-    office_id: _joi2.default.string().optional(),
+    office: _joi2.default.string().optional(),
     role: _joi2.default.array().optional(),
     subsidiary: _joi2.default.string().trim().valid(Object.values(_constants.SUBSIDIARY)).optional(),
     remark: _joi2.default.string().optional(),
@@ -315,7 +312,7 @@ var schema = exports.schema = {
     bank_account_number: { type: Number },
     bank_account_name: { type: String },
     rank: { type: String },
-    office_id: { type: ObjectId, ref: "Office", required: [false, "Why no input?"] },
+    office: { type: ObjectId, ref: "Office", required: [false, "Why no input?"] },
     role: [{ type: ObjectId, ref: "Office", required: [false, "Why no input?"] }],
     subsidiary: {
         type: String,

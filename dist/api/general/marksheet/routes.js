@@ -104,7 +104,7 @@ router.get("/results", [_authorization.checkAuth, _authorization.isValidStaff], 
  * @apiParam {Number} rank Report rank for that report
  * @apiSuccess {Object} Report Report's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Report not found.
+ * @apiError 404 Marksheet not found.
  * @apiError 401 master access only.
  */
 router.post("/results", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createResult);
@@ -125,7 +125,7 @@ router.post("/results", [_authorization.checkAuth, _authorization.isValidStaff],
  * @apiParam {Number} rank Report rank for that report
  * @apiSuccess {Object} Report Report's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Report not found.
+ * @apiError 404 Marksheet not found.
  * @apiError 401 master access only.
  */
 router.put("/results/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateResult);

@@ -31,37 +31,41 @@ var _model5 = require("../county/model");
 
 var _model6 = _interopRequireDefault(_model5);
 
+var _model7 = require("../staff/model");
+
+var _model8 = _interopRequireDefault(_model7);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Schema = _mongoose2.default.Schema;
 // import table from "./table";
 
 // eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
- * @property {String} id Parent ObjectId primaryKey
+ * @property {ObjectId} id Parent ObjectId primaryKey
  * @property {String} title Parent title (optional)
  * @property {String} first_name Parent first_name (optional)
  * @property {String} middle_name Parent middle_name (optional)
  * @property {String} last_name Parent first_name (optional)
  * @property {String} gender Parent gender (optional)
- * @property {Date} date_of_birth Parent date_of_birth (optional)
+ * @property {Date} birth_date Parent birth_date (optional)
  * @property {String} marital_status Parent marital_status (optional)
  * @property {String} address Parent address (optional)
- * @property {String} state Parent state (optional)
- * @property {String} county Parent county (optional)
+ * @property {ObjectId} state Parent state (optional)
+ * @property {ObjectId} county Parent county (optional)
  * @property {String} email Parent email (optional)
  * @property {String} phone Parent office phone (optional)
  * @property {String} password Parent password (optional)
  * @property {String} profession Parent profession (optional)
  * @property {String} employment_status Parent employment_status (required)
- * @property {String} students_name Parent students_name (optional)
+ * @property {ObjectId} students_name Parent students_name Array<ObjectId> (optional)
  * @property {String} created_by Parent record created by
  * @property {String} updated_by Parent record modified by
  * @description Parent holds record of all student's parents in the school
  */
 
+var Schema = _mongoose2.default.Schema;
 var ObjectId = Schema.Types.ObjectId;
 var schemaLogin = exports.schemaLogin = {
     email: _joi2.default.string().trim().email().optional(),
@@ -73,11 +77,10 @@ var schemaLogin = exports.schemaLogin = {
 
 var schemaCreate = exports.schemaCreate = {
     title: _joi2.default.string().optional(),
-    first_name: _joi2.default.string().trim().optional(),
-    middle_name: _joi2.default.string().trim().optional(),
-    last_name: _joi2.default.string().trim().optional(),
+    surname: _joi2.default.string().optional(),
+    given_name: _joi2.default.string().optional(),
     gender: _joi2.default.string().optional(),
-    date_of_birth: _joi2.default.date().optional(),
+    birth_date: _joi2.default.date().optional(),
     marital_status: _joi2.default.string().optional(),
     address: _joi2.default.string().optional(),
     state: _joi2.default.string().optional(),
@@ -86,19 +89,17 @@ var schemaCreate = exports.schemaCreate = {
     phone: _joi2.default.string().optional(),
     password: _joi2.default.string().optional(),
     profession: _joi2.default.string().optional(),
-    parents_name: _joi2.default.string().trim().optional(),
     employment_status: _joi2.default.string().trim().valid(Object.values(_constants.EMPLOYMENT_STATUS)).optional(),
-    students_name: _joi2.default.string().trim().optional(),
+    students_name: _joi2.default.array().optional(),
     created_by: _joi2.default.string().optional()
 };
 
 var schemaUpdate = exports.schemaUpdate = {
     title: _joi2.default.string().optional(),
-    first_name: _joi2.default.string().trim().optional(),
-    middle_name: _joi2.default.string().trim().optional(),
-    last_name: _joi2.default.string().trim().optional(),
+    surname: _joi2.default.string().optional(),
+    given_name: _joi2.default.string().optional(),
     gender: _joi2.default.string().optional(),
-    date_of_birth: _joi2.default.date().optional(),
+    birth_date: _joi2.default.date().optional(),
     marital_status: _joi2.default.string().optional(),
     address: _joi2.default.string().optional(),
     state: _joi2.default.string().optional(),
@@ -107,24 +108,22 @@ var schemaUpdate = exports.schemaUpdate = {
     phone: _joi2.default.string().optional(),
     password: _joi2.default.string().optional(),
     profession: _joi2.default.string().optional(),
-    parents_name: _joi2.default.string().trim().optional(),
     employment_status: _joi2.default.string().trim().valid(Object.values(_constants.EMPLOYMENT_STATUS)).optional(),
-    students_name: _joi2.default.string().trim().optional(),
+    students_name: _joi2.default.array().optional(),
     updated_by: _joi2.default.string().required()
 };
 
 var schema = exports.schema = {
     title: { type: String },
-    first_name: { type: String, required: [true, "Why no firstname?"] },
-    middle_name: { type: String },
-    last_name: { type: String, required: [true, "Why no lastname?"] },
+    surname: { type: String, required: [true, "Why no Surname?"] },
+    given_name: { type: String, required: [true, "Why no Given name?"] },
     gender: {
         type: String,
         enum: Object.values(_constants.GENDER),
         default: _constants.GENDER.MALE,
         required: [false, "Why no gender?"]
     },
-    date_of_birth: { type: Date, required: [true, "Date is required"] },
+    birth_date: { type: Date, required: [true, "Date is required"] },
     marital_status: {
         type: String,
         enum: Object.values(_constants.MARITAL_STATUS),
@@ -153,12 +152,11 @@ var schema = exports.schema = {
         enum: Object.values(_constants.EMPLOYMENT_STATUS),
         required: [false, "Why no input?"]
     },
-    students_name: { type: ObjectId, ref: "Student", required: [false, "Why no Parent's name"] },
-    created_by: { type: ObjectId, ref: "Parent", required: true },
-    updated_by: { type: ObjectId, ref: "Parent", required: true }
+    students_name: [{ type: ObjectId, ref: "Student", required: [false, "Why no Student's name"] }],
+    created_by: { type: ObjectId, ref: "Staff", required: true },
+    updated_by: { type: ObjectId, ref: "Staff", required: true }
 };
 
-var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
 var options = _constants.DATABASE.OPTIONS;
 
 var newSchema = new Schema(schema, options);

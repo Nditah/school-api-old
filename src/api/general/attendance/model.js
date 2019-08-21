@@ -18,6 +18,7 @@ import { DATABASE, SUBSIDIARY } from "../../../constants";
 import table from "./table";
 import Staff from "../staff/model";
 import Student from "../student/model";
+import Office from "../office/model";
 import Classe from "../classe/model";
 
 const { Schema } = mongoose;
@@ -26,6 +27,7 @@ const { ObjectId } = Schema.Types;
 export const schemaCreate = {
     staff_id: Joi.string().optional(),
     student_id: Joi.string().optional(),
+    office_id: Joi.string().optional(),
     attendance_status: Joi.string().trim().valid(["SUSPENDED", "EARLY", "LATE"]).optional(),
     subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
     classe_id: Joi.string().optional(),
@@ -37,6 +39,7 @@ export const schemaCreate = {
 export const schemaUpdate = {
     staff_id: Joi.string().optional(),
     student_id: Joi.string().optional(),
+    office_id: Joi.string().optional(),
     attendance_status: Joi.string().trim().valid(["SUSPENDED", "EARLY", "LATE"]).optional(),
     subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
     classe_id: Joi.string().optional(),
@@ -54,6 +57,7 @@ export const schema = {
         default: "EARLY",
         required: true,
     },
+    office_id: { type: ObjectId, ref: "Office", required: false  },
     subsidiary: {
         type: String,
         enum: Object.values(SUBSIDIARY),

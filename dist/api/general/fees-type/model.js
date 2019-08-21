@@ -40,7 +40,7 @@ var Schema = _mongoose2.default.Schema;
  * @author 4Decoder
  * @property {ObjectId} id Table primaryKey
  * @property {String} type Type of fees to pay,
- * @property {ObjectId} classe Fees for a particular class(required),
+ * @property {ObjectId} classe_id Fees for a particular class(required),
  * @property {Number} amount Amount for each class,
  * @property {String} description Table description about fee payment
  * @property {ObjectId} created_by Table record created by

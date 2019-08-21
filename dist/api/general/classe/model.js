@@ -22,17 +22,19 @@ var Schema = _mongoose2.default.Schema;
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
- * @property {String} id Classe ObjectId primaryKey
+ * @property {ObjectId} id Classe ObjectId primaryKey
+ * @property {String} name Classe name (optional)
  * @property {String} subsidiary Classe subsidiary (optional)
  * @property {String} level Classe level (optional)
- * @property {String} form_teacher Classe form_teacher (optional)
- * @property {String} created_by Classe record created by
- * @property {String} updated_by Classe record modified by
+ * @property {ObjectId} form_teacher Classe form_teacher (optional)
+ * @property {ObjectId} created_by Classe record created by
+ * @property {ObjectId} updated_by Classe record modified by
  * @description Classe holds record of all classes in the school.
  */
 
 var ObjectId = Schema.Types.ObjectId;
 var schemaCreate = exports.schemaCreate = {
+    name: _joi2.default.string().trim().optional(),
     subsidiary: _joi2.default.string().trim().optional(),
     level: _joi2.default.string().trim().optional(),
     form_teacher: _joi2.default.string().optional(),
@@ -40,6 +42,7 @@ var schemaCreate = exports.schemaCreate = {
 };
 
 var schemaUpdate = exports.schemaUpdate = {
+    name: _joi2.default.string().trim().optional(),
     subsidiary: _joi2.default.string().trim().optional(),
     level: _joi2.default.string().trim().optional(),
     form_teacher: _joi2.default.string().optional(),
@@ -48,6 +51,7 @@ var schemaUpdate = exports.schemaUpdate = {
 };
 
 var schema = exports.schema = {
+    name: { type: String },
     subsidiary: { type: String, required: [false, "Why no School?"] },
     level: { type: String, required: [false, "Why no level?"] },
     form_teacher: { type: ObjectId, ref: "Staff" },

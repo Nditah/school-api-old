@@ -1,1 +1,1 @@
-{"version":3,"sources":["../src/index.js"],"names":["default"],"mappings":";;;;;;;;;;;wCAASA,O","file":"index.js","sourcesContent":["export { default } from \"./app\";\n"]}
+{"version":3,"sources":["../src/index.js"],"names":["default"],"mappings":";;;;;;;;;;;wCAASA,O","file":"index.js","sourcesContent":["export { default } from \"./app\";\r\n"]}

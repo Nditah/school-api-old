@@ -22,12 +22,12 @@ var Schema = _mongoose2.default.Schema;
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
- * @property {String} id Subject ObjectId primaryKey
+ * @property {ObjectId} id Subject ObjectId primaryKey
  * @property {String} name Subject name (optional)
- * @property {String} hod Subject hod (optional)
+ * @property {ObjectId} hod Subject hod (optional)
  * @property {String} description Subject description (optional)
- * @property {String} created_by Subject record created by
- * @property {String} updated_by Subject record modified by
+ * @property {ObjectId} created_by Subject record created by
+ * @property {ObjectId} updated_by Subject record modified by
  * @description Subject holds record of all subjects in the school.
  */
 
@@ -44,7 +44,7 @@ var schemaCreate = exports.schemaCreate = {
     name: _joi2.default.string().trim().optional(),
     hod: _joi2.default.string().optional(),
     description: _joi2.default.string().trim().optional(),
-    created_by: _joi2.default.string().required()
+    updated_by: _joi2.default.string().required()
 };
 
 var schemaUpdate = exports.schemaUpdate = {
@@ -55,7 +55,7 @@ var schemaUpdate = exports.schemaUpdate = {
 };
 
 var schema = exports.schema = {
-    name: { type: String, required: [false, "Why no name?"] },
+    name: { type: String, required: [true, "Why no name?"] },
     hod: { type: ObjectId, ref: "Staff" },
     description: { type: String },
     created_by: { type: ObjectId, ref: "Staff", required: true },
