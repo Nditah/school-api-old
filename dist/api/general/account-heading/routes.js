@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/account-headings?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/account-headings?id={recordId} Retrieve one or all records
  * @apiName RetrieveAccountHeading
  * @apiGroup AccountHeading
  * @apiExample {curl} Example usage for retieving a single record:
@@ -35,7 +35,7 @@ var router = _express2.default.Router();
 router.get("/account-headings", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/account-headings Create account-headings
+ * @api {post} /api/v1/account-headings Create account-headings
  * @apiName CreateAccountingHeading
  * @apiGroup AccountHeading
  * @apiHeader {String} Authorization Bearer token
@@ -54,7 +54,7 @@ router.get("/account-headings", [_authorization.checkAuth, _authorization.isVali
 router.post("/account-headings", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/account-headings/{recordId} Update account-headings
+ * @api {put} /api/v1/account-headings/{recordId} Update account-headings
  * @apiName UpdateAccountingHeading
  * @apiGroup AccountHeading
  * @apiHeader {String} Authorization Bearer token
@@ -74,7 +74,7 @@ router.post("/account-headings", [_authorization.checkAuth, _authorization.isVal
 router.put("/account-headings/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/account-headings/{recordId} Delete account-headings
+ * @api {delete} /api/v1/account-headings/{recordId} Delete account-headings
  * @apiName DeleteAccountingHeading
  * @apiGroup AccountHeading
  * @apiHeader {String} Authorization Bearer token

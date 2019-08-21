@@ -20,7 +20,7 @@ const { ObjectId } = Schema.Types;
 
 export const schemaCreate = {
     sid: Joi.string().optional(),
-    sender: Joi.string().optional(),
+    sender: Joi.string().required(),
     recipient: Joi.string().optional(),
     message: Joi.string().required(),
     direction: Joi.string().valid("INBOUND", "OUTBOUND").optional(),

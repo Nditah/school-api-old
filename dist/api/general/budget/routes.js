@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/budgets?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/budgets?id={recordId} Retrieve one or all records
  * @apiName RetrieveBudget
  * @apiGroup Budget
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/budgets", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/budgets Create budgets
+ * @api {post} /api/v1/budgets Create budgets
  * @apiName CreateBudget
  * @apiGroup Budget
  * @apiHeader {String} Authorization Bearer token
@@ -55,7 +55,7 @@ router.get("/budgets", [_authorization.checkAuth, _authorization.isValidStaff], 
 router.post("/budgets", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/budgets/{recordId} Update budgets
+ * @api {put} /api/v1/budgets/{recordId} Update budgets
  * @apiName UpdateBudget
  * @apiGroup Budget
  * @apiHeader {String} Authorization Bearer token
@@ -77,7 +77,7 @@ router.post("/budgets", [_authorization.checkAuth, _authorization.isValidStaff],
 router.put("/budgets/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/budgets/{recordId} Delete budgets
+ * @api {delete} /api/v1/budgets/{recordId} Delete budgets
  * @apiName DeleteBudget
  * @apiGroup Budget
  * @apiHeader {String} Authorization Bearer token

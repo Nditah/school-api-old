@@ -1,27 +1,23 @@
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
- * @property {String} id Staff ObjectId primaryKey
- * @property {String} serial Staff serial (optional)
- * @property {String} category Staff category (optional)
+ * @property {ObjectId} id Staff ObjectId primaryKey
  * @property {String} title Staff title (optional)
- * @property {String} surname Staff surname (required)
- * @property {String} other_name Staff other_name (required)
- * @property {String} gender Staff gender (required)
- * @property {Date} birth_date Staff birth_date (required)
- * @property {String} marital_status Staff marital_status (required)
- * @property {Number} children Staff Number of children (optional)
- * @property {String} phone Staff office phone (required)
+ * @property {String} surname Staff surname (optional)
+ * @property {String} given_name Staff surname (optional)
+ * @property {String} gender Staff gender (optional)
+ * @property {Date} birth_date Staff birth_date (optional)
+ * @property {String} marital_status Staff marital_status (optional)
+ * @property {String} phone Staff office phone (optional)
  * @property {String} phone_personal Staff phone_personal (optional)
  * @property {String} address Staff address (optional)
- * @property {String} village Staff village (optional)
- * @property {String} state_id Staff state_id (required)
- * @property {String} county_id Staff county_id (required)
- * @property {String} country_iso2 Staff country_iso2 (optional)
+ * @property {ObjectId} state Staff state (optional)
+ * @property {ObjectId} county Staff county (optional)
  * @property {String} email Staff email (optional)
+ * @property {String} staff_type Staff staff_type (optional)
+ * @property {ObjectId} classe Staff classe (optional)
+ * @property {ObjectId} subject Staff subject (optional)
  * @property {String} password Staff password (optional)
- * @property {String} otp Staff otp (optional)
- * @property {Number} otp_count Staff otp_count (optional)
  * @property {String} kin Staff kin (required)
  * @property {String} kin_phone Staff kin_phone (required)
  * @property {String} kin_address Staff kin_address (required)
@@ -33,7 +29,6 @@
  * @property {String} guarantor2_address Staff guarantor2_address (optional)
  * @property {String} profession Staff profession (optional)
  * @property {String} qualification Staff qualification (optional)
- * @property {String} institution Staff institution (optional)
  * @property {String} employment_status Staff employment_status (required)
  * @property {Number} tax Staff tax (optional)
  * @property {Number} basic_salary Staff basic_salary (optional)
@@ -47,45 +42,36 @@
  * @property {Number} welfare_allowance Staff welfare_allowance (optional)
  * @property {Number} pension Staff pension (optional)
  * @property {Number} assurance Staff assurance (optional)
- * @property {String} bank_id Staff bank_id (optional)
+ * @property {String} bank_name Staff bank_name (optional)
  * @property {String} bank_account_number Staff bank_account_number (optional)
  * @property {String} bank_account_name Staff bank_account_name (optional)
  * @property {String} rank Staff rank (optional)
- * @property {String} office_id Staff office_id (required)
- * @property {Array} role Staff role is an array of office duties (required)
- * @property {String} superior_id Staff superior_id (required)
+ * @property {ObjectId} office Staff office (required)
+ * @property {ObjectId} role Staff role is an array of office duties (required)
  * @property {String} subsidiary Staff subsidiary (required)
- * @property {String} terminal_id Staff terminal_id (required)
- * @property {String} vehicle_id Staff vehicle_id (optional)
- * @property {Array} asset_assigment_ids array of Objects of Asset Assigmnet History
- * managed my Asset Manager (prohibited)
- * @property {String} notice Staff notice (optional)
- * @property {Array} rating_ids Staff rating_ids (optional)
  * @property {String} remark Staff remark (optional)
  * @property {String} photo Staff photo (optional)
  * @property {Boolean} is_salary_payable Staff is_salary_payable (optional)
  * @property {Boolean} is_document_complete Staff is_document_complete (optional)
- * @property {Number} access_level Staff access_level (optional)
- * @property {String} approved_by Staff approved_by (optional)
+ * @property {ObjectId} approved_by Staff approved_by (optional)
  * @property {Date} approved_date Staff approved_date (optional)
- * @property {String} disengaged_by Staff disengaged_by (optional)
+ * @property {ObjectId} disengaged_by Staff disengaged_by (optional)
  * @property {Date} disengaged_date Staff disengaged_date (optional)
- * @property {String} created_by Staff record created by
- * @property {String} updated_by Staff record modified by
- * @description Staff holds record of all cities with terminal_list
+ * @property {ObjectId} created_by Staff record created by
+ * @property {ObjectId} updated_by Staff record modified by
+ * @description Staff holds record of all staffs in the school
  */
 import Joi from "joi";
 import mongoose from "mongoose";
 // eslint-disable-next-line camelcase
 import mongoose_csv from "mongoose-csv";
-import { DATABASE, GENDER, MARITAL_STATUS, EMPLOYMENT_STATUS, SUBSIDIARY } from "../../../constants";
+import { DATABASE, GENDER, MARITAL_STATUS, EMPLOYMENT_STATUS, SUBSIDIARY, EMPLOYEE_TYPE } from "../../../constants";
 import table from "./table";
 import State from "../state/model";
 import County from "../county/model";
 import Office from "../office/model";
-import Vehicle from "../vehicle/model";
-import Bank from "../bank/model";
-import Rating from "../rating/model";
+import Classe from "../classe/model";
+import Subject from "../subject/model";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
@@ -99,96 +85,22 @@ export const schemaLogin = {
 };
 
 export const schemaCreate = {
-    serial: Joi.string().optional(),
-    category: Joi.string().optional(),
-    title: Joi.string().optional(),
-    surname: Joi.string().required(),
-    other_name: Joi.string().required(),
-    gender: Joi.string().required(),
-    birth_date: Joi.date().required(),
-    marital_status: Joi.string().required(),
-    children: Joi.number().optional(),
-    phone: Joi.string().required(),
-    phone_personal: Joi.string().optional(),
-    address: Joi.string().optional(),
-    village: Joi.string().optional(),
-    state_id: Joi.string().required(),
-    county_id: Joi.string().required(),
-    country_iso2: Joi.string().optional(),
-    email: Joi.string().trim().email().optional(),
-    password: Joi.string().optional(),
-    otp: Joi.string().optional(),
-    otp_count: Joi.number().optional(),
-    kin: Joi.string().required(),
-    kin_phone: Joi.string().required(),
-    kin_address: Joi.string().required(),
-    guarantor1: Joi.string().required(),
-    guarantor1_phone: Joi.string().required(),
-    guarantor1_address: Joi.string().required(),
-    guarantor2: Joi.string().optional(),
-    guarantor2_phone: Joi.string().optional(),
-    guarantor2_address: Joi.string().optional(),
-    profession: Joi.string().optional(),
-    qualification: Joi.string().optional(),
-    institution: Joi.string().optional(),
-    employment_status: Joi.string().trim().valid(Object.values(EMPLOYMENT_STATUS)).optional(),
-    tax: Joi.number().optional(),
-    basic_salary: Joi.number().optional(),
-    bonus: Joi.number().optional(),
-    entertainment_allowance: Joi.number().optional(),
-    house_allowance: Joi.number().optional(),
-    lunch_allowance: Joi.number().optional(),
-    medical_allowance: Joi.number().optional(),
-    transport_allowance: Joi.number().optional(),
-    utility_allowance: Joi.number().optional(),
-    welfare_allowance: Joi.number().optional(),
-    pension: Joi.number().optional(),
-    assurance: Joi.number().optional(),
-    bank_id: Joi.string().optional(),
-    bank_account_number: Joi.string().optional(),
-    bank_account_name: Joi.string().optional(),
-    rank: Joi.string().optional(),
-    office_id: Joi.string().required(),
-    role: Joi.array().optional(),
-    superior_id: Joi.string().required(),
-    subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).required(),
-    terminal_id: Joi.string().required(),
-    vehicle_id: Joi.string().optional(),
-    notice: Joi.string().optional(),
-    rating_ids: Joi.array().optional(),
-    remark: Joi.string().optional(),
-    photo: Joi.string().optional(),
-    is_salary_payable: Joi.boolean().optional(),
-    is_document_complete: Joi.boolean().optional(),
-    access_level: Joi.string().optional(),
-    approved_by: Joi.string().optional(),
-    approved_date: Joi.date().optional(),
-    disengaged_by: Joi.string().optional(),
-    disengaged_date: Joi.date().optional(),
-    created_by: Joi.string().required(),
-};
-
-export const schemaUpdate = {
-    serial: Joi.string().optional(),
-    category: Joi.string().optional(),
     title: Joi.string().optional(),
     surname: Joi.string().optional(),
-    other_name: Joi.string().optional(),
+    given_name: Joi.string().optional(),
     gender: Joi.string().optional(),
     birth_date: Joi.date().optional(),
     marital_status: Joi.string().optional(),
-    children: Joi.number().optional(),
     phone: Joi.string().optional(),
     phone_personal: Joi.string().optional(),
     address: Joi.string().optional(),
-    village: Joi.string().optional(),
-    state_id: Joi.string().optional(),
-    county_id: Joi.string().optional(),
-    country_iso2: Joi.string().optional(),
+    state: Joi.string().optional(),
+    county: Joi.string().optional(),
     email: Joi.string().trim().email().optional(),
+    staff_type: Joi.string().trim().optional(),
+    classe: Joi.string().trim().optional(),
+    subject: Joi.string().trim().optional(),
     password: Joi.string().optional(),
-    otp: Joi.string().optional(),
-    otp_count: Joi.number().optional(),
     kin: Joi.string().optional(),
     kin_phone: Joi.string().optional(),
     kin_address: Joi.string().optional(),
@@ -200,7 +112,6 @@ export const schemaUpdate = {
     guarantor2_address: Joi.string().optional(),
     profession: Joi.string().optional(),
     qualification: Joi.string().optional(),
-    institution: Joi.string().optional(),
     employment_status: Joi.string().trim().valid(Object.values(EMPLOYMENT_STATUS)).optional(),
     tax: Joi.number().optional(),
     basic_salary: Joi.number().optional(),
@@ -213,24 +124,75 @@ export const schemaUpdate = {
     utility_allowance: Joi.number().optional(),
     welfare_allowance: Joi.number().optional(),
     pension: Joi.number().optional(),
-    assurance: Joi.number().optional(),
-    bank_id: Joi.string().optional(),
-    bank_account_number: Joi.string().optional(),
+    bank_name: Joi.string().trim().optional(),
+    bank_account_number: Joi.number().optional(),
     bank_account_name: Joi.string().optional(),
     rank: Joi.string().optional(),
-    office_id: Joi.string().optional(),
+    office: Joi.string().optional(),
     role: Joi.array().optional(),
-    superior_id: Joi.string().optional(),
     subsidiary: Joi.string().trim().valid(Object.values(SUBSIDIARY)).optional(),
-    terminal_id: Joi.string().optional(),
-    vehicle_id: Joi.string().optional(),
-    notice: Joi.string().optional(),
-    rating_ids: Joi.array().optional(),
     remark: Joi.string().optional(),
     photo: Joi.string().optional(),
     is_salary_payable: Joi.boolean().optional(),
     is_document_complete: Joi.boolean().optional(),
-    access_level: Joi.string().optional(),
+    approved_by: Joi.string().optional(),
+    approved_date: Joi.date().optional(),
+    disengaged_by: Joi.string().optional(),
+    disengaged_date: Joi.date().optional(),
+    created_by: Joi.string().required(),
+};
+
+export const schemaUpdate = {
+    title: Joi.string().optional(),
+    surname: Joi.string().optional(),
+    given_name: Joi.string().optional(),
+    gender: Joi.string().optional(),
+    birth_date: Joi.date().optional(),
+    marital_status: Joi.string().optional(),
+    phone: Joi.string().optional(),
+    phone_personal: Joi.string().optional(),
+    address: Joi.string().optional(),
+    state: Joi.string().optional(),
+    county: Joi.string().optional(),
+    email: Joi.string().trim().email().optional(),
+    staff_type: Joi.string().trim().optional(),
+    classe: Joi.string().trim().optional(),
+    subject: Joi.string().trim().optional(),
+    password: Joi.string().optional(),
+    kin: Joi.string().optional(),
+    kin_phone: Joi.string().optional(),
+    kin_address: Joi.string().optional(),
+    guarantor1: Joi.string().optional(),
+    guarantor1_phone: Joi.string().optional(),
+    guarantor1_address: Joi.string().optional(),
+    guarantor2: Joi.string().optional(),
+    guarantor2_phone: Joi.string().optional(),
+    guarantor2_address: Joi.string().optional(),
+    profession: Joi.string().optional(),
+    qualification: Joi.string().optional(),
+    employment_status: Joi.string().trim().valid(Object.values(EMPLOYMENT_STATUS)).optional(),
+    tax: Joi.number().optional(),
+    basic_salary: Joi.number().optional(),
+    bonus: Joi.number().optional(),
+    entertainment_allowance: Joi.number().optional(),
+    house_allowance: Joi.number().optional(),
+    lunch_allowance: Joi.number().optional(),
+    medical_allowance: Joi.number().optional(),
+    transport_allowance: Joi.number().optional(),
+    utility_allowance: Joi.number().optional(),
+    welfare_allowance: Joi.number().optional(),
+    pension: Joi.number().optional(),
+    bank_name: Joi.string().trim().optional(),
+    bank_account_number: Joi.number().optional(),
+    bank_account_name: Joi.string().optional(),
+    rank: Joi.string().optional(),
+    office: Joi.string().optional(),
+    role: Joi.array().optional(),
+    subsidiary: Joi.string().trim().valid(Object.values(SUBSIDIARY)).optional(),
+    remark: Joi.string().optional(),
+    photo: Joi.string().optional(),
+    is_salary_payable: Joi.boolean().optional(),
+    is_document_complete: Joi.boolean().optional(),
     approved_by: Joi.string().optional(),
     approved_date: Joi.date().optional(),
     disengaged_by: Joi.string().optional(),
@@ -239,11 +201,9 @@ export const schemaUpdate = {
 };
 
 export const schema = {
-    serial: { type: String },
-    category: { type: String },
     title: { type: String },
-    surname: { type: String, required: [false, "Why no surname?"] },
-    other_name: { type: String, required: [false, "Why no other_name?"] },
+    surname: { type: String, required: true },
+    given_name: { type: String, required: true },
     gender: {
         type: String,
         enum: Object.values(GENDER),
@@ -256,7 +216,6 @@ export const schema = {
         enum: Object.values(MARITAL_STATUS),
         required: [false, "Why no marital_status?"],
     },
-    children: { type: String },
     phone: {
         type: String,
         required: [false, "Why no offical phone?"],
@@ -269,10 +228,8 @@ export const schema = {
         alias: "phone_home",
     },
     address: { type: String },
-    village: { type: String },
-    state_id: { type: ObjectId, ref: "State", required: [false, "Why no input?"] },
-    county_id: { type: ObjectId, ref: "County", required: [false, "Why no input?"] },
-    country_iso2: { type: String, required: [false, "Why no input?"], default: "ng" },
+    state: { type: String, required: [false, "Why no State?"] },
+    county: { type: String, required: [false, "Why no Country?"] },
     email: {
         type: String,
         trim: true,
@@ -282,10 +239,14 @@ export const schema = {
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
             "Please fill a valid email address"],
     },
+    staff_type: {
+        type: String,
+        enum: Object.values(EMPLOYEE_TYPE),
+        required: [false, "Why no Type?"],
+    },
+    classe: { type: ObjectId, ref: "Classe" },
+    subject: { type: ObjectId, ref: "Subject" },
     password: { type: String },
-    otp: { type: String },
-    otp_count: { type: Number, required: [false, "Why no input?"], default: 0 },
-    otp_access: { type: Boolean, default: false },
     kin: { type: String, required: [false, "Why no input?"] },
     kin_phone: { type: String, required: [false, "Why no input?"] },
     kin_address: { type: String, required: [false, "Why no input?"] },
@@ -297,7 +258,6 @@ export const schema = {
     guarantor2_address: { type: String },
     profession: { type: String },
     qualification: { type: String },
-    institution: { type: String },
     employment_status: {
         type: String,
         enum: Object.values(EMPLOYMENT_STATUS),
@@ -314,29 +274,21 @@ export const schema = {
     utility_allowance: { type: Number, default: 0.0 },
     welfare_allowance: { type: Number, default: 0.0 },
     pension: { type: Number, default: 0.0 },
-    assurance: { type: Number, default: 0.0 },
-    bank_id: { type: ObjectId, ref: "Bank" },
-    bank_account_number: { type: String },
+    bank_name: { type: String },
+    bank_account_number: { type: Number },
     bank_account_name: { type: String },
     rank: { type: String },
-    office_id: { type: ObjectId, ref: "Office", required: [false, "Why no input?"] },
-    role: [{ type: ObjectId, ref: "Office", required: true }],
-    superior_id: { type: ObjectId, ref: "Staff", required: [false, "Why no input?"] },
+    office: { type: ObjectId, ref: "Office", required: [false, "Why no input?"] },
+    role: [{ type: ObjectId, ref: "Office", required: [false, "Why no input?"] }],
     subsidiary: {
         type: String,
         enum: Object.values(SUBSIDIARY),
         required: [false, "Why no input?"],
     },
-    terminal_id: { type: ObjectId, ref: "Terminal", required: [false, "Why no input?"] },
-    vehicle_id: { type: ObjectId, ref: "Vehicle" },
-    asset_assigment_ids: [{ type: ObjectId, ref: "AssetAssignment" }],
-    notice: { type: String },
-    rating_ids: [{ type: ObjectId, ref: "Rating" }],
     remark: { type: String },
     photo: { type: String },
     is_salary_payable: { type: Boolean, default: false, required: [false, "Why no input?"] },
     is_document_complete: { type: Boolean, default: false, required: [false, "Why no input?"] },
-    access_level: { type: String, default: "0", required: [false, "Why no input?"] },
     approved_by: { type: ObjectId, ref: "Staff" },
     approved_date: { type: Date },
     disengaged_by: { type: ObjectId, ref: "Staff" },

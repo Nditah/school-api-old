@@ -102,19 +102,16 @@ export async function setCollection(req, res) {
         case "bank_account": Model = BankAccount; break;
         case "budget": Model = Budget; break;
         case "category": Model = Category; break;
-        case "country": Model = Country; break;
         case "table": Model = Table; break;
         case "vehicle": Model = Vehicle; break;
         case "state": Model = State; break;
         case "setting": Model = Setting; break;
-        case "hub": Model = Hub; break;
         case "staff": Model = Staff; break;
         case "office": Model = Office; break;
         case "report": Model = Report; break;
         case "document_type": Model = DocumentType; break;
         case "offence_type": Model = OffenceType; break;
         case "material": Model = Material; break;
-        case "stage": Model = Stage; break;
         default: return fail(res, 401, `Error invalid collection: ${collection}`);
         }
         const result = await Model.insertMany(table);
@@ -135,25 +132,22 @@ export async function downloadCsv(req, res) {
     try {
         // eslint-disable-next-line default-case
         switch (collection) {
-            case "account_class": Model = AccountClass; break;
-            case "account_heading": Model = AccountHeading; break;
-            case "bank": Model = Bank; break;
-            case "bank_account": Model = BankAccount; break;
-            case "budget": Model = Budget; break;
-            case "category": Model = Category; break;
-            case "country": Model = Country; break;
-            case "table": Model = Table; break;
-            case "vehicle": Model = Vehicle; break;
-            case "state": Model = State; break;
-            case "setting": Model = Setting; break;
-            case "hub": Model = Hub; break;
-            case "staff": Model = Staff; break;
-            case "office": Model = Office; break;
-            case "report": Model = Report; break;
-            case "document_type": Model = DocumentType; break;
-            case "offence_type": Model = OffenceType; break;
-            case "material": Model = Material; break;
-            case "stage": Model = Stage; break;
+        case "account_class": Model = AccountClass; break;
+        case "account_heading": Model = AccountHeading; break;
+        case "bank": Model = Bank; break;
+        case "bank_account": Model = BankAccount; break;
+        case "budget": Model = Budget; break;
+        case "category": Model = Category; break;
+        case "table": Model = Table; break;
+        case "vehicle": Model = Vehicle; break;
+        case "state": Model = State; break;
+        case "setting": Model = Setting; break;
+        case "staff": Model = Staff; break;
+        case "office": Model = Office; break;
+        case "report": Model = Report; break;
+        case "document_type": Model = DocumentType; break;
+        case "offence_type": Model = OffenceType; break;
+        case "material": Model = Material; break;
         default: return fail(res, 401, `Error invalid collection: ${collection}`);
         }
         res.writeHead(200, {
@@ -176,25 +170,22 @@ export async function uploadCsv(req, res) {
     try {
         // eslint-disable-next-line default-case
         switch (collection) {
-            case "account_class": Model = AccountClass; break;
-            case "account_heading": Model = AccountHeading; break;
-            case "bank": Model = Bank; break;
-            case "bank_account": Model = BankAccount; break;
-            case "budget": Model = Budget; break;
-            case "category": Model = Category; break;
-            case "country": Model = Country; break;
-            case "table": Model = Table; break;
-            case "vehicle": Model = Vehicle; break;
-            case "state": Model = State; break;
-            case "setting": Model = Setting; break;
-            case "hub": Model = Hub; break;
-            case "staff": Model = Staff; break;
-            case "office": Model = Office; break;
-            case "report": Model = Report; break;
-            case "document_type": Model = DocumentType; break;
-            case "offence_type": Model = OffenceType; break;
-            case "material": Model = Material; break;
-            case "stage": Model = Stage; break;
+        case "account_class": Model = AccountClass; break;
+        case "account_heading": Model = AccountHeading; break;
+        case "bank": Model = Bank; break;
+        case "bank_account": Model = BankAccount; break;
+        case "budget": Model = Budget; break;
+        case "category": Model = Category; break;
+        case "table": Model = Table; break;
+        case "vehicle": Model = Vehicle; break;
+        case "state": Model = State; break;
+        case "setting": Model = Setting; break;
+        case "staff": Model = Staff; break;
+        case "office": Model = Office; break;
+        case "report": Model = Report; break;
+        case "document_type": Model = DocumentType; break;
+        case "offence_type": Model = OffenceType; break;
+        case "material": Model = Material; break;
         default: return fail(res, 401, `Error invalid collection: ${collection}`);
         }
         if (Object.keys(req.files).length === 0) {

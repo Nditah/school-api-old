@@ -24,7 +24,7 @@ var fetchRecord = exports.fetchRecord = function () {
                         }
                         console.log(filter);
                         _context.next = 8;
-                        return _model2.default.find(filter).populate("cart_id").populate("sales_order_ids").populate("blog_comment_ids").populate("ratings").populate("state_id").populate("county_id").skip(skip).limit(limit).sort(sort).select(projection).exec();
+                        return _model2.default.find(filter).populate("classe").populate("hostel").populate("state").populate("county").skip(skip).limit(limit).sort(sort).select(projection).exec();
 
                     case 8:
                         result = _context.sent;
@@ -260,7 +260,7 @@ var login = exports.login = function () {
                         return _context5.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
 
                     case 3:
-                        return _context5.abrupt("return", (0, _authenticate.customerAuthenticate)(req.body).then(function (_ref6) {
+                        return _context5.abrupt("return", (0, _authenticate.studentAuthenticate)(req.body).then(function (_ref6) {
                             var token = _ref6.token,
                                 user = _ref6.user;
                             return (0, _lib.success)(res, 201, { token: token, user: user }, "Login was successful!");
@@ -308,9 +308,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 // Logging
-var logger = _log4js2.default.getLogger("[customer]");
+var logger = _log4js2.default.getLogger("[student]");
 _log4js2.default.configure({
-    appenders: { file: { type: "file", filename: "logs/customer.log" } },
+    appenders: { file: { type: "file", filename: "logs/student.log" } },
     categories: { default: { appenders: ["file"], level: "debug" } }
 });
 //# sourceMappingURL=controller.js.map

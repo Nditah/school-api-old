@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../src/api/general/lending/table.js"],"names":["table"],"mappings":";;;;;AAAA,IAAMA,QAAQ,EAAd;;kBAEeA,K","file":"table.js","sourcesContent":["const table = [];\n\nexport default table;\n"]}

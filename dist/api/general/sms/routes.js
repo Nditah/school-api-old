@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/sms?id={recordId} Retrieve SMS records
+ * @api {get} /api/v1/sms?id={recordId} Retrieve SMS records
  * @apiName RetrieveSms
  * @apiGroup Sms
  * @apiHeader {String} Authorization Bearer token
@@ -35,7 +35,7 @@ var router = _express2.default.Router();
 router.get("/sms", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/sms Create an SMS record
+ * @api {post} /api/v1/sms Create an SMS record
  * @apiName CreateSms
  * @apiGroup Sms
  * @apiHeader {String} Authorization Bearer token
@@ -52,7 +52,7 @@ router.get("/sms", [_authorization.checkAuth, _authorization.isValidStaff], _con
 router.post("/sms", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {post} /api/sms/otp Create send SMS otp
+ * @api {post} /api/v1/sms/otp Create send SMS otp
  * @apiName CreateSmsOtp
  * @apiGroup Sms
  * @apiHeader {String} Authorization Bearer token
@@ -65,7 +65,7 @@ router.post("/sms", [_authorization.checkAuth, _authorization.isValidStaff], _co
 router.post("/sms/otp", _controller.createOtp);
 
 /**
- * @api {post} /api/sms/webhook Create incoming SMS webhook
+ * @api {post} /api/v1/sms/webhook Create incoming SMS webhook
  * @apiName CreateSmsWebhook
  * @apiGroup Sms
  * @apiHeader {String} Authorization Bearer token

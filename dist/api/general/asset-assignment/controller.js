@@ -17,7 +17,7 @@ var fetchRecord = exports.fetchRecord = function () {
                         _aqp = (0, _apiQueryParams2.default)(query), filter = _aqp.filter, skip = _aqp.skip, limit = _aqp.limit, sort = _aqp.sort, projection = _aqp.projection;
                         _context.prev = 2;
                         _context.next = 5;
-                        return _model2.default.find(filter).populate("asset_id").populate("vehicle_id").populate("task_id").populate({ path: "staff_id", select: "-password -otp" }).populate({ path: "partner_id", select: "-password -otp" }).populate({ path: "created_by", select: "surname other_name email phone" }).populate({ path: "updated_by", select: "surname other_name email phone" }).skip(skip).limit(limit).sort(sort).select(projection).exec();
+                        return _model2.default.find(filter).populate("asset_id").populate("vehicle_id").populate("task_id").populate({ path: "staff_id", select: "-password -otp" }).populate({ path: "student_id", select: "-password -otp" }).populate({ path: "created_by", select: "surname given_name email phone" }).populate({ path: "updated_by", select: "surname given_name email phone" }).skip(skip).limit(limit).sort(sort).select(projection).exec();
 
                     case 5:
                         result = _context.sent;
@@ -83,14 +83,14 @@ var createRecord = exports.createRecord = function () {
                         UserModel = void 0;
                         userId = void 0;
                         _context2.t0 = data.user_type;
-                        _context2.next = _context2.t0 === "PARTNER" ? 10 : _context2.t0 === "STAFF" ? 13 : 16;
+                        _context2.next = _context2.t0 === "STUDENT" ? 10 : _context2.t0 === "STAFF" ? 13 : 16;
                         break;
 
                     case 10:
-                        UserModel = _model4.default;userId = "partner_id";return _context2.abrupt("break", 17);
+                        UserModel = _model6.default;userId = "student_id";return _context2.abrupt("break", 17);
 
                     case 13:
-                        UserModel = _model6.default;userId = "staff_id";return _context2.abrupt("break", 17);
+                        UserModel = _model4.default;userId = "staff_id";return _context2.abrupt("break", 17);
 
                     case 16:
                         return _context2.abrupt("return", (0, _lib.fail)(res, 422, "Error invalid user_type " + data.user_type));
@@ -181,7 +181,7 @@ var createRecord = exports.createRecord = function () {
         required: [true, "Why no vehicle_custodian?"],
     },
     current_staff_id: { type: ObjectId, ref: "Staff" },
-    current_partner_id: { type: ObjectId, ref: "Partner" },
+    current_student_id: { type: ObjectId, ref: "Student" },
 */
 // eslint-disable-next-line complexity
 
@@ -277,14 +277,14 @@ var deleteRecord = exports.deleteRecord = function () {
                         UserModel = void 0;
                         userId = void 0;
                         _context4.t0 = result.user_type;
-                        _context4.next = _context4.t0 === "PARTNER" ? 12 : _context4.t0 === "STAFF" ? 15 : 18;
+                        _context4.next = _context4.t0 === "STUDENT" ? 12 : _context4.t0 === "STAFF" ? 15 : 18;
                         break;
 
                     case 12:
-                        UserModel = _model4.default;userId = "partner_id";return _context4.abrupt("break", 19);
+                        UserModel = _model6.default;userId = "student_id";return _context4.abrupt("break", 19);
 
                     case 15:
-                        UserModel = _model6.default;userId = "staff_id";return _context4.abrupt("break", 19);
+                        UserModel = _model4.default;userId = "staff_id";return _context4.abrupt("break", 19);
 
                     case 18:
                         return _context4.abrupt("return", (0, _lib.fail)(res, 422, "Error invalid user_type " + result.user_type));
@@ -366,11 +366,11 @@ var _lib = require("../../../lib");
 
 var _constants = require("../../../constants");
 
-var _model3 = require("../partner/model");
+var _model3 = require("../staff/model");
 
 var _model4 = _interopRequireDefault(_model3);
 
-var _model5 = require("../staff/model");
+var _model5 = require("../student/model");
 
 var _model6 = _interopRequireDefault(_model5);
 

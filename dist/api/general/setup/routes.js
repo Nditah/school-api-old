@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {post} /api/setups/system Complete System Setup
+ * @api {post} /api/v1/setups/system Complete System Setup
  * @apiName SystemSetup
  * @apiGroup Setup
  * @apiParam {String} username Master username
@@ -30,7 +30,7 @@ var router = _express2.default.Router();
 router.get("/setups/preload/system", [_authorization.checkAuth, _authorization.isValidStaff], _controller.setupSystem);
 
 /**
- * @api {get} /api/setups/preload/{subsidiary}/{folder}/{collection} Preload Setups data
+ * @api {get} /api/v1/setups/preload/{subsidiary}/{folder}/{collection} Preload Setups data
  * @apiName ModuleSetup
  * @apiGroup Setup
  * @apiParam {String} access_token admin access token.
@@ -45,7 +45,7 @@ router.get("/setups/preload/system", [_authorization.checkAuth, _authorization.i
 router.get("/setups/preload/:subsidiary/:folder/:collection", [_authorization.checkAuth, _authorization.isValidStaff], _controller.setCollection);
 
 /**
- * @api {get} /api/setups/csv/{collection} Download Table in CSV
+ * @api {get} /api/v1/setups/csv/{collection} Download Table in CSV
  * @apiName DownloadCsv
  * @apiGroup Setup
  * @apiExample {curl} Example usage for seeding vehicle records:
@@ -61,7 +61,7 @@ router.get("/setups/preload/:subsidiary/:folder/:collection", [_authorization.ch
 router.get("/setups/csv/:collection", [_authorization.checkAuth, _authorization.isValidStaff], _controller.downloadCsv);
 
 /**
- * @api {post} /api/setups/csv/{collection} Upload Table in CSV
+ * @api {post} /api/v1/setups/csv/{collection} Upload Table in CSV
  * @apiName UploadCsv
  * @apiGroup Setup
  * @apiExample {curl} Example usage for seeding driver records:

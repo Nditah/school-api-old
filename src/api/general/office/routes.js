@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/offices?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/offices?id={recordId} Retrieve one or all records
  * @apiName RetrieveOffice
  * @apiGroup Office
  * @apiExample {curl} Example usage for retieving a single record:
@@ -22,18 +22,20 @@ const router = express.Router();
 router.get("/offices", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/offices Create offices
+ * @api {post} /api/v1/offices Create offices
  * @apiName CreateOffice
  * @apiGroup Office
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} name Office name (required)
  * @apiParam {String} code Office code
  * @apiParam {String} email Office email
- * @apiParam {String} phone Office phone
- * @apiParam {String} functions Office description tasks the office performs
+ * @apiParam {String} phone Office phone number
+ * @apiParam {String} functions Office list tasks the office performs
+ * @apiParam {String} description Office job-description staff performs
  * @apiParam {Number} hierarchy Office hierarchy [1-7]
- * @apiParam {Enum} office_type Office office_type "BOARD|DEPARTMENT|UNIT"
- * @apiParam {Enum} subsidiary Office subsidiary "PMT|PML|PET|PRESS"
+ * @apiParam {Enum} office_type Office office_type
+ * "PRINCIPAL|VICE-PRINCIPAL|ACADEMIC|ADMINISTRATIVE"
+ * @apiParam {Enum} subsidiary Office subsidiary "NURSRY|PRIMARY|SECONDARY|PRE-NURSRY"
  * @apiParam {ObjectId} office_above Office above this.
  * @apiParam {ObjectId} head Office Head Staff Id
  * @apiParam {ObjectId} assistant Office Assistant Head Staff Id
@@ -45,19 +47,20 @@ router.get("/offices", [checkAuth, isValidStaff], fetchRecord);
 router.post("/offices", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/offices/{recordId} Update offices
+ * @api {put} /api/v1/offices/{recordId} Update offices
  * @apiName UpdateOffice
  * @apiGroup Office
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
  * @apiParam {String} name Office name (required)
  * @apiParam {String} code Office code
  * @apiParam {String} email Office email
- * @apiParam {String} phone Office phone
- * @apiParam {String} functions Office description tasks the office performs
+ * @apiParam {String} phone Office phone number
+ * @apiParam {String} functions Office list tasks the office performs
+ * @apiParam {String} description Office job-description staff performs
  * @apiParam {Number} hierarchy Office hierarchy [1-7]
- * @apiParam {Enum} office_type Office office_type "BOARD|DEPARTMENT|UNIT"
- * @apiParam {Enum} subsidiary Office subsidiary "PMT|PML|PET|PRESS"
+ * @apiParam {Enum} office_type Office office_type
+ *  "PRINCIPAL|VICE-PRINCIPAL|ACADEMIC|ADMINISTRATIVE"
+ * @apiParam {Enum} subsidiary Office subsidiary "NURSRY|PRIMARY|SECONDARY|PRE-NURSRY"
  * @apiParam {ObjectId} office_above Office above this.
  * @apiParam {ObjectId} head Office Head Staff Id
  * @apiParam {ObjectId} assistant Office Assistant Head Staff Id
@@ -69,7 +72,7 @@ router.post("/offices", [checkAuth, isValidStaff], createRecord);
 router.put("/offices/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/offices/{recordId} Delete offices
+ * @api {delete} /api/v1/offices/{recordId} Delete offices
  * @apiName DeleteOffice
  * @apiGroup Office
  * @apiHeader {String} Authorization Bearer token

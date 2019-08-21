@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/categories?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/categories?id={recordId} Retrieve one or all records
  * @apiName RetrieveCategory
  * @apiGroup Category
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/categories", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/categories Create categories
+ * @api {post} /api/v1/categories Create categories
  * @apiName CreateCategory
  * @apiGroup Category
  * @apiHeader {String} Authorization Bearer token
@@ -51,7 +51,7 @@ router.get("/categories", [_authorization.checkAuth, _authorization.isValidStaff
 router.post("/categories", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/categories/{recordId} Update categories
+ * @api {put} /api/v1/categories/{recordId} Update categories
  * @apiName UpdateCategory
  * @apiGroup Category
  * @apiHeader {String} Authorization Bearer token
@@ -69,7 +69,7 @@ router.post("/categories", [_authorization.checkAuth, _authorization.isValidStaf
 router.put("/categories/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/categories/{recordId} Delete categories
+ * @api {delete} /api/v1/categories/{recordId} Delete categories
  * @apiName DeleteCategory
  * @apiGroup Category
  * @apiHeader {String} Authorization Bearer token

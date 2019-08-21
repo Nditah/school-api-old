@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/stages?id={recordId} Retrieve Stage records
+ * @api {get} /api/v1/stages?id={recordId} Retrieve Stage records
  * @apiName RetrieveStage
  * @apiGroup Stage
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/stages", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/stages Create stages
+ * @api {post} /api/v1/stages Create stages
  * @apiName CreateStage
  * @apiGroup Stage
  * @apiHeader {String} Authorization authorization token
@@ -53,7 +53,7 @@ router.get("/stages", [_authorization.checkAuth, _authorization.isValidStaff], _
 router.post("/stages", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/stages/{recordId} Update stages
+ * @api {put} /api/v1/stages/{recordId} Update stages
  * @apiName UpdateStage
  * @apiGroup Stage
  * @apiHeader {String} Authorization authorization token
@@ -72,7 +72,7 @@ router.post("/stages", [_authorization.checkAuth, _authorization.isValidStaff], 
 router.put("/stages/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/stages/{recordId} Delete stages
+ * @api {delete} /api/v1/stages/{recordId} Delete stages
  * @apiName DeleteStage
  * @apiGroup Stage
  * @apiHeader {String} Authorization authorization token

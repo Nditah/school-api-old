@@ -5,13 +5,13 @@ import { fetchRecord, createRecord } from "./controller";
 const router = express.Router();
 
 /**
- * @api {get} /api/unionbank-transactions?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/unionbank-transactions?id={recordId} Retrieve one or all records
  * @apiName RetrieveUnionbankTransaction
  * @apiGroup UnionbankTransaction
  * @apiExample {curl} Example usage for retieving a single record:
- *      curl -i http://localhost/api/unionbank-transactions?id=2&fields=id,created_at,updated_at
+ *      curl -i https://mis-api.herokuapp.com/api/v1/unionbank-transactions?id=2&fields=id,created_at,updated_at
  * @apiExample {curl} Example usage for retieving multiple records:
- *      curl -i http://localhost/api/unionbank-transactions?offset=10&limit=50
+ *      curl -i https://mis-api.herokuapp.com/api/v1/unionbank-transactions?offset=10&limit=50
  * @apiParam {Number} id Unique id of the record to retrieve (optional)
  * @apiParam {Number} offset Number of records to skip (optional)
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/unionbank-transactions", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/unionbank-transactions Create unionbank-transactions
+ * @api {post} /api/v1/unionbank-transactions Create unionbank-transactions
  * @apiName CreateUnionbankTransaction
  * @apiGroup UnionbankTransaction
  * @apiParam {Number} branchid UnionBank Branch code the transaction originated from

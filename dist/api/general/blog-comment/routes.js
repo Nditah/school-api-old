@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/blog-comments?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/blog-comments?id={recordId} Retrieve one or all records
  * @apiName RetrieveBlogComment
  * @apiGroup BlogComment
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/blog-comments", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/blog-comments Create blog-comments
+ * @api {post} /api/v1/blog-comments Create blog-comments
  * @apiName CreateBlogComment
  * @apiGroup BlogComment
  * @apiParam {String} blog_id BlogComment blog ObjectId
@@ -49,7 +49,7 @@ router.get("/blog-comments", [_authorization.checkAuth, _authorization.isValidSt
 router.post("/blog-comments", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/blog-comments/{recordId} Update blog-comments
+ * @api {put} /api/v1/blog-comments/{recordId} Update blog-comments
  * @apiName UpdateBlogComment
  * @apiGroup BlogComment
  * @apiHeader {String} Authorization authorization token
@@ -66,7 +66,7 @@ router.post("/blog-comments", [_authorization.checkAuth, _authorization.isValidS
 router.put("/blog-comments/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/blog-comments/{recordId} Delete blog-comments
+ * @api {delete} /api/v1/blog-comments/{recordId} Delete blog-comments
  * @apiName DeleteBlogComment
  * @apiGroup BlogComment
  * @apiHeader {String} Authorization authorization token

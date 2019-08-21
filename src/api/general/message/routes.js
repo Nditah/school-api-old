@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/messages?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/messages?id={recordId} Retrieve one or all records
  * @apiName RetrieveMessage
  * @apiGroup Message
  * @apiHeader {String} Authorization Bearer token
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/messages", [checkAuth], fetchRecord);
 
 /**
- * @api {post} /api/messages Create messages
+ * @api {post} /api/v1/messages Create messages
  * @apiName CreateMessage
  * @apiGroup Message
  * @apiHeader {String} Authorization Bearer token
@@ -45,7 +45,7 @@ router.get("/messages", [checkAuth], fetchRecord);
 router.post("/messages", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/messages/{recordId} Update messages
+ * @api {put} /api/v1/messages/{recordId} Update messages
  * @apiName UpdateMessage
  * @apiGroup Message
  * @apiHeader {String} Authorization Bearer token
@@ -60,7 +60,7 @@ router.post("/messages", [checkAuth, isValidStaff], createRecord);
 router.put("/messages/:recordId", checkAuth, updateRecord);
 
 /**
- * @api {delete} /api/messages/{recordId} Delete messages
+ * @api {delete} /api/v1/messages/{recordId} Delete messages
  * @apiName DeleteMessage
  * @apiGroup Message
  * @apiHeader {String} Authorization Bearer token

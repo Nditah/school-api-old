@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/settings/public Retrieve Public Settings record(s)
+ * @api {get} /api/v1/settings/public Retrieve Public Settings record(s)
  * @apiName RetrievePublicSetting
  * @apiGroup Setting
  * @apiExample {curl} Example usage for retieving a single record:
@@ -35,7 +35,7 @@ var router = _express2.default.Router();
 router.get("/settings/public", _controller.fetchRecordPublic);
 
 /**
- * @api {get} /api/settings?id={recordId} Retrieve Settings record(s)
+ * @api {get} /api/v1/settings?id={recordId} Retrieve Settings record(s)
  * @apiName RetrieveSetting
  * @apiGroup Setting
  * @apiHeader {String} Authorization Bearer token
@@ -46,7 +46,7 @@ router.get("/settings/public", _controller.fetchRecordPublic);
 router.get("/settings", [_authorization.checkAuth], _controller.fetchRecord);
 
 /**
- * @api {put} /api/settings/{recordId} Update Settings record
+ * @api {put} /api/v1/settings/{recordId} Update Settings record
  * @apiName UpdateSetting
  * @apiGroup Setting
  * @apiHeader {String} Authorization Bearer token

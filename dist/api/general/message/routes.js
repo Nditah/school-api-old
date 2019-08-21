@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/messages?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/messages?id={recordId} Retrieve one or all records
  * @apiName RetrieveMessage
  * @apiGroup Message
  * @apiHeader {String} Authorization Bearer token
@@ -35,7 +35,7 @@ var router = _express2.default.Router();
 router.get("/messages", [_authorization.checkAuth], _controller.fetchRecord);
 
 /**
- * @api {post} /api/messages Create messages
+ * @api {post} /api/v1/messages Create messages
  * @apiName CreateMessage
  * @apiGroup Message
  * @apiHeader {String} Authorization Bearer token
@@ -57,7 +57,7 @@ router.get("/messages", [_authorization.checkAuth], _controller.fetchRecord);
 router.post("/messages", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/messages/{recordId} Update messages
+ * @api {put} /api/v1/messages/{recordId} Update messages
  * @apiName UpdateMessage
  * @apiGroup Message
  * @apiHeader {String} Authorization Bearer token
@@ -72,7 +72,7 @@ router.post("/messages", [_authorization.checkAuth, _authorization.isValidStaff]
 router.put("/messages/:recordId", _authorization.checkAuth, _controller.updateRecord);
 
 /**
- * @api {delete} /api/messages/{recordId} Delete messages
+ * @api {delete} /api/v1/messages/{recordId} Delete messages
  * @apiName DeleteMessage
  * @apiGroup Message
  * @apiHeader {String} Authorization Bearer token

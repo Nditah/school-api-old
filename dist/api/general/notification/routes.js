@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/notifications?id={recordId} Retrieve Notification records
+ * @api {get} /api/v1/notifications?id={recordId} Retrieve Notification records
  * @apiName RetrieveNotification
  * @apiGroup Notification
  * @apiHeader {String} Authorization Bearer token
@@ -35,7 +35,7 @@ var router = _express2.default.Router();
 router.get("/notifications", [_authorization.checkAuth], _controller.fetchRecord);
 
 /**
- * @api {post} /api/notifications Create a Notification record
+ * @api {post} /api/v1/notifications Create a Notification record
  * @apiName CreateNotification
  * @apiGroup Notification
  * @apiHeader {String} Authorization Bearer token
@@ -54,7 +54,7 @@ router.get("/notifications", [_authorization.checkAuth], _controller.fetchRecord
 router.post("/notifications", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/notifications/{recordId} Update a Notification record
+ * @api {put} /api/v1/notifications/{recordId} Update a Notification record
  * @apiName UpdateNotification
  * @apiGroup Notification
  * @apiHeader {String} Authorization Bearer token
@@ -74,7 +74,7 @@ router.post("/notifications", [_authorization.checkAuth, _authorization.isValidS
 router.put("/notifications/:recordId", [_authorization.checkAuth], _controller.updateRecord);
 
 /**
- * @api {delete} /api/notifications/{recordId} Delete a Notification record
+ * @api {delete} /api/v1/notifications/{recordId} Delete a Notification record
  * @apiName DeleteNotification
  * @apiGroup Notification
  * @apiPermission master
