@@ -58,7 +58,7 @@ const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
 const options = DATABASE.OPTIONS;
 
 const newSchema = new Schema(schema, options);
-newSchema.set("collection", "mark_sheet");
+newSchema.set("collection", "marksheet");
 
 const Marksheet = mongoose.model("Marksheet", newSchema);
 

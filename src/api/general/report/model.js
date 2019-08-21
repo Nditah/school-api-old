@@ -42,7 +42,7 @@ export const schema = {
     code: { type: String },
     type: {
         type: String,
-        enum: ["management", "financial"],
+        enum: ["MANAGEMENT", "FINANCIAL"],
         required: true,
     },
     name: { type: String },
