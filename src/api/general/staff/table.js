@@ -24,7 +24,6 @@ const staff1 = {
     guarantor1_phone: "ABC",
     guarantor1_address: "ABC",
     employment_status: EMPLOYMENT_STATUS.ON_DUTY,
-    office: "1",
     subsidiary: SUBSIDIARY.SECONDARY,
     superior_id: "Victor",
     created_by: "1",

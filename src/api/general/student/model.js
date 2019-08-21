@@ -34,7 +34,7 @@ import table from "./table";
 import State from "../state/model";
 import County from "../county/model";
 import Parent from "../parent/model";
-import Hostel from "../hostel/model";
+import Hostel from "../hostel-allocation/model";
 import Classe from "../classe/model";
 
 const { Schema } = mongoose;
