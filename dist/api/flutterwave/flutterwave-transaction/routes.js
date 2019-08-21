@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/flutterwave-transactions?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/flutterwave-transactions?id={recordId} Retrieve one or all records
  * @apiName RetrieveFlutterwaveTransaction
  * @apiGroup FlutterwaveTransaction
   * @apiExample {curl} Example usage for retieving a single record:
@@ -39,7 +39,7 @@ var router = _express2.default.Router();
 router.get("/flutterwave-transactions", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {get} /api/flutterwave-transactions/online?id={recordId} Retrieve one or all online Tnx
+ * @api {get} /api/v1/flutterwave-transactions/online?id={recordId} Retrieve one or all online Tnx
  * @apiName RetrieveFlutterwaveTransactionOnline
  * @apiGroup FlutterwaveTransaction
  * @apiExample {curl} Example usage for retieving multiple records:
@@ -59,7 +59,7 @@ router.get("/flutterwave-transactions", [_authorization.checkAuth, _authorizatio
 router.get("/flutterwave-transactions/online", [_authorization.checkAuth, _authorization.isValidStaff], _controller.queryOnlineTnx);
 
 /**
- * @api {get} /api/flutterwave-transactions/settlement?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/flutterwave-transactions/settlement?id={recordId} Retrieve one or all records
  * @apiName RetrieveFlutterwaveTransactionSettlement
  * @apiGroup FlutterwaveTransaction
  * @apiExample {curl} Example usage for retieving multiple records:
@@ -74,7 +74,7 @@ router.get("/flutterwave-transactions/online", [_authorization.checkAuth, _autho
 router.get("/flutterwave-transactions/settlement", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchSettlement);
 
 /**
- * @api {post} /api/flutterwave-transactions Create flutterwave-transactions
+ * @api {post} /api/v1/flutterwave-transactions Create flutterwave-transactions
  * @apiName CreateFlutterwaveTransaction
  * @apiGroup FlutterwaveTransaction
  * @apiParam {Number} flwId FlutterwaveTransaction flwId // 125837,
@@ -114,7 +114,7 @@ router.get("/flutterwave-transactions/settlement", [_authorization.checkAuth, _a
 router.post("/flutterwave-transactions", _controller.createRecord);
 
 /**
- * @api {get} /api/flutterwave-transactions/bvn/:bvn verify BVN
+ * @api {get} /api/v1/flutterwave-transactions/bvn/:bvn verify BVN
  * @apiName VerifyBvn
  * @apiGroup FlutterwaveTransaction
  * @apiParam {String} bvn Bank Verification Number
@@ -125,7 +125,7 @@ router.post("/flutterwave-transactions", _controller.createRecord);
 router.get("/flutterwave-transactions/bvn/:bvn", _controller.verifyBvn);
 
 /**
- * @api {get} /api/flutterwave-transactions/payment/{txref} verify Payment
+ * @api {get} /api/v1/flutterwave-transactions/payment/{txref} verify Payment
  * @apiName VerifyPayment
  * @apiGroup FlutterwaveTransaction
  * @apiParam {String} txref Transaction Reference Number

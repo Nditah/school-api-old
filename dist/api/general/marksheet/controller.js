@@ -62,7 +62,7 @@ var generateMarksheet = exports.generateMarksheet = function () {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         data = req.body;
-                        _Joi$validate = _joi2.default.validate(data, _model.schemaGenerate), error = _Joi$validate.error;
+                        _Joi$validate = _joi2.default.validate(data, _model.schemaCreate), error = _Joi$validate.error;
 
                         if (!error) {
                             _context2.next = 4;

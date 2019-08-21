@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/tasks?id={recordId} Retrieve Task records
+ * @api {get} /api/v1/tasks?id={recordId} Retrieve Task records
  * @apiName RetrieveTask
  * @apiGroup Task
  * @apiHeader {String} Authorization Bearer token
@@ -35,7 +35,7 @@ var router = _express2.default.Router();
 router.get("/tasks", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/tasks Create a Task record
+ * @api {post} /api/v1/tasks Create a Task record
  * @apiName CreateTask
  * @apiGroup Task
  * @apiHeader {String} Authorization Bearer token
@@ -67,7 +67,7 @@ router.get("/tasks", [_authorization.checkAuth, _authorization.isValidStaff], _c
 router.post("/tasks", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/tasks/{recordId} Update a Task record
+ * @api {put} /api/v1/tasks/{recordId} Update a Task record
  * @apiName UpdateTask
  * @apiGroup Task
  * @apiHeader {String} Authorization Bearer token
@@ -100,7 +100,7 @@ router.post("/tasks", [_authorization.checkAuth, _authorization.isValidStaff], _
 router.put("/tasks/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/tasks/{recordId} Delete a Task record
+ * @api {delete} /api/v1/tasks/{recordId} Delete a Task record
  * @apiName DeleteTask
  * @apiGroup Task
  * @apiHeader {String} Authorization Bearer token

@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/blogs?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/blogs?id={recordId} Retrieve one or all records
  * @apiName RetrieveBlog
  * @apiGroup Blog
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/blogs", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/blogs Create blogs
+ * @api {post} /api/v1/blogs Create blogs
  * @apiName CreateBlog
  * @apiGroup Blog
  * @apiHeader {String} Authorization authorization token
@@ -54,7 +54,7 @@ router.get("/blogs", [_authorization.checkAuth, _authorization.isValidStaff], _c
 router.post("/blogs", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/blogs/{recordId} Update blogs
+ * @api {put} /api/v1/blogs/{recordId} Update blogs
  * @apiName UpdateBlog
  * @apiGroup Blog
  * @apiHeader {String} Authorization authorization token
@@ -75,7 +75,7 @@ router.post("/blogs", [_authorization.checkAuth, _authorization.isValidStaff], _
 router.put("/blogs/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/blogs/{recordId} Delete blogs
+ * @api {delete} /api/v1/blogs/{recordId} Delete blogs
  * @apiName DeleteBlog
  * @apiGroup Blog
  * @apiHeader {String} Authorization authorization token

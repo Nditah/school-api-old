@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/assets?id={recordId} Retrieve Asset records
+ * @api {get} /api/v1/assets?id={recordId} Retrieve Asset records
  * @apiName RetrieveAsset
  * @apiGroup Asset
  * @apiHeader {String} Authorization Bearer token
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/assets", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/assets Create an Asset record
+ * @api {post} /api/v1/assets Create an Asset record
  * @apiName CreateAsset
  * @apiGroup Asset
  * @apiHeader {String} Authorization Bearer token
@@ -38,7 +38,7 @@ router.get("/assets", [checkAuth, isValidStaff], fetchRecord);
 router.post("/assets", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/assets/{recordId} Update an Asset record
+ * @api {put} /api/v1/assets/{recordId} Update an Asset record
  * @apiName UpdateAsset
  * @apiGroup Asset
  * @apiHeader {String} Authorization Bearer token
@@ -53,7 +53,7 @@ router.post("/assets", [checkAuth, isValidStaff], createRecord);
 router.put("/assets/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/assets/{recordId} Delete an Asset record
+ * @api {delete} /api/v1/assets/{recordId} Delete an Asset record
  * @apiName DeleteAsset
  * @apiGroup Asset
  * @apiHeader {String} Authorization Bearer token

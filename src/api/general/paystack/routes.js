@@ -12,7 +12,7 @@ import {
 const router = express.Router();
 
 /**
- * @api {get} /api/paystack-transactions/get/{id} Retrieve one record
+ * @api {get} /api/v1/paystack-transactions/get/{id} Retrieve one record
  * @apiName RetrieveOnePaystackTransaction
  * @apiGroup PaystackTransaction
  * @apiExample {curl} Example usage for retieving a single record:
@@ -25,7 +25,7 @@ const router = express.Router();
 router.get("/paystack-transactions/get/:id", [checkAuth, isValidStaff], getTransaction);
 
 /**
- * @api {get} /api/paystack-transactions/timeline/{id} View Transaction Timeline
+ * @api {get} /api/v1/paystack-transactions/timeline/{id} View Transaction Timeline
  * @apiName TimelinePaystackTransaction
  * @apiGroup PaystackTransaction
  * @apiExample {curl} Example usage for retieving a single record:
@@ -38,7 +38,7 @@ router.get("/paystack-transactions/get/:id", [checkAuth, isValidStaff], getTrans
 router.get("/paystack-transactions/timeline/:id", [checkAuth, isValidStaff], timelineTransaction);
 
 /**
- * @api {get} /api/paystack-transactions/list?perPage={perPage} Retrieve one or all records
+ * @api {get} /api/v1/paystack-transactions/list?perPage={perPage} Retrieve one or all records
  * @apiName ListPaystackTransaction
  * @apiGroup PaystackTransaction
  * @apiExample {curl} Example usage for retieving a single record:
@@ -61,7 +61,7 @@ router.get("/paystack-transactions/timeline/:id", [checkAuth, isValidStaff], tim
 router.get("/paystack-transactions/list", [checkAuth, isValidStaff], listTransaction);
 
 /**
- * @api {get} /api/paystack-transactions/verify/{reference} Retrieve one record
+ * @api {get} /api/v1/paystack-transactions/verify/{reference} Retrieve one record
  * @apiName VerifyPaystackTransaction
  * @apiGroup PaystackTransaction
  * @apiExample {curl} Example usage for retieving a record:
@@ -74,7 +74,7 @@ router.get("/paystack-transactions/list", [checkAuth, isValidStaff], listTransac
 router.get("/paystack-transactions/verify/:reference", [checkAuth, isValidStaff], verifyTransaction);
 
 /**
- * @api {get} /api/paystack-transactions/totals Total amount received on your account
+ * @api {get} /api/v1/paystack-transactions/totals Total amount received on your account
  * @apiName TotalPaystackTransaction
  * @apiGroup PaystackTransaction
  * @apiExample {curl} Example usage for retieving a single record:
@@ -88,7 +88,7 @@ router.get("/paystack-transactions/verify/:reference", [checkAuth, isValidStaff]
 router.get("/paystack-transactions/totals", [checkAuth, isValidStaff], totalTransaction);
 
 /**
- * @api {get} /api/paystack-transactions/check-authorization Check Authorization
+ * @api {get} /api/v1/paystack-transactions/check-authorization Check Authorization
  * @apiName CheckAuthorizationPaystackTransaction
  * @apiGroup PaystackTransaction
  * @apiParam {String} authorization_code Authorization code for mastercard or VISA authorization

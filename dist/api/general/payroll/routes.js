@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/payrolls?id={recordId} Retrieve Payroll records
+ * @api {get} /api/v1/payrolls?id={recordId} Retrieve Payroll records
  * @apiName RetrievePayroll
  * @apiGroup Payroll
  * @apiHeader {String} Authorization Bearer token
@@ -35,7 +35,7 @@ var router = _express2.default.Router();
 router.get("/payrolls", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/payrolls Create a Payroll record
+ * @api {post} /api/v1/payrolls Create a Payroll record
  * @apiName CreatePayroll
  * @apiGroup Payroll
  * @apiHeader {String} Authorization Bearer token
@@ -55,7 +55,7 @@ router.get("/payrolls", [_authorization.checkAuth, _authorization.isValidStaff],
 router.post("/payrolls", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/payrolls/{recordId} Update a Payroll record
+ * @api {put} /api/v1/payrolls/{recordId} Update a Payroll record
  * @apiName UpdatePayroll
  * @apiGroup Payroll
  * @apiHeader {String} Authorization Bearer token
@@ -76,7 +76,7 @@ router.post("/payrolls", [_authorization.checkAuth, _authorization.isValidStaff]
 router.put("/payrolls/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/payrolls/{recordId} Delete a Payroll record
+ * @api {delete} /api/v1/payrolls/{recordId} Delete a Payroll record
  * @apiName DeletePayroll
  * @apiGroup Payroll
  * @apiHeader {String} Authorization Bearer token

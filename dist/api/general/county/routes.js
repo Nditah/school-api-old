@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/counties?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/counties?id={recordId} Retrieve one or all records
  * @apiName RetrieveCounty
  * @apiGroup County
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/counties", _controller.fetchRecord);
 
 /**
- * @api {post} /api/counties Create counties
+ * @api {post} /api/v1/counties Create counties
  * @apiName CreateCounty
  * @apiGroup County
  * @apiParam {String} access_token master access token.
@@ -49,7 +49,7 @@ router.get("/counties", _controller.fetchRecord);
 router.post("/counties", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/counties/{recordId} Update counties
+ * @api {put} /api/v1/counties/{recordId} Update counties
  * @apiName UpdateCounty
  * @apiGroup County
  * @apiPermission master
@@ -66,7 +66,7 @@ router.post("/counties", [_authorization.checkAuth, _authorization.isValidStaff]
 router.put("/counties/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/counties/{recordId} Delete counties
+ * @api {delete} /api/v1/counties/{recordId} Delete counties
  * @apiName DeleteCounty
  * @apiGroup County
  * @apiPermission master

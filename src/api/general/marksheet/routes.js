@@ -1,11 +1,11 @@
 import express from "express";
 import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, generateReport, updateRecord } from "./controller";
+import { fetchRecord, generateMarksheet, updateRecord } from "./controller";
 
 const router = express.Router();
 
 /**
- * @api {get} /api/reports?id={recordId} Retrieve Report records
+ * @api {get} /api/v1/reports?id={recordId} Retrieve Report records
  * @apiName RetrieveReport
  * @apiGroup Report
  * @apiHeader {String} Authorization Bearer token
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/reports", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/reports Create a Report record
+ * @api {post} /api/v1/reports Create a Report record
  * @apiName CreateReport
  * @apiGroup Report
  * @apiHeader {String} Authorization Bearer token
@@ -35,10 +35,10 @@ router.get("/reports", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Report not found.
  * @apiError 401 master access only.
  */
-router.post("/reports", [checkAuth, isValidStaff], generateReport);
+router.post("/reports", [checkAuth, isValidStaff], generateMarksheet);
 
 /**
- * @api {put} /api/reports/{recordId} Update a Report record
+ * @api {put} /api/v1/reports/{recordId} Update a Report record
  * @apiName UpdateReport
  * @apiGroup Report
  * @apiHeader {String} Authorization Bearer token

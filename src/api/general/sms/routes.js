@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, createWebhook, createOtp } from "./controlle
 const router = express.Router();
 
 /**
- * @api {get} /api/sms?id={recordId} Retrieve SMS records
+ * @api {get} /api/v1/sms?id={recordId} Retrieve SMS records
  * @apiName RetrieveSms
  * @apiGroup Sms
  * @apiHeader {String} Authorization Bearer token
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/sms", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/sms Create an SMS record
+ * @api {post} /api/v1/sms Create an SMS record
  * @apiName CreateSms
  * @apiGroup Sms
  * @apiHeader {String} Authorization Bearer token
@@ -40,7 +40,7 @@ router.get("/sms", [checkAuth, isValidStaff], fetchRecord);
 router.post("/sms", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {post} /api/sms/otp Create send SMS otp
+ * @api {post} /api/v1/sms/otp Create send SMS otp
  * @apiName CreateSmsOtp
  * @apiGroup Sms
  * @apiHeader {String} Authorization Bearer token
@@ -53,7 +53,7 @@ router.post("/sms", [checkAuth, isValidStaff], createRecord);
 router.post("/sms/otp", createOtp);
 
 /**
- * @api {post} /api/sms/webhook Create incoming SMS webhook
+ * @api {post} /api/v1/sms/webhook Create incoming SMS webhook
  * @apiName CreateSmsWebhook
  * @apiGroup Sms
  * @apiHeader {String} Authorization Bearer token

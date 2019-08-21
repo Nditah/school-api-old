@@ -9,7 +9,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/offences?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/offences?id={recordId} Retrieve one or all records
  * @apiName RetrieveOffence
  * @apiGroup Offence
  * @apiExample {curl} Example usage for retieving a single record:
@@ -26,7 +26,7 @@ const router = express.Router();
 router.get("/offences", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/offences Create offences
+ * @api {post} /api/v1/offences Create offences
  * @apiName CreateOffence
  * @apiGroup Offence
  * @apiParam {String} offender_type Offence offender_type (required)
@@ -51,7 +51,7 @@ router.get("/offences", [checkAuth, isValidStaff], fetchRecord);
 router.post("/offences", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/offences/{recordId} Update offences
+ * @api {put} /api/v1/offences/{recordId} Update offences
  * @apiName UpdateOffence
  * @apiGroup Offence
  * @apiPermission master
@@ -77,7 +77,7 @@ router.post("/offences", [checkAuth, isValidStaff], createRecord);
 router.put("/offences/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/offences/{recordId} Delete offences
+ * @api {delete} /api/v1/offences/{recordId} Delete offences
  * @apiName DeleteOffence
  * @apiGroup Offence
  * @apiPermission master

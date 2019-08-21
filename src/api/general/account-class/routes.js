@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/account-classes?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/account-classes?id={recordId} Retrieve one or all records
  * @apiName RetrieveAccountClasss
  * @apiGroup AccountClass
  * @apiExample {curl} Example usage for retieving a single record:
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/account-classes", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/account-classes Create account-classes
+ * @api {post} /api/v1/account-classes Create account-classes
  * @apiName CreateAccountClass
  * @apiGroup AccountClass
  * @apiHeader {String} Authorization Bearer token
@@ -41,7 +41,7 @@ router.get("/account-classes", [checkAuth, isValidStaff], fetchRecord);
 router.post("/account-classes", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/account-classes/{recordId} Update account-classes
+ * @api {put} /api/v1/account-classes/{recordId} Update account-classes
  * @apiName UpdateAccountClass
  * @apiGroup AccountClass
  * @apiHeader {String} Authorization Bearer token
@@ -60,7 +60,7 @@ router.post("/account-classes", [checkAuth, isValidStaff], createRecord);
 router.put("/account-classes/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/account-classes/{recordId} Delete account-classes
+ * @api {delete} /api/v1/account-classes/{recordId} Delete account-classes
  * @apiName DeleteAccountClass
  * @apiGroup AccountClass
  * @apiHeader {String} Authorization Bearer token

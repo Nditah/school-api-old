@@ -1,7 +1,7 @@
 import Joi from "joi";
 import log4js from "log4js";
 import aqp from "api-query-params";
-import Marksheet, { schemaGenerate, schemaUpdate } from "./model";
+import Marksheet, { schemaCreate, schemaUpdate } from "./model";
 import { success, fail, notFound, isObjecId } from "../../../lib";
 import { STATUS_MSG } from "../../../constants";
 
@@ -37,7 +37,7 @@ export async function fetchRecord(req, res) {
 
 export async function generateMarksheet(req, res) {
     const data = req.body;
-    const { error } = Joi.validate(data, schemaGenerate);
+    const { error } = Joi.validate(data, schemaCreate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
     const newRecord = new Marksheet(data);
     try {

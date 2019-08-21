@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/stocks?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/stocks?id={recordId} Retrieve one or all records
  * @apiName RetrieveStock
  * @apiGroup Stock
   * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/stocks", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/stocks Create stocks
+ * @api {post} /api/v1/stocks Create stocks
  * @apiName CreateStock
  * @apiGroup Stock
  * @apiHeader {String} Authorization Bearer token
@@ -46,7 +46,7 @@ router.get("/stocks", [checkAuth, isValidStaff], fetchRecord);
 router.post("/stocks", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/stocks/{recordId} Update stocks
+ * @api {put} /api/v1/stocks/{recordId} Update stocks
  * @apiName UpdateStock
  * @apiGroup Stock
  * @apiHeader {String} Authorization Bearer token
@@ -71,7 +71,7 @@ router.post("/stocks", [checkAuth, isValidStaff], createRecord);
 router.put("/stocks/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/stocks/{recordId} Delete stocks
+ * @api {delete} /api/v1/stocks/{recordId} Delete stocks
  * @apiName DeleteStock
  * @apiGroup Stock
  * @apiHeader {String} Authorization Bearer token

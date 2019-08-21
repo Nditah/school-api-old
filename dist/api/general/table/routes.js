@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/tables?id={recordId} Retrieve Table records
+ * @api {get} /api/v1/tables?id={recordId} Retrieve Table records
  * @apiName RetrieveTable filter, skip, limit, sort, projection
  * @apiGroup Table
  * @apiExample {curl} Example usage for retieving a single record:
@@ -36,7 +36,7 @@ var router = _express2.default.Router();
 router.get("/tables", _controller.fetchRecord);
 
 /**
- * @api {post} /api/tables Create a Table record
+ * @api {post} /api/v1/tables Create a Table record
  * @apiName CreateTable
  * @apiGroup Table
  * @apiHeader {String} Authorization Bearer token
@@ -55,7 +55,7 @@ router.get("/tables", _controller.fetchRecord);
 router.post("/tables", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/tables/{recordId} Update a Table record
+ * @api {put} /api/v1/tables/{recordId} Update a Table record
  * @apiName UpdateTable
  * @apiGroup Table
  * @apiHeader {String} Authorization authorization token
@@ -75,7 +75,7 @@ router.post("/tables", [_authorization.checkAuth, _authorization.isValidStaff], 
 router.put("/tables/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/tables/{recordId} Delete a Table record
+ * @api {delete} /api/v1/tables/{recordId} Delete a Table record
  * @apiName DeleteTable
  * @apiGroup Table
  * @apiHeader {String} Authorization authorization token

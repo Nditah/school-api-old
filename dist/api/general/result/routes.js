@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/results?id={recordId} Retrieve Report records
+ * @api {get} /api/v1/results?id={recordId} Retrieve Report records
  * @apiName RetrieveReport
  * @apiGroup Report
  * @apiHeader {String} Authorization Bearer token
@@ -35,7 +35,7 @@ var router = _express2.default.Router();
 router.get("/results", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/results Create a Report record
+ * @api {post} /api/v1/results Create a Report record
  * @apiName CreateReport
  * @apiGroup Report
  * @apiHeader {String} Authorization Bearer token
@@ -55,7 +55,7 @@ router.get("/results", [_authorization.checkAuth, _authorization.isValidStaff], 
 router.post("/results", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/results/{recordId} Update a Report record
+ * @api {put} /api/v1/results/{recordId} Update a Report record
  * @apiName UpdateReport
  * @apiGroup Report
  * @apiHeader {String} Authorization Bearer token

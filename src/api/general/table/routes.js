@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/tables?id={recordId} Retrieve Table records
+ * @api {get} /api/v1/tables?id={recordId} Retrieve Table records
  * @apiName RetrieveTable filter, skip, limit, sort, projection
  * @apiGroup Table
  * @apiExample {curl} Example usage for retieving a single record:
@@ -24,7 +24,7 @@ const router = express.Router();
 router.get("/tables", fetchRecord);
 
 /**
- * @api {post} /api/tables Create a Table record
+ * @api {post} /api/v1/tables Create a Table record
  * @apiName CreateTable
  * @apiGroup Table
  * @apiHeader {String} Authorization Bearer token
@@ -43,7 +43,7 @@ router.get("/tables", fetchRecord);
 router.post("/tables", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/tables/{recordId} Update a Table record
+ * @api {put} /api/v1/tables/{recordId} Update a Table record
  * @apiName UpdateTable
  * @apiGroup Table
  * @apiHeader {String} Authorization authorization token
@@ -63,7 +63,7 @@ router.post("/tables", [checkAuth, isValidStaff], createRecord);
 router.put("/tables/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/tables/{recordId} Delete a Table record
+ * @api {delete} /api/v1/tables/{recordId} Delete a Table record
  * @apiName DeleteTable
  * @apiGroup Table
  * @apiHeader {String} Authorization authorization token

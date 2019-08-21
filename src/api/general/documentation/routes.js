@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/documentations?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/documentations?id={recordId} Retrieve one or all records
  * @apiName RetrieveDocumentation
  * @apiGroup Documentation
  * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/documentations", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/documentations Create documentations
+ * @api {post} /api/v1/documentations Create documentations
  * @apiName CreateDocumentation
  * @apiGroup Documentation
  * @apiHeader {String} Authorization Bearer token
@@ -52,7 +52,7 @@ router.get("/documentations", [checkAuth, isValidStaff], fetchRecord);
 router.post("/documentations", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/documentations/{recordId} Update documentations
+ * @api {put} /api/v1/documentations/{recordId} Update documentations
  * @apiName UpdateDocumentation
  * @apiGroup Documentation
  * @apiHeader {String} Authorization Bearer token
@@ -83,7 +83,7 @@ router.post("/documentations", [checkAuth, isValidStaff], createRecord);
 router.put("/documentations/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/documentations/{recordId} Delete documentations
+ * @api {delete} /api/v1/documentations/{recordId} Delete documentations
  * @apiName DeleteDocumentation
  * @apiGroup Documentation
  * @apiPermission master

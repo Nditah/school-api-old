@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/expenses?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/expenses?id={recordId} Retrieve one or all records
  * @apiName RetrieveExpense
  * @apiGroup Expense
  * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/expenses", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/expenses Create expenses
+ * @api {post} /api/v1/expenses Create expenses
  * @apiName CreateExpense
  * @apiGroup Expense
  * @apiHeader {String} Authorization Bearer token
@@ -36,7 +36,7 @@ router.get("/expenses", [checkAuth, isValidStaff], fetchRecord);
 router.post("/expenses", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/expenses/{recordId} Update expenses
+ * @api {put} /api/v1/expenses/{recordId} Update expenses
  * @apiName UpdateExpense
  * @apiGroup Expense
  * @apiHeader {String} Authorization Bearer token
@@ -50,7 +50,7 @@ router.post("/expenses", [checkAuth, isValidStaff], createRecord);
 router.put("/expenses/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/expenses/{recordId} Delete expenses
+ * @api {delete} /api/v1/expenses/{recordId} Delete expenses
  * @apiName DeleteExpense
  * @apiGroup Expense
  * @apiHeader {String} Authorization Bearer token

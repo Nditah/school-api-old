@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/stages?id={recordId} Retrieve Stage records
+ * @api {get} /api/v1/stages?id={recordId} Retrieve Stage records
  * @apiName RetrieveStage
  * @apiGroup Stage
  * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/stages", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/stages Create stages
+ * @api {post} /api/v1/stages Create stages
  * @apiName CreateStage
  * @apiGroup Stage
  * @apiHeader {String} Authorization authorization token
@@ -41,7 +41,7 @@ router.get("/stages", [checkAuth, isValidStaff], fetchRecord);
 router.post("/stages", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/stages/{recordId} Update stages
+ * @api {put} /api/v1/stages/{recordId} Update stages
  * @apiName UpdateStage
  * @apiGroup Stage
  * @apiHeader {String} Authorization authorization token
@@ -60,7 +60,7 @@ router.post("/stages", [checkAuth, isValidStaff], createRecord);
 router.put("/stages/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/stages/{recordId} Delete stages
+ * @api {delete} /api/v1/stages/{recordId} Delete stages
  * @apiName DeleteStage
  * @apiGroup Stage
  * @apiHeader {String} Authorization authorization token
