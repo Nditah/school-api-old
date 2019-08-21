@@ -17,8 +17,8 @@ export async function fetchRecord(req, res) {
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
         const result = await FeesType.find(filter)
-            .populate("created_by", "id surname other_name email phone")
-            .populate("updated_by", "id surname other_name email phone")
+            .populate("created_by", "id surname given_name email phone")
+            .populate("updated_by", "id surname given_name email phone")
             .skip(skip)
             .limit(limit)
             .sort(sort)

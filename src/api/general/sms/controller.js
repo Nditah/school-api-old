@@ -19,7 +19,7 @@ export async function fetchRecord(req, res) {
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
         const result = await Sms.find(filter)
-            .populate("created_by", "id phone email type surname other_name")
+            .populate("created_by", "id phone email type surname given_name")
             .skip(skip)
             .limit(limit)
             .sort(sort)

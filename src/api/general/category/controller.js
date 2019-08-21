@@ -17,8 +17,8 @@ export async function fetchRecord(req, res) {
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
         const result = await Category.find(filter)
-            .populate({ path: "created_by", select: "surname other_name email phone" })
-            .populate({ path: "updated_by", select: "surname other_name email phone" })
+            .populate({ path: "created_by", select: "surname given_name email phone" })
+            .populate({ path: "updated_by", select: "surname given_name email phone" })
             .skip(skip)
             .limit(limit)
             .sort(sort)

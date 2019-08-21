@@ -17,7 +17,7 @@ var fetchRecord = exports.fetchRecord = function () {
                         _aqp = (0, _apiQueryParams2.default)(query), filter = _aqp.filter, skip = _aqp.skip, limit = _aqp.limit, sort = _aqp.sort, projection = _aqp.projection;
                         _context.prev = 2;
                         _context.next = 5;
-                        return _model2.default.find(filter).populate("stage_id").populate("account_heading_id").populate({ path: "staff_id", select: "-password -otp" }).populate({ path: "partner_id", select: "-password -otp" }).populate({ path: "created_by", select: "surname other_name email phone" }).populate({ path: "updated_by", select: "surname other_name email phone" }).skip(skip).limit(limit).sort(sort).select(projection).exec();
+                        return _model2.default.find(filter).populate("stage_id").populate("account_heading_id").populate({ path: "staff_id", select: "-password -otp" }).populate({ path: "partner_id", select: "-password -otp" }).populate({ path: "created_by", select: "surname given_name email phone" }).populate({ path: "updated_by", select: "surname given_name email phone" }).skip(skip).limit(limit).sort(sort).select(projection).exec();
 
                     case 5:
                         result = _context.sent;
@@ -170,8 +170,7 @@ var updateRecord = exports.updateRecord = function () {
 
 var auditRecord = exports.auditRecord = function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res) {
-        var data, id, _Joi$validate3, error, result;
-
+        var data, id, result;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
             while (1) {
                 switch (_context4.prev = _context4.next) {
@@ -181,46 +180,38 @@ var auditRecord = exports.auditRecord = function () {
 
                         data.audited_by = req.body.updated_by;
                         data.audited_date = Date.now();
-                        _Joi$validate3 = _joi2.default.validate(data, schemaAudit), error = _Joi$validate3.error;
-
-                        if (!error) {
-                            _context4.next = 7;
-                            break;
-                        }
-
-                        return _context4.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
-
-                    case 7:
-                        _context4.prev = 7;
-                        _context4.next = 10;
+                        // const { error } = Joi.validate(data, schemaAudit);
+                        // if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
+                        _context4.prev = 4;
+                        _context4.next = 7;
                         return _model2.default.findOneAndUpdate({ _id: id }, data, { new: true });
 
-                    case 10:
+                    case 7:
                         result = _context4.sent;
 
                         if (result) {
-                            _context4.next = 13;
+                            _context4.next = 10;
                             break;
                         }
 
                         return _context4.abrupt("return", (0, _lib.notFound)(res, "Bad Request: Model not found with id " + id));
 
-                    case 13:
+                    case 10:
                         return _context4.abrupt("return", (0, _lib.success)(res, 200, result, "Record updated successfully!"));
 
-                    case 16:
-                        _context4.prev = 16;
-                        _context4.t0 = _context4["catch"](7);
+                    case 13:
+                        _context4.prev = 13;
+                        _context4.t0 = _context4["catch"](4);
 
                         logger.error(_context4.t0);
                         return _context4.abrupt("return", (0, _lib.fail)(res, 500, "Error updating record. " + _context4.t0.message));
 
-                    case 20:
+                    case 17:
                     case "end":
                         return _context4.stop();
                 }
             }
-        }, _callee4, null, [[7, 16]]);
+        }, _callee4, null, [[4, 13]]);
     }));
 
     return function auditRecord(_x7, _x8) {

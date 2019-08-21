@@ -5,8 +5,9 @@ import Message, { schemaCreate, schemaUpdated } from "./model";
 import { success, fail, notFound, isObjecId, hasProp } from "../../../lib";
 import { sendEmail } from "../../../services";
 import { STATUS_MSG } from "../../../constants";
-
 import Staff from "../staff/model";
+import Student from "../student/model";
+import Parent from "../parent/model";
 
 // Logging
 const logger = log4js.getLogger("[message]");
@@ -20,11 +21,10 @@ export async function fetchRecord(req, res) {
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
         const result = await Message.find(filter)
-            .populate("created_by", "id phone email surname other_name")
-            .populate("staff_id", "id phone email surname other_name")
-            .populate("supplier_id", "id phone email surname other_name")
-            .populate("customer_id", "id phone email surname other_name")
-            .populate("partner_id", "id phone email surname other_name")
+            .populate("created_by", "id phone email surname given_name")
+            .populate("staff", "id phone email surname given_name")
+            .populate("student", "id phone email surname given_name")
+            .populate("parent", "id phone email surname given_name")
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -52,14 +52,13 @@ export async function createRecord(req, res) {
         const newRecord = new Message(data);
         const { recipient, sender, subject, body } = data;
         // eslint-disable-next-line max-len
-        const { staff_id: staffId, partner_id: partnerId, supplier_id: driverId, customer_id: customerId } = data;
+        const { staff: staffId, parent: partnerId, supplier_id: driverId, student: customerId } = data;
         let Recipient;
         let recipientId;
         switch (recipient.toUpperCase()) {
         case "STAFF": Recipient = Staff; recipientId = staffId; break;
-        case "PARTNER": Recipient = Partner; recipientId = partnerId; break;
-        case "SUPPLIER": Recipient = Supplier; recipientId = driverId; break;
-        case "CUSTOMER": Recipient = Customer; recipientId = customerId; break;
+        case "PARENT": Recipient = Parent; recipientId = partnerId; break;
+        case "STUDENT": Recipient = Student; recipientId = customerId; break;
         // case "SUPPLIER": Recipient = Supplier; recipientId = supplierId; break;
         default: return fail(res, 422, `Error invalid user type: ${recipient}`);
         }
@@ -71,9 +70,8 @@ export async function createRecord(req, res) {
         let Sender;
         switch (sender.toUpperCase()) {
         case "STAFF": Sender = Staff; break;
-        case "PARTNER": Sender = Partner; break;
-        case "SUPPLIER": Sender = Supplier; break;
-        case "CUSTOMER": Sender = Customer; break;
+        case "PARENT": Sender = Parent; break;
+        case "STUDENT": Sender = Student; break;
         // case "SUPPLIER": Recipient = Supplier; recipientId = supplierId; break;
         default: return fail(res, 422, `Error user type: ${sender}`);
         }

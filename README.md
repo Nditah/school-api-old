@@ -66,3 +66,13 @@ API ROUTES
 
 - **Update Marksheet**
     - put /api/marksheet/{marksheetId}
+
+
+## FUNCTIONALITY
+=========================
+
+- ** From Questionnaire, you can create Assessment (CBT) **
+
+- ** From Assessment (CBT), you can process it into Marksheet **
+
+- ** From Marksheet, you can create Result (CBT) **

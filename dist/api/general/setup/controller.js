@@ -78,100 +78,91 @@ var setCollection = exports.setCollection = function () {
                         console.log(table);
                         _context2.prev = 5;
                         _context2.t0 = collection;
-                        _context2.next = _context2.t0 === "account_class" ? 9 : _context2.t0 === "account_heading" ? 11 : _context2.t0 === "bank" ? 13 : _context2.t0 === "bank_account" ? 15 : _context2.t0 === "budget" ? 17 : _context2.t0 === "category" ? 19 : _context2.t0 === "country" ? 21 : _context2.t0 === "table" ? 23 : _context2.t0 === "vehicle" ? 25 : _context2.t0 === "state" ? 27 : _context2.t0 === "setting" ? 29 : _context2.t0 === "hub" ? 31 : _context2.t0 === "staff" ? 33 : _context2.t0 === "office" ? 35 : _context2.t0 === "report" ? 37 : _context2.t0 === "document_type" ? 39 : _context2.t0 === "offence_type" ? 41 : _context2.t0 === "material" ? 43 : _context2.t0 === "stage" ? 45 : 47;
+                        _context2.next = _context2.t0 === "account_class" ? 9 : _context2.t0 === "account_heading" ? 11 : _context2.t0 === "bank" ? 13 : _context2.t0 === "bank_account" ? 15 : _context2.t0 === "budget" ? 17 : _context2.t0 === "category" ? 19 : _context2.t0 === "table" ? 21 : _context2.t0 === "vehicle" ? 23 : _context2.t0 === "state" ? 25 : _context2.t0 === "setting" ? 27 : _context2.t0 === "staff" ? 29 : _context2.t0 === "office" ? 31 : _context2.t0 === "report" ? 33 : _context2.t0 === "document_type" ? 35 : _context2.t0 === "offence_type" ? 37 : _context2.t0 === "material" ? 39 : 41;
                         break;
 
                     case 9:
-                        Model = _model4.default;return _context2.abrupt("break", 48);
+                        Model = _model4.default;return _context2.abrupt("break", 42);
 
                     case 11:
-                        Model = _model2.default;return _context2.abrupt("break", 48);
+                        Model = _model2.default;return _context2.abrupt("break", 42);
 
                     case 13:
-                        Model = _model24.default;return _context2.abrupt("break", 48);
+                        Model = _model24.default;return _context2.abrupt("break", 42);
 
                     case 15:
-                        Model = _model30.default;return _context2.abrupt("break", 48);
+                        Model = _model30.default;return _context2.abrupt("break", 42);
 
                     case 17:
-                        Model = _model16.default;return _context2.abrupt("break", 48);
+                        Model = _model16.default;return _context2.abrupt("break", 42);
 
                     case 19:
-                        Model = _model34.default;return _context2.abrupt("break", 48);
+                        Model = _model34.default;return _context2.abrupt("break", 42);
 
                     case 21:
-                        Model = Country;return _context2.abrupt("break", 48);
+                        Model = _model6.default;return _context2.abrupt("break", 42);
 
                     case 23:
-                        Model = _model6.default;return _context2.abrupt("break", 48);
+                        Model = _model14.default;return _context2.abrupt("break", 42);
 
                     case 25:
-                        Model = _model14.default;return _context2.abrupt("break", 48);
+                        Model = _model20.default;return _context2.abrupt("break", 42);
 
                     case 27:
-                        Model = _model20.default;return _context2.abrupt("break", 48);
+                        Model = _model22.default;return _context2.abrupt("break", 42);
 
                     case 29:
-                        Model = _model22.default;return _context2.abrupt("break", 48);
+                        Model = _model8.default;return _context2.abrupt("break", 42);
 
                     case 31:
-                        Model = Hub;return _context2.abrupt("break", 48);
+                        Model = _model10.default;return _context2.abrupt("break", 42);
 
                     case 33:
-                        Model = _model8.default;return _context2.abrupt("break", 48);
+                        Model = _model12.default;return _context2.abrupt("break", 42);
 
                     case 35:
-                        Model = _model10.default;return _context2.abrupt("break", 48);
+                        Model = _model26.default;return _context2.abrupt("break", 42);
 
                     case 37:
-                        Model = _model12.default;return _context2.abrupt("break", 48);
+                        Model = _model28.default;return _context2.abrupt("break", 42);
 
                     case 39:
-                        Model = _model26.default;return _context2.abrupt("break", 48);
+                        Model = _model32.default;return _context2.abrupt("break", 42);
 
                     case 41:
-                        Model = _model28.default;return _context2.abrupt("break", 48);
-
-                    case 43:
-                        Model = _model32.default;return _context2.abrupt("break", 48);
-
-                    case 45:
-                        Model = Stage;return _context2.abrupt("break", 48);
-
-                    case 47:
                         return _context2.abrupt("return", (0, _lib.fail)(res, 401, "Error invalid collection: " + collection));
 
-                    case 48:
-                        _context2.next = 50;
+                    case 42:
+                        _context2.next = 44;
                         return Model.insertMany(table);
 
-                    case 50:
+                    case 44:
                         result = _context2.sent;
 
                         if (result) {
-                            _context2.next = 54;
+                            _context2.next = 48;
                             break;
                         }
 
                         logger.info(_constants.STATUS_MSG.SUCCESS.DEFAULT, []);
                         return _context2.abrupt("return", (0, _lib.notFound)(res, "Error: Bad Request: Model not found"));
 
-                    case 54:
+                    case 48:
                         return _context2.abrupt("return", (0, _lib.success)(res, 201, result, "Record created successfully!"));
 
-                    case 57:
-                        _context2.prev = 57;
+                    case 51:
+                        _context2.prev = 51;
                         _context2.t1 = _context2["catch"](5);
 
                         logger.error(_context2.t1);
                         return _context2.abrupt("return", (0, _lib.fail)(res, 500, "Error creating record. " + _context2.t1.message));
 
-                    case 61:
+                    case 55:
                     case "end":
                         return _context2.stop();
                 }
             }
-        }, _callee2, null, [[5, 57]]);
+        }, _callee2, null, [[5, 51]]);
     }));
 
     return function setCollection(_x3, _x4) {
@@ -190,94 +181,85 @@ var downloadCsv = exports.downloadCsv = function () {
                         Model = void 0;
                         _context3.prev = 2;
                         _context3.t0 = collection;
-                        _context3.next = _context3.t0 === "account_class" ? 6 : _context3.t0 === "account_heading" ? 8 : _context3.t0 === "bank" ? 10 : _context3.t0 === "bank_account" ? 12 : _context3.t0 === "budget" ? 14 : _context3.t0 === "category" ? 16 : _context3.t0 === "country" ? 18 : _context3.t0 === "table" ? 20 : _context3.t0 === "vehicle" ? 22 : _context3.t0 === "state" ? 24 : _context3.t0 === "setting" ? 26 : _context3.t0 === "hub" ? 28 : _context3.t0 === "staff" ? 30 : _context3.t0 === "office" ? 32 : _context3.t0 === "report" ? 34 : _context3.t0 === "document_type" ? 36 : _context3.t0 === "offence_type" ? 38 : _context3.t0 === "material" ? 40 : _context3.t0 === "stage" ? 42 : 44;
+                        _context3.next = _context3.t0 === "account_class" ? 6 : _context3.t0 === "account_heading" ? 8 : _context3.t0 === "bank" ? 10 : _context3.t0 === "bank_account" ? 12 : _context3.t0 === "budget" ? 14 : _context3.t0 === "category" ? 16 : _context3.t0 === "table" ? 18 : _context3.t0 === "vehicle" ? 20 : _context3.t0 === "state" ? 22 : _context3.t0 === "setting" ? 24 : _context3.t0 === "staff" ? 26 : _context3.t0 === "office" ? 28 : _context3.t0 === "report" ? 30 : _context3.t0 === "document_type" ? 32 : _context3.t0 === "offence_type" ? 34 : _context3.t0 === "material" ? 36 : 38;
                         break;
 
                     case 6:
-                        Model = _model4.default;return _context3.abrupt("break", 45);
+                        Model = _model4.default;return _context3.abrupt("break", 39);
 
                     case 8:
-                        Model = _model2.default;return _context3.abrupt("break", 45);
+                        Model = _model2.default;return _context3.abrupt("break", 39);
 
                     case 10:
-                        Model = _model24.default;return _context3.abrupt("break", 45);
+                        Model = _model24.default;return _context3.abrupt("break", 39);
 
                     case 12:
-                        Model = _model30.default;return _context3.abrupt("break", 45);
+                        Model = _model30.default;return _context3.abrupt("break", 39);
 
                     case 14:
-                        Model = _model16.default;return _context3.abrupt("break", 45);
+                        Model = _model16.default;return _context3.abrupt("break", 39);
 
                     case 16:
-                        Model = _model34.default;return _context3.abrupt("break", 45);
+                        Model = _model34.default;return _context3.abrupt("break", 39);
 
                     case 18:
-                        Model = Country;return _context3.abrupt("break", 45);
+                        Model = _model6.default;return _context3.abrupt("break", 39);
 
                     case 20:
-                        Model = _model6.default;return _context3.abrupt("break", 45);
+                        Model = _model14.default;return _context3.abrupt("break", 39);
 
                     case 22:
-                        Model = _model14.default;return _context3.abrupt("break", 45);
+                        Model = _model20.default;return _context3.abrupt("break", 39);
 
                     case 24:
-                        Model = _model20.default;return _context3.abrupt("break", 45);
+                        Model = _model22.default;return _context3.abrupt("break", 39);
 
                     case 26:
-                        Model = _model22.default;return _context3.abrupt("break", 45);
+                        Model = _model8.default;return _context3.abrupt("break", 39);
 
                     case 28:
-                        Model = Hub;return _context3.abrupt("break", 45);
+                        Model = _model10.default;return _context3.abrupt("break", 39);
 
                     case 30:
-                        Model = _model8.default;return _context3.abrupt("break", 45);
+                        Model = _model12.default;return _context3.abrupt("break", 39);
 
                     case 32:
-                        Model = _model10.default;return _context3.abrupt("break", 45);
+                        Model = _model26.default;return _context3.abrupt("break", 39);
 
                     case 34:
-                        Model = _model12.default;return _context3.abrupt("break", 45);
+                        Model = _model28.default;return _context3.abrupt("break", 39);
 
                     case 36:
-                        Model = _model26.default;return _context3.abrupt("break", 45);
+                        Model = _model32.default;return _context3.abrupt("break", 39);
 
                     case 38:
-                        Model = _model28.default;return _context3.abrupt("break", 45);
-
-                    case 40:
-                        Model = _model32.default;return _context3.abrupt("break", 45);
-
-                    case 42:
-                        Model = Stage;return _context3.abrupt("break", 45);
-
-                    case 44:
                         return _context3.abrupt("return", (0, _lib.fail)(res, 401, "Error invalid collection: " + collection));
 
-                    case 45:
+                    case 39:
                         res.writeHead(200, {
                             "Content-Type": "text/csv",
                             "Content-Disposition": "attachment; filename=" + collection + ".csv"
                         });
                         // pipe file using mongoose-csv
-                        _context3.next = 48;
+                        _context3.next = 42;
                         return Model.find().sort({ _id: 1 }).limit(100).csv(res);
 
-                    case 48:
+                    case 42:
                         return _context3.abrupt("return", _context3.sent);
 
-                    case 51:
-                        _context3.prev = 51;
+                    case 45:
+                        _context3.prev = 45;
                         _context3.t1 = _context3["catch"](2);
 
                         logger.error(_context3.t1);
                         return _context3.abrupt("return", (0, _lib.fail)(res, 500, "Error creating record. " + _context3.t1.message));
 
-                    case 55:
+                    case 49:
                     case "end":
                         return _context3.stop();
                 }
             }
-        }, _callee3, null, [[2, 51]]);
+        }, _callee3, null, [[2, 45]]);
     }));
 
     return function downloadCsv(_x5, _x6) {
@@ -297,78 +279,69 @@ var uploadCsv = exports.uploadCsv = function () {
                         Model = void 0;
                         _context4.prev = 3;
                         _context4.t0 = collection;
-                        _context4.next = _context4.t0 === "account_class" ? 7 : _context4.t0 === "account_heading" ? 9 : _context4.t0 === "bank" ? 11 : _context4.t0 === "bank_account" ? 13 : _context4.t0 === "budget" ? 15 : _context4.t0 === "category" ? 17 : _context4.t0 === "country" ? 19 : _context4.t0 === "table" ? 21 : _context4.t0 === "vehicle" ? 23 : _context4.t0 === "state" ? 25 : _context4.t0 === "setting" ? 27 : _context4.t0 === "hub" ? 29 : _context4.t0 === "staff" ? 31 : _context4.t0 === "office" ? 33 : _context4.t0 === "report" ? 35 : _context4.t0 === "document_type" ? 37 : _context4.t0 === "offence_type" ? 39 : _context4.t0 === "material" ? 41 : _context4.t0 === "stage" ? 43 : 45;
+                        _context4.next = _context4.t0 === "account_class" ? 7 : _context4.t0 === "account_heading" ? 9 : _context4.t0 === "bank" ? 11 : _context4.t0 === "bank_account" ? 13 : _context4.t0 === "budget" ? 15 : _context4.t0 === "category" ? 17 : _context4.t0 === "table" ? 19 : _context4.t0 === "vehicle" ? 21 : _context4.t0 === "state" ? 23 : _context4.t0 === "setting" ? 25 : _context4.t0 === "staff" ? 27 : _context4.t0 === "office" ? 29 : _context4.t0 === "report" ? 31 : _context4.t0 === "document_type" ? 33 : _context4.t0 === "offence_type" ? 35 : _context4.t0 === "material" ? 37 : 39;
                         break;
 
                     case 7:
-                        Model = _model4.default;return _context4.abrupt("break", 46);
+                        Model = _model4.default;return _context4.abrupt("break", 40);
 
                     case 9:
-                        Model = _model2.default;return _context4.abrupt("break", 46);
+                        Model = _model2.default;return _context4.abrupt("break", 40);
 
                     case 11:
-                        Model = _model24.default;return _context4.abrupt("break", 46);
+                        Model = _model24.default;return _context4.abrupt("break", 40);
 
                     case 13:
-                        Model = _model30.default;return _context4.abrupt("break", 46);
+                        Model = _model30.default;return _context4.abrupt("break", 40);
 
                     case 15:
-                        Model = _model16.default;return _context4.abrupt("break", 46);
+                        Model = _model16.default;return _context4.abrupt("break", 40);
 
                     case 17:
-                        Model = _model34.default;return _context4.abrupt("break", 46);
+                        Model = _model34.default;return _context4.abrupt("break", 40);
 
                     case 19:
-                        Model = Country;return _context4.abrupt("break", 46);
+                        Model = _model6.default;return _context4.abrupt("break", 40);
 
                     case 21:
-                        Model = _model6.default;return _context4.abrupt("break", 46);
+                        Model = _model14.default;return _context4.abrupt("break", 40);
 
                     case 23:
-                        Model = _model14.default;return _context4.abrupt("break", 46);
+                        Model = _model20.default;return _context4.abrupt("break", 40);
 
                     case 25:
-                        Model = _model20.default;return _context4.abrupt("break", 46);
+                        Model = _model22.default;return _context4.abrupt("break", 40);
 
                     case 27:
-                        Model = _model22.default;return _context4.abrupt("break", 46);
+                        Model = _model8.default;return _context4.abrupt("break", 40);
 
                     case 29:
-                        Model = Hub;return _context4.abrupt("break", 46);
+                        Model = _model10.default;return _context4.abrupt("break", 40);
 
                     case 31:
-                        Model = _model8.default;return _context4.abrupt("break", 46);
+                        Model = _model12.default;return _context4.abrupt("break", 40);
 
                     case 33:
-                        Model = _model10.default;return _context4.abrupt("break", 46);
+                        Model = _model26.default;return _context4.abrupt("break", 40);
 
                     case 35:
-                        Model = _model12.default;return _context4.abrupt("break", 46);
+                        Model = _model28.default;return _context4.abrupt("break", 40);
 
                     case 37:
-                        Model = _model26.default;return _context4.abrupt("break", 46);
+                        Model = _model32.default;return _context4.abrupt("break", 40);
 
                     case 39:
-                        Model = _model28.default;return _context4.abrupt("break", 46);
-
-                    case 41:
-                        Model = _model32.default;return _context4.abrupt("break", 46);
-
-                    case 43:
-                        Model = Stage;return _context4.abrupt("break", 46);
-
-                    case 45:
                         return _context4.abrupt("return", (0, _lib.fail)(res, 401, "Error invalid collection: " + collection));
 
-                    case 46:
+                    case 40:
                         if (!(Object.keys(req.files).length === 0)) {
-                            _context4.next = 48;
+                            _context4.next = 42;
                             break;
                         }
 
                         return _context4.abrupt("return", res.status(400).send("No files were uploaded."));
 
-                    case 48:
+                    case 42:
                         csvFile = req.files.file;
                         csvString = csvFile.data.toString();
                         records = [];
@@ -383,19 +356,19 @@ var uploadCsv = exports.uploadCsv = function () {
                             });
                         }));
 
-                    case 54:
-                        _context4.prev = 54;
+                    case 48:
+                        _context4.prev = 48;
                         _context4.t1 = _context4["catch"](3);
 
                         logger.error(_context4.t1);
                         return _context4.abrupt("return", (0, _lib.fail)(res, 500, "Error creating record. " + _context4.t1.message));
 
-                    case 58:
+                    case 52:
                     case "end":
                         return _context4.stop();
                 }
             }
-        }, _callee4, null, [[3, 54]]);
+        }, _callee4, null, [[3, 48]]);
     }));
 
     return function uploadCsv(_x7, _x8) {

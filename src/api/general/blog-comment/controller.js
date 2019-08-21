@@ -20,7 +20,7 @@ export async function fetchRecord(req, res) {
         const result = await BlogComment.find(filter)
             .populate("blog_id")
             .populate("related_comment_id")
-            .populate("created_by", "id surname other_name email phone")
+            .populate("created_by", "id surname given_name email phone")
             .skip(skip)
             .limit(limit)
             .sort(sort)

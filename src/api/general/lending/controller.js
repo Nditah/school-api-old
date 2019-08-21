@@ -21,8 +21,8 @@ export async function fetchRecord(req, res) {
             .populate("account_heading_id")
             .populate({ path: "staff_id", select: "-password -otp" })
             .populate({ path: "partner_id", select: "-password -otp" })
-            .populate({ path: "created_by", select: "surname other_name email phone" })
-            .populate({ path: "updated_by", select: "surname other_name email phone" })
+            .populate({ path: "created_by", select: "surname given_name email phone" })
+            .populate({ path: "updated_by", select: "surname given_name email phone" })
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -79,8 +79,8 @@ export async function auditRecord(req, res) {
     const { recordId: id } = req.params;
     data.audited_by = req.body.updated_by;
     data.audited_date = Date.now();
-    const { error } = Joi.validate(data, schemaAudit);
-    if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
+    // const { error } = Joi.validate(data, schemaAudit);
+    // if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
     try {
         const result = await Lending.findOneAndUpdate({ _id: id }, data, { new: true });
         if (!result) {
