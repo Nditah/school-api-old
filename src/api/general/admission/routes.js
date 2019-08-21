@@ -40,7 +40,7 @@ router.get("/admissions", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {String} intending_class Admission intending class
  * @apiParam {String} last_school Admission last school attended
  * @apiParam {String} father_name Admission father's name
- * @apiParam {String} mother_name Admission mother's name
+ * @apiParam {String} mgiven_name Admission mother's name
  * @apiParam {String} home_address Admission guadians home address
  * @apiParam {String} phone_number Admission guadians phone number
  * @apiError {Object} 422 Some parameters may contain invalid values.
@@ -68,7 +68,7 @@ router.post("/admissions", [checkAuth, isValidStaff], createRecord);
  * @apiParam {String} intending_class Admission intending class
  * @apiParam {String} last_school Admission last school attended
  * @apiParam {String} father_name Admission father's name
- * @apiParam {String} mother_name Admission mother's name
+ * @apiParam {String} mgiven_name Admission mother's name
  * @apiParam {String} home_address Admission guadians home address
  * @apiParam {String} phone_number Admission guadians phone number
  * @apiError {Object} 422 Some parameters may contain invalid values.

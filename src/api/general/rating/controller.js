@@ -19,8 +19,8 @@ export async function fetchRecord(req, res) {
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
         const result = await Rating.find(filter)
-            .populate("staff_id", "id, surname, other_name")
-            .populate("partner_id", "id, surname, other_name, phone, email")
+            .populate("staff_id", "id, surname, given_name")
+            .populate("partner_id", "id, surname, given_name, phone, email")
             .populate("vehicle_id", "id, name")
             .populate("terminal_id")
             .skip(skip)

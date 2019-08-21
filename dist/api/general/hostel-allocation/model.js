@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.HostelBedspace = exports.HostelRoom = exports.Hostel = exports.hostelAllocationSchema = exports.hostelAllocationUpdate = exports.hostelAllocationCreate = exports.hostelBedspaceSchema = exports.hostelBedspaceUpdate = exports.hostelBedspaceCreate = exports.hostelRoomSchema = exports.hostelRoomUpdate = exports.hostelRoomCreate = exports.hostelSchema = exports.hostelUpdate = exports.hostelCreate = undefined;
+exports.HostelAllocation = exports.HostelBedspace = exports.HostelRoom = exports.Hostel = exports.hostelAllocationSchema = exports.hostelAllocationUpdate = exports.hostelAllocationCreate = exports.hostelBedspaceSchema = exports.hostelBedspaceUpdate = exports.hostelBedspaceCreate = exports.hostelRoomSchema = exports.hostelRoomUpdate = exports.hostelRoomCreate = exports.hostelSchema = exports.hostelUpdate = exports.hostelCreate = undefined;
 
 var _joi = require("joi");
 
@@ -206,12 +206,13 @@ newHostelBedspaceSchemaSchema.plugin(_mongooseCsv2.default);
 newHostelAllocationSchemaSchema.plugin(_mongooseCsv2.default);
 
 var Hostel = _mongoose2.default.model("Hostel", newHostelSchema);
-var HostelRoom = _mongoose2.default.model("Hostel", newHostelRoomSchema);
-var HostelBedspace = _mongoose2.default.model("Hostel", newHostelBedspaceSchemaSchema);
-var HostelAllocation = _mongoose2.default.model("Hostel", newHostelAllocationSchemaSchema);
+var HostelRoom = _mongoose2.default.model("HostelRoom", newHostelRoomSchema);
+var HostelBedspace = _mongoose2.default.model("HostelBedspace", newHostelBedspaceSchemaSchema);
+var HostelAllocation = _mongoose2.default.model("HostelAllocation", newHostelAllocationSchemaSchema);
 
 exports.Hostel = Hostel;
 exports.HostelRoom = HostelRoom;
 exports.HostelBedspace = HostelBedspace;
+exports.HostelAllocation = HostelAllocation;
 exports.default = HostelAllocation;
 //# sourceMappingURL=model.js.map

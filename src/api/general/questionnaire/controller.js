@@ -6,9 +6,9 @@ import { success, fail, notFound } from "../../../lib";
 import { STATUS_MSG } from "../../../constants";
 
 // Logging
-const logger = log4js.getLogger("[cbt_question]");
+const logger = log4js.getLogger("[questionnaire]");
 log4js.configure({
-    appenders: { file: { type: "file", filename: "logs/cbt_question.log" } },
+    appenders: { file: { type: "file", filename: "logs/questionnaire.log" } },
     categories: { default: { appenders: ["file"], level: "debug" } },
 });
 

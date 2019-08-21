@@ -67,7 +67,7 @@ var findVehicle = exports.findVehicle = function () {
                             delete filter.q;
                         }
                         _context2.next = 5;
-                        return _model2.default.find(filter).populate("partner_id").populate("current_staff_id").populate("current_partner_id").populate("rating_ids").populate({ path: "created_by", select: "surname other_name email phone" }).populate({ path: "updated_by", select: "surname other_name email phone" }).skip(skip).limit(limit).sort(sort).select(projection).exec();
+                        return _model2.default.find(filter).populate("partner_id").populate("current_staff_id").populate("current_partner_id").populate("rating_ids").populate({ path: "created_by", select: "surname given_name email phone" }).populate({ path: "updated_by", select: "surname given_name email phone" }).skip(skip).limit(limit).sort(sort).select(projection).exec();
 
                     case 5:
                         result = _context2.sent;

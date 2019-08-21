@@ -16,7 +16,7 @@
  * @property {String} intending_class Admission intending class
  * @property {String} last_school Admission last school attended
  * @property {String} father_name Admission father's name
- * @property {String} mother_name Admission mother's name
+ * @property {String} mgiven_name Admission mother's name
  * @property {String} home_address Admission guadians home address
  * @property {String} phone_number Admission guadians phone number
  * @description Admission model holds record of all admissions in Peace Group
@@ -38,7 +38,7 @@ const { ObjectId } = Schema.Types;
 export const schemaCreate = {
     passport: Joi.string().optional(),
     surname: Joi.string().optional(),
-    other_name: Joi.string().optional(),
+    given_name: Joi.string().optional(),
     home_town: Joi.string().optional(),
     address: Joi.string().optional(),
     state_id: Joi.string().optional(),
@@ -51,7 +51,7 @@ export const schemaCreate = {
     intending_class: Joi.string().optional(),
     last_school: Joi.string().optional(),
     father_name: Joi.string().optional(),
-    mother_name: Joi.string().optional(),
+    mgiven_name: Joi.string().optional(),
     home_address: Joi.string().optional(),
     created_by: Joi.string().required(),
 };
@@ -59,7 +59,7 @@ export const schemaCreate = {
 export const schemaUpdate = {
     passport: Joi.string().optional(),
     surname: Joi.string().optional(),
-    other_name: Joi.string().optional(),
+    given_name: Joi.string().optional(),
     home_town: Joi.string().optional(),
     address: Joi.string().optional(),
     state_id: Joi.string().optional(),
@@ -72,7 +72,7 @@ export const schemaUpdate = {
     intending_class: Joi.string().optional(),
     last_school: Joi.string().optional(),
     father_name: Joi.string().optional(),
-    mother_name: Joi.string().optional(),
+    mgiven_name: Joi.string().optional(),
     home_address: Joi.string().optional(),
     updated_by: Joi.string().required(),
 };
@@ -91,7 +91,7 @@ export const schema = {
     intending_class: { type: ObjectId, ref: "Classe" },
     last_school: { type: String },
     father_name: { type: String },
-    mother_name: { type: String },
+    mgiven_name: { type: String },
     home_address: { type: String },
     phone: {
         type: String,
