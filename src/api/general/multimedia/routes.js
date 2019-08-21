@@ -6,7 +6,7 @@ import { addImageAws, createRecord, fetchRecord, updateRecord, deleteRecord } fr
 const router = express.Router();
 
 /**
- * @api {get} /api/upload to get the form for uploading images
+ * @api {get} /api/v1/upload to get the form for uploading images
  * @apiName RetrieveUploadForm
  * @apiGroup Image
  * @apiDescription The sample form allows you to test the API by uploading
@@ -17,7 +17,7 @@ router.get("/upload", (req, res) => {
 });
 
 /**
- * @api {get} /api/images?{query} Retrieve all image-assets
+ * @api {get} /api/v1/images?{query} Retrieve all image-assets
  * @apiName RetrieveImages
  * @apiGroup Image
  * @apiHeader {String} Authorization authorization token
@@ -29,7 +29,7 @@ router.get("/upload", (req, res) => {
 router.get("/images", fetchRecord);
 
 /**
- * @api {post} /api/images Create image-assets
+ * @api {post} /api/v1/images Create image-assets
  * @apiName CreateImage
  * @apiGroup Image
  * @apiHeader {String} Authorization authorization token
@@ -44,7 +44,7 @@ router.get("/images", fetchRecord);
 router.post("/images", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {post} /api/images-aws Create image-assets
+ * @api {post} /api/v1/images-aws Create image-assets
  * @apiName CreateImageAws
  * @apiGroup Image
  * @apiHeader {String} Authorization authorization token
@@ -57,7 +57,7 @@ router.post("/images", [checkAuth, isValidStaff], createRecord);
 router.post("/images-aws", [checkAuth, isValidStaff], addImageAws);
 
 /**
- * @api {put} /api/images/{ImageId} Update image-assets
+ * @api {put} /api/v1/images/{ImageId} Update image-assets
  * @apiName UpdateImage
  * @apiGroup Image
  * @apiHeader {String} Authorization authorization token
@@ -68,7 +68,7 @@ router.post("/images-aws", [checkAuth, isValidStaff], addImageAws);
 router.put("/images/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/images/{recordId} Delete image-assets
+ * @api {delete} /api/v1/images/{recordId} Delete image-assets
  * @apiName DeleteImage
  * @apiGroup Image
  * @apiHeader {String} Authorization authorization token

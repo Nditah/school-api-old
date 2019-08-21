@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/vehicles?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/vehicles?id={recordId} Retrieve one or all records
  * @apiName RetrieveVehicle
  * @apiGroup Vehicle
  * @apiHeader {String} Authorization Bearer token
@@ -38,7 +38,7 @@ var router = _express2.default.Router();
 router.get("/vehicles", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/vehicles Create vehicles
+ * @api {post} /api/v1/vehicles Create vehicles
  * @apiName CreateVehicle
  * @apiGroup Vehicle
  * @apiHeader {String} Authorization Bearer token
@@ -149,7 +149,7 @@ router.get("/vehicles", [_authorization.checkAuth, _authorization.isValidStaff],
 router.post("/vehicles", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/vehicles/{recordId} Update vehicles
+ * @api {put} /api/v1/vehicles/{recordId} Update vehicles
  * @apiName UpdateVehicle
  * @apiGroup Vehicle
  * @apiHeader {String} Authorization Bearer token
@@ -205,7 +205,7 @@ router.post("/vehicles", [_authorization.checkAuth, _authorization.isValidStaff]
 router.put("/vehicles/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/vehicles/{recordId} Delete vehicles
+ * @api {delete} /api/v1/vehicles/{recordId} Delete vehicles
  * @apiName DeleteVehicle
  * @apiGroup Vehicle
  * @apiHeader {String} Authorization Bearer token

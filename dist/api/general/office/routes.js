@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/offices?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/offices?id={recordId} Retrieve one or all records
  * @apiName RetrieveOffice
  * @apiGroup Office
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/offices", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/offices Create offices
+ * @api {post} /api/v1/offices Create offices
  * @apiName CreateOffice
  * @apiGroup Office
  * @apiHeader {String} Authorization Bearer token
@@ -45,7 +45,8 @@ router.get("/offices", [_authorization.checkAuth, _authorization.isValidStaff], 
  * @apiParam {String} functions Office list tasks the office performs
  * @apiParam {String} description Office job-description staff performs
  * @apiParam {Number} hierarchy Office hierarchy [1-7]
- * @apiParam {Enum} office_type Office office_type "PRINCIPAL|VICE-PRINCIPAL|ACADEMIC|ADMINISTRATIVE"
+ * @apiParam {Enum} office_type Office office_type
+ * "PRINCIPAL|VICE-PRINCIPAL|ACADEMIC|ADMINISTRATIVE"
  * @apiParam {Enum} subsidiary Office subsidiary "NURSRY|PRIMARY|SECONDARY|PRE-NURSRY"
  * @apiParam {ObjectId} office_above Office above this.
  * @apiParam {ObjectId} head Office Head Staff Id
@@ -58,7 +59,7 @@ router.get("/offices", [_authorization.checkAuth, _authorization.isValidStaff], 
 router.post("/offices", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/offices/{recordId} Update offices
+ * @api {put} /api/v1/offices/{recordId} Update offices
  * @apiName UpdateOffice
  * @apiGroup Office
  * @apiHeader {String} Authorization Bearer token
@@ -69,7 +70,8 @@ router.post("/offices", [_authorization.checkAuth, _authorization.isValidStaff],
  * @apiParam {String} functions Office list tasks the office performs
  * @apiParam {String} description Office job-description staff performs
  * @apiParam {Number} hierarchy Office hierarchy [1-7]
- * @apiParam {Enum} office_type Office office_type "PRINCIPAL|VICE-PRINCIPAL|ACADEMIC|ADMINISTRATIVE"
+ * @apiParam {Enum} office_type Office office_type
+ *  "PRINCIPAL|VICE-PRINCIPAL|ACADEMIC|ADMINISTRATIVE"
  * @apiParam {Enum} subsidiary Office subsidiary "NURSRY|PRIMARY|SECONDARY|PRE-NURSRY"
  * @apiParam {ObjectId} office_above Office above this.
  * @apiParam {ObjectId} head Office Head Staff Id
@@ -82,7 +84,7 @@ router.post("/offices", [_authorization.checkAuth, _authorization.isValidStaff],
 router.put("/offices/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/offices/{recordId} Delete offices
+ * @api {delete} /api/v1/offices/{recordId} Delete offices
  * @apiName DeleteOffice
  * @apiGroup Office
  * @apiHeader {String} Authorization Bearer token

@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/stocks?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/stocks?id={recordId} Retrieve one or all records
  * @apiName RetrieveStock
  * @apiGroup Stock
   * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/stocks", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/stocks Create stocks
+ * @api {post} /api/v1/stocks Create stocks
  * @apiName CreateStock
  * @apiGroup Stock
  * @apiHeader {String} Authorization Bearer token
@@ -58,7 +58,7 @@ router.get("/stocks", [_authorization.checkAuth, _authorization.isValidStaff], _
 router.post("/stocks", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/stocks/{recordId} Update stocks
+ * @api {put} /api/v1/stocks/{recordId} Update stocks
  * @apiName UpdateStock
  * @apiGroup Stock
  * @apiHeader {String} Authorization Bearer token
@@ -83,7 +83,7 @@ router.post("/stocks", [_authorization.checkAuth, _authorization.isValidStaff], 
 router.put("/stocks/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/stocks/{recordId} Delete stocks
+ * @api {delete} /api/v1/stocks/{recordId} Delete stocks
  * @apiName DeleteStock
  * @apiGroup Stock
  * @apiHeader {String} Authorization Bearer token

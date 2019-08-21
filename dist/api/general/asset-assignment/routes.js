@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/asset-assignments?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/asset-assignments?id={recordId} Retrieve one or all records
  * @apiName RetrieveAssetAssignment
  * @apiGroup AssetAssignment
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/asset-assignments", [_authorization.checkAuth], _controller.fetchRecord);
 
 /**
- * @api {post} /api/asset-assignments Create asset-assignments
+ * @api {post} /api/v1/asset-assignments Create asset-assignments
  * @apiName CreateAssetAssignment
  * @apiGroup AssetAssignment
  * @apiHeader {String} Authorization Bearer token
@@ -67,7 +67,7 @@ router.get("/asset-assignments", [_authorization.checkAuth], _controller.fetchRe
 router.post("/asset-assignments", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/asset-assignments/{recordId} Update asset-assignments
+ * @api {put} /api/v1/asset-assignments/{recordId} Update asset-assignments
  * @apiName UpdateAssetAssignment
  * @apiGroup AssetAssignment
  * @apiHeader {String} Authorization Bearer token
@@ -101,7 +101,7 @@ router.post("/asset-assignments", [_authorization.checkAuth, _authorization.isVa
 router.put("/asset-assignments/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/asset-assignments/{recordId} Delete asset-assignments
+ * @api {delete} /api/v1/asset-assignments/{recordId} Delete asset-assignments
  * @apiName DeleteAssetAssignment
  * @apiGroup AssetAssignment
  * @apiHeader {String} Authorization Bearer token

@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/synchronizations?id={recordId} Retrieve Synchronization records
+ * @api {get} /api/v1/synchronizations?id={recordId} Retrieve Synchronization records
  * @apiName RetrieveSynchronization filter, skip, limit, sort, projection
  * @apiGroup Synchronization
  * @apiExample {curl} Example usage for retieving a single record:
@@ -24,7 +24,7 @@ const router = express.Router();
 router.get("/synchronizations", fetchRecord);
 
 /**
- * @api {post} /api/synchronizations Create a Synchronization record
+ * @api {post} /api/v1/synchronizations Create a Synchronization record
  * @apiName CreateSynchronization
  * @apiGroup Synchronization
  * @apiHeader {String} Authorization Bearer token
@@ -42,7 +42,7 @@ router.get("/synchronizations", fetchRecord);
 router.post("/synchronizations", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/synchronizations/{recordId} Update a Synchronization record
+ * @api {put} /api/v1/synchronizations/{recordId} Update a Synchronization record
  * @apiName UpdateSynchronization
  * @apiGroup Synchronization
  * @apiHeader {String} Authorization authorization token
@@ -61,7 +61,7 @@ router.post("/synchronizations", [checkAuth, isValidStaff], createRecord);
 router.put("/synchronizations/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/synchronizations/{recordId} Delete a Synchronization record
+ * @api {delete} /api/v1/synchronizations/{recordId} Delete a Synchronization record
  * @apiName DeleteSynchronization
  * @apiGroup Synchronization
  * @apiHeader {String} Authorization authorization token

@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/hostels?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/hostels?id={recordId} Retrieve one or all records
  * @apiName RetrieveHostel
  * @apiGroup Hostel
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/hostels", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/hostels Create hostels
+ * @api {post} /api/v1/hostels Create hostels
  * @apiName CreateHostel
  * @apiGroup Hostel
  * @apiHeader {String} Authorization Bearer token
@@ -51,7 +51,7 @@ router.get("/hostels", [_authorization.checkAuth, _authorization.isValidStaff], 
 router.post("/hostels", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/hostels/{recordId} Update hostels
+ * @api {put} /api/v1/hostels/{recordId} Update hostels
  * @apiName UpdateHostel
  * @apiGroup Hostel
  * @apiHeader {String} Authorization Bearer token
@@ -68,7 +68,7 @@ router.post("/hostels", [_authorization.checkAuth, _authorization.isValidStaff],
 router.put("/hostels/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/hostels/{recordId} Delete hostels
+ * @api {delete} /api/v1/hostels/{recordId} Delete hostels
  * @apiName DeleteHostel
  * @apiGroup Hostel
  * @apiHeader {String} Authorization Bearer token

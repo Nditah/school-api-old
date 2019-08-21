@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/staff?id={recordId} Retrieve Staff records
+ * @api {get} /api/v1/staff?id={recordId} Retrieve Staff records
  * @apiName RetrieveStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -35,7 +35,7 @@ var router = _express2.default.Router();
 router.get("/staff", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/staff Create a Staff record
+ * @api {post} /api/v1/staff Create a Staff record
  * @apiName CreateStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -103,7 +103,7 @@ router.get("/staff", [_authorization.checkAuth, _authorization.isValidStaff], _c
 router.post("/staff", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/staff/{recordId} Update a Staff record
+ * @api {put} /api/v1/staff/{recordId} Update a Staff record
  * @apiName UpdateStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -172,7 +172,7 @@ router.post("/staff", [_authorization.checkAuth, _authorization.isValidStaff], _
 router.put("/staff/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/staff/{recordId} Delete a Staff record
+ * @api {delete} /api/v1/staff/{recordId} Delete a Staff record
  * @apiName DeleteStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -184,7 +184,7 @@ router.put("/staff/:recordId", [_authorization.checkAuth, _authorization.isValid
 router.delete("/staff/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
 /**
- * @api {post} /api/staff/login Login Staff
+ * @api {post} /api/v1/staff/login Login Staff
  * @apiName LoginStaff
  * @apiGroup Staff
  * @apiPermission master

@@ -9,7 +9,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/contact-us?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/contact-us?id={recordId} Retrieve one or all records
  * @apiName RetrieveContactUs
  * @apiGroup ContactUs
  * @apiExample {curl} Example usage for retieving a single record:
@@ -27,7 +27,7 @@ const router = express.Router();
 router.get("/contact-us", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/contact-us Create contact-us
+ * @api {post} /api/v1/contact-us Create contact-us
  * @apiName CreateContactUs
  * @apiGroup ContactUs
  * @apiParam {String} access_token master access token.
@@ -50,7 +50,7 @@ router.get("/contact-us", [checkAuth, isValidStaff], fetchRecord);
 router.post("/contact-us", createRecord);
 
 /**
- * @api {put} /api/contact-us/{recordId} Update contact-us
+ * @api {put} /api/v1/contact-us/{recordId} Update contact-us
  * @apiName UpdateContactUs
  * @apiGroup ContactUs
  * @apiPermission master
@@ -67,7 +67,7 @@ router.post("/contact-us", createRecord);
 router.put("/contact-us/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/contact-us/{recordId} Delete contact-us
+ * @api {delete} /api/v1/contact-us/{recordId} Delete contact-us
  * @apiName DeleteContactUs
  * @apiGroup ContactUs
  * @apiPermission master

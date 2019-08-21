@@ -1,15 +1,11 @@
-const twilio = require("twilio");
 const dotenv = require("dotenv");
 const { SMS } = require("../constants");
 
-//  * https://www.twilio.com/docs/sms/api/message-resource#read-multiple-message-resources
-
 dotenv.config();
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
+const smsApi = process.env.SMS_API;
+const client = null;
 // eslint-disable-next-line new-cap
-const client = new twilio(accountSid, authToken);
 const sender = SMS.PEACE_SMS_SENDER;
 
 function formatPhone(phone) {
@@ -49,7 +45,7 @@ async function sendSmsAsync(recipient, message) {
  * Receive message via this webhook set at the twilio user settings
  */
 async function receiveSms(req, res) {
-    const twiml = new twilio.TwimlResponse();
+    const twiml = ""; // new twilio.TwimlResponse();
     twiml.message("Twilio incoming message:");
     const message = twiml.toString();
     res.send(message);

@@ -9,7 +9,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/document-type?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/document-type?id={recordId} Retrieve one or all records
  * @apiName RetrieveDocumentType
  * @apiGroup DocumentType
  * @apiExample {curl} Example usage for retieving a single record:
@@ -26,7 +26,7 @@ const router = express.Router();
 router.get("/document-type", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/document-type Create document-type
+ * @api {post} /api/v1/document-type Create document-type
  * @apiName CreateDocumentType
  * @apiGroup DocumentType
  * @apiHeader {String} Authorization Bearer token
@@ -46,7 +46,7 @@ router.get("/document-type", [checkAuth, isValidStaff], fetchRecord);
 router.post("/document-type", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/document-type/{recordId} Update document-type
+ * @api {put} /api/v1/document-type/{recordId} Update document-type
  * @apiName UpdateDocumentType
  * @apiGroup DocumentType
  * @apiHeader {String} Authorization Bearer token
@@ -67,7 +67,7 @@ router.post("/document-type", [checkAuth, isValidStaff], createRecord);
 router.put("/document-type/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/document-type/{recordId} Delete document-type
+ * @api {delete} /api/v1/document-type/{recordId} Delete document-type
  * @apiName DeleteDocumentType
  * @apiGroup DocumentType
  * @apiHeader {String} Authorization Bearer token

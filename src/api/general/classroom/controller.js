@@ -1,7 +1,7 @@
 import Joi from "joi";
 import log4js from "log4js";
 import aqp from "api-query-params";
-import ClassRoom, { schemaCreate, schemaUpdate } from "./model";
+import Classroom, { schemaCreate, schemaUpdate } from "./model";
 import { success, fail, notFound, isObjecId } from "../../../lib";
 import { STATUS_MSG } from "../../../constants";
 
@@ -16,7 +16,7 @@ export async function fetchRecord(req, res) {
     const { query } = req;
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
-        const result = await ClassRoom.find(filter)
+        const result = await Classroom.find(filter)
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -37,7 +37,7 @@ export async function createRecord(req, res) {
     const data = req.body;
     const { error } = Joi.validate(data, schemaCreate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
-    const newRecord = new ClassRoom(data);
+    const newRecord = new Classroom(data);
     try {
         const result = await newRecord.save();
         if (!result) {
@@ -57,7 +57,7 @@ export async function updateRecord(req, res) {
     const { error } = Joi.validate(data, schemaUpdate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
     try {
-        const result = await ClassRoom.findOneAndUpdate({ _id: id }, data, { new: true });
+        const result = await Classroom.findOneAndUpdate({ _id: id }, data, { new: true });
         if (!result) {
             return notFound(res, `Bad Request: Model not found with id ${id}`);
         }
@@ -71,7 +71,7 @@ export async function updateRecord(req, res) {
 export async function deleteRecord(req, res) {
     const { recordId: id } = req.params;
     try {
-        const result = await ClassRoom.findOneAndRemove({ _id: id });
+        const result = await Classroom.findOneAndRemove({ _id: id });
         if (!result) {
             return notFound(res, `Bad Request: Model not found with id ${id}`);
         }

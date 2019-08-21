@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/donations?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/donations?id={recordId} Retrieve one or all records
  * @apiName RetrieveDonation
  * @apiGroup Donation
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/donations", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/donations Create donations
+ * @api {post} /api/v1/donations Create donations
  * @apiName CreateDonation
  * @apiGroup Donation
  * @apiHeader {String} Authorization Bearer token
@@ -50,7 +50,7 @@ router.get("/donations", [_authorization.checkAuth, _authorization.isValidStaff]
 router.post("/donations", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/donations/{recordId} Update donations
+ * @api {put} /api/v1/donations/{recordId} Update donations
  * @apiName UpdateDonation
  * @apiGroup Donation
  * @apiHeader {String} Authorization Bearer token
@@ -66,7 +66,7 @@ router.post("/donations", [_authorization.checkAuth, _authorization.isValidStaff
 router.put("/donations/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/donations/{recordId} Delete donations
+ * @api {delete} /api/v1/donations/{recordId} Delete donations
  * @apiName DeleteDonation
  * @apiGroup Donation
  * @apiPermission master

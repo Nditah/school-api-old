@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/fees_types?id={recordId} Retrieve FeesType records
+ * @api {get} /api/v1/fees_types?id={recordId} Retrieve FeesType records
  * @apiName RetrieveFeesType filter, skip, limit, sort, projection
  * @apiGroup FeesType
  * @apiExample {curl} Example usage for retieving a single record:
@@ -36,7 +36,7 @@ var router = _express2.default.Router();
 router.get("/fees_types", _controller.fetchRecord);
 
 /**
- * @api {post} /api/fees_types Create a FeesType record
+ * @api {post} /api/v1/fees_types Create a FeesType record
  * @apiName CreateFeesType
  * @apiGroup FeesType
  * @apiHeader {String} Authorization Bearer token
@@ -55,7 +55,7 @@ router.get("/fees_types", _controller.fetchRecord);
 router.post("/fees_types", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/fees_types/{recordId} Update a FeesType record
+ * @api {put} /api/v1/fees_types/{recordId} Update a FeesType record
  * @apiName UpdateFeesType
  * @apiGroup FeesType
  * @apiHeader {String} Authorization authorization token
@@ -75,7 +75,7 @@ router.post("/fees_types", [_authorization.checkAuth, _authorization.isValidStaf
 router.put("/fees_types/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/fees_types/{recordId} Delete a FeesType record
+ * @api {delete} /api/v1/fees_types/{recordId} Delete a FeesType record
  * @apiName DeleteFeesType
  * @apiGroup FeesType
  * @apiHeader {String} Authorization authorization token

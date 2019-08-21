@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/vehicles?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/vehicles?id={recordId} Retrieve one or all records
  * @apiName RetrieveVehicle
  * @apiGroup Vehicle
  * @apiHeader {String} Authorization Bearer token
@@ -26,7 +26,7 @@ const router = express.Router();
 router.get("/vehicles", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/vehicles Create vehicles
+ * @api {post} /api/v1/vehicles Create vehicles
  * @apiName CreateVehicle
  * @apiGroup Vehicle
  * @apiHeader {String} Authorization Bearer token
@@ -137,7 +137,7 @@ router.get("/vehicles", [checkAuth, isValidStaff], fetchRecord);
 router.post("/vehicles", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/vehicles/{recordId} Update vehicles
+ * @api {put} /api/v1/vehicles/{recordId} Update vehicles
  * @apiName UpdateVehicle
  * @apiGroup Vehicle
  * @apiHeader {String} Authorization Bearer token
@@ -193,7 +193,7 @@ router.post("/vehicles", [checkAuth, isValidStaff], createRecord);
 router.put("/vehicles/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/vehicles/{recordId} Delete vehicles
+ * @api {delete} /api/v1/vehicles/{recordId} Delete vehicles
  * @apiName DeleteVehicle
  * @apiGroup Vehicle
  * @apiHeader {String} Authorization Bearer token

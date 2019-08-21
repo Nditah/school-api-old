@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/asset-assignments?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/asset-assignments?id={recordId} Retrieve one or all records
  * @apiName RetrieveAssetAssignment
  * @apiGroup AssetAssignment
  * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/asset-assignments", [checkAuth], fetchRecord);
 
 /**
- * @api {post} /api/asset-assignments Create asset-assignments
+ * @api {post} /api/v1/asset-assignments Create asset-assignments
  * @apiName CreateAssetAssignment
  * @apiGroup AssetAssignment
  * @apiHeader {String} Authorization Bearer token
@@ -55,7 +55,7 @@ router.get("/asset-assignments", [checkAuth], fetchRecord);
 router.post("/asset-assignments", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/asset-assignments/{recordId} Update asset-assignments
+ * @api {put} /api/v1/asset-assignments/{recordId} Update asset-assignments
  * @apiName UpdateAssetAssignment
  * @apiGroup AssetAssignment
  * @apiHeader {String} Authorization Bearer token
@@ -89,7 +89,7 @@ router.post("/asset-assignments", [checkAuth, isValidStaff], createRecord);
 router.put("/asset-assignments/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/asset-assignments/{recordId} Delete asset-assignments
+ * @api {delete} /api/v1/asset-assignments/{recordId} Delete asset-assignments
  * @apiName DeleteAssetAssignment
  * @apiGroup AssetAssignment
  * @apiHeader {String} Authorization Bearer token

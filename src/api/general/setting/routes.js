@@ -5,7 +5,7 @@ import { fetchRecordPublic, fetchRecord, updateRecord } from "./controller";
 const router = express.Router();
 
 /**
- * @api {get} /api/settings/public Retrieve Public Settings record(s)
+ * @api {get} /api/v1/settings/public Retrieve Public Settings record(s)
  * @apiName RetrievePublicSetting
  * @apiGroup Setting
  * @apiExample {curl} Example usage for retieving a single record:
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/settings/public", fetchRecordPublic);
 
 /**
- * @api {get} /api/settings?id={recordId} Retrieve Settings record(s)
+ * @api {get} /api/v1/settings?id={recordId} Retrieve Settings record(s)
  * @apiName RetrieveSetting
  * @apiGroup Setting
  * @apiHeader {String} Authorization Bearer token
@@ -34,7 +34,7 @@ router.get("/settings/public", fetchRecordPublic);
 router.get("/settings", [checkAuth], fetchRecord);
 
 /**
- * @api {put} /api/settings/{recordId} Update Settings record
+ * @api {put} /api/v1/settings/{recordId} Update Settings record
  * @apiName UpdateSetting
  * @apiGroup Setting
  * @apiHeader {String} Authorization Bearer token

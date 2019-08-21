@@ -4,13 +4,14 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 var dotenv = require("dotenv");
-var sgMail = require("@sendgrid/mail");
 
 var _require = require("../constants"),
     EMAIL = _require.EMAIL;
 
 dotenv.config();
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+var emailApi = process.env.EMAIL_API;
+var sgMail = null;
 
 function sendEmail(recipient, sender, subject, body) {
     var text = "";

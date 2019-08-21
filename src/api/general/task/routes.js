@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/tasks?id={recordId} Retrieve Task records
+ * @api {get} /api/v1/tasks?id={recordId} Retrieve Task records
  * @apiName RetrieveTask
  * @apiGroup Task
  * @apiHeader {String} Authorization Bearer token
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/tasks", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/tasks Create a Task record
+ * @api {post} /api/v1/tasks Create a Task record
  * @apiName CreateTask
  * @apiGroup Task
  * @apiHeader {String} Authorization Bearer token
@@ -55,7 +55,7 @@ router.get("/tasks", [checkAuth, isValidStaff], fetchRecord);
 router.post("/tasks", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/tasks/{recordId} Update a Task record
+ * @api {put} /api/v1/tasks/{recordId} Update a Task record
  * @apiName UpdateTask
  * @apiGroup Task
  * @apiHeader {String} Authorization Bearer token
@@ -88,7 +88,7 @@ router.post("/tasks", [checkAuth, isValidStaff], createRecord);
 router.put("/tasks/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/tasks/{recordId} Delete a Task record
+ * @api {delete} /api/v1/tasks/{recordId} Delete a Task record
  * @apiName DeleteTask
  * @apiGroup Task
  * @apiHeader {String} Authorization Bearer token

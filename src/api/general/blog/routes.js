@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/blogs?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/blogs?id={recordId} Retrieve one or all records
  * @apiName RetrieveBlog
  * @apiGroup Blog
  * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/blogs", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/blogs Create blogs
+ * @api {post} /api/v1/blogs Create blogs
  * @apiName CreateBlog
  * @apiGroup Blog
  * @apiHeader {String} Authorization authorization token
@@ -42,7 +42,7 @@ router.get("/blogs", [checkAuth, isValidStaff], fetchRecord);
 router.post("/blogs", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/blogs/{recordId} Update blogs
+ * @api {put} /api/v1/blogs/{recordId} Update blogs
  * @apiName UpdateBlog
  * @apiGroup Blog
  * @apiHeader {String} Authorization authorization token
@@ -63,7 +63,7 @@ router.post("/blogs", [checkAuth, isValidStaff], createRecord);
 router.put("/blogs/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/blogs/{recordId} Delete blogs
+ * @api {delete} /api/v1/blogs/{recordId} Delete blogs
  * @apiName DeleteBlog
  * @apiGroup Blog
  * @apiHeader {String} Authorization authorization token

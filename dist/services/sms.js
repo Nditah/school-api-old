@@ -49,7 +49,7 @@ var receiveSms = function () {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
-                        twiml = new twilio.TwimlResponse();
+                        twiml = ""; // new twilio.TwimlResponse();
 
                         twiml.message("Twilio incoming message:");
                         message = twiml.toString();
@@ -74,20 +74,16 @@ var receiveSms = function () {
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-var twilio = require("twilio");
 var dotenv = require("dotenv");
 
 var _require = require("../constants"),
     SMS = _require.SMS;
 
-//  * https://www.twilio.com/docs/sms/api/message-resource#read-multiple-message-resources
-
 dotenv.config();
 
-var accountSid = process.env.TWILIO_ACCOUNT_SID;
-var authToken = process.env.TWILIO_AUTH_TOKEN;
+var smsApi = process.env.SMS_API;
+var client = null;
 // eslint-disable-next-line new-cap
-var client = new twilio(accountSid, authToken);
 var sender = SMS.PEACE_SMS_SENDER;
 
 function formatPhone(phone) {

@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/results?id={recordId} Retrieve Report records
+ * @api {get} /api/v1/results?id={recordId} Retrieve Report records
  * @apiName RetrieveReport
  * @apiGroup Report
  * @apiHeader {String} Authorization Bearer token
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/results", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/results Create a Report record
+ * @api {post} /api/v1/results Create a Report record
  * @apiName CreateReport
  * @apiGroup Report
  * @apiHeader {String} Authorization Bearer token
@@ -43,7 +43,7 @@ router.get("/results", [checkAuth, isValidStaff], fetchRecord);
 router.post("/results", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/results/{recordId} Update a Report record
+ * @api {put} /api/v1/results/{recordId} Update a Report record
  * @apiName UpdateReport
  * @apiGroup Report
  * @apiHeader {String} Authorization Bearer token
