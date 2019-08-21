@@ -23,7 +23,6 @@ export async function fetchRecord(req, res) {
         }
         const result = await Subject.find(filter)
             .populate("hod")
-            .populate("teacher")
             .skip(skip)
             .limit(limit)
             .sort(sort)
