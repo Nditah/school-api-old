@@ -5,11 +5,11 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/v1/hostels?id={recordId} Retrieve one or all records
- * @apiName RetrieveHostel
- * @apiGroup Hostel
- * @apiExample {curl} Example usage for retieving a single record:
- *      curl -i api/hostels?
+ * @api {get} /api/v1/subjects?id={recordId} Retrieve one or all records
+ * @apiName RetrieveSubject
+ * @apiGroup Subject
+* @apiExample {curl} Example usage for retieving a single record:
+ *      curl -i api/subjects?
  * @apiParam {Object} filter query condition (optional)
  * @apiParam {Number} skip Number of records to offset by (optional)
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
@@ -22,14 +22,12 @@ const router = express.Router();
 router.get("/subjects", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/v1/hostels Create hostels
- * @apiName CreateHostel
- * @apiGroup Hostel
+ * @api {post} /api/v1/subjects Create subjects
+ * @apiName CreateSubject
+ * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} name Subject name (optional)
  * @apiParam {String} hod Subject hod (optional)
- * @apiParam {String} course Subject course (optional)
- * @apiParam {String} teacher Subject teacher (optional)
  * @apiParam {String} description Subject description (optional)
  * @apiSuccess {Object} Subject Subject's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
@@ -39,15 +37,13 @@ router.get("/subjects", [checkAuth, isValidStaff], fetchRecord);
 router.post("/subjects", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/v1/hostels/{recordId} Update hostels
- * @apiName UpdateHostel
- * @apiGroup Hostel
+ * @api {put} /api/v1/subjects/{recordId} Update subjects
+ * @apiName UpdateSubject
+ * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} recordId required record ObjectId
  * @apiParam {String} name Subject name (optional)
  * @apiParam {String} hod Subject hod (optional)
- * @apiParam {String} course Subject course (optional)
- * @apiParam {String} teacher Subject teacher (optional)
  * @apiParam {String} description Subject description (optional)
  * @apiSuccess {Object} Subject Subject's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
@@ -57,9 +53,9 @@ router.post("/subjects", [checkAuth, isValidStaff], createRecord);
 router.put("/subjects/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/v1/hostels/{recordId} Delete hostels
- * @apiName DeleteHostel
- * @apiGroup Hostel
+ * @api {delete} /api/v1/subjects/{recordId} Delete subjects
+ * @apiName DeleteSubject
+ * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} recordId required record ObjectId
  * @apiSuccess (Success 204) 204 No Content.

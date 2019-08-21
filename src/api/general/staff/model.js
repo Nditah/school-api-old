@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
- * @property {String} id Staff ObjectId primaryKey
+ * @property {ObjectId} id Staff ObjectId primaryKey
  * @property {String} title Staff title (optional)
  * @property {String} surname Staff surname (optional)
  * @property {String} given_name Staff surname (optional)
@@ -11,12 +11,12 @@
  * @property {String} phone Staff office phone (optional)
  * @property {String} phone_personal Staff phone_personal (optional)
  * @property {String} address Staff address (optional)
- * @property {String} state Staff state (optional)
- * @property {String} county Staff county (optional)
+ * @property {ObjectId} state Staff state (optional)
+ * @property {ObjectId} county Staff county (optional)
  * @property {String} email Staff email (optional)
  * @property {String} staff_type Staff staff_type (optional)
- * @property {String} classe Staff classe (optional)
- * @property {String} subject Staff subject (optional)
+ * @property {ObjectId} classe Staff classe (optional)
+ * @property {ObjectId} subject Staff subject (optional)
  * @property {String} password Staff password (optional)
  * @property {String} kin Staff kin (required)
  * @property {String} kin_phone Staff kin_phone (required)
@@ -31,7 +31,7 @@
  * @property {String} qualification Staff qualification (optional)
  * @property {String} employment_status Staff employment_status (required)
  * @property {Number} tax Staff tax (optional)
- * @property {Number} basic_first_namesalary Staff basic_salary (optional)
+ * @property {Number} basic_salary Staff basic_salary (optional)
  * @property {Number} bonus Staff bonus (optional)
  * @property {Number} entertainment_allowance Staff entertainment_allowance (optional)
  * @property {Number} house_allowance Staff house_allowance (optional)
@@ -46,19 +46,19 @@
  * @property {String} bank_account_number Staff bank_account_number (optional)
  * @property {String} bank_account_name Staff bank_account_name (optional)
  * @property {String} rank Staff rank (optional)
- * @property {String} office Staff office (required)
- * @property {Array} role Staff role is an array of office duties (required)
+ * @property {ObjectId} office Staff office (required)
+ * @property {ObjectId} role Staff role is an array of office duties (required)
  * @property {String} subsidiary Staff subsidiary (required)
  * @property {String} remark Staff remark (optional)
  * @property {String} photo Staff photo (optional)
  * @property {Boolean} is_salary_payable Staff is_salary_payable (optional)
  * @property {Boolean} is_document_complete Staff is_document_complete (optional)
- * @property {String} approved_by Staff approved_by (optional)
+ * @property {ObjectId} approved_by Staff approved_by (optional)
  * @property {Date} approved_date Staff approved_date (optional)
- * @property {String} disengaged_by Staff disengaged_by (optional)
+ * @property {ObjectId} disengaged_by Staff disengaged_by (optional)
  * @property {Date} disengaged_date Staff disengaged_date (optional)
- * @property {String} created_by Staff record created by
- * @property {String} updated_by Staff record modified by
+ * @property {ObjectId} created_by Staff record created by
+ * @property {ObjectId} updated_by Staff record modified by
  * @description Staff holds record of all staffs in the school
  */
 import Joi from "joi";

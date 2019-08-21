@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/classes?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/classes?id={recordId} Retrieve one or all records
  * @apiName RetrieveClasse
  * @apiGroup Classe
 * @apiExample {curl} Example usage for retieving a single record:
@@ -22,13 +22,14 @@ const router = express.Router();
 router.get("/classes", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/classes Create classes
+ * @api {post} /api/v1/classes Create classes
  * @apiName CreateClasse
  * @apiGroup Classe
  * @apiHeader {String} Authorization Bearer token
+ * @apiParam {String} name Classe name (optional)
  * @apiParam {String} subsidiary Classe subsidiary (optional)
  * @apiParam {String} level Classe level (optional)
- * @apiParam {String} form_teacher Classe form_teacher (optional)
+ * @apiParam {ObjectId} form_teacher Classe form_teacher (optional)
  * @apiSuccess {Object} Classe Classe's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Classe not found.
@@ -37,14 +38,15 @@ router.get("/classes", [checkAuth, isValidStaff], fetchRecord);
 router.post("/classes", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/classes/{recordId} Update classes
+ * @api {put} /api/v1/classes/{recordId} Update classes
  * @apiName UpdateClasse
  * @apiGroup Classe
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
+ * @apiParam {ObjectId} recordId required record ObjectId
+ * @apiParam {String} name Classe name (optional)
  * @apiParam {String} subsidiary Classe subsidiary (optional)
  * @apiParam {String} level Classe level (optional)
- * @apiParam {String} form_teacher Classe form_teacher (optional)
+ * @apiParam {ObjectId} form_teacher Classe form_teacher (optional)
  * @apiSuccess {Object} Classe Classe's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Classe not found.
@@ -53,11 +55,11 @@ router.post("/classes", [checkAuth, isValidStaff], createRecord);
 router.put("/classes/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/classes/{recordId} Delete classes
+ * @api {delete} /api/v1/classes/{recordId} Delete classes
  * @apiName DeleteClasse
  * @apiGroup Classe
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
+ * @apiParam {ObjectId} recordId required record ObjectId
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 404 Classe not found.
  * @apiError 401 master access only.

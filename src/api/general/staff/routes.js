@@ -5,12 +5,12 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord, login } from "./
 const router = express.Router();
 
 /**
- * @api {get} /api/v1/staff?id={recordId} Retrieve Staff records
+ * @api {get} /api/v1/staffs?id={recordId} Retrieve Staff records
  * @apiName RetrieveStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
  * @apiExample {curl} Example usage for retieving a single record:
- *      curl -i api/staff?
+ *      curl -i api/staffs?
  * @apiParam {Object} filter query condition (optional)
  * @apiParam {Number} skip Number of records to offset by (optional)
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
@@ -20,10 +20,10 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/staff", [checkAuth, isValidStaff], fetchRecord);
+router.get("/staffs", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/v1/staff Create a Staff record
+ * @api {post} /api/v1/staffs Create a Staff record
  * @apiName CreateStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -36,12 +36,12 @@ router.get("/staff", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {String} phone Staff office phone (optional)
  * @apiParam {String} phone_personal Staff phone_personal (optional)
  * @apiParam {String} address Staff address (optional)
- * @apiParam {String} state Staff state (optional)
- * @apiParam {String} county Staff county (optional)
+ * @apiParam {ObjectId} state Staff state (optional)
+ * @apiParam {ObjectId} county Staff county (optional)
  * @apiParam {String} email Staff email (optional)
  * @apiParam {String} staff_type Staff staff_type (optional)
- * @apiParam {String} classe Staff classe (optional)
- * @apiParam {String} subject Staff subject (optional)
+ * @apiParam {ObjectId} classe Staff classe (optional)
+ * @apiParam {ObjectId} subject Staff subject (optional)
  * @apiParam {String} password Staff password (optional)
  * @apiParam {String} kin Staff kin (required)
  * @apiParam {String} kin_phone Staff kin_phone (required)
@@ -67,49 +67,49 @@ router.get("/staff", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {Number} welfare_allowance Staff welfare_allowance (optional)
  * @apiParam {Number} pension Staff pension (optional)
  * @apiParam {Number} assurance Staff assurance (optional)
- * @apiParam {String} bank_name Staff bank_name (optional)
+ * @apiParam {ObjectId} bank_name Staff bank_name (optional)
  * @apiParam {String} bank_account_number Staff bank_account_number (optional)
  * @apiParam {String} bank_account_name Staff bank_account_name (optional)
  * @apiParam {String} rank Staff rank (optional)
- * @apiParam {String} office Staff office (required)
- * @apiParam {Array} role Staff role is an array of office duties (required)
+ * @apiParam {ObjectId} office Staff office (required)
+ * @apiParam {String} role Staff role is an array of office duties (required)
  * @apiParam {String} subsidiary Staff subsidiary (required)
  * @apiParam {String} remark Staff remark (optional)
  * @apiParam {String} photo Staff photo (optional)
  * @apiParam {Boolean} is_salary_payable Staff is_salary_payable (optional)
  * @apiParam {Boolean} is_document_complete Staff is_document_complete (optional)
- * @apiParam {String} approved_by Staff approved_by (optional)
+ * @apiParam {ObjectId} approved_by Staff approved_by (optional)
  * @apiParam {Date} approved_date Staff approved_date (optional)
- * @apiParam {String} disengaged_by Staff disengaged_by (optional)
+ * @apiParam {ObjectId} disengaged_by Staff disengaged_by (optional)
  * @apiParam {Date} disengaged_date Staff disengaged_date (optional)
  * @apiSuccess {Object} Staff Staff's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Staff not found.
  * @apiError 401 master access only.
  */
-router.post("/staff", [checkAuth, isValidStaff], createRecord);
+router.post("/staffs", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/v1/staff/{recordId} Update a Staff record
+ * @api {put} /api/v1/staffs/{recordId} Update a Staff record
  * @apiName UpdateStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
+ * @apiParam {ObjectId} recordId required record ObjectId
  * @apiParam {String} title Staff title (optional)
  * @apiParam {String} surname Staff surname (optional)
  * @apiParam {String} given_name Staff given_name (optional)
  * @apiParam {String} gender Staff gender (optional)
- * @apiParam {Date} date_of_birth Staff date_of_birth (optional)
+ * @apiParam {Date} birth_date Staff birth_date (optional)
  * @apiParam {String} marital_status Staff marital_status (optional)
  * @apiParam {String} phone Staff office phone (optional)
  * @apiParam {String} phone_personal Staff phone_personal (optional)
  * @apiParam {String} address Staff address (optional)
- * @apiParam {String} state Staff state (optional)
- * @apiParam {String} county Staff county (optional)
+ * @apiParam {ObjectId} state Staff state (optional)
+ * @apiParam {ObjectId} county Staff county (optional)
  * @apiParam {String} email Staff email (optional)
  * @apiParam {String} staff_type Staff staff_type (optional)
- * @apiParam {String} classe Staff classe (optional)
- * @apiParam {String} subject Staff subject (optional)
+ * @apiParam {ObjectId} classe Staff classe (optional)
+ * @apiParam {ObjectId} subject Staff subject (optional)
  * @apiParam {String} password Staff password (optional)
  * @apiParam {String} kin Staff kin (required)
  * @apiParam {String} kin_phone Staff kin_phone (required)
@@ -135,39 +135,39 @@ router.post("/staff", [checkAuth, isValidStaff], createRecord);
  * @apiParam {Number} welfare_allowance Staff welfare_allowance (optional)
  * @apiParam {Number} pension Staff pension (optional)
  * @apiParam {Number} assurance Staff assurance (optional)
- * @apiParam {String} bank_name Staff bank_name (optional)
+ * @apiParam {ObjectId} bank_name Staff bank_name (optional)
  * @apiParam {String} bank_account_number Staff bank_account_number (optional)
  * @apiParam {String} bank_account_name Staff bank_account_name (optional)
  * @apiParam {String} rank Staff rank (optional)
- * @apiParam {String} office Staff office (required)
- * @apiParam {Array} role Staff role is an array of office duties (required)
+ * @apiParam {ObjectId} office Staff office (required)
+ * @apiParam {String} role Staff role is an array of office duties (required)
  * @apiParam {String} subsidiary Staff subsidiary (required)
  * @apiParam {String} remark Staff remark (optional)
  * @apiParam {String} photo Staff photo (optional)
  * @apiParam {Boolean} is_salary_payable Staff is_salary_payable (optional)
  * @apiParam {Boolean} is_document_complete Staff is_document_complete (optional)
- * @apiParam {String} approved_by Staff approved_by (optional)
+ * @apiParam {ObjectId} approved_by Staff approved_by (optional)
  * @apiParam {Date} approved_date Staff approved_date (optional)
- * @apiParam {String} disengaged_by Staff disengaged_by (optional)
+ * @apiParam {ObjectId} disengaged_by Staff disengaged_by (optional)
  * @apiParam {Date} disengaged_date Staff disengaged_date (optional)
  * @apiSuccess {Object} Staff Staff's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Staff not found.
  * @apiError 401 master access only.
  */
-router.put("/staff/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/staffs/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/v1/staff/{recordId} Delete a Staff record
+ * @api {delete} /api/v1/staffs/{recordId} Delete a Staff record
  * @apiName DeleteStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
+ * @apiParam {ObjectId} recordId required record ObjectId
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 404 Staff not found.
  * @apiError 401 master access only.
  */
-router.delete("/staff/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/staffs/:recordId", [checkAuth, isValidStaff], deleteRecord);
 
 /**
  * @api {post} /api/v1/staff/login Login Staff
