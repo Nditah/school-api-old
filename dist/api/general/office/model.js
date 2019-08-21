@@ -107,7 +107,7 @@ var schema = exports.schema = {
         type: String,
         enum: Object.values(_constants.SUBSIDIARY),
         required: [true, "Why no input?"],
-        default: _constants.SUBSIDIARY.PEACEGROUP
+        default: _constants.SUBSIDIARY.SCHOOL
     },
     office_above: { type: ObjectId, ref: "Office" },
     head: { type: ObjectId, ref: "Staff" },

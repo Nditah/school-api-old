@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../src/api/general/admission/index.js"],"names":["routes"],"mappings":";;;;;;AAAA;;;;;;kBAEeA,gB","file":"index.js","sourcesContent":["import routes from \"./routes\";\n\nexport default routes;\n"]}

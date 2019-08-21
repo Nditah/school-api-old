@@ -5,7 +5,7 @@
  * @property {String} block Hostel block name (required)
  * @property {Number} room_no Hostel room_no (required)
  * @property {Number} no_of_beds Hostel no_of_beds (required)
- * @property {String} fee_id Hostel fee_id (optional)
+ * @property {String} fees Hostel fees (optional)
  * @property {String} description Hostel description (optional)
  * @property {String} status Hostel Status (Occupied or not Occupied)(optional)
  * @description Hostel model holds record of all hostels the company deals with
@@ -17,7 +17,7 @@ import mongoose_csv from "mongoose-csv";
 import { DATABASE } from "../../../constants";
 import table from "./table";
 import Staff from "../staff/model";
-import Fee from "../fee/model";
+import FeeType from "../fees-type/model";
 import Classe from "../classe/model";
 
 const { Schema } = mongoose;
@@ -28,7 +28,7 @@ export const schemaCreate = {
     classe_id: Joi.string().optional(),
     room_no: Joi.number().optional(),
     no_of_beds: Joi.number().optional(),
-    fee_id : Joi.string().optional(),
+    fee: Joi.string().optional(),
     description: Joi.string().optional(),
     status: Joi.string().optional(),
     created_by: Joi.string().required(),
@@ -39,7 +39,7 @@ export const schemaUpdate = {
     classe_id: Joi.string().optional(),
     room_no: Joi.number().optional(),
     no_of_beds: Joi.number().optional(),
-    fee_id : Joi.string().optional(),
+    fee: Joi.string().optional(),
     description: Joi.string().optional(),
     status: Joi.string().optional(),
     updated_by: Joi.string().required(),
@@ -47,10 +47,10 @@ export const schemaUpdate = {
 
 export const schema = {
     block: { type: String, required: [true, "Why no input?"], unique: true },
-    classe: { type: ObjectId,ref: "Classe" },
+    classe: { type: ObjectId, ref: "Classe" },
     room_no: { type: Number },
     no_of_beds: { type: Number },
-    fee : { type: ObjectId, ref: "Fee"},
+    fees: { type: ObjectId, ref: "FeeType" },
     description: { type: String },
     status: { type: String },
     created_by: { type: ObjectId, required: true, ref: "Staff" },

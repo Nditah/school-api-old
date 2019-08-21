@@ -52,8 +52,8 @@ app.use((req, res, next) => {
 });
 
 // Use Routes
-app.use("/api", schoolApi);
-app.use("/api", flutterwaveApi);
+app.use("/api/v1", schoolApi);
+app.use("/api/v1", flutterwaveApi);
 
 app.use((req, res, next) => {
     const error = new Error("Not found!");

@@ -27,8 +27,13 @@ var _model = require("../staff/model");
 
 var _model2 = _interopRequireDefault(_model);
 
+var _model3 = require("../student/model");
+
+var _model4 = _interopRequireDefault(_model3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var Schema = _mongoose2.default.Schema;
 // eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
@@ -38,24 +43,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {String} subsidiary Report subsidiary
  * @description Report holds the model for generating financial reports.
  */
-var Schema = _mongoose2.default.Schema;
+
 var ObjectId = Schema.Types.ObjectId;
 var schemaGenerate = exports.schemaGenerate = {
     id: _joi2.default.string().optional(),
     code: _joi2.default.string().optional(),
     from: _joi2.default.date().optional(), // start period
     to: _joi2.default.date().optional(), // end period
-    terminal: _joi2.default.string().optional(), // ObjectId
-    pmtroute: _joi2.default.string().optional(), // ObjectId
-    partner: _joi2.default.string().optional(), // ObjectId
+    classe_id: _joi2.default.string().optional(), // ObjectId
+    student: _joi2.default.string().optional(), // ObjectId
     staff: _joi2.default.string().optional(), // ObjectId
-    customer: _joi2.default.string().optional(), // ObjectId
-    task: _joi2.default.string().optional(), // ObjectId
     office: _joi2.default.string().optional(), // ObjectId
-    product: _joi2.default.string().optional(), // ObjectId
-    store: _joi2.default.string().optional(), // ObjectId
-    sales: _joi2.default.string().optional(), // Sales ObjectId
-    purchase: _joi2.default.string().optional(), // Sales ObjectId
     subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional()
 };
 

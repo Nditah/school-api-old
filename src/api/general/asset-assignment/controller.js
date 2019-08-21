@@ -4,8 +4,8 @@ import aqp from "api-query-params";
 import AssetAssignment, { schemaCreate, schemaUpdate } from "./model";
 import { success, fail, notFound, isObjecId, timestamp } from "../../../lib";
 import { STATUS_MSG } from "../../../constants";
-import Partner from "../partner/model";
 import Staff from "../staff/model";
+import Student from "../student/model";
 import Vehicle from "../vehicle/model";
 import Asset from "../asset/model";
 
@@ -25,7 +25,7 @@ export async function fetchRecord(req, res) {
             .populate("vehicle_id")
             .populate("task_id")
             .populate({ path: "staff_id", select: "-password -otp" })
-            .populate({ path: "partner_id", select: "-password -otp" })
+            .populate({ path: "student_id", select: "-password -otp" })
             .populate({ path: "created_by", select: "surname other_name email phone" })
             .populate({ path: "updated_by", select: "surname other_name email phone" })
             .skip(skip)
@@ -57,7 +57,7 @@ export async function createRecord(req, res) {
     let UserModel;
     let userId;
     switch (data.user_type) {
-    case "PARTNER": UserModel = Partner; userId = "partner_id"; break;
+    case "STUDENT": UserModel = Student; userId = "student_id"; break;
     case "STAFF": UserModel = Staff; userId = "staff_id"; break;
     default: return fail(res, 422, `Error invalid user_type ${data.user_type}`);
     }
@@ -101,7 +101,7 @@ export async function createRecord(req, res) {
         required: [true, "Why no vehicle_custodian?"],
     },
     current_staff_id: { type: ObjectId, ref: "Staff" },
-    current_partner_id: { type: ObjectId, ref: "Partner" },
+    current_student_id: { type: ObjectId, ref: "Student" },
 */
 // eslint-disable-next-line complexity
 export async function updateRecord(req, res) {
@@ -137,7 +137,7 @@ export async function deleteRecord(req, res) {
         let UserModel;
         let userId;
         switch (result.user_type) {
-        case "PARTNER": UserModel = Partner; userId = "partner_id"; break;
+        case "STUDENT": UserModel = Student; userId = "student_id"; break;
         case "STAFF": UserModel = Staff; userId = "staff_id"; break;
         default: return fail(res, 422, `Error invalid user_type ${result.user_type}`);
         }
