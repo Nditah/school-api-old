@@ -34,8 +34,8 @@ import table from "./table";
 import State from "../state/model";
 import County from "../county/model";
 import Parent from "../parent/model";
-import Hostel from "../hostel/model";
 import Classe from "../classe/model";
+import HostelAllocation from "../hostel-allocation/model";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
@@ -126,7 +126,7 @@ export const schema = {
         enum: Object.values(SUBSIDIARY),
         required: [false, "Why no input?"],
     },
-    hostel: { type: ObjectId, ref: "Hostel" },
+    hostel: { type: ObjectId, ref: "HostelAllocation" },
     photo: { type: String },
     parents: [{ type: ObjectId, ref: "Parent" }],
     created_by: { type: ObjectId, ref: "Staff", required: true },
