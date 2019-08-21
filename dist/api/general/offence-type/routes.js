@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/offence-types?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/offence-types?id={recordId} Retrieve one or all records
  * @apiName RetrieveOffenceType
  * @apiGroup OffenceType
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/offence-types", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/offence-types Create offence-types
+ * @api {post} /api/v1/offence-types Create offence-types
  * @apiName CreateOffenceType
  * @apiGroup OffenceType
  * @apiParam {String} code OffenceType code (required)
@@ -53,7 +53,7 @@ router.get("/offence-types", [_authorization.checkAuth, _authorization.isValidSt
 router.post("/offence-types", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/offence-types/{recordId} Update offence-types
+ * @api {put} /api/v1/offence-types/{recordId} Update offence-types
  * @apiName UpdateOffenceType
  * @apiGroup OffenceType
  * @apiPermission master
@@ -73,7 +73,7 @@ router.post("/offence-types", [_authorization.checkAuth, _authorization.isValidS
 router.put("/offence-types/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/offence-types/{recordId} Delete offence-types
+ * @api {delete} /api/v1/offence-types/{recordId} Delete offence-types
  * @apiName DeleteOffenceType
  * @apiGroup OffenceType
  * @apiParam {String} recordId ObjectId

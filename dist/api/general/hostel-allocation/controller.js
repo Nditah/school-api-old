@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.deleteRecord = exports.updateRecord = exports.createRecord = exports.fetchRecord = undefined;
+exports.deleteHostelAllocation = exports.updateHostelAllocation = exports.createHostelAllocation = exports.fetchHostelAllocation = undefined;
 
-var fetchRecord = exports.fetchRecord = function () {
+var fetchHostelAllocation = exports.fetchHostelAllocation = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, res) {
         var query, _aqp, filter, skip, limit, sort, projection, result;
 
@@ -48,12 +48,12 @@ var fetchRecord = exports.fetchRecord = function () {
         }, _callee, null, [[2, 12]]);
     }));
 
-    return function fetchRecord(_x, _x2) {
+    return function fetchHostelAllocation(_x, _x2) {
         return _ref.apply(this, arguments);
     };
 }();
 
-var createRecord = exports.createRecord = function () {
+var createHostelAllocation = exports.createHostelAllocation = function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(req, res) {
         var data, _Joi$validate, error, newRecord, result;
 
@@ -62,7 +62,7 @@ var createRecord = exports.createRecord = function () {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         data = req.body;
-                        _Joi$validate = _joi2.default.validate(data, _model.schemaCreate), error = _Joi$validate.error;
+                        _Joi$validate = _joi2.default.validate(data, _model.hostelAllocationCreate), error = _Joi$validate.error;
 
                         if (!error) {
                             _context2.next = 4;
@@ -106,12 +106,12 @@ var createRecord = exports.createRecord = function () {
         }, _callee2, null, [[5, 15]]);
     }));
 
-    return function createRecord(_x3, _x4) {
+    return function createHostelAllocation(_x3, _x4) {
         return _ref2.apply(this, arguments);
     };
 }();
 
-var updateRecord = exports.updateRecord = function () {
+var updateHostelAllocation = exports.updateHostelAllocation = function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(req, res) {
         var data, id, _Joi$validate2, error, result;
 
@@ -121,7 +121,7 @@ var updateRecord = exports.updateRecord = function () {
                     case 0:
                         data = req.body;
                         id = req.params.recordId;
-                        _Joi$validate2 = _joi2.default.validate(data, _model.schemaUpdate), error = _Joi$validate2.error;
+                        _Joi$validate2 = _joi2.default.validate(data, _model.hostelAllocationUpdate), error = _Joi$validate2.error;
 
                         if (!error) {
                             _context3.next = 5;
@@ -163,12 +163,12 @@ var updateRecord = exports.updateRecord = function () {
         }, _callee3, null, [[5, 14]]);
     }));
 
-    return function updateRecord(_x5, _x6) {
+    return function updateHostelAllocation(_x5, _x6) {
         return _ref3.apply(this, arguments);
     };
 }();
 
-var deleteRecord = exports.deleteRecord = function () {
+var deleteHostelAllocation = exports.deleteHostelAllocation = function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res) {
         var id, result;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
@@ -208,7 +208,7 @@ var deleteRecord = exports.deleteRecord = function () {
         }, _callee4, null, [[1, 10]]);
     }));
 
-    return function deleteRecord(_x7, _x8) {
+    return function deleteHostelAllocation(_x7, _x8) {
         return _ref4.apply(this, arguments);
     };
 }();
@@ -238,9 +238,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 // Logging
-var logger = _log4js2.default.getLogger("[hostel]");
+var logger = _log4js2.default.getLogger("[hostel-allocation]");
 _log4js2.default.configure({
-    appenders: { file: { type: "file", filename: "logs/hostel.log" } },
+    appenders: { file: { type: "file", filename: "logs/hostel-allocation.log" } },
     categories: { default: { appenders: ["file"], level: "debug" } }
 });
 //# sourceMappingURL=controller.js.map

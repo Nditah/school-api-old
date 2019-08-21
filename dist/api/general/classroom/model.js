@@ -19,10 +19,6 @@ var _mongooseCsv2 = _interopRequireDefault(_mongooseCsv);
 
 var _constants = require("../../../constants");
 
-var _table = require("./table");
-
-var _table2 = _interopRequireDefault(_table);
-
 var _model = require("../staff/model");
 
 var _model2 = _interopRequireDefault(_model);
@@ -33,20 +29,19 @@ var _model4 = _interopRequireDefault(_model3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Schema = _mongoose2.default.Schema;
 // eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Dcoder
  * @property {Number} id class_room primaryKey
- * @property {String} name ClassRoom full name (required)
- * @property {String} block ClassRoom block code (required)
- * @property {String} level ClassRoom levels (required)
- * @property {String} subsidiary ClassRoom subsidiary (required)
- * @property {String} classe ClassRoom classe (required)
- * @description ClassRoom model holds record of all class_rooms the school deals with
+ * @property {String} name Classroom full name (required)
+ * @property {String} block Classroom block code (required)
+ * @property {String} level Classroom levels (required)
+ * @property {String} subsidiary Classroom subsidiary (required)
+ * @property {String} classe Classroom classe (required)
+ * @description Classroom model holds record of all class_rooms the school deals with
  */
-
+var Schema = _mongoose2.default.Schema;
 var ObjectId = Schema.Types.ObjectId;
 var schemaCreate = exports.schemaCreate = {
     name: _joi2.default.string().optional(),
@@ -80,17 +75,13 @@ var schema = exports.schema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
 var options = _constants.DATABASE.OPTIONS;
 
 var newSchema = new Schema(schema, options);
 newSchema.set("collection", "class_room");
 newSchema.plugin(_mongooseCsv2.default);
 
-var ClassRoom = _mongoose2.default.model("ClassRoom", newSchema);
-if (preload) {
-    ClassRoom.insertMany(_table2.default);
-}
+var Classroom = _mongoose2.default.model("Classroom", newSchema);
 
-exports.default = ClassRoom;
+exports.default = Classroom;
 //# sourceMappingURL=model.js.map

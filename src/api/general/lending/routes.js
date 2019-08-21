@@ -80,22 +80,6 @@ router.post("/lendings", [checkAuth, isValidStaff], createRecord);
 router.put("/lendings/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {put} /api/lendings/audit/{recordId} Audit lendings
- * @apiName AuditLending
- * @apiGroup Lending
- * @apiHeader {String} Authorization authorization token
- * @apiParam {String} recordId required record ObjectId
- * @apiParam {Status} audited_status Lending status has been updated
- * @apiParam {Status} audited_remark Lending comment by Auditor
- * @apiParam {ObjectId} audited_by Lending auditor (prohibited)
- * @apiParam {Date} audited_date Lending audit date (prohibited)
- * @apiSuccess {Object} Lending Lending's data.
- * @apiError {Object} 422 Some parameters may contain invalid values.
- * @apiError 404 Lending not found.
- */
-router.put("/lendings/audit/:recordId", [checkAuth, isValidStaff], auditRecord);
-
-/**
  * @api {delete} /api/lendings/{recordId} Delete lendings
  * @apiName DeleteLending
  * @apiGroup Lending

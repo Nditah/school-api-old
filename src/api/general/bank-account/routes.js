@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/bank-accounts?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/bank-accounts?id={recordId} Retrieve one or all records
  * @apiName RetrieveBankAccount
  * @apiGroup BankAccount
  * @apiExample {curl} Example usage for retieving a single record:
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/bank-accounts", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/bank-accounts Create bank-accounts
+ * @api {post} /api/v1/bank-accounts Create bank-accounts
  * @apiName CreateBank-Account
  * @apiGroup BankAccount
  * @apiHeader {String} Authorization authorization token
@@ -56,7 +56,7 @@ router.get("/bank-accounts", [checkAuth, isValidStaff], fetchRecord);
 router.post("/bank-accounts", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/bank-accounts/{recordId} Update bank-accounts
+ * @api {put} /api/v1/bank-accounts/{recordId} Update bank-accounts
  * @apiName UpdateBank-Account
  * @apiGroup BankAccount
  * @apiHeader {String} Authorization authorization token
@@ -90,7 +90,7 @@ router.post("/bank-accounts", [checkAuth, isValidStaff], createRecord);
 router.put("/bank-accounts/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/bank-accounts/{recordId} Delete bank-accounts
+ * @api {delete} /api/v1/bank-accounts/{recordId} Delete bank-accounts
  * @apiName DeleteBank-Account
  * @apiGroup BankAccount
  * @apiHeader {String} Authorization authorization token

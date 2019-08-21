@@ -5,11 +5,11 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/subjects?id={recordId} Retrieve one or all records
- * @apiName RetrieveSubject
- * @apiGroup Subject
-* @apiExample {curl} Example usage for retieving a single record:
- *      curl -i api/subjects?
+ * @api {get} /api/v1/hostels?id={recordId} Retrieve one or all records
+ * @apiName RetrieveHostel
+ * @apiGroup Hostel
+ * @apiExample {curl} Example usage for retieving a single record:
+ *      curl -i api/hostels?
  * @apiParam {Object} filter query condition (optional)
  * @apiParam {Number} skip Number of records to offset by (optional)
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
@@ -22,9 +22,9 @@ const router = express.Router();
 router.get("/subjects", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/subjects Create subjects
- * @apiName CreateSubject
- * @apiGroup Subject
+ * @api {post} /api/v1/hostels Create hostels
+ * @apiName CreateHostel
+ * @apiGroup Hostel
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} name Subject name (optional)
  * @apiParam {String} hod Subject hod (optional)
@@ -39,9 +39,9 @@ router.get("/subjects", [checkAuth, isValidStaff], fetchRecord);
 router.post("/subjects", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/subjects/{recordId} Update subjects
- * @apiName UpdateSubject
- * @apiGroup Subject
+ * @api {put} /api/v1/hostels/{recordId} Update hostels
+ * @apiName UpdateHostel
+ * @apiGroup Hostel
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} recordId required record ObjectId
  * @apiParam {String} name Subject name (optional)
@@ -57,9 +57,9 @@ router.post("/subjects", [checkAuth, isValidStaff], createRecord);
 router.put("/subjects/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/subjects/{recordId} Delete subjects
- * @apiName DeleteSubject
- * @apiGroup Subject
+ * @api {delete} /api/v1/hostels/{recordId} Delete hostels
+ * @apiName DeleteHostel
+ * @apiGroup Hostel
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} recordId required record ObjectId
  * @apiSuccess (Success 204) 204 No Content.

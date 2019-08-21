@@ -17,8 +17,8 @@ export async function fetchRecord(req, res) {
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
         const result = await Task.find(filter)
-            .populate("assigned_to", "id surname other_name email phone")
-            .populate("assigned_by", "id surname other_name email phone")
+            .populate("assigned_to", "id surname given_name email phone")
+            .populate("assigned_by", "id surname given_name email phone")
             .populate("voucher")
             .populate("asset_assignment")
             .populate("office_id")

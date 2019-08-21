@@ -17,9 +17,9 @@ export async function fetchRecord(req, res) {
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
         const result = await Offence.find(filter)
-            .populate("staff_id", "id surname other_name email phone")
-            .populate("partner_id", "id surname other_name email phone")
-            .populate("verdict_by", "id surname other_name email phone")
+            .populate("staff_id", "id surname given_name email phone")
+            .populate("partner_id", "id surname given_name email phone")
+            .populate("verdict_by", "id surname given_name email phone")
             .skip(skip)
             .limit(limit)
             .sort(sort)

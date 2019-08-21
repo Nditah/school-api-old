@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/ratings?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/ratings?id={recordId} Retrieve one or all records
  * @apiName RetrieveRatings
  * @apiGroup Rating
   * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/ratings", [checkAuth], fetchRecord);
 
 /**
- * @api {post} /api/ratings Create ratings
+ * @api {post} /api/v1/ratings Create ratings
  * @apiName CreateRating
  * @apiGroup Rating
  * @apiParam {Number} star Rating star from 0 to 5 (required)
@@ -40,7 +40,7 @@ router.get("/ratings", [checkAuth], fetchRecord);
 router.post("/ratings", [checkAuth, isValidCustomer], createRecord);
 
 /**
- * @api {put} /api/ratings/{recordId} Update ratings
+ * @api {put} /api/v1/ratings/{recordId} Update ratings
  * @apiName UpdateRating
  * @apiGroup Rating
  * @apiPermission master
@@ -59,7 +59,7 @@ router.post("/ratings", [checkAuth, isValidCustomer], createRecord);
 router.put("/ratings/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/ratings/{recordId} Delete ratings
+ * @api {delete} /api/v1/ratings/{recordId} Delete ratings
  * @apiName DeleteRating
  * @apiGroup Rating
  * @apiPermission master

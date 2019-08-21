@@ -17,7 +17,7 @@ var fetchRecord = exports.fetchRecord = function () {
                         _aqp = (0, _apiQueryParams2.default)(query), filter = _aqp.filter, skip = _aqp.skip, limit = _aqp.limit, sort = _aqp.sort, projection = _aqp.projection;
                         _context.prev = 2;
                         _context.next = 5;
-                        return _model2.default.find(filter).populate("officer", "email phone surname other_name").skip(skip).limit(limit).sort(sort).select(projection).exec();
+                        return _model2.default.find(filter).populate("officer", "email phone surname given_name").skip(skip).limit(limit).sort(sort).select(projection).exec();
 
                     case 5:
                         result = _context.sent;

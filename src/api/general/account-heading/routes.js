@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/account-headings?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/account-headings?id={recordId} Retrieve one or all records
  * @apiName RetrieveAccountHeading
  * @apiGroup AccountHeading
  * @apiExample {curl} Example usage for retieving a single record:
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/account-headings", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/account-headings Create account-headings
+ * @api {post} /api/v1/account-headings Create account-headings
  * @apiName CreateAccountingHeading
  * @apiGroup AccountHeading
  * @apiHeader {String} Authorization Bearer token
@@ -42,7 +42,7 @@ router.get("/account-headings", [checkAuth, isValidStaff], fetchRecord);
 router.post("/account-headings", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/account-headings/{recordId} Update account-headings
+ * @api {put} /api/v1/account-headings/{recordId} Update account-headings
  * @apiName UpdateAccountingHeading
  * @apiGroup AccountHeading
  * @apiHeader {String} Authorization Bearer token
@@ -62,7 +62,7 @@ router.post("/account-headings", [checkAuth, isValidStaff], createRecord);
 router.put("/account-headings/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/account-headings/{recordId} Delete account-headings
+ * @api {delete} /api/v1/account-headings/{recordId} Delete account-headings
  * @apiName DeleteAccountingHeading
  * @apiGroup AccountHeading
  * @apiHeader {String} Authorization Bearer token

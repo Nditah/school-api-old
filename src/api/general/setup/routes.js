@@ -5,7 +5,7 @@ import { setupSystem, setCollection, uploadCsv, downloadCsv } from "./controller
 const router = express.Router();
 
 /**
- * @api {post} /api/setups/system Complete System Setup
+ * @api {post} /api/v1/setups/system Complete System Setup
  * @apiName SystemSetup
  * @apiGroup Setup
  * @apiParam {String} username Master username
@@ -18,7 +18,7 @@ const router = express.Router();
 router.get("/setups/preload/system", [checkAuth, isValidStaff], setupSystem);
 
 /**
- * @api {get} /api/setups/preload/{subsidiary}/{folder}/{collection} Preload Setups data
+ * @api {get} /api/v1/setups/preload/{subsidiary}/{folder}/{collection} Preload Setups data
  * @apiName ModuleSetup
  * @apiGroup Setup
  * @apiParam {String} access_token admin access token.
@@ -33,7 +33,7 @@ router.get("/setups/preload/system", [checkAuth, isValidStaff], setupSystem);
 router.get("/setups/preload/:subsidiary/:folder/:collection", [checkAuth, isValidStaff], setCollection);
 
 /**
- * @api {get} /api/setups/csv/{collection} Download Table in CSV
+ * @api {get} /api/v1/setups/csv/{collection} Download Table in CSV
  * @apiName DownloadCsv
  * @apiGroup Setup
  * @apiExample {curl} Example usage for seeding vehicle records:
@@ -49,7 +49,7 @@ router.get("/setups/preload/:subsidiary/:folder/:collection", [checkAuth, isVali
 router.get("/setups/csv/:collection", [checkAuth, isValidStaff], downloadCsv);
 
 /**
- * @api {post} /api/setups/csv/{collection} Upload Table in CSV
+ * @api {post} /api/v1/setups/csv/{collection} Upload Table in CSV
  * @apiName UploadCsv
  * @apiGroup Setup
  * @apiExample {curl} Example usage for seeding driver records:

@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/contact-us?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/contact-us?id={recordId} Retrieve one or all records
  * @apiName RetrieveContactUs
  * @apiGroup ContactUs
  * @apiExample {curl} Example usage for retieving a single record:
@@ -39,7 +39,7 @@ var router = _express2.default.Router();
 router.get("/contact-us", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/contact-us Create contact-us
+ * @api {post} /api/v1/contact-us Create contact-us
  * @apiName CreateContactUs
  * @apiGroup ContactUs
  * @apiParam {String} access_token master access token.
@@ -62,7 +62,7 @@ router.get("/contact-us", [_authorization.checkAuth, _authorization.isValidStaff
 router.post("/contact-us", _controller.createRecord);
 
 /**
- * @api {put} /api/contact-us/{recordId} Update contact-us
+ * @api {put} /api/v1/contact-us/{recordId} Update contact-us
  * @apiName UpdateContactUs
  * @apiGroup ContactUs
  * @apiPermission master
@@ -79,7 +79,7 @@ router.post("/contact-us", _controller.createRecord);
 router.put("/contact-us/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/contact-us/{recordId} Delete contact-us
+ * @api {delete} /api/v1/contact-us/{recordId} Delete contact-us
  * @apiName DeleteContactUs
  * @apiGroup ContactUs
  * @apiPermission master

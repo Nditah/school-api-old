@@ -2,19 +2,18 @@
 /**
  * @author 4Dcoder
  * @property {Number} id class_room primaryKey
- * @property {String} name ClassRoom full name (required)
- * @property {String} block ClassRoom block code (required)
- * @property {String} level ClassRoom levels (required)
- * @property {String} subsidiary ClassRoom subsidiary (required)
- * @property {String} classe ClassRoom classe (required)
- * @description ClassRoom model holds record of all class_rooms the school deals with
+ * @property {String} name Classroom full name (required)
+ * @property {String} block Classroom block code (required)
+ * @property {String} level Classroom levels (required)
+ * @property {String} subsidiary Classroom subsidiary (required)
+ * @property {String} classe Classroom classe (required)
+ * @description Classroom model holds record of all class_rooms the school deals with
  */
 import Joi from "joi";
 import mongoose from "mongoose";
 // eslint-disable-next-line camelcase
 import mongoose_csv from "mongoose-csv";
 import { DATABASE, SUBSIDIARY } from "../../../constants";
-import table from "./table";
 import Staff from "../staff/model";
 import Classe from "../classe/model";
 
@@ -53,14 +52,12 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" },
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
 const options = DATABASE.OPTIONS;
 
 const newSchema = new Schema(schema, options);
 newSchema.set("collection", "class_room");
 newSchema.plugin(mongoose_csv);
 
-const ClassRoom = mongoose.model("ClassRoom", newSchema);
-if (preload) { ClassRoom.insertMany(table); }
+const Classroom = mongoose.model("Classroom", newSchema);
 
-export default ClassRoom;
+export default Classroom;

@@ -23,7 +23,7 @@ var fetchRecord = exports.fetchRecord = function () {
                             delete filter.q;
                         }
                         _context.next = 7;
-                        return _model2.default.find(filter).populate("author_id", "id surname other_name email phone").populate("comment_ids").skip(skip).limit(limit).sort(sort).select(projection).exec();
+                        return _model2.default.find(filter).populate("author_id", "id surname given_name email phone").populate("comment_ids").skip(skip).limit(limit).sort(sort).select(projection).exec();
 
                     case 7:
                         result = _context.sent;

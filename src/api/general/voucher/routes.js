@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, auditRecord, deleteRecord } fr
 const router = express.Router();
 
 /**
- * @api {get} /api/vouchers?id={recordId} Retrieve Voucher record(s)
+ * @api {get} /api/v1/vouchers?id={recordId} Retrieve Voucher record(s)
  * @apiName RetrieveVoucher
  * @apiGroup Voucher
  * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/vouchers", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/vouchers Create vouchers
+ * @api {post} /api/v1/vouchers Create vouchers
  * @apiName CreateVoucher
  * @apiGroup Voucher
  * @apiHeader {String} Authorization authorization token
@@ -66,7 +66,7 @@ router.get("/vouchers", [checkAuth, isValidStaff], fetchRecord);
 router.post("/vouchers", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/vouchers/{recordId} Update vouchers
+ * @api {put} /api/v1/vouchers/{recordId} Update vouchers
  * @apiName UpdateVoucher
  * @apiGroup Voucher
  * @apiHeader {String} Authorization authorization token
@@ -111,7 +111,7 @@ router.post("/vouchers", [checkAuth, isValidStaff], createRecord);
 router.put("/vouchers/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {put} /api/vouchers/audit/{recordId} Audit vouchers
+ * @api {put} /api/v1/vouchers/audit/{recordId} Audit vouchers
  * @apiName AuditVoucher
  * @apiGroup Voucher
  * @apiHeader {String} Authorization authorization token
@@ -127,7 +127,7 @@ router.put("/vouchers/:recordId", [checkAuth, isValidStaff], updateRecord);
 router.put("/vouchers/audit/:recordId", [checkAuth, isValidStaff], auditRecord);
 
 /**
- * @api {delete} /api/vouchers/{recordId} Delete vouchers
+ * @api {delete} /api/v1/vouchers/{recordId} Delete vouchers
  * @apiName DeleteVoucher
  * @apiGroup Voucher
  * @apiHeader {String} Authorization authorization token

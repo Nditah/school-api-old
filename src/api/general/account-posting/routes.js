@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/account-posting?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/account-posting?id={recordId} Retrieve one or all records
  * @apiName RetrieveAccountPosting
  * @apiGroup AccountPosting
  * @apiExample {curl} Example usage for retieving a single record:
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/account-posting", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/account-posting Create account-posting
+ * @api {post} /api/v1/account-posting Create account-posting
  * @apiName CreateAccountPosting
  * @apiGroup AccountPosting
  * @apiHeader {String} Authorization Bearer token
@@ -44,7 +44,7 @@ router.get("/account-posting", [checkAuth, isValidStaff], fetchRecord);
 router.post("/account-posting", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/account-posting/{recordId} Update account-posting
+ * @api {put} /api/v1/account-posting/{recordId} Update account-posting
  * @apiName UpdateAccountPosting
  * @apiGroup AccountPosting
  * @apiHeader {String} Authorization Bearer token
@@ -66,7 +66,7 @@ router.post("/account-posting", [checkAuth, isValidStaff], createRecord);
 router.put("/account-posting/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/account-posting/{recordId} Delete account-posting
+ * @api {delete} /api/v1/account-posting/{recordId} Delete account-posting
  * @apiName DeleteAccountPosting
  * @apiGroup AccountPosting
  * @apiHeader {String} Authorization Bearer token

@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/vouchers?id={recordId} Retrieve Voucher record(s)
+ * @api {get} /api/v1/vouchers?id={recordId} Retrieve Voucher record(s)
  * @apiName RetrieveVoucher
  * @apiGroup Voucher
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/vouchers", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/vouchers Create vouchers
+ * @api {post} /api/v1/vouchers Create vouchers
  * @apiName CreateVoucher
  * @apiGroup Voucher
  * @apiHeader {String} Authorization authorization token
@@ -78,7 +78,7 @@ router.get("/vouchers", [_authorization.checkAuth, _authorization.isValidStaff],
 router.post("/vouchers", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/vouchers/{recordId} Update vouchers
+ * @api {put} /api/v1/vouchers/{recordId} Update vouchers
  * @apiName UpdateVoucher
  * @apiGroup Voucher
  * @apiHeader {String} Authorization authorization token
@@ -123,7 +123,7 @@ router.post("/vouchers", [_authorization.checkAuth, _authorization.isValidStaff]
 router.put("/vouchers/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {put} /api/vouchers/audit/{recordId} Audit vouchers
+ * @api {put} /api/v1/vouchers/audit/{recordId} Audit vouchers
  * @apiName AuditVoucher
  * @apiGroup Voucher
  * @apiHeader {String} Authorization authorization token
@@ -139,7 +139,7 @@ router.put("/vouchers/:recordId", [_authorization.checkAuth, _authorization.isVa
 router.put("/vouchers/audit/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.auditRecord);
 
 /**
- * @api {delete} /api/vouchers/{recordId} Delete vouchers
+ * @api {delete} /api/v1/vouchers/{recordId} Delete vouchers
  * @apiName DeleteVoucher
  * @apiGroup Voucher
  * @apiHeader {String} Authorization authorization token

@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/timetables?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/timetables?id={recordId} Retrieve one or all records
  * @apiName RetrieveStore
  * @apiGroup Store
  * @apiExample {curl} Example usage for retieving a single record:
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/timetables", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/timetables Create timetables
+ * @api {post} /api/v1/timetables Create timetables
  * @apiName CreateTimetables
  * @apiGroup Timetables
  * @apiHeader {String} Authorization Bearer token
@@ -42,7 +42,7 @@ router.get("/timetables", [checkAuth, isValidStaff], fetchRecord);
 router.post("/timetables", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/timetables/{recordId} Update timetables
+ * @api {put} /api/v1/timetables/{recordId} Update timetables
  * @apiName UpdateTimetable
  * @apiGroup Timetable
  * @apiHeader {String} Authorization Bearer token
@@ -61,7 +61,7 @@ router.post("/timetables", [checkAuth, isValidStaff], createRecord);
 router.put("/timetables/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/timetables/{recordId} Delete timetables
+ * @api {delete} /api/v1/timetables/{recordId} Delete timetables
  * @apiName DeleteTimetable
  * @apiGroup Timetable
  * @apiHeader {String} Authorization Bearer token

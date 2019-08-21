@@ -22,7 +22,7 @@ export async function fetchRecord(req, res) {
             delete filter.q;
         }
         const result = await Blog.find(filter)
-            .populate("author_id", "id surname other_name email phone")
+            .populate("author_id", "id surname given_name email phone")
             .populate("comment_ids")
             .skip(skip)
             .limit(limit)

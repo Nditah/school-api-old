@@ -17,7 +17,7 @@ export async function fetchRecord(req, res) {
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
         const result = await Stage.find(filter)
-            .populate("officer", "email phone surname other_name")
+            .populate("officer", "email phone surname given_name")
             .skip(skip)
             .limit(limit)
             .sort(sort)

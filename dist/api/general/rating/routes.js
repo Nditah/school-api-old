@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/ratings?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/ratings?id={recordId} Retrieve one or all records
  * @apiName RetrieveRatings
  * @apiGroup Rating
   * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/ratings", [_authorization.checkAuth], _controller.fetchRecord);
 
 /**
- * @api {post} /api/ratings Create ratings
+ * @api {post} /api/v1/ratings Create ratings
  * @apiName CreateRating
  * @apiGroup Rating
  * @apiParam {Number} star Rating star from 0 to 5 (required)
@@ -52,7 +52,7 @@ router.get("/ratings", [_authorization.checkAuth], _controller.fetchRecord);
 router.post("/ratings", [_authorization.checkAuth, _authorization.isValidCustomer], _controller.createRecord);
 
 /**
- * @api {put} /api/ratings/{recordId} Update ratings
+ * @api {put} /api/v1/ratings/{recordId} Update ratings
  * @apiName UpdateRating
  * @apiGroup Rating
  * @apiPermission master
@@ -71,7 +71,7 @@ router.post("/ratings", [_authorization.checkAuth, _authorization.isValidCustome
 router.put("/ratings/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/ratings/{recordId} Delete ratings
+ * @api {delete} /api/v1/ratings/{recordId} Delete ratings
  * @apiName DeleteRating
  * @apiGroup Rating
  * @apiPermission master
