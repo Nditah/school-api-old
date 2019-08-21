@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/upload to get the form for uploading images
+ * @api {get} /api/v1/upload to get the form for uploading images
  * @apiName RetrieveUploadForm
  * @apiGroup Image
  * @apiDescription The sample form allows you to test the API by uploading
@@ -32,7 +32,7 @@ router.get("/upload", function (req, res) {
 });
 
 /**
- * @api {get} /api/images?{query} Retrieve all image-assets
+ * @api {get} /api/v1/images?{query} Retrieve all image-assets
  * @apiName RetrieveImages
  * @apiGroup Image
  * @apiHeader {String} Authorization authorization token
@@ -44,7 +44,7 @@ router.get("/upload", function (req, res) {
 router.get("/images", _controller.fetchRecord);
 
 /**
- * @api {post} /api/images Create image-assets
+ * @api {post} /api/v1/images Create image-assets
  * @apiName CreateImage
  * @apiGroup Image
  * @apiHeader {String} Authorization authorization token
@@ -59,7 +59,7 @@ router.get("/images", _controller.fetchRecord);
 router.post("/images", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {post} /api/images-aws Create image-assets
+ * @api {post} /api/v1/images-aws Create image-assets
  * @apiName CreateImageAws
  * @apiGroup Image
  * @apiHeader {String} Authorization authorization token
@@ -72,7 +72,7 @@ router.post("/images", [_authorization.checkAuth, _authorization.isValidStaff], 
 router.post("/images-aws", [_authorization.checkAuth, _authorization.isValidStaff], _controller.addImageAws);
 
 /**
- * @api {put} /api/images/{ImageId} Update image-assets
+ * @api {put} /api/v1/images/{ImageId} Update image-assets
  * @apiName UpdateImage
  * @apiGroup Image
  * @apiHeader {String} Authorization authorization token
@@ -83,7 +83,7 @@ router.post("/images-aws", [_authorization.checkAuth, _authorization.isValidStaf
 router.put("/images/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/images/{recordId} Delete image-assets
+ * @api {delete} /api/v1/images/{recordId} Delete image-assets
  * @apiName DeleteImage
  * @apiGroup Image
  * @apiHeader {String} Authorization authorization token

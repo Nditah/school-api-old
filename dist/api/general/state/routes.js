@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/states?id={recordId} Retrieve State records
+ * @api {get} /api/v1/states?id={recordId} Retrieve State records
  * @apiName RetrieveState
  * @apiGroup State
  * @apiHeader {String} Authorization Bearer token
@@ -35,7 +35,7 @@ var router = _express2.default.Router();
 router.get("/states", _controller.fetchRecord);
 
 /**
- * @api {post} /api/states Create a State record
+ * @api {post} /api/v1/states Create a State record
  * @apiName CreateState
  * @apiGroup State
  * @apiHeader {String} Authorization Bearer token
@@ -50,7 +50,7 @@ router.get("/states", _controller.fetchRecord);
 router.post("/states", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/states/{recordId} Update a State record
+ * @api {put} /api/v1/states/{recordId} Update a State record
  * @apiName UpdateState
  * @apiGroup State
  * @apiHeader {String} Authorization Bearer token
@@ -67,7 +67,7 @@ router.post("/states", [_authorization.checkAuth, _authorization.isValidStaff], 
 router.put("/states/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/states/{recordId} Delete a State record
+ * @api {delete} /api/v1/states/{recordId} Delete a State record
  * @apiName DeleteState
  * @apiGroup State
  * @apiHeader {String} Authorization Bearer token

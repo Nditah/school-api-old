@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/blog-comments?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/blog-comments?id={recordId} Retrieve one or all records
  * @apiName RetrieveBlogComment
  * @apiGroup BlogComment
  * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/blog-comments", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/blog-comments Create blog-comments
+ * @api {post} /api/v1/blog-comments Create blog-comments
  * @apiName CreateBlogComment
  * @apiGroup BlogComment
  * @apiParam {String} blog_id BlogComment blog ObjectId
@@ -37,7 +37,7 @@ router.get("/blog-comments", [checkAuth, isValidStaff], fetchRecord);
 router.post("/blog-comments", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/blog-comments/{recordId} Update blog-comments
+ * @api {put} /api/v1/blog-comments/{recordId} Update blog-comments
  * @apiName UpdateBlogComment
  * @apiGroup BlogComment
  * @apiHeader {String} Authorization authorization token
@@ -54,7 +54,7 @@ router.post("/blog-comments", [checkAuth, isValidStaff], createRecord);
 router.put("/blog-comments/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/blog-comments/{recordId} Delete blog-comments
+ * @api {delete} /api/v1/blog-comments/{recordId} Delete blog-comments
  * @apiName DeleteBlogComment
  * @apiGroup BlogComment
  * @apiHeader {String} Authorization authorization token

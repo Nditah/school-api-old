@@ -1,11 +1,11 @@
 import express from "express";
 import { checkAuth, isValidStaff } from "../../../middleware/authorization";
- import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
 
 const router = express.Router();
 
 /**
- * @api {get} /api/lessons?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/lessons?id={recordId} Retrieve one or all records
  * @apiName RetrieveLesson
  * @apiGroup Lesson
  * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/lessons", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/lessons Create lessons
+ * @api {post} /api/v1/lessons Create lessons
  * @apiName CreateLesson
  * @apiGroup Lesson
  * @apiHeader {String} Authorization Bearer token
@@ -40,7 +40,7 @@ router.get("/lessons", [checkAuth, isValidStaff], fetchRecord);
 router.post("/lessons", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/lessons/{recordId} Update lessons
+ * @api {put} /api/v1/lessons/{recordId} Update lessons
  * @apiName UpdateLesson
  * @apiGroup Lesson
  * @apiHeader {String} Authorization Bearer token
@@ -58,7 +58,7 @@ router.post("/lessons", [checkAuth, isValidStaff], createRecord);
 router.put("/lessons/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/lessons/{recordId} Delete lessons
+ * @api {delete} /api/v1/lessons/{recordId} Delete lessons
  * @apiName DeleteLesson
  * @apiGroup Lesson
  * @apiHeader {String} Authorization Bearer token

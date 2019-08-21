@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/document-type?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/document-type?id={recordId} Retrieve one or all records
  * @apiName RetrieveDocumentType
  * @apiGroup DocumentType
  * @apiExample {curl} Example usage for retieving a single record:
@@ -38,7 +38,7 @@ var router = _express2.default.Router();
 router.get("/document-type", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/document-type Create document-type
+ * @api {post} /api/v1/document-type Create document-type
  * @apiName CreateDocumentType
  * @apiGroup DocumentType
  * @apiHeader {String} Authorization Bearer token
@@ -58,7 +58,7 @@ router.get("/document-type", [_authorization.checkAuth, _authorization.isValidSt
 router.post("/document-type", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/document-type/{recordId} Update document-type
+ * @api {put} /api/v1/document-type/{recordId} Update document-type
  * @apiName UpdateDocumentType
  * @apiGroup DocumentType
  * @apiHeader {String} Authorization Bearer token
@@ -79,7 +79,7 @@ router.post("/document-type", [_authorization.checkAuth, _authorization.isValidS
 router.put("/document-type/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/document-type/{recordId} Delete document-type
+ * @api {delete} /api/v1/document-type/{recordId} Delete document-type
  * @apiName DeleteDocumentType
  * @apiGroup DocumentType
  * @apiHeader {String} Authorization Bearer token

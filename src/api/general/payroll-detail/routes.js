@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/payroll-details?id={recordId} Retrieve PayrollDetail records
+ * @api {get} /api/v1/payroll-details?id={recordId} Retrieve PayrollDetail records
  * @apiName RetrievePayrollDetail
  * @apiGroup PayrollDetail
  * @apiHeader {String} Authorization Bearer token
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/payroll-details", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/payroll-details Create a PayrollDetail record
+ * @api {post} /api/v1/payroll-details Create a PayrollDetail record
  * @apiName CreatePayrollDetail
  * @apiGroup PayrollDetail
  * @apiHeader {String} Authorization Bearer token
@@ -46,7 +46,7 @@ router.get("/payroll-details", [checkAuth, isValidStaff], fetchRecord);
 router.post("/payroll-details", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/payroll-details/{recordId} Update a PayrollDetail record
+ * @api {put} /api/v1/payroll-details/{recordId} Update a PayrollDetail record
  * @apiName UpdatePayrollDetail
  * @apiGroup PayrollDetail
  * @apiHeader {String} Authorization Bearer token
@@ -70,7 +70,7 @@ router.post("/payroll-details", [checkAuth, isValidStaff], createRecord);
 router.put("/payroll-details/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/payroll-details/{recordId} Delete a PayrollDetail record
+ * @api {delete} /api/v1/payroll-details/{recordId} Delete a PayrollDetail record
  * @apiName DeletePayrollDetail
  * @apiGroup PayrollDetail
  * @apiHeader {String} Authorization Bearer token

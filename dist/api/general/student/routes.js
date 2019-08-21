@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/students?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/students?id={recordId} Retrieve one or all records
  * @apiName RetrieveStudent
  * @apiGroup Student
  * @apiExample {curl} Example usage for retieving a single record:
@@ -38,7 +38,7 @@ var router = _express2.default.Router();
 router.get("/students", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/students Create students
+ * @api {post} /api/v1/students Create students
  * @apiName CreateStudent
  * @apiGroup Student
  * @apiHeader {String} Authorization Bearer token
@@ -68,7 +68,7 @@ router.get("/students", [_authorization.checkAuth, _authorization.isValidStaff],
 router.post("/students", _controller.createRecord);
 
 /**
- * @api {put} /api/students/{recordId} Update students
+ * @api {put} /api/v1/students/{recordId} Update students
  * @apiName UpdateStudent
  * @apiGroup Student
  * @apiHeader {String} Authorization Bearer token
@@ -99,7 +99,7 @@ router.post("/students", _controller.createRecord);
 router.put("/students/:recordId", [_authorization.checkAuth], _controller.updateRecord);
 
 /**
- * @api {delete} /api/students/{recordId} Delete students
+ * @api {delete} /api/v1/students/{recordId} Delete students
  * @apiName DeleteStudent
  * @apiGroup Student
  * @apiParam {String} recordId record ObjectId
@@ -110,7 +110,7 @@ router.put("/students/:recordId", [_authorization.checkAuth], _controller.update
 router.delete("/students/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
 /**
- * @api {post} /api/students/login Login Student
+ * @api {post} /api/v1/students/login Login Student
  * @apiName LoginStudent
  * @apiGroup Student
  * @apiPermission master

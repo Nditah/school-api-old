@@ -1,9 +1,10 @@
 const dotenv = require("dotenv");
-const sgMail = require("@sendgrid/mail");
 const { EMAIL } = require("../constants");
 
 dotenv.config();
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+const emailApi = process.env.EMAIL_API;
+const sgMail = null;
 
 function sendEmail(recipient, sender, subject, body) {
     const text = "";

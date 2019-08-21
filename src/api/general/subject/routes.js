@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/subjects?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/subjects?id={recordId} Retrieve one or all records
  * @apiName RetrieveSubject
  * @apiGroup Subject
 * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/subjects", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/subjects Create subjects
+ * @api {post} /api/v1/subjects Create subjects
  * @apiName CreateSubject
  * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
@@ -39,7 +39,7 @@ router.get("/subjects", [checkAuth, isValidStaff], fetchRecord);
 router.post("/subjects", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/subjects/{recordId} Update subjects
+ * @api {put} /api/v1/subjects/{recordId} Update subjects
  * @apiName UpdateSubject
  * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
@@ -57,7 +57,7 @@ router.post("/subjects", [checkAuth, isValidStaff], createRecord);
 router.put("/subjects/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/subjects/{recordId} Delete subjects
+ * @api {delete} /api/v1/subjects/{recordId} Delete subjects
  * @apiName DeleteSubject
  * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token

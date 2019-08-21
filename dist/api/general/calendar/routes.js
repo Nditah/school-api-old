@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/calendar?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/calendar?id={recordId} Retrieve one or all records
  * @apiName RetrieveCalendar
  * @apiGroup Calendar
  * @apiExample {curl} Example usage for retieving a single record:
@@ -38,7 +38,7 @@ var router = _express2.default.Router();
 router.get("/calendar", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/calendar Create calendar
+ * @api {post} /api/v1/calendar Create calendar
  * @apiName CreateCalendar
  * @apiGroup Calendar
  * @apiParam {String} access_token master access token.
@@ -54,7 +54,7 @@ router.get("/calendar", [_authorization.checkAuth, _authorization.isValidStaff],
 router.post("/calendar", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/calendar/{recordId} Update calendar
+ * @api {put} /api/v1/calendar/{recordId} Update calendar
  * @apiName UpdateCalendar
  * @apiGroup Calendar
  * @apiPermission master
@@ -71,7 +71,7 @@ router.post("/calendar", [_authorization.checkAuth, _authorization.isValidStaff]
 router.put("/calendar/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/calendar/{recordId} Delete calendar
+ * @api {delete} /api/v1/calendar/{recordId} Delete calendar
  * @apiName DeleteCalendar
  * @apiGroup Calendar
  * @apiPermission master

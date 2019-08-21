@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/lessons?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/lessons?id={recordId} Retrieve one or all records
  * @apiName RetrieveLesson
  * @apiGroup Lesson
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/lessons", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/lessons Create lessons
+ * @api {post} /api/v1/lessons Create lessons
  * @apiName CreateLesson
  * @apiGroup Lesson
  * @apiHeader {String} Authorization Bearer token
@@ -52,7 +52,7 @@ router.get("/lessons", [_authorization.checkAuth, _authorization.isValidStaff], 
 router.post("/lessons", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/lessons/{recordId} Update lessons
+ * @api {put} /api/v1/lessons/{recordId} Update lessons
  * @apiName UpdateLesson
  * @apiGroup Lesson
  * @apiHeader {String} Authorization Bearer token
@@ -70,7 +70,7 @@ router.post("/lessons", [_authorization.checkAuth, _authorization.isValidStaff],
 router.put("/lessons/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/lessons/{recordId} Delete lessons
+ * @api {delete} /api/v1/lessons/{recordId} Delete lessons
  * @apiName DeleteLesson
  * @apiGroup Lesson
  * @apiHeader {String} Authorization Bearer token

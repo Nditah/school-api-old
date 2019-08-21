@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/materials?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/materials?id={recordId} Retrieve one or all records
  * @apiName RetrieveMaterial
  * @apiGroup Material
 * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/materials", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/materials Create materials
+ * @api {post} /api/v1/materials Create materials
  * @apiName CreateMaterial
  * @apiGroup Material
  * @apiHeader {String} Authorization Bearer token
@@ -66,7 +66,7 @@ router.get("/materials", [_authorization.checkAuth, _authorization.isValidStaff]
 router.post("/materials", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/materials/{recordId} Update materials
+ * @api {put} /api/v1/materials/{recordId} Update materials
  * @apiName UpdateMaterial
  * @apiGroup Material
  * @apiHeader {String} Authorization Bearer token
@@ -99,7 +99,7 @@ router.post("/materials", [_authorization.checkAuth, _authorization.isValidStaff
 router.put("/materials/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/materials/{recordId} Delete materials
+ * @api {delete} /api/v1/materials/{recordId} Delete materials
  * @apiName DeleteMaterial
  * @apiGroup Material
  * @apiHeader {String} Authorization Bearer token

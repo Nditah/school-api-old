@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/timetables?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/timetables?id={recordId} Retrieve one or all records
  * @apiName RetrieveStore
  * @apiGroup Store
  * @apiExample {curl} Example usage for retieving a single record:
@@ -35,7 +35,7 @@ var router = _express2.default.Router();
 router.get("/timetables", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/timetables Create timetables
+ * @api {post} /api/v1/timetables Create timetables
  * @apiName CreateTimetables
  * @apiGroup Timetables
  * @apiHeader {String} Authorization Bearer token
@@ -54,7 +54,7 @@ router.get("/timetables", [_authorization.checkAuth, _authorization.isValidStaff
 router.post("/timetables", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/timetables/{recordId} Update timetables
+ * @api {put} /api/v1/timetables/{recordId} Update timetables
  * @apiName UpdateTimetable
  * @apiGroup Timetable
  * @apiHeader {String} Authorization Bearer token
@@ -73,7 +73,7 @@ router.post("/timetables", [_authorization.checkAuth, _authorization.isValidStaf
 router.put("/timetables/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/timetables/{recordId} Delete timetables
+ * @api {delete} /api/v1/timetables/{recordId} Delete timetables
  * @apiName DeleteTimetable
  * @apiGroup Timetable
  * @apiHeader {String} Authorization Bearer token

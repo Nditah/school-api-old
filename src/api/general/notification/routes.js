@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/notifications?id={recordId} Retrieve Notification records
+ * @api {get} /api/v1/notifications?id={recordId} Retrieve Notification records
  * @apiName RetrieveNotification
  * @apiGroup Notification
  * @apiHeader {String} Authorization Bearer token
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/notifications", [checkAuth], fetchRecord);
 
 /**
- * @api {post} /api/notifications Create a Notification record
+ * @api {post} /api/v1/notifications Create a Notification record
  * @apiName CreateNotification
  * @apiGroup Notification
  * @apiHeader {String} Authorization Bearer token
@@ -42,7 +42,7 @@ router.get("/notifications", [checkAuth], fetchRecord);
 router.post("/notifications", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/notifications/{recordId} Update a Notification record
+ * @api {put} /api/v1/notifications/{recordId} Update a Notification record
  * @apiName UpdateNotification
  * @apiGroup Notification
  * @apiHeader {String} Authorization Bearer token
@@ -62,7 +62,7 @@ router.post("/notifications", [checkAuth, isValidStaff], createRecord);
 router.put("/notifications/:recordId", [checkAuth], updateRecord);
 
 /**
- * @api {delete} /api/notifications/{recordId} Delete a Notification record
+ * @api {delete} /api/v1/notifications/{recordId} Delete a Notification record
  * @apiName DeleteNotification
  * @apiGroup Notification
  * @apiPermission master

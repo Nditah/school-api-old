@@ -5,7 +5,7 @@ import { fetchRecord, createRecord } from "./controller";
 const router = express.Router();
 
 /**
- * @api {get} /api/unionbank-transactions?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/unionbank-transactions?id={recordId} Retrieve one or all records
  * @apiName RetrieveUnionbankTransaction
  * @apiGroup UnionbankTransaction
  * @apiExample {curl} Example usage for retieving a single record:
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/unionbank-transactions", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/unionbank-transactions Create unionbank-transactions
+ * @api {post} /api/v1/unionbank-transactions Create unionbank-transactions
  * @apiName CreateUnionbankTransaction
  * @apiGroup UnionbankTransaction
  * @apiParam {Number} branchid UnionBank Branch code the transaction originated from

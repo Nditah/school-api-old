@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/documentations?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/documentations?id={recordId} Retrieve one or all records
  * @apiName RetrieveDocumentation
  * @apiGroup Documentation
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/documentations", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/documentations Create documentations
+ * @api {post} /api/v1/documentations Create documentations
  * @apiName CreateDocumentation
  * @apiGroup Documentation
  * @apiHeader {String} Authorization Bearer token
@@ -64,7 +64,7 @@ router.get("/documentations", [_authorization.checkAuth, _authorization.isValidS
 router.post("/documentations", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/documentations/{recordId} Update documentations
+ * @api {put} /api/v1/documentations/{recordId} Update documentations
  * @apiName UpdateDocumentation
  * @apiGroup Documentation
  * @apiHeader {String} Authorization Bearer token
@@ -95,7 +95,7 @@ router.post("/documentations", [_authorization.checkAuth, _authorization.isValid
 router.put("/documentations/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/documentations/{recordId} Delete documentations
+ * @api {delete} /api/v1/documentations/{recordId} Delete documentations
  * @apiName DeleteDocumentation
  * @apiGroup Documentation
  * @apiPermission master

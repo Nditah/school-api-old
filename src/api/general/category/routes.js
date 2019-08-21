@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/categories?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/categories?id={recordId} Retrieve one or all records
  * @apiName RetrieveCategory
  * @apiGroup Category
  * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/categories", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/categories Create categories
+ * @api {post} /api/v1/categories Create categories
  * @apiName CreateCategory
  * @apiGroup Category
  * @apiHeader {String} Authorization Bearer token
@@ -39,7 +39,7 @@ router.get("/categories", [checkAuth, isValidStaff], fetchRecord);
 router.post("/categories", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/categories/{recordId} Update categories
+ * @api {put} /api/v1/categories/{recordId} Update categories
  * @apiName UpdateCategory
  * @apiGroup Category
  * @apiHeader {String} Authorization Bearer token
@@ -57,7 +57,7 @@ router.post("/categories", [checkAuth, isValidStaff], createRecord);
 router.put("/categories/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/categories/{recordId} Delete categories
+ * @api {delete} /api/v1/categories/{recordId} Delete categories
  * @apiName DeleteCategory
  * @apiGroup Category
  * @apiHeader {String} Authorization Bearer token

@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/assets?id={recordId} Retrieve Asset records
+ * @api {get} /api/v1/assets?id={recordId} Retrieve Asset records
  * @apiName RetrieveAsset
  * @apiGroup Asset
  * @apiHeader {String} Authorization Bearer token
@@ -35,7 +35,7 @@ var router = _express2.default.Router();
 router.get("/assets", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/assets Create an Asset record
+ * @api {post} /api/v1/assets Create an Asset record
  * @apiName CreateAsset
  * @apiGroup Asset
  * @apiHeader {String} Authorization Bearer token
@@ -50,7 +50,7 @@ router.get("/assets", [_authorization.checkAuth, _authorization.isValidStaff], _
 router.post("/assets", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/assets/{recordId} Update an Asset record
+ * @api {put} /api/v1/assets/{recordId} Update an Asset record
  * @apiName UpdateAsset
  * @apiGroup Asset
  * @apiHeader {String} Authorization Bearer token
@@ -65,7 +65,7 @@ router.post("/assets", [_authorization.checkAuth, _authorization.isValidStaff], 
 router.put("/assets/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/assets/{recordId} Delete an Asset record
+ * @api {delete} /api/v1/assets/{recordId} Delete an Asset record
  * @apiName DeleteAsset
  * @apiGroup Asset
  * @apiHeader {String} Authorization Bearer token

@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/admissions?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/admissions?id={recordId} Retrieve one or all records
  * @apiName RetrieveAdmission
  * @apiGroup Admission
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/admissions", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/admissions Create admissions
+ * @api {post} /api/v1/admissions Create admissions
  * @apiName CreateAdmission
  * @apiGroup Admission
  * @apiHeader {String} Authorization Bearer token
@@ -62,7 +62,7 @@ router.get("/admissions", [_authorization.checkAuth, _authorization.isValidStaff
 router.post("/admissions", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/admissions/{recordId} Update admissions
+ * @api {put} /api/v1/admissions/{recordId} Update admissions
  * @apiName UpdateAdmission
  * @apiGroup Admission
  * @apiHeader {String} Authorization Bearer token
@@ -90,7 +90,7 @@ router.post("/admissions", [_authorization.checkAuth, _authorization.isValidStaf
 router.put("/admissions/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/admissions/{recordId} Delete admissions
+ * @api {delete} /api/v1/admissions/{recordId} Delete admissions
  * @apiName DeleteAdmission
  * @apiGroup Admission
  * @apiHeader {String} Authorization Bearer token

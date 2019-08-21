@@ -9,7 +9,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/attendances?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/attendances?id={recordId} Retrieve one or all records
  * @apiName RetrieveAttendance
  * @apiGroup Attendance
  * @apiExample {curl} Example usage for retieving a single record:
@@ -26,7 +26,7 @@ const router = express.Router();
 router.get("/attendances", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/attendances Create attendances
+ * @api {post} /api/v1/attendances Create attendances
  * @apiName CreateAttendance
  * @apiGroup Attendance
  * @apiHeader {String} Authorization Bearer token
@@ -47,7 +47,7 @@ router.get("/attendances", [checkAuth, isValidStaff], fetchRecord);
 router.post("/attendances", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/attendances/{recordId} Update attendances
+ * @api {put} /api/v1/attendances/{recordId} Update attendances
  * @apiName UpdateAttendance
  * @apiGroup Attendance
  * @apiHeader {String} Authorization Bearer token
@@ -68,7 +68,7 @@ router.post("/attendances", [checkAuth, isValidStaff], createRecord);
 router.put("/attendances/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/attendances/{recordId} Delete attendances
+ * @api {delete} /api/v1/attendances/{recordId} Delete attendances
  * @apiName DeleteAttendance
  * @apiGroup Attendance
  * @apiHeader {String} Authorization Bearer token

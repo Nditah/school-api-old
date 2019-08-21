@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/offence-types?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/offence-types?id={recordId} Retrieve one or all records
  * @apiName RetrieveOffenceType
  * @apiGroup OffenceType
  * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/offence-types", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/offence-types Create offence-types
+ * @api {post} /api/v1/offence-types Create offence-types
  * @apiName CreateOffenceType
  * @apiGroup OffenceType
  * @apiParam {String} code OffenceType code (required)
@@ -41,7 +41,7 @@ router.get("/offence-types", [checkAuth, isValidStaff], fetchRecord);
 router.post("/offence-types", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/offence-types/{recordId} Update offence-types
+ * @api {put} /api/v1/offence-types/{recordId} Update offence-types
  * @apiName UpdateOffenceType
  * @apiGroup OffenceType
  * @apiPermission master
@@ -61,7 +61,7 @@ router.post("/offence-types", [checkAuth, isValidStaff], createRecord);
 router.put("/offence-types/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/offence-types/{recordId} Delete offence-types
+ * @api {delete} /api/v1/offence-types/{recordId} Delete offence-types
  * @apiName DeleteOffenceType
  * @apiGroup OffenceType
  * @apiParam {String} recordId ObjectId

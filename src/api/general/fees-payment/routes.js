@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/fees_payments?id={recordId} Retrieve FeesPayment records
+ * @api {get} /api/v1/fees_payments?id={recordId} Retrieve FeesPayment records
  * @apiName RetrieveFeesPayment filter, skip, limit, sort, projection
  * @apiGroup FeesPayment
  * @apiExample {curl} Example usage for retieving a single record:
@@ -24,7 +24,7 @@ const router = express.Router();
 router.get("/fees_payments", fetchRecord);
 
 /**
- * @api {post} /api/fees_payments Create a fees payments record
+ * @api {post} /api/v1/fees_payments Create a fees payments record
  * @apiName CreateFeesPayments
  * @apiGroup FeesPayments
  * @apiHeader {String} Authorization Bearer token
@@ -43,7 +43,7 @@ router.get("/fees_payments", fetchRecord);
 router.post("/fees_payments", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/fees_payments/{recordId} Update a FeesPayments record
+ * @api {put} /api/v1/fees_payments/{recordId} Update a FeesPayments record
  * @apiName UpdateFeesPayments
  * @apiGroup FeesPayments
  * @apiHeader {String} Authorization authorization token
@@ -63,7 +63,7 @@ router.post("/fees_payments", [checkAuth, isValidStaff], createRecord);
 router.put("/fees_payments/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/fees_payments/{recordId} Delete a FeesPayments record
+ * @api {delete} /api/v1/fees_payments/{recordId} Delete a FeesPayments record
  * @apiName DeleteFeesPayment
  * @apiGroup FeesPayments
  * @apiHeader {String} Authorization authorization token

@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord, login } from "./
 const router = express.Router();
 
 /**
- * @api {get} /api/staff?id={recordId} Retrieve Staff records
+ * @api {get} /api/v1/staff?id={recordId} Retrieve Staff records
  * @apiName RetrieveStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/staff", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/staff Create a Staff record
+ * @api {post} /api/v1/staff Create a Staff record
  * @apiName CreateStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -90,7 +90,7 @@ router.get("/staff", [checkAuth, isValidStaff], fetchRecord);
 router.post("/staff", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/staff/{recordId} Update a Staff record
+ * @api {put} /api/v1/staff/{recordId} Update a Staff record
  * @apiName UpdateStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -158,7 +158,7 @@ router.post("/staff", [checkAuth, isValidStaff], createRecord);
 router.put("/staff/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/staff/{recordId} Delete a Staff record
+ * @api {delete} /api/v1/staff/{recordId} Delete a Staff record
  * @apiName DeleteStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -170,7 +170,7 @@ router.put("/staff/:recordId", [checkAuth, isValidStaff], updateRecord);
 router.delete("/staff/:recordId", [checkAuth, isValidStaff], deleteRecord);
 
 /**
- * @api {post} /api/staff/login Login Staff
+ * @api {post} /api/v1/staff/login Login Staff
  * @apiName LoginStaff
  * @apiGroup Staff
  * @apiPermission master

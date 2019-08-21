@@ -5,7 +5,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/donations?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/donations?id={recordId} Retrieve one or all records
  * @apiName RetrieveDonation
  * @apiGroup Donation
  * @apiExample {curl} Example usage for retieving a single record:
@@ -22,7 +22,7 @@ const router = express.Router();
 router.get("/donations", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/donations Create donations
+ * @api {post} /api/v1/donations Create donations
  * @apiName CreateDonation
  * @apiGroup Donation
  * @apiHeader {String} Authorization Bearer token
@@ -38,7 +38,7 @@ router.get("/donations", [checkAuth, isValidStaff], fetchRecord);
 router.post("/donations", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/donations/{recordId} Update donations
+ * @api {put} /api/v1/donations/{recordId} Update donations
  * @apiName UpdateDonation
  * @apiGroup Donation
  * @apiHeader {String} Authorization Bearer token
@@ -54,7 +54,7 @@ router.post("/donations", [checkAuth, isValidStaff], createRecord);
 router.put("/donations/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/donations/{recordId} Delete donations
+ * @api {delete} /api/v1/donations/{recordId} Delete donations
  * @apiName DeleteDonation
  * @apiGroup Donation
  * @apiPermission master

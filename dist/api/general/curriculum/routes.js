@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/curriculums?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/curriculums?id={recordId} Retrieve one or all records
  * @apiName RetrieveCurriculum
  * @apiGroup Curriculum
  * @apiExample {curl} Example usage for retieving a single record:
@@ -34,7 +34,7 @@ var router = _express2.default.Router();
 router.get("/curriculums", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/curriculums Create curriculums
+ * @api {post} /api/v1/curriculums Create curriculums
  * @apiName CreateCurriculum
  * @apiGroup Curriculum
  * @apiHeader {String} Authorization Bearer token
@@ -48,7 +48,7 @@ router.get("/curriculums", [_authorization.checkAuth, _authorization.isValidStaf
 router.post("/curriculums", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/curriculums/{recordId} Update curriculums
+ * @api {put} /api/v1/curriculums/{recordId} Update curriculums
  * @apiName UpdateCurriculum
  * @apiGroup Curriculum
  * @apiHeader {String} Authorization Bearer token
@@ -62,7 +62,7 @@ router.post("/curriculums", [_authorization.checkAuth, _authorization.isValidSta
 router.put("/curriculums/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/curriculums/{recordId} Delete curriculums
+ * @api {delete} /api/v1/curriculums/{recordId} Delete curriculums
  * @apiName DeleteCurriculum
  * @apiGroup Curriculum
  * @apiPermission master

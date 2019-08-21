@@ -9,7 +9,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./control
 const router = express.Router();
 
 /**
- * @api {get} /api/calendar?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/calendar?id={recordId} Retrieve one or all records
  * @apiName RetrieveCalendar
  * @apiGroup Calendar
  * @apiExample {curl} Example usage for retieving a single record:
@@ -26,7 +26,7 @@ const router = express.Router();
 router.get("/calendar", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/calendar Create calendar
+ * @api {post} /api/v1/calendar Create calendar
  * @apiName CreateCalendar
  * @apiGroup Calendar
  * @apiParam {String} access_token master access token.
@@ -42,7 +42,7 @@ router.get("/calendar", [checkAuth, isValidStaff], fetchRecord);
 router.post("/calendar", [checkAuth, isValidStaff], createRecord);
 
 /**
- * @api {put} /api/calendar/{recordId} Update calendar
+ * @api {put} /api/v1/calendar/{recordId} Update calendar
  * @apiName UpdateCalendar
  * @apiGroup Calendar
  * @apiPermission master
@@ -59,7 +59,7 @@ router.post("/calendar", [checkAuth, isValidStaff], createRecord);
 router.put("/calendar/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
- * @api {delete} /api/calendar/{recordId} Delete calendar
+ * @api {delete} /api/v1/calendar/{recordId} Delete calendar
  * @apiName DeleteCalendar
  * @apiGroup Calendar
  * @apiPermission master

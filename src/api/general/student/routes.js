@@ -9,7 +9,7 @@ import { fetchRecord, createRecord, updateRecord, deleteRecord, login } from "./
 const router = express.Router();
 
 /**
- * @api {get} /api/students?id={recordId} Retrieve one or all records
+ * @api {get} /api/v1/students?id={recordId} Retrieve one or all records
  * @apiName RetrieveStudent
  * @apiGroup Student
  * @apiExample {curl} Example usage for retieving a single record:
@@ -26,7 +26,7 @@ const router = express.Router();
 router.get("/students", [checkAuth, isValidStaff], fetchRecord);
 
 /**
- * @api {post} /api/students Create students
+ * @api {post} /api/v1/students Create students
  * @apiName CreateStudent
  * @apiGroup Student
  * @apiHeader {String} Authorization Bearer token
@@ -56,7 +56,7 @@ router.get("/students", [checkAuth, isValidStaff], fetchRecord);
 router.post("/students", createRecord);
 
 /**
- * @api {put} /api/students/{recordId} Update students
+ * @api {put} /api/v1/students/{recordId} Update students
  * @apiName UpdateStudent
  * @apiGroup Student
  * @apiHeader {String} Authorization Bearer token
@@ -86,7 +86,7 @@ router.post("/students", createRecord);
 router.put("/students/:recordId", [checkAuth], updateRecord);
 
 /**
- * @api {delete} /api/students/{recordId} Delete students
+ * @api {delete} /api/v1/students/{recordId} Delete students
  * @apiName DeleteStudent
  * @apiGroup Student
  * @apiParam {ObjectId} recordId record ObjectId
@@ -97,7 +97,7 @@ router.put("/students/:recordId", [checkAuth], updateRecord);
 router.delete("/students/:recordId", [checkAuth, isValidStaff], deleteRecord);
 
 /**
- * @api {post} /api/students/login Login Student
+ * @api {post} /api/v1/students/login Login Student
  * @apiName LoginStudent
  * @apiGroup Student
  * @apiPermission master
