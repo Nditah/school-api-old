@@ -30,7 +30,6 @@ export const schemaLogin = {
 
 export const schemaCreate = {
     name: Joi.string().trim().optional(),
-    course: Joi.string().trim().optional(),
     teacher: Joi.string().trim().optional(),
     hod: Joi.string().optional(),
     description: Joi.string().trim().optional(),
@@ -39,7 +38,6 @@ export const schemaCreate = {
 
 export const schemaUpdate = {
     name: Joi.string().trim().optional(),
-    course: Joi.string().trim().optional(),
     teacher: Joi.string().trim().optional(),
     hod: Joi.string().optional(),
     description: Joi.string().trim().optional(),
@@ -48,7 +46,6 @@ export const schemaUpdate = {
 
 export const schema = {
     name: { type: String, required: [true, "Why no name?"] },
-    course: { type: ObjectId, ref: "Course" },
     teacher: { type: ObjectId, ref: "Staff" },
     hod: { type: ObjectId, ref: "Staff" },
     description: { type: String },

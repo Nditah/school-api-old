@@ -28,7 +28,6 @@ router.get("/subjects", [checkAuth, isValidStaff], fetchRecord);
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} name Subject name (optional)
  * @apiParam {String} hod Subject hod (optional)
- * @apiParam {String} course Subject course (optional)
  * @apiParam {String} teacher Subject teacher (optional)
  * @apiParam {String} description Subject description (optional)
  * @apiSuccess {Object} Subject Subject's data.
@@ -46,7 +45,6 @@ router.post("/subjects", [checkAuth, isValidStaff], createRecord);
  * @apiParam {String} recordId required record ObjectId
  * @apiParam {String} name Subject name (optional)
  * @apiParam {String} hod Subject hod (optional)
- * @apiParam {String} course Subject course (optional)
  * @apiParam {String} teacher Subject teacher (optional)
  * @apiParam {String} description Subject description (optional)
  * @apiSuccess {Object} Subject Subject's data.
