@@ -3,7 +3,7 @@ import { toObjectId, hash } from "../../../lib";
 
 const table = [
     {
-        last_name: "Jave",
+        surname: "Jave",
         given_name: "Scott",
         gender: GENDER.FEMALE,
         birth_date: new Date(1987, 6, 20),

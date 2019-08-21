@@ -76,9 +76,9 @@ var _documentation = require("./documentation");
 
 var _documentation2 = _interopRequireDefault(_documentation);
 
-var _hostel = require("./hostel");
+var _hostelAllocation = require("./hostel-allocation");
 
-var _hostel2 = _interopRequireDefault(_hostel);
+var _hostelAllocation2 = _interopRequireDefault(_hostelAllocation);
 
 var _multimedia = require("./multimedia");
 
@@ -127,10 +127,6 @@ var _rating2 = _interopRequireDefault(_rating);
 var _report = require("./report");
 
 var _report2 = _interopRequireDefault(_report);
-
-var _result = require("./result");
-
-var _result2 = _interopRequireDefault(_result);
 
 var _setting = require("./setting");
 
@@ -194,10 +190,12 @@ var _unionbank2 = _interopRequireDefault(_unionbank);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Routes
 var router = _express2.default.Router();
 
 // Use Routes
+
+
+// Routes
 router.use(_accountClass2.default);
 router.use(_accountHeading2.default);
 router.use(_accountPosting2.default);
@@ -216,7 +214,7 @@ router.use(_contactUs2.default);
 router.use(_county2.default);
 router.use(_documentType2.default);
 router.use(_documentation2.default);
-router.use(_hostel2.default);
+router.use(_hostelAllocation2.default);
 router.use(_multimedia2.default);
 router.use(_message2.default);
 router.use(_notification2.default);
@@ -229,7 +227,6 @@ router.use(_category2.default);
 router.use(_material2.default);
 router.use(_rating2.default);
 router.use(_report2.default);
-router.use(_result2.default);
 router.use(_setting2.default);
 router.use(_setup2.default);
 router.use(_sms2.default);

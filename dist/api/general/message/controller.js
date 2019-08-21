@@ -17,7 +17,7 @@ var fetchRecord = exports.fetchRecord = function () {
                         _aqp = (0, _apiQueryParams2.default)(query), filter = _aqp.filter, skip = _aqp.skip, limit = _aqp.limit, sort = _aqp.sort, projection = _aqp.projection;
                         _context.prev = 2;
                         _context.next = 5;
-                        return _model2.default.find(filter).populate("created_by", "id phone email surname other_name").populate("staff_id", "id phone email surname other_name").populate("supplier_id", "id phone email surname other_name").populate("customer_id", "id phone email surname other_name").populate("partner_id", "id phone email surname other_name").skip(skip).limit(limit).sort(sort).select(projection).exec();
+                        return _model2.default.find(filter).populate("created_by", "id phone email surname given_name").populate("staff", "id phone email surname given_name").populate("student", "id phone email surname given_name").populate("parent", "id phone email surname given_name").skip(skip).limit(limit).sort(sort).select(projection).exec();
 
                     case 5:
                         result = _context.sent;
@@ -83,140 +83,134 @@ var createRecord = exports.createRecord = function () {
                         recipient = data.recipient, sender = data.sender, subject = data.subject, body = data.body;
                         // eslint-disable-next-line max-len
 
-                        staffId = data.staff_id, partnerId = data.partner_id, driverId = data.supplier_id, customerId = data.customer_id;
+                        staffId = data.staff, partnerId = data.parent, driverId = data.supplier_id, customerId = data.student;
                         Recipient = void 0;
                         recipientId = void 0;
                         _context2.t0 = recipient.toUpperCase();
-                        _context2.next = _context2.t0 === "STAFF" ? 15 : _context2.t0 === "PARTNER" ? 18 : _context2.t0 === "SUPPLIER" ? 21 : _context2.t0 === "CUSTOMER" ? 24 : 27;
+                        _context2.next = _context2.t0 === "STAFF" ? 15 : _context2.t0 === "PARENT" ? 18 : _context2.t0 === "STUDENT" ? 21 : 24;
                         break;
 
                     case 15:
-                        Recipient = _model4.default;recipientId = staffId;return _context2.abrupt("break", 28);
+                        Recipient = _model4.default;recipientId = staffId;return _context2.abrupt("break", 25);
 
                     case 18:
-                        Recipient = Partner;recipientId = partnerId;return _context2.abrupt("break", 28);
+                        Recipient = _model8.default;recipientId = partnerId;return _context2.abrupt("break", 25);
 
                     case 21:
-                        Recipient = Supplier;recipientId = driverId;return _context2.abrupt("break", 28);
+                        Recipient = _model6.default;recipientId = customerId;return _context2.abrupt("break", 25);
 
                     case 24:
-                        Recipient = Customer;recipientId = customerId;return _context2.abrupt("break", 28);
-
-                    case 27:
                         return _context2.abrupt("return", (0, _lib.fail)(res, 422, "Error invalid user type: " + recipient));
 
-                    case 28:
-                        _context2.next = 30;
+                    case 25:
+                        _context2.next = 27;
                         return Recipient.findOne({ _id: recipientId }).select("email, phone").exec();
 
-                    case 30:
+                    case 27:
                         personR = _context2.sent;
 
                         if (personR) {
-                            _context2.next = 33;
+                            _context2.next = 30;
                             break;
                         }
 
                         return _context2.abrupt("return", (0, _lib.notFound)(res, "Bad Request: Model not found for recipient with id " + recipientId));
 
-                    case 33:
+                    case 30:
                         Sender = void 0;
                         _context2.t1 = sender.toUpperCase();
-                        _context2.next = _context2.t1 === "STAFF" ? 37 : _context2.t1 === "PARTNER" ? 39 : _context2.t1 === "SUPPLIER" ? 41 : _context2.t1 === "CUSTOMER" ? 43 : 45;
+                        _context2.next = _context2.t1 === "STAFF" ? 34 : _context2.t1 === "PARENT" ? 36 : _context2.t1 === "STUDENT" ? 38 : 40;
                         break;
 
-                    case 37:
-                        Sender = _model4.default;return _context2.abrupt("break", 46);
+                    case 34:
+                        Sender = _model4.default;return _context2.abrupt("break", 41);
 
-                    case 39:
-                        Sender = Partner;return _context2.abrupt("break", 46);
+                    case 36:
+                        Sender = _model8.default;return _context2.abrupt("break", 41);
 
-                    case 41:
-                        Sender = Supplier;return _context2.abrupt("break", 46);
+                    case 38:
+                        Sender = _model6.default;return _context2.abrupt("break", 41);
 
-                    case 43:
-                        Sender = Customer;return _context2.abrupt("break", 46);
-
-                    case 45:
+                    case 40:
                         return _context2.abrupt("return", (0, _lib.fail)(res, 422, "Error user type: " + sender));
 
-                    case 46:
-                        _context2.next = 48;
+                    case 41:
+                        _context2.next = 43;
                         return Sender.findOne({ _id: data.created_by }).select("email").exec();
 
-                    case 48:
+                    case 43:
                         personS = _context2.sent;
 
                         if (personS) {
-                            _context2.next = 51;
+                            _context2.next = 46;
                             break;
                         }
 
                         return _context2.abrupt("return", (0, _lib.notFound)(res, "Bad Request: Model not found for sender with id " + data.created_by));
 
-                    case 51:
+                    case 46:
                         send1 = void 0;
                         send2 = void 0;
 
                         if (!((0, _lib.hasProp)(personS, "email") && (0, _lib.hasProp)(personR, "email"))) {
-                            _context2.next = 62;
+                            _context2.next = 57;
                             break;
                         }
 
-                        _context2.next = 56;
+                        _context2.next = 51;
                         return (0, _services.sendEmail)(personR.email, personS.email, subject, body);
 
-                    case 56:
+                    case 51:
                         send1 = _context2.sent;
-                        _context2.next = 59;
+                        _context2.next = 54;
                         return (0, _services.sendEmail)(personS.email, personS.email, subject, body);
 
-                    case 59:
+                    case 54:
                         send2 = _context2.sent;
-                        _context2.next = 63;
+                        _context2.next = 58;
                         break;
 
-                    case 62:
+                    case 57:
                         feedback += "Sender email or Recipient email is incorrect";
 
-                    case 63:
-                        _context2.next = 65;
+                    case 58:
+                        _context2.next = 60;
                         return newRecord.save();
 
-                    case 65:
+                    case 60:
                         result = _context2.sent;
 
                         if (result) {
-                            _context2.next = 69;
+                            _context2.next = 64;
                             break;
                         }
 
                         logger.error(_constants.STATUS_MSG.ERROR.DEFAULT, send1, send2, []);
                         return _context2.abrupt("return", (0, _lib.notFound)(res, "Error: Bad Request: Model not found. " + feedback));
 
-                    case 69:
+                    case 64:
                         data.box = "OUTBOX";
                         newRecord2 = new _model2.default(data);
-                        _context2.next = 73;
+                        _context2.next = 68;
                         return newRecord2.save();
 
-                    case 73:
+                    case 68:
                         result2 = _context2.sent;
                         return _context2.abrupt("return", (0, _lib.success)(res, 201, result2, "Record created successfully! " + feedback));
 
-                    case 77:
-                        _context2.prev = 77;
+                    case 72:
+                        _context2.prev = 72;
                         _context2.t2 = _context2["catch"](4);
 
                         logger.error(_context2.t2);
                         return _context2.abrupt("return", (0, _lib.fail)(res, 500, "Error creating record. " + _context2.t2.message));
 
-                    case 81:
+                    case 76:
                     case "end":
                         return _context2.stop();
                 }
             }
-        }, _callee2, null, [[4, 77]]);
+        }, _callee2, null, [[4, 72]]);
     }));
 
     return function createRecord(_x3, _x4) {
@@ -351,6 +345,14 @@ var _constants = require("../../../constants");
 var _model3 = require("../staff/model");
 
 var _model4 = _interopRequireDefault(_model3);
+
+var _model5 = require("../student/model");
+
+var _model6 = _interopRequireDefault(_model5);
+
+var _model7 = require("../parent/model");
+
+var _model8 = _interopRequireDefault(_model7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

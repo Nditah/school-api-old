@@ -216,5 +216,5 @@ const HostelRoom = mongoose.model("HostelRoom", newHostelRoomSchema);
 const HostelBedspace = mongoose.model("HostelBedspace", newHostelBedspaceSchemaSchema);
 const HostelAllocation = mongoose.model("HostelAllocation", newHostelAllocationSchemaSchema);
 
-export { Hostel, HostelRoom, HostelBedspace };
+export { Hostel, HostelRoom, HostelBedspace, HostelAllocation };
 export default HostelAllocation;
