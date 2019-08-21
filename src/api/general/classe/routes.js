@@ -26,9 +26,10 @@ router.get("/classes", [checkAuth, isValidStaff], fetchRecord);
  * @apiName CreateClasse
  * @apiGroup Classe
  * @apiHeader {String} Authorization Bearer token
+ * @apiParam {String} name Classe name (optional)
  * @apiParam {String} subsidiary Classe subsidiary (optional)
  * @apiParam {String} level Classe level (optional)
- * @apiParam {String} form_teacher Classe form_teacher (optional)
+ * @apiParam {ObjectId} form_teacher Classe form_teacher (optional)
  * @apiSuccess {Object} Classe Classe's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Classe not found.
@@ -41,10 +42,11 @@ router.post("/classes", [checkAuth, isValidStaff], createRecord);
  * @apiName UpdateClasse
  * @apiGroup Classe
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
+ * @apiParam {ObjectId} recordId required record ObjectId
+ * @apiParam {String} name Classe name (optional)
  * @apiParam {String} subsidiary Classe subsidiary (optional)
  * @apiParam {String} level Classe level (optional)
- * @apiParam {String} form_teacher Classe form_teacher (optional)
+ * @apiParam {ObjectId} form_teacher Classe form_teacher (optional)
  * @apiSuccess {Object} Classe Classe's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Classe not found.
@@ -57,7 +59,7 @@ router.put("/classes/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiName DeleteClasse
  * @apiGroup Classe
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
+ * @apiParam {ObjectId} recordId required record ObjectId
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 404 Classe not found.
  * @apiError 401 master access only.

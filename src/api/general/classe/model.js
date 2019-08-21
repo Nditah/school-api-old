@@ -1,12 +1,13 @@
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
- * @property {String} id Classe ObjectId primaryKey
+ * @property {ObjectId} id Classe ObjectId primaryKey
+ * @property {String} name Classe name (optional)
  * @property {String} subsidiary Classe subsidiary (optional)
  * @property {String} level Classe level (optional)
- * @property {String} form_teacher Classe form_teacher (optional)
- * @property {String} created_by Classe record created by
- * @property {String} updated_by Classe record modified by
+ * @property {ObjectId} form_teacher Classe form_teacher (optional)
+ * @property {ObjectId} created_by Classe record created by
+ * @property {ObjectId} updated_by Classe record modified by
  * @description Classe holds record of all classes in the school.
  */
 
@@ -19,6 +20,7 @@ const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
 export const schemaCreate = {
+    name: Joi.string().trim().optional(),
     subsidiary: Joi.string().trim().optional(),
     level: Joi.string().trim().optional(),
     form_teacher: Joi.string().optional(),
@@ -26,6 +28,7 @@ export const schemaCreate = {
 };
 
 export const schemaUpdate = {
+    name: Joi.string().trim().optional(),
     subsidiary: Joi.string().trim().optional(),
     level: Joi.string().trim().optional(),
     form_teacher: Joi.string().optional(),
@@ -34,6 +37,7 @@ export const schemaUpdate = {
 };
 
 export const schema = {
+    name: { type: String },
     subsidiary: { type: String, required: [false, "Why no School?"] },
     level: { type: String, required: [false, "Why no level?"] },
     form_teacher: { type: ObjectId, ref: "Staff" },
