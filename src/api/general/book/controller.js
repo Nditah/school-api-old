@@ -17,10 +17,7 @@ export async function fetchRecord(req, res) {
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
         const result = await Book.find(filter)
-            .populate("title")
-            .populate("book_id")
-            .populate("class_id")
-            .populate("subsidiary")
+            .populate("subject")
             .populate({ path: "created_by", select: "surname given_name email phone" })
             .populate({ path: "updated_by", select: "surname given_name email phone" })
             .skip(skip)

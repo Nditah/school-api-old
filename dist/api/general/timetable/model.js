@@ -27,6 +27,12 @@ var _model3 = require("../classe/model");
 
 var _model4 = _interopRequireDefault(_model3);
 
+var _model5 = require("../classroom/model");
+
+var _model6 = _interopRequireDefault(_model5);
+
+var _model7 = require("../subject/model");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // eslint-disable-next-line import/no-cycle
@@ -35,43 +41,76 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * @author 4Dcoder
  * @property {ObjectId} id Timetable primaryKey
- * @property {String} name Timetable name
- * @property {ObjectId} classe Class name
- * @property {ObjectId} subject Subject name
- * @property {Date} datetime Date and time
- * @property {Number} duration Duration
- * @property {Array} staff staff_list
+ * @property {String} type Timetable type "REGULAR|ASSESSMENT"
+ * @property {String} activity Timetable activity
+ *  "LESSON", "BREAK", "CLOSED", "PREP", "FREE", "LIBRARY"
+* @property {String} day Timetable day
+ * @property {String} from Timetable from
+ * @property {String} to Timetable to
+ * @property {Number} duration Timetable duration in Minutes
+ * @property {ObjectId} classe Timetable classe
+ * @property {ObjectId} course Timetable course
+ * @property {ObjectId} classroom Timetable classroom
+ * @property {String} subsidiary Timetable subsidiary
+ * @property {String} description Timetable description
  * @description Timetable model holds record of all subject staffs timetable and durations
  */
 var Schema = _mongoose2.default.Schema;
 var ObjectId = Schema.Types.ObjectId;
 var schemaCreate = exports.schemaCreate = {
-    name: _joi2.default.string().optional(),
+    type: _joi2.default.string().trim().valid(["REGULAR", "ASSESSMENT"]).optional(),
+    activity: _joi2.default.string().trim().valid(["LESSON", "BREAK", "CLOSED", "PREP", "FREE", "LIBRARY"]).optional(),
+    day: _joi2.default.string().required(),
+    from: _joi2.default.string().required(),
+    to: _joi2.default.string().required(),
+    duration: _joi2.default.number().required(),
+    classe: _joi2.default.string().required(),
+    course: _joi2.default.string().required(),
+    classroom: _joi2.default.string().required(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).required(),
     description: _joi2.default.string().optional(),
-    classe: _joi2.default.string().optional(),
-    subject: _joi2.default.string().optional(),
-    datetime: _joi2.default.date().optional(),
-    duration: _joi2.default.number().optional(),
-    staff: _joi2.default.array().optional()
+    created_by: _joi2.default.string().required()
 };
 
 var schemaUpdate = exports.schemaUpdate = {
-    name: _joi2.default.string().optional(),
-    description: _joi2.default.string().optional(),
-    subject: _joi2.default.string().optional(),
-    datetime: _joi2.default.date().optional(),
+    type: _joi2.default.string().trim().valid(["REGULAR", "ASSESSMENT"]).optional(),
+    activity: _joi2.default.string().trim().valid(["LESSON", "BREAK", "CLOSED", "PREP", "FREE", "LIBRARY"]).optional(),
+    day: _joi2.default.string().optional(),
+    from: _joi2.default.string().optional(),
+    to: _joi2.default.string().optional(),
     duration: _joi2.default.number().optional(),
-    staff: _joi2.default.array().optional()
+    classe: _joi2.default.string().optional(),
+    course: _joi2.default.string().optional(),
+    classroom: _joi2.default.string().optional(),
+    subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
+    description: _joi2.default.string().optional(),
+    updated_by: _joi2.default.string().required()
 };
 
 var schema = exports.schema = {
-    name: { type: String },
-    description: { type: String },
-    datetime: { type: Date },
+    type: { type: String, enum: ["REGULAR", "ASSESSMENT"], default: "REGULAR" },
+    activity: {
+        type: String,
+        enum: ["LESSON", "BREAK", "CLOSED", "PREP", "FREE", "LIBRARY"],
+        default: "LESSON"
+    },
+    day: { type: String, required: true },
+    from: { type: Date },
+    to: { type: Date },
     duration: { type: Number },
-    classe: { type: ObjectId, ref: "Classe" },
-    staff: [{ type: ObjectId, ref: "Staff" }],
-    subject: { type: ObjectId, ref: "Subject" }
+    classe: { type: ObjectId, ref: "Classe", required: true },
+    course: { type: ObjectId, ref: "Course", required: true },
+    classroom: { type: ObjectId, ref: "Classroom", required: true },
+    subsidiary: {
+        type: String,
+        enum: Object.values(_constants.SUBSIDIARY),
+        required: true
+    },
+    description: { type: String },
+    deleted: { type: Boolean, default: false, required: true },
+    deleted_at: { type: Date },
+    created_by: { type: ObjectId, ref: "Staff", required: true },
+    updated_by: { type: ObjectId, ref: "Staff" }
 };
 
 var options = _constants.DATABASE.OPTIONS;

@@ -44,7 +44,7 @@ router.get("/parents", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {String} password Parent password (optional)
  * @apiParam {String} profession Parent profession (optional)
  * @apiParam {String} employment_status Parent employment_status (required)
- * @apiParam {ObjectId} students_name Parent students_name (optional)
+ * @apiParam {ObjectId} students Parent students (optional)
  * @apiSuccess {Object} Parent Parent's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Parent not found.
@@ -72,7 +72,7 @@ router.post("/parents", createRecord);
  * @apiParam {String} password Parent password (optional)
  * @apiParam {String} profession Parent profession (optional)
  * @apiParam {String} employment_status Parent employment_status (required)
- * @apiParam {ObjectId} students_name Parent students_name (optional)
+ * @apiParam {ObjectId} students Parent students (optional)
  * @apiParam {ObjectId} updated_by id of the staff who created the record
  * @apiSuccess {Object} Parent Parent's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.

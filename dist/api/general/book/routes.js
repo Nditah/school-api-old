@@ -38,11 +38,12 @@ router.get("/books", [_authorization.checkAuth, _authorization.isValidStaff], _c
  * @apiName CreateBook
  * @apiGroup Book
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} title Book title of book string  (required)
- * @apiParam {String} description Book description of book  (required)
+ * @apiParam {String} title Book title of books
+ * @apiParam {String} author Book author of books
+ * @apiParam {String} description Book Description of the book
  * @apiParam {String} subsidiary Book subsidiary (required)
- * @apiParam {ObjectId} classe_id Book class ObjectId
- * @apiParam {ObjectId} subject_id Book subject ObjectId
+ * @apiParam {String} level Book level (required)
+ * @apiParam {ObjectId} subject Book subject ObjectId
  * @apiSuccess {Object} Book Book's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Book not found.
@@ -55,11 +56,13 @@ router.post("/books", [_authorization.checkAuth, _authorization.isValidStaff], _
  * @apiName UpdateBook
  * @apiGroup Book
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} title Book title of book string  (required)
- * @apiParam {String} description Book description of book  (required)
+ * @apiParam {String} recordId required record ObjectId
+ * @apiParam {String} title Book title of books
+ * @apiParam {String} author Book author of books
+ * @apiParam {String} description Book Description of the book
  * @apiParam {String} subsidiary Book subsidiary (required)
- * @apiParam {ObjectId} classe_id Book class ObjectId
- * @apiParam {ObjectId} subject_id Book subject ObjectId
+ * @apiParam {String} level Book level (required)
+ * @apiParam {ObjectId} subject Book subject ObjectId
  * @apiSuccess {Object} Book Book's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Book not found.
