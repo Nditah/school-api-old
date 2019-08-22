@@ -49,22 +49,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @description Markheet records score per student per course
  */
 
-//* ===== RESULT =====
-
-/**
- * @author 4Dcoder
- * @property {ObjectId} id Report primaryKey
- * @property {String} type Report type "EVALUATION|TERMLY|ANNUAL" required
- * @property {String} term Report type "FIRST|SECOND|THRID|ANNUAL" required
- * @property {Array} cumulated Report cumulated Result Array
- * @property {ObjectId} student Report student ObjectId
- * @property {Array} marksheets Report marksheets Array<Marksheet>
- * @property {Number} evaluation Report evaluation [1, 2, 3, 4]
- * @property {Number} total Report total
- * @property {Number} rank Report rank for that report
- * @description Result ( a type of report) holds generated academic report being computed
- */
-
 var Schema = _mongoose2.default.Schema;
 var ObjectId = Schema.Types.ObjectId;
 var marksheetCreate = exports.marksheetCreate = {
@@ -106,6 +90,19 @@ newMarksheetSchema.set("collection", "marksheet");
 var Marksheet = _mongoose2.default.model("Marksheet", newMarksheetSchema);
 
 //* ===== RESULT =========
+/**
+ * @author 4Dcoder
+ * @property {ObjectId} id Report primaryKey
+ * @property {String} type Report type "EVALUATION|TERMLY|ANNUAL" required
+ * @property {String} term Report type "FIRST|SECOND|THRID|ANNUAL" required
+ * @property {Array} cumulated Report cumulated Result Array
+ * @property {ObjectId} student Report student ObjectId
+ * @property {Array} marksheets Report marksheets Array<Marksheet>
+ * @property {Number} evaluation Report evaluation [1, 2, 3, 4]
+ * @property {Number} total Report total
+ * @property {Number} rank Report rank for that report
+ * @description Result ( a type of report) holds generated academic report being computed
+ */
 
 var resultCreate = exports.resultCreate = {
     type: _joi2.default.string().trim().valid(["EVALUATION", "TERMLY", "ANNUAL"]).required(),

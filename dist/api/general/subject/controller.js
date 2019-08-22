@@ -64,72 +64,69 @@ var fetchSubject = exports.fetchSubject = function () {
 
 var createSubject = exports.createSubject = function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(req, res) {
-        var data, _Joi$validate, error, email, phone, duplicate, newSubject, result;
+        var data, _Joi$validate, error, duplicate, newSubject, result;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         data = req.body;
-
-                        if ((0, _lib.hasProp)(data, "password")) data.password = (0, _lib.hash)(req.body.password);
                         _Joi$validate = _joi2.default.validate(data, _model.subjectCreate), error = _Joi$validate.error;
 
                         if (!error) {
-                            _context2.next = 5;
+                            _context2.next = 4;
                             break;
                         }
 
                         return _context2.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
 
-                    case 5:
-                        email = data.email, phone = data.phone;
-                        _context2.next = 8;
-                        return _model.Subject.findOne({ $or: [{ email: email }, { phone: phone }] }).exec();
+                    case 4:
+                        _context2.next = 6;
+                        return _model.Subject.findOne({ code: data.code }).exec();
 
-                    case 8:
+                    case 6:
                         duplicate = _context2.sent;
 
                         if (!duplicate) {
-                            _context2.next = 11;
+                            _context2.next = 9;
                             break;
                         }
 
-                        return _context2.abrupt("return", (0, _lib.fail)(res, 422, "Error! Subject already exist for " + email + " or " + phone));
+                        return _context2.abrupt("return", (0, _lib.fail)(res, 422, "Error! Subject already exist for code " + data.code));
 
-                    case 11:
+                    case 9:
                         newSubject = new _model.Subject(data);
-                        _context2.prev = 12;
-                        _context2.next = 15;
+                        _context2.prev = 10;
+                        _context2.next = 13;
                         return newSubject.save();
 
-                    case 15:
+                    case 13:
                         result = _context2.sent;
 
                         if (result) {
-                            _context2.next = 19;
+                            _context2.next = 17;
                             break;
                         }
 
                         logger.info(_constants.STATUS_MSG.SUCCESS.DEFAULT, []);
                         return _context2.abrupt("return", (0, _lib.notFound)(res, "Error: Bad Request: Model not found"));
 
-                    case 19:
+                    case 17:
                         return _context2.abrupt("return", (0, _lib.success)(res, 201, result, "Subject created successfully!"));
 
-                    case 22:
-                        _context2.prev = 22;
-                        _context2.t0 = _context2["catch"](12);
+                    case 20:
+                        _context2.prev = 20;
+                        _context2.t0 = _context2["catch"](10);
 
                         logger.error(_context2.t0);
                         return _context2.abrupt("return", (0, _lib.fail)(res, 500, "Error creating record. " + _context2.t0.message));
 
-                    case 26:
+                    case 24:
                     case "end":
                         return _context2.stop();
                 }
             }
-        }, _callee2, null, [[12, 22]]);
+        }, _callee2, null, [[10, 20]]);
     }));
 
     return function createSubject(_x3, _x4) {
@@ -147,48 +144,46 @@ var updateSubject = exports.updateSubject = function () {
                     case 0:
                         data = req.body;
                         id = req.params.recordId;
-
-                        if ((0, _lib.hasProp)(data, "password")) data.password = (0, _lib.hash)(req.body.password);
                         _Joi$validate2 = _joi2.default.validate(data, _model.subjectUpdate), error = _Joi$validate2.error;
 
                         if (!error) {
-                            _context3.next = 6;
+                            _context3.next = 5;
                             break;
                         }
 
                         return _context3.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
 
-                    case 6:
-                        _context3.prev = 6;
-                        _context3.next = 9;
+                    case 5:
+                        _context3.prev = 5;
+                        _context3.next = 8;
                         return _model.Subject.findOneAndUpdate({ _id: id }, data, { new: true });
 
-                    case 9:
+                    case 8:
                         result = _context3.sent;
 
                         if (result) {
-                            _context3.next = 12;
+                            _context3.next = 11;
                             break;
                         }
 
                         return _context3.abrupt("return", (0, _lib.notFound)(res, "Bad Request: Model not found with id " + id));
 
-                    case 12:
+                    case 11:
                         return _context3.abrupt("return", (0, _lib.success)(res, 200, result, "Subject updated successfully!"));
 
-                    case 15:
-                        _context3.prev = 15;
-                        _context3.t0 = _context3["catch"](6);
+                    case 14:
+                        _context3.prev = 14;
+                        _context3.t0 = _context3["catch"](5);
 
                         logger.error(_context3.t0);
                         return _context3.abrupt("return", (0, _lib.fail)(res, 500, "Error updating record. " + _context3.t0.message));
 
-                    case 19:
+                    case 18:
                     case "end":
                         return _context3.stop();
                 }
             }
-        }, _callee3, null, [[6, 15]]);
+        }, _callee3, null, [[5, 14]]);
     }));
 
     return function updateSubject(_x5, _x6) {
@@ -302,72 +297,69 @@ var fetchCourse = exports.fetchCourse = function () {
 
 var createCourse = exports.createCourse = function () {
     var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(req, res) {
-        var data, _Joi$validate3, error, email, phone, duplicate, newCourse, result;
+        var data, _Joi$validate3, error, duplicate, newCourse, result;
 
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
             while (1) {
                 switch (_context6.prev = _context6.next) {
                     case 0:
                         data = req.body;
-
-                        if ((0, _lib.hasProp)(data, "password")) data.password = (0, _lib.hash)(req.body.password);
                         _Joi$validate3 = _joi2.default.validate(data, _model.courseCreate), error = _Joi$validate3.error;
 
                         if (!error) {
-                            _context6.next = 5;
+                            _context6.next = 4;
                             break;
                         }
 
                         return _context6.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
 
-                    case 5:
-                        email = data.email, phone = data.phone;
-                        _context6.next = 8;
-                        return _model.Course.findOne({ $or: [{ email: email }, { phone: phone }] }).exec();
+                    case 4:
+                        _context6.next = 6;
+                        return _model.Course.findOne({ code: data.code }).exec();
 
-                    case 8:
+                    case 6:
                         duplicate = _context6.sent;
 
                         if (!duplicate) {
-                            _context6.next = 11;
+                            _context6.next = 9;
                             break;
                         }
 
-                        return _context6.abrupt("return", (0, _lib.fail)(res, 422, "Error! Course already exist for " + email + " or " + phone));
+                        return _context6.abrupt("return", (0, _lib.fail)(res, 422, "Error! Course already exist for code " + data.code));
 
-                    case 11:
+                    case 9:
                         newCourse = new _model.Course(data);
-                        _context6.prev = 12;
-                        _context6.next = 15;
+                        _context6.prev = 10;
+                        _context6.next = 13;
                         return newCourse.save();
 
-                    case 15:
+                    case 13:
                         result = _context6.sent;
 
                         if (result) {
-                            _context6.next = 19;
+                            _context6.next = 17;
                             break;
                         }
 
                         logger.info(_constants.STATUS_MSG.SUCCESS.DEFAULT, []);
                         return _context6.abrupt("return", (0, _lib.notFound)(res, "Error: Bad Request: Model not found"));
 
-                    case 19:
+                    case 17:
                         return _context6.abrupt("return", (0, _lib.success)(res, 201, result, "Course created successfully!"));
 
-                    case 22:
-                        _context6.prev = 22;
-                        _context6.t0 = _context6["catch"](12);
+                    case 20:
+                        _context6.prev = 20;
+                        _context6.t0 = _context6["catch"](10);
 
                         logger.error(_context6.t0);
                         return _context6.abrupt("return", (0, _lib.fail)(res, 500, "Error creating record. " + _context6.t0.message));
 
-                    case 26:
+                    case 24:
                     case "end":
                         return _context6.stop();
                 }
             }
-        }, _callee6, null, [[12, 22]]);
+        }, _callee6, null, [[10, 20]]);
     }));
 
     return function createCourse(_x11, _x12) {
@@ -385,48 +377,46 @@ var updateCourse = exports.updateCourse = function () {
                     case 0:
                         data = req.body;
                         id = req.params.recordId;
-
-                        if ((0, _lib.hasProp)(data, "password")) data.password = (0, _lib.hash)(req.body.password);
                         _Joi$validate4 = _joi2.default.validate(data, _model.courseUpdate), error = _Joi$validate4.error;
 
                         if (!error) {
-                            _context7.next = 6;
+                            _context7.next = 5;
                             break;
                         }
 
                         return _context7.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
 
-                    case 6:
-                        _context7.prev = 6;
-                        _context7.next = 9;
+                    case 5:
+                        _context7.prev = 5;
+                        _context7.next = 8;
                         return _model.Course.findOneAndUpdate({ _id: id }, data, { new: true });
 
-                    case 9:
+                    case 8:
                         result = _context7.sent;
 
                         if (result) {
-                            _context7.next = 12;
+                            _context7.next = 11;
                             break;
                         }
 
                         return _context7.abrupt("return", (0, _lib.notFound)(res, "Bad Request: Model not found with id " + id));
 
-                    case 12:
+                    case 11:
                         return _context7.abrupt("return", (0, _lib.success)(res, 200, result, "Course updated successfully!"));
 
-                    case 15:
-                        _context7.prev = 15;
-                        _context7.t0 = _context7["catch"](6);
+                    case 14:
+                        _context7.prev = 14;
+                        _context7.t0 = _context7["catch"](5);
 
                         logger.error(_context7.t0);
                         return _context7.abrupt("return", (0, _lib.fail)(res, 500, "Error updating record. " + _context7.t0.message));
 
-                    case 19:
+                    case 18:
                     case "end":
                         return _context7.stop();
                 }
             }
-        }, _callee7, null, [[6, 15]]);
+        }, _callee7, null, [[5, 14]]);
     }));
 
     return function updateCourse(_x13, _x14) {

@@ -4,6 +4,12 @@ export const EMPLOYEE_TYPE = {
     UNKNOWN: "UNKNOWN",
 };
 
+export const TERM = {
+    FIRST: "FIRST",
+    SECOND: "SECOND",
+    THIRD: "THIRD",
+};
+
 export const OFFICE_TYPE = {
     BOARD: "BOARD",
     DIRECTORATE: "DIRECTORATE",

@@ -47,13 +47,11 @@ export async function fetchSubject(req, res) {
 // eslint-disable-next-line complexity
 export async function createSubject(req, res) {
     const data = req.body;
-    if (hasProp(data, "password")) data.password = hash(req.body.password);
     const { error } = Joi.validate(data, subjectCreate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
-    const { email, phone } = data;
-    const duplicate = await Subject.findOne({ $or: [{ email }, { phone }] }).exec();
+    const duplicate = await Subject.findOne({ code: data.code }).exec();
     if (duplicate) {
-        return fail(res, 422, `Error! Subject already exist for ${email} or ${phone}`);
+        return fail(res, 422, `Error! Subject already exist for code ${data.code}`);
     }
     const newSubject = new Subject(data);
     try {
@@ -72,7 +70,6 @@ export async function createSubject(req, res) {
 export async function updateSubject(req, res) {
     const data = req.body;
     const { recordId: id } = req.params;
-    if (hasProp(data, "password")) data.password = hash(req.body.password);
     const { error } = Joi.validate(data, subjectUpdate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
     try {
@@ -135,13 +132,11 @@ export async function fetchCourse(req, res) {
 // eslint-disable-next-line complexity
 export async function createCourse(req, res) {
     const data = req.body;
-    if (hasProp(data, "password")) data.password = hash(req.body.password);
     const { error } = Joi.validate(data, courseCreate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
-    const { email, phone } = data;
-    const duplicate = await Course.findOne({ $or: [{ email }, { phone }] }).exec();
+    const duplicate = await Course.findOne({ code: data.code }).exec();
     if (duplicate) {
-        return fail(res, 422, `Error! Course already exist for ${email} or ${phone}`);
+        return fail(res, 422, `Error! Course already exist for code ${data.code}`);
     }
     const newCourse = new Course(data);
     try {
@@ -160,7 +155,6 @@ export async function createCourse(req, res) {
 export async function updateCourse(req, res) {
     const data = req.body;
     const { recordId: id } = req.params;
-    if (hasProp(data, "password")) data.password = hash(req.body.password);
     const { error } = Joi.validate(data, courseUpdate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
     try {

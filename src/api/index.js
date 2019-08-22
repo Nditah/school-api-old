@@ -1,4 +1,3 @@
-
 import 	flutterwaveApi from "./flutterwave";
 import 	schoolApi from "./general";
 

@@ -21,9 +21,10 @@ export async function fetchCurriculum(req, res) {
     try {
         const result = await Curriculum.find(filter)
             .populate("book")
-            .populate("description")
+            .populate("course")
+            .populate("classe")
             .populate("material")
-            .populate({ path: "staff", select: "surname given_name email phone" })
+            .populate("subject")
             .populate({ path: "created_by", select: "surname given_name email phone" })
             .populate({ path: "updated_by", select: "surname given_name email phone" })
             .skip(skip)
@@ -98,6 +99,14 @@ export async function fetchLesson(req, res) {
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
         const result = await Lesson.find(filter)
+            .populate("teacher")
+            .populate("course")
+            .populate("classe")
+            .populate("material")
+            .populate("curriculum")
+            .populate("timetable")
+            .populate({ path: "created_by", select: "surname given_name email phone" })
+            .populate({ path: "updated_by", select: "surname given_name email phone" })
             .skip(skip)
             .limit(limit)
             .sort(sort)
