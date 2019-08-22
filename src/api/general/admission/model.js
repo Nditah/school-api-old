@@ -50,7 +50,7 @@ export const schemaCreate = {
     intending_class: Joi.string().optional(),
     last_school: Joi.string().optional(),
     father_name: Joi.string().optional(),
-    mgiven_name: Joi.string().optional(),
+    mother_name: Joi.string().optional(),
     home_address: Joi.string().optional(),
     created_by: Joi.string().required(),
 };
@@ -71,7 +71,7 @@ export const schemaUpdate = {
     intending_class: Joi.string().optional(),
     last_school: Joi.string().optional(),
     father_name: Joi.string().optional(),
-    mgiven_name: Joi.string().optional(),
+    mother_name: Joi.string().optional(),
     home_address: Joi.string().optional(),
     updated_by: Joi.string().required(),
 };
@@ -90,7 +90,7 @@ export const schema = {
     intending_class: { type: ObjectId, ref: "Classe" },
     last_school: { type: String },
     father_name: { type: String },
-    mgiven_name: { type: String },
+    mother_name: { type: String },
     home_address: { type: String },
     phone: {
         type: String,
