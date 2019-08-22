@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.AssessmentSitting = exports.Assessment = exports.assessmentSittingSchema = exports.assessmentSittingSchemaUpdate = exports.assessmentSittingSchemaCreate = exports.assessmentSchema = exports.assessmentSchemaUpdate = exports.assessmentSchemaCreate = undefined;
+exports.AssessmentSitting = exports.Assessment = exports.assessmentSittingSchema = exports.assessmentSittingUpdate = exports.assessmentSittingCreate = exports.assessmentSchema = exports.assessmentUpdate = exports.assessmentCreate = undefined;
 
 var _joi = require("joi");
 
@@ -45,7 +45,7 @@ var Schema = _mongoose2.default.Schema;
  * @author 4Dcoder
  * @property {ObjectId} id Assessment primaryKey
  * @property {String} code Assessment code
- * @property {String} code Assessment code "TEST|CA|EXAM"
+ * @property {String} type Assessment type "TEST|CA|EXAM"
  * @property {String} mode Assessment mode "ORAL|PAPER|CBT|DEMO"
  * @property {Date} written_date Assessment written_date
  * @property {Date} started_at Assessment started dateime
@@ -64,7 +64,7 @@ var Schema = _mongoose2.default.Schema;
  */
 
 var ObjectId = Schema.Types.ObjectId;
-var assessmentSchemaCreate = exports.assessmentSchemaCreate = {
+var assessmentCreate = exports.assessmentCreate = {
     code: _joi2.default.string().required(),
     type: _joi2.default.string().valid(["TEST", "CA", "EXAM"]).required(),
     mode: _joi2.default.string().valid(["ORAL", "PAPER", "CBT", "DEMO"]).required(),
@@ -79,7 +79,7 @@ var assessmentSchemaCreate = exports.assessmentSchemaCreate = {
     created_by: _joi2.default.string().required()
 };
 
-var assessmentSchemaUpdate = exports.assessmentSchemaUpdate = {
+var assessmentUpdate = exports.assessmentUpdate = {
     code: _joi2.default.string().optional(),
     type: _joi2.default.string().valid(["TEST", "CA", "EXAM"]).optional(),
     mode: _joi2.default.string().valid(["ORAL", "PAPER", "CBT", "DEMO"]).optional(),
@@ -124,14 +124,32 @@ var Assessment = _mongoose2.default.model("Assessment", newAssessmentSchema);
 
 //* ASSESSMENT-SITTING
 
-var assessmentSittingSchemaCreate = exports.assessmentSittingSchemaCreate = {
+/**
+ * @author 4Dcoder
+ * @property {ObjectId} id AssessmentSitting primaryKey
+ * @property {String} student AssessmentSitting student
+ * @property {String} assessment AssessmentSitting assessment
+ * @property {Date} started_at AssessmentSitting started_at dateime
+ * @property {Date} ended_at AssessmentSitting ended dateime
+ * @property {String} responses AssessmentSitting responses
+ *  "answer1|answer2|answer3|answer4|answer5"
+ * @property {Number} score AssessmentSitting score
+ * @property {String} status AssessmentSitting status "OPEN|CLOSED"
+ *  Open - when the students starts and Close - when stopped.
+ * @property {Boolean} deleted Assessment delete status
+ * @property {ObjectId} created_by Assessment created Staff
+ * @property {ObjectId} updated_by Assessment updated Staff
+ * @description Assessment records evaluation of students for courses
+ */
+
+var assessmentSittingCreate = exports.assessmentSittingCreate = {
     student: _joi2.default.string().optional(),
     assessment: _joi2.default.string().optional(),
     started_at: _joi2.default.date().optional(),
     created_by: _joi2.default.string().required()
 };
 
-var assessmentSittingSchemaUpdate = exports.assessmentSittingSchemaUpdate = {
+var assessmentSittingUpdate = exports.assessmentSittingUpdate = {
     student: _joi2.default.string().optional(),
     assessment: _joi2.default.string().optional(),
     started_at: _joi2.default.date().optional(),
@@ -167,5 +185,4 @@ var AssessmentSitting = _mongoose2.default.model("AssessmentSitting", newAssessm
 
 exports.Assessment = Assessment;
 exports.AssessmentSitting = AssessmentSitting;
-exports.default = Assessment;
 //# sourceMappingURL=model.js.map

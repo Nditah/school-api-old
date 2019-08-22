@@ -2,32 +2,26 @@ import Joi from "joi";
 import log4js from "log4js";
 import aqp from "api-query-params";
 import {
-    Subject, subjectCreate, subjectUpdate,
-    Course, courseCreate, courseUpdate,
+    Fees, feesCreate, feesUpdate,
+    FeesPayment, feesPaymentCreate, feesPaymentUpdate,
 } from "./model";
-import { success, fail, notFound, hasProp, hash } from "../../../lib";
+import { success, fail, notFound } from "../../../lib";
 import { STATUS_MSG } from "../../../constants";
 
 // Logging
-const logger = log4js.getLogger("[subject]");
+const logger = log4js.getLogger("[fees]");
 log4js.configure({
-    appenders: { file: { type: "file", filename: "logs/subject.log" } },
+    appenders: { file: { type: "file", filename: "logs/fees.log" } },
     categories: { default: { appenders: ["file"], level: "debug" } },
 });
 
-export async function fetchSubject(req, res) {
+export async function fetchFees(req, res) {
     const { query } = req;
+    const { filter, skip, limit, sort, projection } = aqp(query);
     try {
-        const { filter, skip, limit, sort, projection } = aqp(query);
-        const searchString = filter.q || "";
-        if (searchString) {
-            filter.$text = { $search: searchString };
-            delete filter.q;
-        }
-        const result = await Subject.find(filter)
-            .populate("hod")
-            .populate("courses")
-            .populate("category")
+        const result = await Fees.find(filter)
+            .populate("created_by", "id surname given_name email phone")
+            .populate("updated_by", "id surname given_name email phone")
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -44,75 +38,64 @@ export async function fetchSubject(req, res) {
     }
 }
 
-// eslint-disable-next-line complexity
-export async function createSubject(req, res) {
+export async function createFees(req, res) {
     const data = req.body;
-    const { error } = Joi.validate(data, subjectCreate);
+    const { error } = Joi.validate(data, feesCreate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
-    const duplicate = await Subject.findOne({ code: data.code }).exec();
-    if (duplicate) {
-        return fail(res, 422, `Error! Subject already exist for code ${data.code}`);
-    }
-    const newSubject = new Subject(data);
+    const newFees = new Fees(data);
     try {
-        const result = await newSubject.save();
+        const result = await newFees.save();
         if (!result) {
             logger.info(STATUS_MSG.SUCCESS.DEFAULT, []);
             return notFound(res, "Error: Bad Request: Model not found");
         }
-        return success(res, 201, result, "Subject created successfully!");
+        return success(res, 201, result, "Fees created successfully!");
     } catch (err) {
         logger.error(err);
         return fail(res, 500, `Error creating record. ${err.message}`);
     }
 }
 
-export async function updateSubject(req, res) {
+export async function updateFees(req, res) {
     const data = req.body;
     const { recordId: id } = req.params;
-    const { error } = Joi.validate(data, subjectUpdate);
+    const { error } = Joi.validate(data, feesUpdate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
     try {
-        const result = await Subject.findOneAndUpdate({ _id: id }, data, { new: true });
+        const result = await Fees.findOneAndUpdate({ _id: id }, data, { new: true });
         if (!result) {
             return notFound(res, `Bad Request: Model not found with id ${id}`);
         }
-        return success(res, 200, result, "Subject updated successfully!");
+        return success(res, 200, result, "Fees updated successfully!");
     } catch (err) {
         logger.error(err);
         return fail(res, 500, `Error updating record. ${err.message}`);
     }
 }
 
-export async function deleteSubject(req, res) {
+export async function deleteFees(req, res) {
     const { recordId: id } = req.params;
     try {
-        const result = await Subject.findOneAndRemove({ _id: id });
+        const result = await Fees.findOneAndRemove({ _id: id });
         if (!result) {
             return notFound(res, `Bad Request: Model not found with id ${id}`);
         }
-        return success(res, 204, result, "Subject deleted successfully!");
+        return success(res, 200, result, "Fees deleted successfully!");
     } catch (err) {
         logger.error(err);
         return fail(res, 500, `Error deleting record. ${err.message}`);
     }
 }
 
-//*  ======== COURSE =========
+//* ========FEES-PAYMENT ========
 
-export async function fetchCourse(req, res) {
+export async function fetchFeesPayment(req, res) {
     const { query } = req;
+    const { filter, skip, limit, sort, projection } = aqp(query);
     try {
-        const { filter, skip, limit, sort, projection } = aqp(query);
-        const searchString = filter.q || "";
-        if (searchString) {
-            filter.$text = { $search: searchString };
-            delete filter.q;
-        }
-        const result = await Course.find(filter)
-            .populate("classe")
-            .populate("subject")
-            .populate("staff")
+        const result = await FeesPayment.find(filter)
+            .populate("created_by", "id surname given_name email phone")
+            .populate("updated_by", "id surname given_name email phone")
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -129,54 +112,49 @@ export async function fetchCourse(req, res) {
     }
 }
 
-// eslint-disable-next-line complexity
-export async function createCourse(req, res) {
+export async function createFeesPayment(req, res) {
     const data = req.body;
-    const { error } = Joi.validate(data, courseCreate);
+    const { error } = Joi.validate(data, feesPaymentCreate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
-    const duplicate = await Course.findOne({ code: data.code }).exec();
-    if (duplicate) {
-        return fail(res, 422, `Error! Course already exist for code ${data.code}`);
-    }
-    const newCourse = new Course(data);
+    const newFeesPayment = new FeesPayment(data);
     try {
-        const result = await newCourse.save();
+        const result = await newFeesPayment.save();
         if (!result) {
             logger.info(STATUS_MSG.SUCCESS.DEFAULT, []);
             return notFound(res, "Error: Bad Request: Model not found");
         }
-        return success(res, 201, result, "Course created successfully!");
+        return success(res, 201, result, "FeesPayment created successfully!");
     } catch (err) {
         logger.error(err);
         return fail(res, 500, `Error creating record. ${err.message}`);
     }
 }
 
-export async function updateCourse(req, res) {
+export async function updateFeesPayment(req, res) {
     const data = req.body;
     const { recordId: id } = req.params;
-    const { error } = Joi.validate(data, courseUpdate);
+    const { error } = Joi.validate(data, feesPaymentUpdate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
     try {
-        const result = await Course.findOneAndUpdate({ _id: id }, data, { new: true });
+        const result = await FeesPayment.findOneAndUpdate({ _id: id }, data, { new: true });
         if (!result) {
             return notFound(res, `Bad Request: Model not found with id ${id}`);
         }
-        return success(res, 200, result, "Course updated successfully!");
+        return success(res, 200, result, "FeesPayment updated successfully!");
     } catch (err) {
         logger.error(err);
         return fail(res, 500, `Error updating record. ${err.message}`);
     }
 }
 
-export async function deleteCourse(req, res) {
+export async function deleteFeesPayment(req, res) {
     const { recordId: id } = req.params;
     try {
-        const result = await Course.findOneAndRemove({ _id: id });
+        const result = await FeesPayment.findOneAndRemove({ _id: id });
         if (!result) {
             return notFound(res, `Bad Request: Model not found with id ${id}`);
         }
-        return success(res, 204, result, "Course deleted successfully!");
+        return success(res, 200, result, "FeesPayment deleted successfully!");
     } catch (err) {
         logger.error(err);
         return fail(res, 500, `Error deleting record. ${err.message}`);

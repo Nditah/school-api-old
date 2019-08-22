@@ -52,9 +52,9 @@ var _blog = require("./blog");
 
 var _blog2 = _interopRequireDefault(_blog);
 
-var _documentation = require("./documentation");
+var _book = require("./book");
 
-var _documentation2 = _interopRequireDefault(_documentation);
+var _book2 = _interopRequireDefault(_book);
 
 var _budget = require("./budget");
 
@@ -72,17 +72,25 @@ var _county = require("./county");
 
 var _county2 = _interopRequireDefault(_county);
 
-var _curriculum = require("./curriculum");
-
-var _curriculum2 = _interopRequireDefault(_curriculum);
-
 var _documentType = require("./document-type");
 
 var _documentType2 = _interopRequireDefault(_documentType);
 
-var _hostelAllocation = require("./hostel-allocation");
+var _documentation = require("./documentation");
 
-var _hostelAllocation2 = _interopRequireDefault(_hostelAllocation);
+var _documentation2 = _interopRequireDefault(_documentation);
+
+var _fees = require("./fees");
+
+var _fees2 = _interopRequireDefault(_fees);
+
+var _hostel = require("./hostel");
+
+var _hostel2 = _interopRequireDefault(_hostel);
+
+var _lesson = require("./lesson");
+
+var _lesson2 = _interopRequireDefault(_lesson);
 
 var _multimedia = require("./multimedia");
 
@@ -202,12 +210,10 @@ var _unionbank2 = _interopRequireDefault(_unionbank);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// Routes
 var router = _express2.default.Router();
 
 // Use Routes
-
-
-// Routes
 router.use(_accountClass2.default);
 router.use(_accountHeading2.default);
 router.use(_accountPosting2.default);
@@ -220,15 +226,16 @@ router.use(_admission2.default);
 router.use(_bank2.default);
 router.use(_blogComment2.default);
 router.use(_blog2.default);
-router.use(_documentation2.default);
+router.use(_book2.default);
 router.use(_budget2.default);
 router.use(_calendar2.default);
 router.use(_contactUs2.default);
 router.use(_county2.default);
-router.use(_curriculum2.default);
+router.use(_fees2.default);
 router.use(_documentType2.default);
 router.use(_documentation2.default);
-router.use(_hostelAllocation2.default);
+router.use(_hostel2.default);
+router.use(_lesson2.default);
 router.use(_multimedia2.default);
 router.use(_message2.default);
 router.use(_notification2.default);

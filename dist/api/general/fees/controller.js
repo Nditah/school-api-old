@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.deleteLesson = exports.updateLesson = exports.createLesson = exports.fetchLesson = exports.deleteCurriculum = exports.updateCurriculum = exports.createCurriculum = exports.fetchCurriculum = undefined;
+exports.deleteFeesPayment = exports.updateFeesPayment = exports.createFeesPayment = exports.fetchFeesPayment = exports.deleteFees = exports.updateFees = exports.createFees = exports.fetchFees = undefined;
 
-var fetchCurriculum = exports.fetchCurriculum = function () {
+var fetchFees = exports.fetchFees = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, res) {
         var query, _aqp, filter, skip, limit, sort, projection, result;
 
@@ -17,7 +17,7 @@ var fetchCurriculum = exports.fetchCurriculum = function () {
                         _aqp = (0, _apiQueryParams2.default)(query), filter = _aqp.filter, skip = _aqp.skip, limit = _aqp.limit, sort = _aqp.sort, projection = _aqp.projection;
                         _context.prev = 2;
                         _context.next = 5;
-                        return _model.Curriculum.find(filter).populate("book").populate("course").populate("classe").populate("material").populate("subject").populate({ path: "created_by", select: "surname given_name email phone" }).populate({ path: "updated_by", select: "surname given_name email phone" }).skip(skip).limit(limit).sort(sort).select(projection).exec();
+                        return _model.Fees.find(filter).populate("created_by", "id surname given_name email phone").populate("updated_by", "id surname given_name email phone").skip(skip).limit(limit).sort(sort).select(projection).exec();
 
                     case 5:
                         result = _context.sent;
@@ -48,21 +48,21 @@ var fetchCurriculum = exports.fetchCurriculum = function () {
         }, _callee, null, [[2, 12]]);
     }));
 
-    return function fetchCurriculum(_x, _x2) {
+    return function fetchFees(_x, _x2) {
         return _ref.apply(this, arguments);
     };
 }();
 
-var createCurriculum = exports.createCurriculum = function () {
+var createFees = exports.createFees = function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(req, res) {
-        var data, _Joi$validate, error, newCurriculum, result;
+        var data, _Joi$validate, error, newFees, result;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         data = req.body;
-                        _Joi$validate = _joi2.default.validate(data, _model.curriculumCreate), error = _Joi$validate.error;
+                        _Joi$validate = _joi2.default.validate(data, _model.feesCreate), error = _Joi$validate.error;
 
                         if (!error) {
                             _context2.next = 4;
@@ -72,10 +72,10 @@ var createCurriculum = exports.createCurriculum = function () {
                         return _context2.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
 
                     case 4:
-                        newCurriculum = new _model.Curriculum(data);
+                        newFees = new _model.Fees(data);
                         _context2.prev = 5;
                         _context2.next = 8;
-                        return newCurriculum.save();
+                        return newFees.save();
 
                     case 8:
                         result = _context2.sent;
@@ -89,7 +89,7 @@ var createCurriculum = exports.createCurriculum = function () {
                         return _context2.abrupt("return", (0, _lib.notFound)(res, "Error: Bad Request: Model not found"));
 
                     case 12:
-                        return _context2.abrupt("return", (0, _lib.success)(res, 201, result, "Curriculum created successfully!"));
+                        return _context2.abrupt("return", (0, _lib.success)(res, 201, result, "Fees created successfully!"));
 
                     case 15:
                         _context2.prev = 15;
@@ -106,12 +106,12 @@ var createCurriculum = exports.createCurriculum = function () {
         }, _callee2, null, [[5, 15]]);
     }));
 
-    return function createCurriculum(_x3, _x4) {
+    return function createFees(_x3, _x4) {
         return _ref2.apply(this, arguments);
     };
 }();
 
-var updateCurriculum = exports.updateCurriculum = function () {
+var updateFees = exports.updateFees = function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(req, res) {
         var data, id, _Joi$validate2, error, result;
 
@@ -121,7 +121,7 @@ var updateCurriculum = exports.updateCurriculum = function () {
                     case 0:
                         data = req.body;
                         id = req.params.recordId;
-                        _Joi$validate2 = _joi2.default.validate(data, _model.curriculumUpdate), error = _Joi$validate2.error;
+                        _Joi$validate2 = _joi2.default.validate(data, _model.feesUpdate), error = _Joi$validate2.error;
 
                         if (!error) {
                             _context3.next = 5;
@@ -133,7 +133,7 @@ var updateCurriculum = exports.updateCurriculum = function () {
                     case 5:
                         _context3.prev = 5;
                         _context3.next = 8;
-                        return _model.Curriculum.findOneAndUpdate({ _id: id }, data, { new: true });
+                        return _model.Fees.findOneAndUpdate({ _id: id }, data, { new: true });
 
                     case 8:
                         result = _context3.sent;
@@ -146,7 +146,7 @@ var updateCurriculum = exports.updateCurriculum = function () {
                         return _context3.abrupt("return", (0, _lib.notFound)(res, "Bad Request: Model not found with id " + id));
 
                     case 11:
-                        return _context3.abrupt("return", (0, _lib.success)(res, 200, result, "Curriculum updated successfully!"));
+                        return _context3.abrupt("return", (0, _lib.success)(res, 200, result, "Fees updated successfully!"));
 
                     case 14:
                         _context3.prev = 14;
@@ -163,12 +163,12 @@ var updateCurriculum = exports.updateCurriculum = function () {
         }, _callee3, null, [[5, 14]]);
     }));
 
-    return function updateCurriculum(_x5, _x6) {
+    return function updateFees(_x5, _x6) {
         return _ref3.apply(this, arguments);
     };
 }();
 
-var deleteCurriculum = exports.deleteCurriculum = function () {
+var deleteFees = exports.deleteFees = function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res) {
         var id, result;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
@@ -178,7 +178,7 @@ var deleteCurriculum = exports.deleteCurriculum = function () {
                         id = req.params.recordId;
                         _context4.prev = 1;
                         _context4.next = 4;
-                        return _model.Curriculum.findOneAndRemove({ _id: id });
+                        return _model.Fees.findOneAndRemove({ _id: id });
 
                     case 4:
                         result = _context4.sent;
@@ -191,7 +191,7 @@ var deleteCurriculum = exports.deleteCurriculum = function () {
                         return _context4.abrupt("return", (0, _lib.notFound)(res, "Bad Request: Model not found with id " + id));
 
                     case 7:
-                        return _context4.abrupt("return", (0, _lib.success)(res, 200, result, "Curriculum deleted successfully!"));
+                        return _context4.abrupt("return", (0, _lib.success)(res, 200, result, "Fees deleted successfully!"));
 
                     case 10:
                         _context4.prev = 10;
@@ -208,14 +208,14 @@ var deleteCurriculum = exports.deleteCurriculum = function () {
         }, _callee4, null, [[1, 10]]);
     }));
 
-    return function deleteCurriculum(_x7, _x8) {
+    return function deleteFees(_x7, _x8) {
         return _ref4.apply(this, arguments);
     };
 }();
 
-//* ==============LESSON================
+//* ========FEES-PAYMENT ========
 
-var fetchLesson = exports.fetchLesson = function () {
+var fetchFeesPayment = exports.fetchFeesPayment = function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(req, res) {
         var query, _aqp2, filter, skip, limit, sort, projection, result;
 
@@ -227,7 +227,7 @@ var fetchLesson = exports.fetchLesson = function () {
                         _aqp2 = (0, _apiQueryParams2.default)(query), filter = _aqp2.filter, skip = _aqp2.skip, limit = _aqp2.limit, sort = _aqp2.sort, projection = _aqp2.projection;
                         _context5.prev = 2;
                         _context5.next = 5;
-                        return _model.Lesson.find(filter).populate("teacher").populate("course").populate("classe").populate("material").populate("curriculum").populate("timetable").populate({ path: "created_by", select: "surname given_name email phone" }).populate({ path: "updated_by", select: "surname given_name email phone" }).skip(skip).limit(limit).sort(sort).select(projection).exec();
+                        return _model.FeesPayment.find(filter).populate("created_by", "id surname given_name email phone").populate("updated_by", "id surname given_name email phone").skip(skip).limit(limit).sort(sort).select(projection).exec();
 
                     case 5:
                         result = _context5.sent;
@@ -258,21 +258,21 @@ var fetchLesson = exports.fetchLesson = function () {
         }, _callee5, null, [[2, 12]]);
     }));
 
-    return function fetchLesson(_x9, _x10) {
+    return function fetchFeesPayment(_x9, _x10) {
         return _ref5.apply(this, arguments);
     };
 }();
 
-var createLesson = exports.createLesson = function () {
+var createFeesPayment = exports.createFeesPayment = function () {
     var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(req, res) {
-        var data, _Joi$validate3, error, newLesson, result;
+        var data, _Joi$validate3, error, newFeesPayment, result;
 
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
             while (1) {
                 switch (_context6.prev = _context6.next) {
                     case 0:
                         data = req.body;
-                        _Joi$validate3 = _joi2.default.validate(data, _model.lessonCreate), error = _Joi$validate3.error;
+                        _Joi$validate3 = _joi2.default.validate(data, _model.feesPaymentCreate), error = _Joi$validate3.error;
 
                         if (!error) {
                             _context6.next = 4;
@@ -282,10 +282,10 @@ var createLesson = exports.createLesson = function () {
                         return _context6.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
 
                     case 4:
-                        newLesson = new _model.Lesson(data);
+                        newFeesPayment = new _model.FeesPayment(data);
                         _context6.prev = 5;
                         _context6.next = 8;
-                        return newLesson.save();
+                        return newFeesPayment.save();
 
                     case 8:
                         result = _context6.sent;
@@ -299,7 +299,7 @@ var createLesson = exports.createLesson = function () {
                         return _context6.abrupt("return", (0, _lib.notFound)(res, "Error: Bad Request: Model not found"));
 
                     case 12:
-                        return _context6.abrupt("return", (0, _lib.success)(res, 201, result, "Lesson created successfully!"));
+                        return _context6.abrupt("return", (0, _lib.success)(res, 201, result, "FeesPayment created successfully!"));
 
                     case 15:
                         _context6.prev = 15;
@@ -316,12 +316,12 @@ var createLesson = exports.createLesson = function () {
         }, _callee6, null, [[5, 15]]);
     }));
 
-    return function createLesson(_x11, _x12) {
+    return function createFeesPayment(_x11, _x12) {
         return _ref6.apply(this, arguments);
     };
 }();
 
-var updateLesson = exports.updateLesson = function () {
+var updateFeesPayment = exports.updateFeesPayment = function () {
     var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(req, res) {
         var data, id, _Joi$validate4, error, result;
 
@@ -331,7 +331,7 @@ var updateLesson = exports.updateLesson = function () {
                     case 0:
                         data = req.body;
                         id = req.params.recordId;
-                        _Joi$validate4 = _joi2.default.validate(data, _model.lessonUpdate), error = _Joi$validate4.error;
+                        _Joi$validate4 = _joi2.default.validate(data, _model.feesPaymentUpdate), error = _Joi$validate4.error;
 
                         if (!error) {
                             _context7.next = 5;
@@ -343,7 +343,7 @@ var updateLesson = exports.updateLesson = function () {
                     case 5:
                         _context7.prev = 5;
                         _context7.next = 8;
-                        return _model.Lesson.findOneAndUpdate({ _id: id }, data, { new: true });
+                        return _model.FeesPayment.findOneAndUpdate({ _id: id }, data, { new: true });
 
                     case 8:
                         result = _context7.sent;
@@ -356,7 +356,7 @@ var updateLesson = exports.updateLesson = function () {
                         return _context7.abrupt("return", (0, _lib.notFound)(res, "Bad Request: Model not found with id " + id));
 
                     case 11:
-                        return _context7.abrupt("return", (0, _lib.success)(res, 200, result, "Lesson updated successfully!"));
+                        return _context7.abrupt("return", (0, _lib.success)(res, 200, result, "FeesPayment updated successfully!"));
 
                     case 14:
                         _context7.prev = 14;
@@ -373,12 +373,12 @@ var updateLesson = exports.updateLesson = function () {
         }, _callee7, null, [[5, 14]]);
     }));
 
-    return function updateLesson(_x13, _x14) {
+    return function updateFeesPayment(_x13, _x14) {
         return _ref7.apply(this, arguments);
     };
 }();
 
-var deleteLesson = exports.deleteLesson = function () {
+var deleteFeesPayment = exports.deleteFeesPayment = function () {
     var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8(req, res) {
         var id, result;
         return regeneratorRuntime.wrap(function _callee8$(_context8) {
@@ -388,7 +388,7 @@ var deleteLesson = exports.deleteLesson = function () {
                         id = req.params.recordId;
                         _context8.prev = 1;
                         _context8.next = 4;
-                        return _model.Lesson.findOneAndRemove({ _id: id });
+                        return _model.FeesPayment.findOneAndRemove({ _id: id });
 
                     case 4:
                         result = _context8.sent;
@@ -401,7 +401,7 @@ var deleteLesson = exports.deleteLesson = function () {
                         return _context8.abrupt("return", (0, _lib.notFound)(res, "Bad Request: Model not found with id " + id));
 
                     case 7:
-                        return _context8.abrupt("return", (0, _lib.success)(res, 200, result, "Lesson deleted successfully!"));
+                        return _context8.abrupt("return", (0, _lib.success)(res, 200, result, "FeesPayment deleted successfully!"));
 
                     case 10:
                         _context8.prev = 10;
@@ -418,7 +418,7 @@ var deleteLesson = exports.deleteLesson = function () {
         }, _callee8, null, [[1, 10]]);
     }));
 
-    return function deleteLesson(_x15, _x16) {
+    return function deleteFeesPayment(_x15, _x16) {
         return _ref8.apply(this, arguments);
     };
 }();
@@ -446,9 +446,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 // Logging
-var logger = _log4js2.default.getLogger("[lesson]");
+var logger = _log4js2.default.getLogger("[fees]");
 _log4js2.default.configure({
-    appenders: { file: { type: "file", filename: "logs/lesson.log" } },
+    appenders: { file: { type: "file", filename: "logs/fees.log" } },
     categories: { default: { appenders: ["file"], level: "debug" } }
 });
 //# sourceMappingURL=controller.js.map
