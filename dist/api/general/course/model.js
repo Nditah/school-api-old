@@ -15,8 +15,6 @@ var _mongoose2 = _interopRequireDefault(_mongoose);
 
 var _constants = require("../../../constants");
 
-var _constants2 = _interopRequireDefault(_constants);
-
 var _model = require("../classe/model");
 
 var _model2 = _interopRequireDefault(_model);
@@ -93,10 +91,10 @@ var schema = exports.schema = {
     subject: { type: ObjectId, ref: "Subject" },
     teacher: { type: ObjectId, ref: "Staff" },
     created_by: { type: ObjectId, ref: "Staff", required: true },
-    updated_by: { type: ObjectId, ref: "Staff", required: true }
+    updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-var options = _constants2.default.OPTIONS;
+var options = _constants.DATABASE.OPTIONS;
 
 var newSchema = new Schema(schema, options);
 newSchema.set("collection", "course");

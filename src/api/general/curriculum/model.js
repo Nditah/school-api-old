@@ -3,8 +3,8 @@
  * @property {ObjectId} id Curriculum primaryKey
  * @property {String} description Curriculum description String (required)
  * @property {String} scheme Curriculum scheme String
- * @property {ObjectId} staff_id Curriculum staff ObjectId
- * @property {ObjectId} book_id Curriculum Book ObjectId
+ * @property {ObjectId} staff Curriculum staff ObjectId
+ * @property {ObjectId} book Curriculum Book ObjectId
  * @description Curriculum model holds all School curriculums
  */
 import Joi from "joi";
@@ -22,8 +22,8 @@ const { ObjectId } = Schema.Types;
 export const schemaCreate = {
     description: Joi.string().optional(),
     scheme: Joi.string().optional(),
-    book_id: Joi.string().optional(),
-    staff_id: Joi.string().optional(),
+    book: Joi.string().optional(),
+    staff: Joi.string().optional(),
     materials: Joi.string().optional(),
     created_by: Joi.string().required(),
 };
@@ -31,19 +31,18 @@ export const schemaCreate = {
 export const schemaUpdate = {
     description: Joi.string().optional(),
     scheme: Joi.string().optional(),
-    book_id: Joi.string().optional(),
+    book: Joi.string().optional(),
     materials: Joi.string().optional(),
-    staff_id: Joi.string().optional(),
+    staff: Joi.string().optional(),
     updated_by: Joi.string().required(),
 };
 
 export const schema = {
     description: { type: String, required: true },
-
-    scheme_id: { type: ObjectId},
-    book_id: { type: ObjectId, ref: "Book" },
-    materials: { type: File },
-    staff_id: { type: ObjectId, ref: "Staff", required: true },
+    scheme: { type: ObjectId },
+    book: { type: ObjectId, ref: "Book" },
+    materials: { type: ObjectId },
+    staff: { type: ObjectId, ref: "Staff", required: true },
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId, ref: "Staff" },
 };

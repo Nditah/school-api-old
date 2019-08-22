@@ -17,67 +17,148 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/v1/hostels?id={recordId} Retrieve one or all records
- * @apiName RetrieveHostel
- * @apiGroup Hostel
- * @apiExample {curl} Example usage for retieving a single record:
- *      curl -i api/hostels?
+ * @api {get} /api/v1/subjects?id={recordId} Retrieve one or all records
+ * @apiName RetrieveSubject
+ * @apiGroup Subject
+* @apiExample {curl} Example usage for retieving a single record:
+ *      curl -i api/subjects?
  * @apiParam {Object} filter query condition (optional)
  * @apiParam {Number} skip Number of records to offset by (optional)
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
  * @apiParam {String} sort how records would be arranged in alphabet (optional)
  * @apiParam {String} projection list of record's attributes to retrieve (optional)
- * @apiDescription Records of Hostel the school.
+ * @apiDescription Subjects  of subjects in the school
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/hostels", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
+router.get("/subjects", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchSubject);
 
 /**
- * @api {post} /api/v1/hostels Create hostels
- * @apiName CreateHostel
- * @apiGroup Hostel
+ * @api {post} /api/v1/subjects Create subjects
+ * @apiName CreateSubject
+ * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} block Hostel block name (required)
- * @apiParam {Number} room_no Hostel room_no (required)
- * @apiParam {Number} no_of_beds Hostel no_of_beds (required)
- * @apiParam {String} fee_id Hostel fee_id (optional)
- * @apiParam {String} description Hostel description (optional)
- * @apiParam {String} status Hostel Status (Occupied or not Occupied)(optional)
- * @apiError {Object} 422 Some parameters may contain invalid values.
- * @apiError 404 Hostel not found.
- * @apiError 500 server error.
+ * @apiParam {String} name Subject name (required)
+ * @apiParam {String} code Subject code (required)
+ * @apiParam {ObjectId} hod Subject hod
+ * @apiParam {String} description Subject description (optional)
+ * @apiParam {String} subsidiary Subject subsidiary
+ * @apiParam {Array} courses Subject courses
+ * @apiParam {ObjectId} category Subject category
+ * @apiSuccess {Object} Subject Subject's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Subject not found.
+ * @apiError 401 master access only.
  */
-router.post("/hostels", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
+router.post("/subjects", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createSubject);
 
 /**
- * @api {put} /api/v1/hostels/{recordId} Update hostels
- * @apiName UpdateHostel
- * @apiGroup Hostel
+ * @api {put} /api/v1/subjects/{recordId} Update subjects
+ * @apiName UpdateSubject
+ * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} block Hostel block name (required)
- * @apiParam {Number} room_no Hostel room_no (required)
- * @apiParam {Number} no_of_beds Hostel no_of_beds (required)
- * @apiParam {String} fee_id Hostel fee_id (optional)
- * @apiParam {String} description Hostel description (optional)
- * @apiParam {String} status Hostel Status (Occupied or not Occupied)(optional)
- * @apiError {Object} 422 Some parameters may contain invalid values.
- * @apiError 404 Hostel not found.
- * @apiError 500 server error.
+ * @apiParam {String} recordId required record ObjectId
+ * @apiParam {String} name Subject name (required)
+ * @apiParam {String} code Subject code (required)
+ * @apiParam {ObjectId} hod Subject hod
+ * @apiParam {String} description Subject description (optional)
+ * @apiParam {String} subsidiary Subject subsidiary
+ * @apiParam {Array} courses Subject courses
+ * @apiParam {ObjectId} category Subject category
+ * @apiSuccess {Object} Subject Subject's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Subject not found.
+ * @apiError 401 master access only.
  */
-router.put("/hostels/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
+router.put("/subjects/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateSubject);
 
 /**
- * @api {delete} /api/v1/hostels/{recordId} Delete hostels
- * @apiName DeleteHostel
- * @apiGroup Hostel
+ * @api {delete} /api/v1/subjects/{recordId} Delete subjects
+ * @apiName DeleteSubject
+ * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} recordId required record ObjectId
  * @apiSuccess (Success 204) 204 No Content.
- * @apiError 404 Hostel not found.
- * @apiError 401 master Hostel only.
+ * @apiError 404 Subject not found.
+ * @apiError 401 master access only.
  */
-router.delete("/hostels/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
+router.delete("/subjects/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteSubject);
+
+//* ======= COURSE ==========
+
+/**
+ * @api {get} /api/v1/courses?id={recordId} Retrieve one or all records
+ * @apiName RetrieveCourse
+ * @apiGroup Course
+* @apiExample {curl} Example usage for retieving a single record:
+ *      curl -i api/courses?
+ * @apiParam {Object} filter query condition (optional)
+ * @apiParam {Number} skip Number of records to offset by (optional)
+ * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
+ * @apiParam {String} sort how records would be arranged in alphabet (optional)
+ * @apiParam {String} projection list of record's attributes to retrieve (optional)
+ * @apiDescription Courses  of courses in the school
+ * @apiSuccess {Object[]} Array of Objects of records.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ */
+router.get("/courses", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchCourse);
+
+/**
+ * @api {post} /api/v1/courses Create courses
+ * @apiName CreateCourse
+ * @apiGroup Course
+ * @apiHeader {String} Authorization Bearer token
+ * @apiParam {String} title Course title (required)
+ * @apiParam {String} level Course level (required)
+ * @apiParam {String} code Course code (required)
+ * @apiParam {String} type Course type "ELECTIVE|COMPULSORY"
+ * @apiParam {String} coefficient Course coefficient (required)
+ * @apiParam {String} description Course description (required)
+ * @apiParam {Array} classes Course classes  Array<ObjectId>
+ * @apiParam {String} subject Course subject (required)
+ * @apiParam {Array} teachers Course teachers Array<ObjectId>
+ * @apiParam {ObjectId} category Subject category
+ * @apiSuccess {Object} Course Course's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Course not found.
+ * @apiError 401 master access only.
+ */
+router.post("/courses", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createCourse);
+
+/**
+ * @api {put} /api/v1/courses/{recordId} Update courses
+ * @apiName UpdateCourse
+ * @apiGroup Course
+ * @apiHeader {String} Authorization Bearer token
+ * @apiParam {String} recordId required record ObjectId
+ * @apiParam {String} title Course title (required)
+ * @apiParam {String} level Course level (required)
+ * @apiParam {String} code Course code (required)
+ * @apiParam {String} type Course type "ELECTIVE|COMPULSORY"
+ * @apiParam {String} coefficient Course coefficient (required)
+ * @apiParam {String} description Course description (required)
+ * @apiParam {Array} classes Course classes  Array<ObjectId>
+ * @apiParam {String} subject Course subject (required)
+ * @apiParam {Array} teachers Course teachers Array<ObjectId>
+ * @apiParam {ObjectId} category Subject category
+ * @apiSuccess {Object} Course Course's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Course not found.
+ * @apiError 401 master access only.
+ */
+router.put("/courses/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateCourse);
+
+/**
+ * @api {delete} /api/v1/courses/{recordId} Delete courses
+ * @apiName DeleteCourse
+ * @apiGroup Course
+ * @apiHeader {String} Authorization Bearer token
+ * @apiParam {String} recordId required record ObjectId
+ * @apiSuccess (Success 204) 204 No Content.
+ * @apiError 404 Course not found.
+ * @apiError 401 master access only.
+ */
+router.delete("/courses/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteCourse);
 
 exports.default = router;
 //# sourceMappingURL=routes.js.map

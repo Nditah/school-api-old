@@ -40,21 +40,20 @@ router.get("/staff", [_authorization.checkAuth, _authorization.isValidStaff], _c
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} title Staff title (optional)
- * @apiParam {String} first_name Staff first_name (optional)
- * @apiParam {String} middle_name Staff middle_name (optional)
- * @apiParam {String} last_name Staff first_name (optional)
+ * @apiParam {String} surname Staff surname (optional)
+ * @apiParam {String} given_name Staff given_name (optional)
  * @apiParam {String} gender Staff gender (optional)
- * @apiParam {Date} date_of_birth Staff date_of_birth (optional)
+ * @apiParam {Date} birth_date Staff birth_date (optional)
  * @apiParam {String} marital_status Staff marital_status (optional)
  * @apiParam {String} phone Staff office phone (optional)
  * @apiParam {String} phone_personal Staff phone_personal (optional)
  * @apiParam {String} address Staff address (optional)
- * @apiParam {String} state Staff state (optional)
- * @apiParam {String} county Staff county (optional)
+ * @apiParam {ObjectId} state Staff state (optional)
+ * @apiParam {ObjectId} county Staff county (optional)
  * @apiParam {String} email Staff email (optional)
  * @apiParam {String} staff_type Staff staff_type (optional)
- * @apiParam {String} classe Staff classe (optional)
- * @apiParam {String} subject Staff subject (optional)
+ * @apiParam {ObjectId} classe Staff classe (optional)
+ * @apiParam {ObjectId} subject Staff subject (optional)
  * @apiParam {String} password Staff password (optional)
  * @apiParam {String} kin Staff kin (required)
  * @apiParam {String} kin_phone Staff kin_phone (required)
@@ -80,20 +79,20 @@ router.get("/staff", [_authorization.checkAuth, _authorization.isValidStaff], _c
  * @apiParam {Number} welfare_allowance Staff welfare_allowance (optional)
  * @apiParam {Number} pension Staff pension (optional)
  * @apiParam {Number} assurance Staff assurance (optional)
- * @apiParam {String} bank_name Staff bank_name (optional)
+ * @apiParam {ObjectId} bank_name Staff bank_name (optional)
  * @apiParam {String} bank_account_number Staff bank_account_number (optional)
  * @apiParam {String} bank_account_name Staff bank_account_name (optional)
  * @apiParam {String} rank Staff rank (optional)
- * @apiParam {String} office_id Staff office_id (required)
- * @apiParam {Array} role Staff role is an array of office duties (required)
+ * @apiParam {ObjectId} office Staff office (required)
+ * @apiParam {String} role Staff role is an array of office duties (required)
  * @apiParam {String} subsidiary Staff subsidiary (required)
  * @apiParam {String} remark Staff remark (optional)
  * @apiParam {String} photo Staff photo (optional)
  * @apiParam {Boolean} is_salary_payable Staff is_salary_payable (optional)
  * @apiParam {Boolean} is_document_complete Staff is_document_complete (optional)
- * @apiParam {String} approved_by Staff approved_by (optional)
+ * @apiParam {ObjectId} approved_by Staff approved_by (optional)
  * @apiParam {Date} approved_date Staff approved_date (optional)
- * @apiParam {String} disengaged_by Staff disengaged_by (optional)
+ * @apiParam {ObjectId} disengaged_by Staff disengaged_by (optional)
  * @apiParam {Date} disengaged_date Staff disengaged_date (optional)
  * @apiSuccess {Object} Staff Staff's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
@@ -107,23 +106,22 @@ router.post("/staff", [_authorization.checkAuth, _authorization.isValidStaff], _
  * @apiName UpdateStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
+ * @apiParam {ObjectId} recordId required record ObjectId
  * @apiParam {String} title Staff title (optional)
- * @apiParam {String} first_name Staff first_name (optional)
- * @apiParam {String} middle_name Staff middle_name (optional)
- * @apiParam {String} last_name Staff first_name (optional)
+ * @apiParam {String} surname Staff surname (optional)
+ * @apiParam {String} given_name Staff given_name (optional)
  * @apiParam {String} gender Staff gender (optional)
- * @apiParam {Date} date_of_birth Staff date_of_birth (optional)
+ * @apiParam {Date} birth_date Staff birth_date (optional)
  * @apiParam {String} marital_status Staff marital_status (optional)
  * @apiParam {String} phone Staff office phone (optional)
  * @apiParam {String} phone_personal Staff phone_personal (optional)
  * @apiParam {String} address Staff address (optional)
- * @apiParam {String} state Staff state (optional)
- * @apiParam {String} county Staff county (optional)
+ * @apiParam {ObjectId} state Staff state (optional)
+ * @apiParam {ObjectId} county Staff county (optional)
  * @apiParam {String} email Staff email (optional)
  * @apiParam {String} staff_type Staff staff_type (optional)
- * @apiParam {String} classe Staff classe (optional)
- * @apiParam {String} subject Staff subject (optional)
+ * @apiParam {ObjectId} classe Staff classe (optional)
+ * @apiParam {ObjectId} subject Staff subject (optional)
  * @apiParam {String} password Staff password (optional)
  * @apiParam {String} kin Staff kin (required)
  * @apiParam {String} kin_phone Staff kin_phone (required)
@@ -149,20 +147,20 @@ router.post("/staff", [_authorization.checkAuth, _authorization.isValidStaff], _
  * @apiParam {Number} welfare_allowance Staff welfare_allowance (optional)
  * @apiParam {Number} pension Staff pension (optional)
  * @apiParam {Number} assurance Staff assurance (optional)
- * @apiParam {String} bank_name Staff bank_name (optional)
+ * @apiParam {ObjectId} bank_name Staff bank_name (optional)
  * @apiParam {String} bank_account_number Staff bank_account_number (optional)
  * @apiParam {String} bank_account_name Staff bank_account_name (optional)
  * @apiParam {String} rank Staff rank (optional)
- * @apiParam {String} office_id Staff office_id (required)
- * @apiParam {Array} role Staff role is an array of office duties (required)
+ * @apiParam {ObjectId} office Staff office (required)
+ * @apiParam {String} role Staff role is an array of office duties (required)
  * @apiParam {String} subsidiary Staff subsidiary (required)
  * @apiParam {String} remark Staff remark (optional)
  * @apiParam {String} photo Staff photo (optional)
  * @apiParam {Boolean} is_salary_payable Staff is_salary_payable (optional)
  * @apiParam {Boolean} is_document_complete Staff is_document_complete (optional)
- * @apiParam {String} approved_by Staff approved_by (optional)
+ * @apiParam {ObjectId} approved_by Staff approved_by (optional)
  * @apiParam {Date} approved_date Staff approved_date (optional)
- * @apiParam {String} disengaged_by Staff disengaged_by (optional)
+ * @apiParam {ObjectId} disengaged_by Staff disengaged_by (optional)
  * @apiParam {Date} disengaged_date Staff disengaged_date (optional)
  * @apiSuccess {Object} Staff Staff's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
@@ -176,7 +174,7 @@ router.put("/staff/:recordId", [_authorization.checkAuth, _authorization.isValid
  * @apiName DeleteStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
+ * @apiParam {ObjectId} recordId required record ObjectId
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 404 Staff not found.
  * @apiError 401 master access only.

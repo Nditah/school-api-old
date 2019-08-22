@@ -39,32 +39,31 @@ var _model7 = require("../classe/model");
 
 var _model8 = _interopRequireDefault(_model7);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _model9 = require("../hostel-allocation/model");
 
-var Schema = _mongoose2.default.Schema;
-// import Hostel from "../hostel/model";
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /**
  * @author 4Decoder
- * @property {String} id Student ObjectId primaryKey
+ * @property {ObjectId} id Student ObjectId primaryKey
  * @property {String} surname Student surname (optional)
  * @property {String} given_name Student given_name (optional)
  * @property {String} last_name Student surname (optional)
  * @property {String} gender Student gender (optional)
  * @property {Date} birth_date Student birth_date (optional)
  * @property {String} address Student address (optional)
- * @property {String} state Student state (optional)
- * @property {String} county Student county (optional)
+ * @property {ObjectId} state Student state (optional)
+ * @property {ObjectId} county Student county (optional)
  * @property {String} email Student email (optional)
  * @property {String} phone Student office phone (optional)
  * @property {String} password Student password (optional)
- * @property {String} blood_group Student blood_group (optional)
- * @property {String} classe Student classe (optional)
+ * @property {String} religion Student religion (optional)
+ * @property {ObjectId} classe Student classe (optional)
  * @property {String} level Student level (optional)
  * @property {String} subsidiary Student subsidiary (required)
- * @property {String} hostel Student hostel (optional)
+ * @property {ObjectId} hostel Student hostel (optional)
  * @property {String} photo Student photo (optional)
  * @property {Array} parents Student parents Array<ObjectId> (optional)
  * @property {ObjectId} created_by Student record created by
@@ -72,6 +71,7 @@ var Schema = _mongoose2.default.Schema;
  * @description Student holds record of all students in the school.
  */
 
+var Schema = _mongoose2.default.Schema;
 var ObjectId = Schema.Types.ObjectId;
 var schemaLogin = exports.schemaLogin = {
     email: _joi2.default.string().trim().email().optional(),
@@ -92,7 +92,7 @@ var schemaCreate = exports.schemaCreate = {
     email: _joi2.default.string().trim().email().optional(),
     phone: _joi2.default.string().optional(),
     password: _joi2.default.string().optional(),
-    blood_group: _joi2.default.string().optional(),
+    religion: _joi2.default.string().optional(),
     classe: _joi2.default.string().trim().optional(),
     level: _joi2.default.string().trim().optional(),
     subsidiary: _joi2.default.string().trim().valid(Object.values(_constants.SUBSIDIARY)).optional(),
@@ -113,7 +113,7 @@ var schemaUpdate = exports.schemaUpdate = {
     email: _joi2.default.string().trim().email().optional(),
     phone: _joi2.default.string().optional(),
     password: _joi2.default.string().optional(),
-    blood_group: _joi2.default.string().optional(),
+    religion: _joi2.default.string().optional(),
     classe: _joi2.default.string().trim().optional(),
     level: _joi2.default.string().trim().optional(),
     subsidiary: _joi2.default.string().trim().valid(Object.values(_constants.SUBSIDIARY)).optional(),
@@ -150,7 +150,7 @@ var schema = exports.schema = {
         unique: true
     },
     password: { type: String, required: [false, "Why no password?"] },
-    blood_group: { type: String },
+    religion: { type: String },
     classe: { type: ObjectId, ref: "Classe", required: [false, "Why no class?"] },
     level: { type: String },
     subsidiary: {
@@ -158,7 +158,7 @@ var schema = exports.schema = {
         enum: Object.values(_constants.SUBSIDIARY),
         required: [false, "Why no input?"]
     },
-    hostel: { type: ObjectId, ref: "Hostel" },
+    hostel: { type: ObjectId, ref: "HostelAllocation" },
     photo: { type: String },
     parents: [{ type: ObjectId, ref: "Parent" }],
     created_by: { type: ObjectId, ref: "Staff", required: true },

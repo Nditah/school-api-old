@@ -17,7 +17,7 @@ export async function fetchRecord(req, res) {
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
         const result = await County.find(filter)
-            .populate("state_id")
+            .populate("state")
             .skip(skip)
             .limit(limit)
             .sort(sort)

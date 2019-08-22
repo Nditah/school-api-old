@@ -23,11 +23,10 @@ var router = _express2.default.Router();
  * @apiExample {curl} Example usage for retieving a single record:
  *      curl -i api/curriculums?
  * @apiParam {Object} filter query condition (optional)
- * @apiParam {Number} skip Number of records to offset by (optional)
- * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
- * @apiParam {String} sort how records would be arranged in alphabet (optional)
- * @apiParam {String} projection list of record's attributes to retrieve (optional)
- * @apiDescription Records  of account headings belonging to one classification
+ * @apiParam {String} description Curriculum description String (required)
+ * @apiParam {String} scheme Curriculum scheme String
+ * @apiParam {ObjectId} staff_id Curriculum staff ObjectId
+ * @apiParam {ObjectId} book_id Curriculum Book ObjectId
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
@@ -38,8 +37,10 @@ router.get("/curriculums", [_authorization.checkAuth, _authorization.isValidStaf
  * @apiName CreateCurriculum
  * @apiGroup Curriculum
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {ObjectId} book_id Curriculum Book ObjectId (required)
- * @apiParam {String} description Curriculum description
+ * @apiParam {String} description Curriculum description String (required)
+ * @apiParam {String} scheme Curriculum scheme String
+ * @apiParam {ObjectId} staff_id Curriculum staff ObjectId
+ * @apiParam {ObjectId} book_id Curriculum Book ObjectId
  * @apiSuccess {Object} Curriculum Staff's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Curriculum not found.

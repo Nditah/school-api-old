@@ -24,8 +24,8 @@ export const schemaCreate = {
 };
 
 export const schemaUpdate = {
-    amount: Joi.number().trim().required(),
-    description: Joi.string().trim().required(),
+    amount: Joi.number().trim().optional(),
+    description: Joi.string().trim().optional(),
     updated_by: Joi.string().required(),
 };
 

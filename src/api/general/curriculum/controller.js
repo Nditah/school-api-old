@@ -17,10 +17,10 @@ export async function fetchRecord(req, res) {
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
         const result = await Curriculum.find(filter)
-            .populate("book_id")
+            .populate("book")
             .populate("description")
-            .populate("material_id")
-            .populate({ path: "staff_id", select: "surname given_name email phone" })
+            .populate("material")
+            .populate({ path: "staff", select: "surname given_name email phone" })
             .populate({ path: "created_by", select: "surname given_name email phone" })
             .populate({ path: "updated_by", select: "surname given_name email phone" })
             .skip(skip)

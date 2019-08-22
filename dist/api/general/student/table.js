@@ -9,10 +9,10 @@ var _constants = require("../../../constants");
 var _lib = require("../../../lib");
 
 var table = [{
-    last_name: "Jave",
+    surname: "Jave",
     given_name: "Scott",
     gender: _constants.GENDER.FEMALE,
-    date_of_birth: new Date(1987, 6, 20),
+    birth_date: new Date(1987, 6, 20),
     phone: "08134836164",
     email: "student@royalacademy.ng",
     password: (0, _lib.hash)("peace"),

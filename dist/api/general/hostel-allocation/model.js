@@ -36,22 +36,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Schema = _mongoose2.default.Schema;
 // eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
+//* Hotels
+
 /**
  * @author 4Dcoder
  * @property {Number} id hostel primaryKey
+ * @property {String} hall Hostel hall name (required)
  * @property {String} block Hostel block name (required)
- * @property {Number} room_no Hostel room_no (required)
- * @property {Number} no_of_beds Hostel no_of_beds (required)
- * @property {String} hostel_fees Hostel hostel_fees (optional)
+ * @property {Number} hostel_rooms Hostel Rooms (required)
+ * @property {Number} hostel_fees Hostel fees (required)
  * @property {String} description Hostel description (optional)
  * @property {String} status Hostel Status (Occupied or not Occupied)(optional)
- * @description HostelAllocation model holds record of all hostels the company deals with
+ * @description Hostel model holds record of all hostels the company deals with
  */
 
 var ObjectId = Schema.Types.ObjectId;
-
-//* Hotels
-
 var hostelCreate = exports.hostelCreate = {
     hall: _joi2.default.string().required(),
     block: _joi2.default.string().required(),
@@ -88,6 +87,18 @@ var hostelSchema = exports.hostelSchema = {
 };
 
 //* HOSTEL-ROOM
+
+/**
+ * @author 4Dcoder
+ * @property {Number} id hostelRoom primaryKey
+ * @property {String} hostel hostelRoom hostel name (required)
+ * @property {String} code hostelRoom code name (required)
+ * @property {Number} floor hostelRoom floor (required)
+ * @property {Number} hostel_bedspaces hostelRoom floor (required)
+ * @property {String} description hostelRoom description (optional)
+ * @property {String} status hostelRoom Status (Occupied or not Occupied)(optional)
+ * @description hostelRoom model holds record of all hostelRoom the company deals with
+ */
 
 var hostelRoomCreate = exports.hostelRoomCreate = {
     hostel: _joi2.default.string().required(),
@@ -126,6 +137,17 @@ var hostelRoomSchema = exports.hostelRoomSchema = {
 
 //* HOSTEL-BEDSPACE
 
+/**
+ * @author 4Dcoder
+ * @property {Number} id hostelBedspace primaryKey
+ * @property {String} room hostelBedspace room name (required)
+ * @property {String} code hostelBedspace code name (required)
+ * @property {Number} occupant hostelBedspace occupant (required)
+ * @property {String} description hostelBedspace description (optional)
+ * @property {String} status hostelBedspace Status (Occupied or not Occupied)(optional)
+ * @description hostelBedspace model holds record of all hostelBedspace the company deals with
+ */
+
 var hostelBedspaceCreate = exports.hostelBedspaceCreate = {
     room: _joi2.default.string().required(),
     code: _joi2.default.string().required(),
@@ -158,7 +180,18 @@ var hostelBedspaceSchema = exports.hostelBedspaceSchema = {
     updated_by: { type: ObjectId, ref: "Staff" }
 };
 
-//* HOSTEL-BEDSPACE
+//* HOSTEL-ALLOCATION
+
+/**
+ * @author 4Dcoder
+ * @property {Number} id hostelAllocation primaryKey
+ * @property {String} bedspace hostelAllocation room name (required)
+ * @property {String} fees_payment hostelAllocation code name (required)
+ * @property {Number} occupant hostelAllocation occupant (required)
+ * @property {String} description hostelAllocation description (optional)
+ * @property {String} status hostelAllocation Status (Occupied or not Occupied)(optional)
+ * @description hostelAllocation model holds record of all hostelAllocation the company deals with
+ */
 
 var hostelAllocationCreate = exports.hostelAllocationCreate = {
     bedspace: _joi2.default.string().required(),
@@ -214,5 +247,4 @@ exports.Hostel = Hostel;
 exports.HostelRoom = HostelRoom;
 exports.HostelBedspace = HostelBedspace;
 exports.HostelAllocation = HostelAllocation;
-exports.default = HostelAllocation;
 //# sourceMappingURL=model.js.map

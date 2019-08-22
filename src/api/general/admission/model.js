@@ -15,7 +15,7 @@
  * @property {String} intending_class Admission intending class
  * @property {String} last_school Admission last school attended
  * @property {String} father_name Admission father's name
- * @property {String} mgiven_name Admission mother's name
+ * @property {String} mother_name Admission mother's name
  * @property {String} home_address Admission guadians home address
  * @property {String} phone Admission guadians phone number
  * @description Admission model holds record of all admissions in Peace Group
@@ -50,7 +50,7 @@ export const schemaCreate = {
     intending_class: Joi.string().optional(),
     last_school: Joi.string().optional(),
     father_name: Joi.string().optional(),
-    mgiven_name: Joi.string().optional(),
+    mother_name: Joi.string().optional(),
     home_address: Joi.string().optional(),
     created_by: Joi.string().required(),
 };
@@ -71,7 +71,7 @@ export const schemaUpdate = {
     intending_class: Joi.string().optional(),
     last_school: Joi.string().optional(),
     father_name: Joi.string().optional(),
-    mgiven_name: Joi.string().optional(),
+    mother_name: Joi.string().optional(),
     home_address: Joi.string().optional(),
     updated_by: Joi.string().required(),
 };
@@ -79,7 +79,7 @@ export const schemaUpdate = {
 export const schema = {
     passport: { type: String },
     surname: { type: String, required: [false, "Why no surname?"] },
-    given_names: { type: String, required: [false, "Why no given_names?"] },
+    given_name: { type: String, required: [false, "Why no given_names?"] },
     home_town: { type: String },
     state_id: { type: ObjectId, ref: "State" },
     county_id: { type: ObjectId, ref: "County" },
@@ -90,7 +90,7 @@ export const schema = {
     intending_class: { type: ObjectId, ref: "Classe" },
     last_school: { type: String },
     father_name: { type: String },
-    mgiven_name: { type: String },
+    mother_name: { type: String },
     home_address: { type: String },
     phone: {
         type: String,

@@ -43,7 +43,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 4Dcoder
  * @property {Number} id Lending ObjectId primaryKey
  * @property {ObjectId} book Book Name of book (required)
- * @property {ObjectId} user_type Lending Type of User{STAFF | STUDENT} (optional)
+ * @property {ObjectId} user_type Lending Type of User{STAFF | STUDENT} (required)
  * @property {ObjectId} staff_id Lending partner_id (optional)
  * @property {ObjectId} student_id Lending asset_id (optional)
  * @property {ObjectId} classe_id Lending asset_id (optional)

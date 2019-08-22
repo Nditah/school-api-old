@@ -52,6 +52,10 @@ var _blog = require("./blog");
 
 var _blog2 = _interopRequireDefault(_blog);
 
+var _documentation = require("./documentation");
+
+var _documentation2 = _interopRequireDefault(_documentation);
+
 var _budget = require("./budget");
 
 var _budget2 = _interopRequireDefault(_budget);
@@ -68,13 +72,13 @@ var _county = require("./county");
 
 var _county2 = _interopRequireDefault(_county);
 
+var _curriculum = require("./curriculum");
+
+var _curriculum2 = _interopRequireDefault(_curriculum);
+
 var _documentType = require("./document-type");
 
 var _documentType2 = _interopRequireDefault(_documentType);
-
-var _documentation = require("./documentation");
-
-var _documentation2 = _interopRequireDefault(_documentation);
 
 var _hostelAllocation = require("./hostel-allocation");
 
@@ -115,6 +119,10 @@ var _payrollDetail2 = _interopRequireDefault(_payrollDetail);
 var _category = require("./category");
 
 var _category2 = _interopRequireDefault(_category);
+
+var _marksheet = require("./marksheet");
+
+var _marksheet2 = _interopRequireDefault(_marksheet);
 
 var _material = require("./material");
 
@@ -172,6 +180,10 @@ var _task = require("./task");
 
 var _task2 = _interopRequireDefault(_task);
 
+var _timetable = require("./timetable");
+
+var _timetable2 = _interopRequireDefault(_timetable);
+
 var _vehicle = require("./vehicle");
 
 var _vehicle2 = _interopRequireDefault(_vehicle);
@@ -208,10 +220,12 @@ router.use(_admission2.default);
 router.use(_bank2.default);
 router.use(_blogComment2.default);
 router.use(_blog2.default);
+router.use(_documentation2.default);
 router.use(_budget2.default);
 router.use(_calendar2.default);
 router.use(_contactUs2.default);
 router.use(_county2.default);
+router.use(_curriculum2.default);
 router.use(_documentType2.default);
 router.use(_documentation2.default);
 router.use(_hostelAllocation2.default);
@@ -225,6 +239,7 @@ router.use(_payrollDetail2.default);
 router.use(_payroll2.default);
 router.use(_category2.default);
 router.use(_material2.default);
+router.use(_marksheet2.default);
 router.use(_rating2.default);
 router.use(_report2.default);
 router.use(_setting2.default);
@@ -237,6 +252,7 @@ router.use(_subject2.default);
 router.use(_synchronization2.default);
 router.use(_table2.default);
 router.use(_task2.default);
+router.use(_timetable2.default);
 router.use(_vehicle2.default);
 router.use(_voucher2.default);
 router.use(_stage2.default);

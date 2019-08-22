@@ -23,7 +23,7 @@ import mongoose from "mongoose";
 import mongoose_csv from "mongoose-csv";
 import { DATABASE } from "../../../constants";
 import Staff from "../staff/model";
-import Course from "../course/model";
+import { Course } from "../subject/model";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;

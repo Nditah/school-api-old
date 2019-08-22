@@ -31,12 +31,17 @@ var _model3 = require("../student/model");
 
 var _model4 = _interopRequireDefault(_model3);
 
-var _model5 = require("../classe/model");
+var _model5 = require("../office/model");
 
 var _model6 = _interopRequireDefault(_model5);
 
+var _model7 = require("../classe/model");
+
+var _model8 = _interopRequireDefault(_model7);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var Schema = _mongoose2.default.Schema;
 // eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
@@ -50,11 +55,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {Date} departure_time Attendance departure_time
  * @description Attendance model holds record of staff time log
  */
-var Schema = _mongoose2.default.Schema;
+
 var ObjectId = Schema.Types.ObjectId;
 var schemaCreate = exports.schemaCreate = {
     staff_id: _joi2.default.string().optional(),
     student_id: _joi2.default.string().optional(),
+    office_id: _joi2.default.string().optional(),
     attendance_status: _joi2.default.string().trim().valid(["SUSPENDED", "EARLY", "LATE"]).optional(),
     subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
     classe_id: _joi2.default.string().optional(),
@@ -66,6 +72,7 @@ var schemaCreate = exports.schemaCreate = {
 var schemaUpdate = exports.schemaUpdate = {
     staff_id: _joi2.default.string().optional(),
     student_id: _joi2.default.string().optional(),
+    office_id: _joi2.default.string().optional(),
     attendance_status: _joi2.default.string().trim().valid(["SUSPENDED", "EARLY", "LATE"]).optional(),
     subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
     classe_id: _joi2.default.string().optional(),
@@ -83,6 +90,7 @@ var schema = exports.schema = {
         default: "EARLY",
         required: true
     },
+    office_id: { type: ObjectId, ref: "Office", required: false },
     subsidiary: {
         type: String,
         enum: Object.values(_constants.SUBSIDIARY),

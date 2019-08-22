@@ -23,7 +23,7 @@ var fetchRecord = exports.fetchRecord = function () {
                             delete filter.q;
                         }
                         _context.next = 7;
-                        return _model2.default.find(filter).populate("teacher").populate("classe").populate("subject").skip(skip).limit(limit).sort(sort).select(projection).exec();
+                        return _model2.default.find(filter).populate("classe").populate("subject").populate("staff").skip(skip).limit(limit).sort(sort).select(projection).exec();
 
                     case 7:
                         result = _context.sent;

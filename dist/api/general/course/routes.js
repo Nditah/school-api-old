@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/v1/courses?id={recordId} Retrieve one or all records
@@ -19,7 +31,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/courses", [checkAuth, isValidStaff], fetchRecord);
+router.get("/courses", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
  * @api {post} /api/v1/courses Create courses
@@ -40,7 +52,7 @@ router.get("/courses", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Course not found.
  * @apiError 401 master access only.
  */
-router.post("/courses", [checkAuth, isValidStaff], createRecord);
+router.post("/courses", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {put} /api/v1/courses/{recordId} Update courses
@@ -62,7 +74,7 @@ router.post("/courses", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 Course not found.
  * @apiError 401 master access only.
  */
-router.put("/courses/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/courses/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/v1/courses/{recordId} Delete courses
@@ -74,6 +86,7 @@ router.put("/courses/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiError 404 Course not found.
  * @apiError 401 master access only.
  */
-router.delete("/courses/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/courses/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
-export default router;
+exports.default = router;
+//# sourceMappingURL=routes.js.map
