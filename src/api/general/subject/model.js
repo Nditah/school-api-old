@@ -6,7 +6,6 @@
  * @property {String} code Subject code (required)
  * @property {ObjectId} hod Subject hod
  * @property {String} description Subject description (optional)
- * @property {Number} level Subject level [1-7]
  * @property {String} subsidiary Subject subsidiary
  * @property {Array} courses Subject courses (prohibited)
  * @property {ObjectId} category Subject category
@@ -30,7 +29,6 @@ export const subjectCreate = {
     name: Joi.string().required(),
     hod: Joi.string().optional(),
     description: Joi.string().required(),
-    level: Joi.string().valid(Object.values(LEVEL)).required(),
     subsidiary: Joi.string().trim().valid(Object.values(SUBSIDIARY)).required(),
     category: Joi.string().optional(),
     created_by: Joi.string().required(),
@@ -41,7 +39,6 @@ export const subjectUpdate = {
     name: Joi.string().optional(),
     hod: Joi.string().optional(),
     description: Joi.string().optional(),
-    level: Joi.string().valid(Object.values(LEVEL)).optional(),
     subsidiary: Joi.string().trim().valid(Object.values(SUBSIDIARY)).optional(),
     category: Joi.string().optional(),
     updated_by: Joi.string().required(),
@@ -52,11 +49,6 @@ export const subjectSchema = {
     name: { type: String, required: true },
     hod: { type: ObjectId, ref: "Staff" },
     description: { type: String, required: true },
-    level: {
-        type: Number,
-        enum: Object.values(LEVEL),
-        required: true,
-    },
     subsidiary: {
         type: String,
         enum: Object.values(SUBSIDIARY),
@@ -82,7 +74,7 @@ const Subject = mongoose.model("Subject", newSubjectSchema);
  * @author 4Decoder
  * @property {String} id Course ObjectId primaryKey
  * @property {String} title Course title (required)
- * @property {String} level Course level (required)
+ * @property {String} level Course level [1-7] (required)
  * @property {String} code Course code (required)
  * @property {String} type Course type "ELECTIVE|COMPULSORY"
  * @property {String} coefficient Course coefficient (required)
@@ -90,6 +82,7 @@ const Subject = mongoose.model("Subject", newSubjectSchema);
  * @property {Array} classes Course classes  Array<ObjectId>
  * @property {String} subject Course subject (required)
  * @property {Array} teachers Course teachers Array<ObjectId>
+ * @property {ObjectId} category Subject category
  * @property {ObjectId} created_by Course record created by
  * @property {ObjectId} updated_by Course record modified by
  * @description Course holds record of all courses in the school.
@@ -97,7 +90,7 @@ const Subject = mongoose.model("Subject", newSubjectSchema);
 
 export const courseCreate = {
     title: Joi.string().trim().required(),
-    level: Joi.number().required(),
+    level: Joi.string().valid(Object.values(LEVEL)).required(),
     code: Joi.string().trim().required(),
     type: Joi.string().trim().valid(["ELECTIVE", "COMPULSORY"]).required(),
     coefficient: Joi.number().required(),
@@ -105,12 +98,13 @@ export const courseCreate = {
     classes: Joi.array().optional(),
     subject: Joi.string().required(),
     teachers: Joi.array().optional(),
+    category: Joi.string().optional(),
     created_by: Joi.string().required(),
 };
 
 export const courseUpdate = {
     title: Joi.string().trim().optional(),
-    level: Joi.number().optional(),
+    level: Joi.string().valid(Object.values(LEVEL)).optional(),
     code: Joi.string().trim().optional(),
     type: Joi.string().trim().valid(["ELECTIVE", "COMPULSORY"]).optional(),
     coefficient: Joi.number().optional(),
@@ -118,12 +112,17 @@ export const courseUpdate = {
     classes: Joi.array().optional(),
     subject: Joi.string().optional(),
     teachers: Joi.array().optional(),
+    category: Joi.string().optional(),
     updated_by: Joi.string().required(),
 };
 
 export const courseSchema = {
     title: { type: String, required: true },
-    level: { type: String, required: true },
+    level: {
+        type: Number,
+        enum: Object.values(LEVEL),
+        required: true,
+    },
     code: { type: String, required: true },
     type: {
         type: String,
@@ -135,6 +134,7 @@ export const courseSchema = {
     classes: [{ type: ObjectId, ref: "Classe" }],
     subject: { type: ObjectId, ref: "Subject", required: true },
     teachers: [{ type: ObjectId, ref: "Staff" }],
+    category: { type: ObjectId, ref: "Category" },
     deleted: { type: Boolean, default: false, required: true },
     deleted_at: { type: Date },
     created_by: { type: ObjectId, ref: "Staff", required: true },

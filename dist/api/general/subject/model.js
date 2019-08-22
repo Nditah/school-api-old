@@ -35,7 +35,6 @@ var Schema = _mongoose2.default.Schema;
  * @property {String} code Subject code (required)
  * @property {ObjectId} hod Subject hod
  * @property {String} description Subject description (optional)
- * @property {Number} level Subject level [1-7]
  * @property {String} subsidiary Subject subsidiary
  * @property {Array} courses Subject courses (prohibited)
  * @property {ObjectId} category Subject category
@@ -50,7 +49,6 @@ var subjectCreate = exports.subjectCreate = {
     name: _joi2.default.string().required(),
     hod: _joi2.default.string().optional(),
     description: _joi2.default.string().required(),
-    level: _joi2.default.string().valid(Object.values(_constants.LEVEL)).required(),
     subsidiary: _joi2.default.string().trim().valid(Object.values(_constants.SUBSIDIARY)).required(),
     category: _joi2.default.string().optional(),
     created_by: _joi2.default.string().required()
@@ -61,7 +59,6 @@ var subjectUpdate = exports.subjectUpdate = {
     name: _joi2.default.string().optional(),
     hod: _joi2.default.string().optional(),
     description: _joi2.default.string().optional(),
-    level: _joi2.default.string().valid(Object.values(_constants.LEVEL)).optional(),
     subsidiary: _joi2.default.string().trim().valid(Object.values(_constants.SUBSIDIARY)).optional(),
     category: _joi2.default.string().optional(),
     updated_by: _joi2.default.string().required()
@@ -72,11 +69,6 @@ var subjectSchema = exports.subjectSchema = {
     name: { type: String, required: true },
     hod: { type: ObjectId, ref: "Staff" },
     description: { type: String, required: true },
-    level: {
-        type: Number,
-        enum: Object.values(_constants.LEVEL),
-        required: true
-    },
     subsidiary: {
         type: String,
         enum: Object.values(_constants.SUBSIDIARY),
@@ -102,7 +94,7 @@ var Subject = _mongoose2.default.model("Subject", newSubjectSchema);
  * @author 4Decoder
  * @property {String} id Course ObjectId primaryKey
  * @property {String} title Course title (required)
- * @property {String} level Course level (required)
+ * @property {String} level Course level [1-7] (required)
  * @property {String} code Course code (required)
  * @property {String} type Course type "ELECTIVE|COMPULSORY"
  * @property {String} coefficient Course coefficient (required)
@@ -110,6 +102,7 @@ var Subject = _mongoose2.default.model("Subject", newSubjectSchema);
  * @property {Array} classes Course classes  Array<ObjectId>
  * @property {String} subject Course subject (required)
  * @property {Array} teachers Course teachers Array<ObjectId>
+ * @property {ObjectId} category Subject category
  * @property {ObjectId} created_by Course record created by
  * @property {ObjectId} updated_by Course record modified by
  * @description Course holds record of all courses in the school.
@@ -117,7 +110,7 @@ var Subject = _mongoose2.default.model("Subject", newSubjectSchema);
 
 var courseCreate = exports.courseCreate = {
     title: _joi2.default.string().trim().required(),
-    level: _joi2.default.number().required(),
+    level: _joi2.default.string().valid(Object.values(_constants.LEVEL)).required(),
     code: _joi2.default.string().trim().required(),
     type: _joi2.default.string().trim().valid(["ELECTIVE", "COMPULSORY"]).required(),
     coefficient: _joi2.default.number().required(),
@@ -125,12 +118,13 @@ var courseCreate = exports.courseCreate = {
     classes: _joi2.default.array().optional(),
     subject: _joi2.default.string().required(),
     teachers: _joi2.default.array().optional(),
+    category: _joi2.default.string().optional(),
     created_by: _joi2.default.string().required()
 };
 
 var courseUpdate = exports.courseUpdate = {
     title: _joi2.default.string().trim().optional(),
-    level: _joi2.default.number().optional(),
+    level: _joi2.default.string().valid(Object.values(_constants.LEVEL)).optional(),
     code: _joi2.default.string().trim().optional(),
     type: _joi2.default.string().trim().valid(["ELECTIVE", "COMPULSORY"]).optional(),
     coefficient: _joi2.default.number().optional(),
@@ -138,12 +132,17 @@ var courseUpdate = exports.courseUpdate = {
     classes: _joi2.default.array().optional(),
     subject: _joi2.default.string().optional(),
     teachers: _joi2.default.array().optional(),
+    category: _joi2.default.string().optional(),
     updated_by: _joi2.default.string().required()
 };
 
 var courseSchema = exports.courseSchema = {
     title: { type: String, required: true },
-    level: { type: String, required: true },
+    level: {
+        type: Number,
+        enum: Object.values(_constants.LEVEL),
+        required: true
+    },
     code: { type: String, required: true },
     type: {
         type: String,
@@ -155,6 +154,7 @@ var courseSchema = exports.courseSchema = {
     classes: [{ type: ObjectId, ref: "Classe" }],
     subject: { type: ObjectId, ref: "Subject", required: true },
     teachers: [{ type: ObjectId, ref: "Staff" }],
+    category: { type: ObjectId, ref: "Category" },
     deleted: { type: Boolean, default: false, required: true },
     deleted_at: { type: Date },
     created_by: { type: ObjectId, ref: "Staff", required: true },

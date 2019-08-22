@@ -22,7 +22,10 @@ export async function fetchRecord(req, res) {
             delete filter.q;
         }
         const result = await Classe.find(filter)
-            .populate("form_teacher")
+            .populate("master")
+            .populate("prefect")
+            .populate("classroom")
+            .populate("category")
             .skip(skip)
             .limit(limit)
             .sort(sort)
@@ -42,13 +45,12 @@ export async function fetchRecord(req, res) {
 // eslint-disable-next-line complexity
 export async function createRecord(req, res) {
     const data = req.body;
-    if (hasProp(data, "password")) data.password = hash(req.body.password);
     const { error } = Joi.validate(data, schemaCreate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
-    const { email, phone } = data;
-    const duplicate = await Classe.findOne({ $or: [{ email }, { phone }] }).exec();
+    const { code } = data;
+    const duplicate = await Classe.findOne({ $or: [{ code }] }).exec();
     if (duplicate) {
-        return fail(res, 422, `Error! Record already exist for ${email} or ${phone}`);
+        return fail(res, 422, `Error! Record already exist for ${code}`);
     }
     const newRecord = new Classe(data);
     try {
@@ -67,7 +69,6 @@ export async function createRecord(req, res) {
 export async function updateRecord(req, res) {
     const data = req.body;
     const { recordId: id } = req.params;
-    if (hasProp(data, "password")) data.password = hash(req.body.password);
     const { error } = Joi.validate(data, schemaUpdate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
     try {
