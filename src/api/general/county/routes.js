@@ -27,7 +27,7 @@ router.get("/counties", fetchRecord);
  * @apiGroup County
  * @apiParam {String} access_token master access token.
  * @apiParam {String} name County short name
- * @apiParam {String} state_id County State Id
+ * @apiParam {String} state County State Id
  * @apiParam {Number} created_by County record created by
  * @apiSuccess {Object} County County's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
@@ -44,7 +44,7 @@ router.post("/counties", [checkAuth, isValidStaff], createRecord);
  * @apiParam {String} access_token master access token.
  * @apiParam {Number} recordId County record id (primaryKey)
  * @apiParam {String} name County short name
- * @apiParam {String} state_id County State Id
+ * @apiParam {String} state County State Id
  * @apiParam {Number} updated_by County record modified by
  * @apiSuccess {Object} County County's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.

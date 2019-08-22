@@ -19,7 +19,7 @@
 import Joi from "joi";
 import mongoose from "mongoose";
 // eslint-disable-next-line camelcase
-import DATABASE from "../../../constants";
+import { DATABASE } from "../../../constants";
 
 import Classe from "../classe/model";
 import Subject from "../subject/model";
@@ -69,7 +69,7 @@ export const schema = {
     subject: { type: ObjectId, ref: "Subject" },
     teacher: { type: ObjectId, ref: "Staff" },
     created_by: { type: ObjectId, ref: "Staff", required: true },
-    updated_by: { type: ObjectId, ref: "Staff", required: true },
+    updated_by: { type: ObjectId, ref: "Staff" },
 };
 
 const options = DATABASE.OPTIONS;

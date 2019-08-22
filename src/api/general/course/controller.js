@@ -22,7 +22,6 @@ export async function fetchRecord(req, res) {
             delete filter.q;
         }
         const result = await Course.find(filter)
-            .populate("teacher")
             .populate("classe")
             .populate("subject")
             .populate("staff")

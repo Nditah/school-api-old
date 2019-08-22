@@ -102,6 +102,7 @@ export async function setCollection(req, res) {
         case "bank_account": Model = BankAccount; break;
         case "budget": Model = Budget; break;
         case "category": Model = Category; break;
+        case "county": Model = County; break;
         case "table": Model = Table; break;
         case "vehicle": Model = Vehicle; break;
         case "state": Model = State; break;
@@ -138,6 +139,7 @@ export async function downloadCsv(req, res) {
         case "bank_account": Model = BankAccount; break;
         case "budget": Model = Budget; break;
         case "category": Model = Category; break;
+        case "county": Model = County; break;
         case "table": Model = Table; break;
         case "vehicle": Model = Vehicle; break;
         case "state": Model = State; break;
@@ -176,6 +178,7 @@ export async function uploadCsv(req, res) {
         case "bank_account": Model = BankAccount; break;
         case "budget": Model = Budget; break;
         case "category": Model = Category; break;
+        case "county": Model = County; break;
         case "table": Model = Table; break;
         case "vehicle": Model = Vehicle; break;
         case "state": Model = State; break;
