@@ -42,7 +42,6 @@ router.get("/subjects", [_authorization.checkAuth, _authorization.isValidStaff],
  * @apiParam {String} code Subject code (required)
  * @apiParam {ObjectId} hod Subject hod
  * @apiParam {String} description Subject description (optional)
- * @apiParam {Number} level Subject level [1-7]
  * @apiParam {String} subsidiary Subject subsidiary
  * @apiParam {Array} courses Subject courses
  * @apiParam {ObjectId} category Subject category
@@ -63,7 +62,6 @@ router.post("/subjects", [_authorization.checkAuth, _authorization.isValidStaff]
  * @apiParam {String} code Subject code (required)
  * @apiParam {ObjectId} hod Subject hod
  * @apiParam {String} description Subject description (optional)
- * @apiParam {Number} level Subject level [1-7]
  * @apiParam {String} subsidiary Subject subsidiary
  * @apiParam {Array} courses Subject courses
  * @apiParam {ObjectId} category Subject category
@@ -119,6 +117,7 @@ router.get("/courses", [_authorization.checkAuth, _authorization.isValidStaff], 
  * @apiParam {Array} classes Course classes  Array<ObjectId>
  * @apiParam {String} subject Course subject (required)
  * @apiParam {Array} teachers Course teachers Array<ObjectId>
+ * @apiParam {ObjectId} category Subject category
  * @apiSuccess {Object} Course Course's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Course not found.
@@ -141,6 +140,7 @@ router.post("/courses", [_authorization.checkAuth, _authorization.isValidStaff],
  * @apiParam {Array} classes Course classes  Array<ObjectId>
  * @apiParam {String} subject Course subject (required)
  * @apiParam {Array} teachers Course teachers Array<ObjectId>
+ * @apiParam {ObjectId} category Subject category
  * @apiSuccess {Object} Course Course's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Course not found.

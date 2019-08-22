@@ -23,7 +23,7 @@ var fetchRecord = exports.fetchRecord = function () {
                             delete filter.q;
                         }
                         _context.next = 7;
-                        return _model2.default.find(filter).populate("form_teacher").skip(skip).limit(limit).sort(sort).select(projection).exec();
+                        return _model2.default.find(filter).populate("master").populate("prefect").populate("classroom").populate("category").skip(skip).limit(limit).sort(sort).select(projection).exec();
 
                     case 7:
                         result = _context.sent;
@@ -64,72 +64,70 @@ var fetchRecord = exports.fetchRecord = function () {
 
 var createRecord = exports.createRecord = function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(req, res) {
-        var data, _Joi$validate, error, email, phone, duplicate, newRecord, result;
+        var data, _Joi$validate, error, code, duplicate, newRecord, result;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         data = req.body;
-
-                        if ((0, _lib.hasProp)(data, "password")) data.password = (0, _lib.hash)(req.body.password);
                         _Joi$validate = _joi2.default.validate(data, _model.schemaCreate), error = _Joi$validate.error;
 
                         if (!error) {
-                            _context2.next = 5;
+                            _context2.next = 4;
                             break;
                         }
 
                         return _context2.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
 
-                    case 5:
-                        email = data.email, phone = data.phone;
-                        _context2.next = 8;
-                        return _model2.default.findOne({ $or: [{ email: email }, { phone: phone }] }).exec();
+                    case 4:
+                        code = data.code;
+                        _context2.next = 7;
+                        return _model2.default.findOne({ $or: [{ code: code }] }).exec();
 
-                    case 8:
+                    case 7:
                         duplicate = _context2.sent;
 
                         if (!duplicate) {
-                            _context2.next = 11;
+                            _context2.next = 10;
                             break;
                         }
 
-                        return _context2.abrupt("return", (0, _lib.fail)(res, 422, "Error! Record already exist for " + email + " or " + phone));
+                        return _context2.abrupt("return", (0, _lib.fail)(res, 422, "Error! Record already exist for " + code));
 
-                    case 11:
+                    case 10:
                         newRecord = new _model2.default(data);
-                        _context2.prev = 12;
-                        _context2.next = 15;
+                        _context2.prev = 11;
+                        _context2.next = 14;
                         return newRecord.save();
 
-                    case 15:
+                    case 14:
                         result = _context2.sent;
 
                         if (result) {
-                            _context2.next = 19;
+                            _context2.next = 18;
                             break;
                         }
 
                         logger.info(_constants.STATUS_MSG.SUCCESS.DEFAULT, []);
                         return _context2.abrupt("return", (0, _lib.notFound)(res, "Error: Bad Request: Model not found"));
 
-                    case 19:
+                    case 18:
                         return _context2.abrupt("return", (0, _lib.success)(res, 201, result, "Record created successfully!"));
 
-                    case 22:
-                        _context2.prev = 22;
-                        _context2.t0 = _context2["catch"](12);
+                    case 21:
+                        _context2.prev = 21;
+                        _context2.t0 = _context2["catch"](11);
 
                         logger.error(_context2.t0);
                         return _context2.abrupt("return", (0, _lib.fail)(res, 500, "Error creating record. " + _context2.t0.message));
 
-                    case 26:
+                    case 25:
                     case "end":
                         return _context2.stop();
                 }
             }
-        }, _callee2, null, [[12, 22]]);
+        }, _callee2, null, [[11, 21]]);
     }));
 
     return function createRecord(_x3, _x4) {
@@ -147,48 +145,46 @@ var updateRecord = exports.updateRecord = function () {
                     case 0:
                         data = req.body;
                         id = req.params.recordId;
-
-                        if ((0, _lib.hasProp)(data, "password")) data.password = (0, _lib.hash)(req.body.password);
                         _Joi$validate2 = _joi2.default.validate(data, _model.schemaUpdate), error = _Joi$validate2.error;
 
                         if (!error) {
-                            _context3.next = 6;
+                            _context3.next = 5;
                             break;
                         }
 
                         return _context3.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
 
-                    case 6:
-                        _context3.prev = 6;
-                        _context3.next = 9;
+                    case 5:
+                        _context3.prev = 5;
+                        _context3.next = 8;
                         return _model2.default.findOneAndUpdate({ _id: id }, data, { new: true });
 
-                    case 9:
+                    case 8:
                         result = _context3.sent;
 
                         if (result) {
-                            _context3.next = 12;
+                            _context3.next = 11;
                             break;
                         }
 
                         return _context3.abrupt("return", (0, _lib.notFound)(res, "Bad Request: Model not found with id " + id));
 
-                    case 12:
+                    case 11:
                         return _context3.abrupt("return", (0, _lib.success)(res, 200, result, "Record updated successfully!"));
 
-                    case 15:
-                        _context3.prev = 15;
-                        _context3.t0 = _context3["catch"](6);
+                    case 14:
+                        _context3.prev = 14;
+                        _context3.t0 = _context3["catch"](5);
 
                         logger.error(_context3.t0);
                         return _context3.abrupt("return", (0, _lib.fail)(res, 500, "Error updating record. " + _context3.t0.message));
 
-                    case 19:
+                    case 18:
                     case "end":
                         return _context3.stop();
                 }
             }
-        }, _callee3, null, [[6, 15]]);
+        }, _callee3, null, [[5, 14]]);
     }));
 
     return function updateRecord(_x5, _x6) {

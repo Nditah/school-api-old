@@ -15,7 +15,7 @@
  * @property {String} intending_class Admission intending class
  * @property {String} last_school Admission last school attended
  * @property {String} father_name Admission father's name
- * @property {String} mgiven_name Admission mother's name
+ * @property {String} mother_name Admission mother's name
  * @property {String} home_address Admission guadians home address
  * @property {String} phone Admission guadians phone number
  * @description Admission model holds record of all admissions in Peace Group

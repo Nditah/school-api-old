@@ -38,10 +38,14 @@ router.get("/classes", [_authorization.checkAuth, _authorization.isValidStaff], 
  * @apiName CreateClasse
  * @apiGroup Classe
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} name Classe name (optional)
- * @apiParam {String} subsidiary Classe subsidiary (optional)
- * @apiParam {String} level Classe level (optional)
- * @apiParam {ObjectId} form_teacher Classe form_teacher (optional)
+ * @apiParam {String} name Classe name - external (required)
+ * @apiParam {String} code Classe code - internal (required)
+ * @apiParam {String} subsidiary Classe subsidiary (required)
+ * @apiParam {String} level Classe level [1-7]
+ * @apiParam {ObjectId} master Classe master or form teacher (optional)
+ * @apiParam {ObjectId} prefect Classe prefect or class captain (optional)
+ * @apiParam {ObjectId} classroom Classe classroom or lesson venue (optional)
+ * @apiParam {ObjectId} category Classe category or type (optional)
  * @apiSuccess {Object} Classe Classe's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Classe not found.
@@ -55,10 +59,14 @@ router.post("/classes", [_authorization.checkAuth, _authorization.isValidStaff],
  * @apiGroup Classe
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {ObjectId} recordId required record ObjectId
- * @apiParam {String} name Classe name (optional)
- * @apiParam {String} subsidiary Classe subsidiary (optional)
- * @apiParam {String} level Classe level (optional)
- * @apiParam {ObjectId} form_teacher Classe form_teacher (optional)
+ * @apiParam {String} name Classe name - external (required)
+ * @apiParam {String} code Classe code - internal (required)
+ * @apiParam {String} subsidiary Classe subsidiary (required)
+ * @apiParam {String} level Classe level [1-7]
+ * @apiParam {ObjectId} master Classe master or form teacher (optional)
+ * @apiParam {ObjectId} prefect Classe prefect or class captain (optional)
+ * @apiParam {ObjectId} classroom Classe classroom or lesson venue (optional)
+ * @apiParam {ObjectId} category Classe category or type (optional)
  * @apiSuccess {Object} Classe Classe's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Classe not found.
