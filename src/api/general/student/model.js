@@ -35,7 +35,7 @@ import State from "../state/model";
 import County from "../county/model";
 import Parent from "../parent/model";
 import Classe from "../classe/model";
-import HostelAllocation from "../hostel-allocation/model";
+import { HostelAllocation } from "../hostel-allocation/model";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;

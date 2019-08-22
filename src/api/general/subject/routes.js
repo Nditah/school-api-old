@@ -29,6 +29,8 @@ router.get("/subjects", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {String} name Subject name (optional)
  * @apiParam {String} hod Subject hod (optional)
  * @apiParam {String} description Subject description (optional)
+ * @apiParam {String} subsidiary Subject subsidiary (optional)
+ * @apiParam {ObjectId} courses Subject courses (optional)
  * @apiSuccess {Object} Subject Subject's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Subject not found.
@@ -41,10 +43,12 @@ router.post("/subjects", [checkAuth, isValidStaff], createRecord);
  * @apiName UpdateSubject
  * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
+ * @apiParam {ObjectId} recordId required record ObjectId
  * @apiParam {String} name Subject name (optional)
  * @apiParam {String} hod Subject hod (optional)
  * @apiParam {String} description Subject description (optional)
+ * @apiParam {String} subsidiary Subject subsidiary (optional)
+ * @apiParam {ObjectId} courses Subject courses (optional)
  * @apiSuccess {Object} Subject Subject's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Subject not found.
@@ -57,7 +61,7 @@ router.put("/subjects/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiName DeleteSubject
  * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
+ * @apiParam {ObjectId} recordId required record ObjectId
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 404 Subject not found.
  * @apiError 401 master access only.

@@ -32,7 +32,6 @@ export const schemaUpdate = {
     subsidiary: Joi.string().trim().optional(),
     level: Joi.string().trim().optional(),
     form_teacher: Joi.string().optional(),
-    captain: Joi.string().optional(),
     updated_by: Joi.string().required(),
 };
 
@@ -41,7 +40,6 @@ export const schema = {
     subsidiary: { type: String, required: [false, "Why no School?"] },
     level: { type: String, required: [false, "Why no level?"] },
     form_teacher: { type: ObjectId, ref: "Staff" },
-    captain: { type: ObjectId, ref: "Student" },
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId, ref: "Staff", required: true },
 };
