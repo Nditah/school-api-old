@@ -123,7 +123,7 @@ export const courseSchema = {
         enum: Object.values(LEVEL),
         required: true,
     },
-    code: { type: String, required: true },
+    code: { type: String, required: true, unique: true },
     type: {
         type: String,
         enum: ["ELECTIVE", "COMPULSORY"],

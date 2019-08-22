@@ -1,4 +1,61 @@
-/* eslint-disable import/no-cycle */
+/**
+ * @author 4Dcoder
+ * @property {ObjectId} id Curriculum primaryKey
+ * @property {String} description Curriculum description String (required)
+ * @property {String} scheme Curriculum scheme String
+ * @property {ObjectId} staff Curriculum staff ObjectId
+ * @property {ObjectId} book Curriculum Book ObjectId
+ * @description Curriculum model holds all School curriculums
+ */
+import Joi from "joi";
+import mongoose from "mongoose";
+// eslint-disable-next-line camelcase
+import mongoose_csv from "mongoose-csv";
+import { DATABASE } from "../../../constants";
+import table from "./table";
+import Staff from "../staff/model";
+import Book from "../book/model";
+import { Course } from "../course/model";
+
+const { Schema } = mongoose;
+const { ObjectId } = Schema.Types;
+
+export const curriculumCreate = {
+    description: Joi.string().optional(),
+    scheme: Joi.string().optional(),
+    book: Joi.string().optional(),
+    staff: Joi.string().optional(),
+    materials: Joi.string().optional(),
+    created_by: Joi.string().required(),
+};
+
+export const curriculumUpdate = {
+    description: Joi.string().optional(),
+    scheme: Joi.string().optional(),
+    book: Joi.string().optional(),
+    materials: Joi.string().optional(),
+    staff: Joi.string().optional(),
+    updated_by: Joi.string().required(),
+};
+
+export const curriculumSchema = {
+    description: { type: String, required: true },
+    scheme: { type: ObjectId },
+    book: { type: ObjectId, ref: "Book" },
+    materials: { type: ObjectId },
+    staff: { type: ObjectId, ref: "Staff", required: true },
+    created_by: { type: ObjectId, ref: "Staff", required: true },
+    updated_by: { type: ObjectId, ref: "Staff" },
+};
+const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+const options = DATABASE.OPTIONS;
+
+const newCurriculumSchema = new Schema(curriculumSchema, options);
+newCurriculumSchema.set("collection", "curriculum");
+newCurriculumSchema.plugin(mongoose_csv);
+const Curriculum = mongoose.model("Curriculum", newCurriculumSchema);
+if (preload) { Curriculum.insertMany(table); }
+
 /**
  * @author 4Dcoder
  * @property {Number} id lesson primaryKey
@@ -11,19 +68,8 @@
  * @property {ObjectId} course Lesson Course (optional)
  * @description Lesson model holds record of all lessons the company deals with
  */
-import Joi from "joi";
-import mongoose from "mongoose";
-// eslint-disable-next-line camelcase
-import mongoose_csv from "mongoose-csv";
-import { DATABASE } from "../../../constants";
-import table from "./table";
-import Staff from "../staff/model";
-import Course from "../course/model";
 
-const { Schema } = mongoose;
-const { ObjectId } = Schema.Types;
-
-export const schemaCreate = {
+export const lessonCreate = {
     title: Joi.string().optional(),
     duration: Joi.date().optional(),
     objective: Joi.number().optional(),
@@ -34,7 +80,7 @@ export const schemaCreate = {
     created_by: Joi.string().required(),
 };
 
-export const schemaUpdate = {
+export const lessonUpdate = {
     title: Joi.string().optional(),
     duration: Joi.date().optional(),
     objective: Joi.number().optional(),
@@ -45,7 +91,7 @@ export const schemaUpdate = {
     updated_by: Joi.string().required(),
 };
 
-export const schema = {
+export const lessonSchema = {
     title: { type: String, required: [true, "Why no input?"], unique: true },
     duration: { type: Date },
     objective: { type: Number },
@@ -57,14 +103,11 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" },
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
-const options = DATABASE.OPTIONS;
+const newLessonSchema = new Schema(lessonSchema, options);
+newLessonSchema.set("collection", "lesson");
+newLessonSchema.plugin(mongoose_csv);
 
-const newSchema = new Schema(schema, options);
-newSchema.set("collection", "lesson");
-newSchema.plugin(mongoose_csv);
-
-const Lesson = mongoose.model("Lesson", newSchema);
+const Lesson = mongoose.model("Lesson", newLessonSchema);
 if (preload) { Lesson.insertMany(table); }
 
-export default Lesson;
+export default { Curriculum, Lesson };

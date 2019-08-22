@@ -2,7 +2,7 @@
  * @author 4Dcoder
  * @property {ObjectId} id Assessment primaryKey
  * @property {String} code Assessment code
- * @property {String} code Assessment code "TEST|CA|EXAM"
+ * @property {String} type Assessment type "TEST|CA|EXAM"
  * @property {String} mode Assessment mode "ORAL|PAPER|CBT|DEMO"
  * @property {Date} written_date Assessment written_date
  * @property {Date} started_at Assessment started dateime
@@ -34,7 +34,7 @@ import Classroom from "../classroom/model";
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
-export const assessmentSchemaCreate = {
+export const assessmentCreate = {
     code: Joi.string().required(),
     type: Joi.string().valid(["TEST", "CA", "EXAM"]).required(),
     mode: Joi.string().valid(["ORAL", "PAPER", "CBT", "DEMO"]).required(),
@@ -49,7 +49,7 @@ export const assessmentSchemaCreate = {
     created_by: Joi.string().required(),
 };
 
-export const assessmentSchemaUpdate = {
+export const assessmentUpdate = {
     code: Joi.string().optional(),
     type: Joi.string().valid(["TEST", "CA", "EXAM"]).optional(),
     mode: Joi.string().valid(["ORAL", "PAPER", "CBT", "DEMO"]).optional(),
@@ -94,14 +94,32 @@ const Assessment = mongoose.model("Assessment", newAssessmentSchema);
 
 //* ASSESSMENT-SITTING
 
-export const assessmentSittingSchemaCreate = {
+/**
+ * @author 4Dcoder
+ * @property {ObjectId} id AssessmentSitting primaryKey
+ * @property {String} student AssessmentSitting student
+ * @property {String} assessment AssessmentSitting assessment
+ * @property {Date} started_at AssessmentSitting started_at dateime
+ * @property {Date} ended_at AssessmentSitting ended dateime
+ * @property {String} responses AssessmentSitting responses
+ *  "answer1|answer2|answer3|answer4|answer5"
+ * @property {Number} score AssessmentSitting score
+ * @property {String} status AssessmentSitting status "OPEN|CLOSED"
+ *  Open - when the students starts and Close - when stopped.
+ * @property {Boolean} deleted Assessment delete status
+ * @property {ObjectId} created_by Assessment created Staff
+ * @property {ObjectId} updated_by Assessment updated Staff
+ * @description Assessment records evaluation of students for courses
+ */
+
+export const assessmentSittingCreate = {
     student: Joi.string().optional(),
     assessment: Joi.string().optional(),
     started_at: Joi.date().optional(),
     created_by: Joi.string().required(),
 };
 
-export const assessmentSittingSchemaUpdate = {
+export const assessmentSittingUpdate = {
     student: Joi.string().optional(),
     assessment: Joi.string().optional(),
     started_at: Joi.date().optional(),
@@ -136,4 +154,3 @@ newAssessmentSittingSchema.set("collection", "assessment_sitting");
 const AssessmentSitting = mongoose.model("AssessmentSitting", newAssessmentSittingSchema);
 
 export { Assessment, AssessmentSitting };
-export default Assessment;
