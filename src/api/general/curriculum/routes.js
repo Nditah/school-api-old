@@ -1,6 +1,6 @@
 import express from "express";
 import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+import { fetchCurriculum, createCurriculum, updateCurriculum, deleteCurriculum } from "./controller";
 
 const router = express.Router();
 
@@ -18,7 +18,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/curriculums", [checkAuth, isValidStaff], fetchRecord);
+router.get("/curriculums", [checkAuth, isValidStaff], fetchCurriculum);
 
 /**
  * @api {post} /api/v1/curriculums Create curriculums
@@ -34,7 +34,7 @@ router.get("/curriculums", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Curriculum not found.
  * @apiError 401 master access only.
  */
-router.post("/curriculums", [checkAuth, isValidStaff], createRecord);
+router.post("/curriculums", [checkAuth, isValidStaff], createCurriculum);
 
 /**
  * @api {put} /api/v1/curriculums/{recordId} Update curriculums
@@ -48,7 +48,7 @@ router.post("/curriculums", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 Curriculum not found.
  * @apiError 401 master access only.
  */
-router.put("/curriculums/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/curriculums/:recordId", [checkAuth, isValidStaff], updateCurriculum);
 
 /**
  * @api {delete} /api/v1/curriculums/{recordId} Delete curriculums
@@ -60,6 +60,6 @@ router.put("/curriculums/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiError 404 Curriculum not found.
  * @apiError 401 master access only.
  */
-router.delete("/curriculums/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/curriculums/:recordId", [checkAuth, isValidStaff], deleteCurriculum);
 
 export default router;

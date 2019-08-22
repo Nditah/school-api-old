@@ -12,7 +12,6 @@ import mongoose from "mongoose";
 // eslint-disable-next-line camelcase
 import mongoose_csv from "mongoose-csv";
 import { DATABASE } from "../../../constants";
-import table from "./table";
 import Staff from "../staff/model";
 import Book from "../book/model";
 import { Course } from "../course/model";
