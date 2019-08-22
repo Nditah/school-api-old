@@ -17,7 +17,7 @@
  * @property {String} password Parent password (optional)
  * @property {String} profession Parent profession (optional)
  * @property {String} employment_status Parent employment_status (required)
- * @property {ObjectId} students_name Parent students_name Array<ObjectId> (optional)
+ * @property {ObjectId} students Parent students Array<ObjectId> (optional)
  * @property {String} created_by Parent record created by
  * @property {String} updated_by Parent record modified by
  * @description Parent holds record of all student's parents in the school
@@ -60,7 +60,7 @@ export const schemaCreate = {
     password: Joi.string().optional(),
     profession: Joi.string().optional(),
     employment_status: Joi.string().trim().valid(Object.values(EMPLOYMENT_STATUS)).optional(),
-    students_name: Joi.array().optional(),
+    students: Joi.array().optional(),
     created_by: Joi.string().optional(),
 };
 
@@ -79,7 +79,7 @@ export const schemaUpdate = {
     password: Joi.string().optional(),
     profession: Joi.string().optional(),
     employment_status: Joi.string().trim().valid(Object.values(EMPLOYMENT_STATUS)).optional(),
-    students_name: Joi.array().optional(),
+    students: Joi.array().optional(),
     updated_by: Joi.string().required(),
 };
 
@@ -123,9 +123,11 @@ export const schema = {
         enum: Object.values(EMPLOYMENT_STATUS),
         required: [false, "Why no input?"],
     },
-    students_name: [{ type: ObjectId, ref: "Student", required: [false, "Why no Student's name"] }],
+    students: [{ type: ObjectId, ref: "Student" }],
+    deleted: { type: Boolean, default: false, required: true },
+    deleted_at: { type: Date },
     created_by: { type: ObjectId, ref: "Staff", required: true },
-    updated_by: { type: ObjectId, ref: "Staff", required: true },
+    updated_by: { type: ObjectId, ref: "Staff" },
 };
 
 const options = DATABASE.OPTIONS;

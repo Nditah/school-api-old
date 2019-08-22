@@ -116,6 +116,10 @@ var _office = require("./office");
 
 var _office2 = _interopRequireDefault(_office);
 
+var _parent = require("./parent");
+
+var _parent2 = _interopRequireDefault(_parent);
+
 var _payroll = require("./payroll");
 
 var _payroll2 = _interopRequireDefault(_payroll);
@@ -210,10 +214,12 @@ var _unionbank2 = _interopRequireDefault(_unionbank);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Routes
 var router = _express2.default.Router();
 
 // Use Routes
+
+
+// Routes
 router.use(_accountClass2.default);
 router.use(_accountHeading2.default);
 router.use(_accountPosting2.default);
@@ -242,6 +248,7 @@ router.use(_notification2.default);
 router.use(_offence2.default);
 router.use(_offenceType2.default);
 router.use(_office2.default);
+router.use(_parent2.default);
 router.use(_payrollDetail2.default);
 router.use(_payroll2.default);
 router.use(_category2.default);
