@@ -13,7 +13,7 @@
  * @property {String} email Student email (optional)
  * @property {String} phone Student office phone (optional)
  * @property {String} password Student password (optional)
- * @property {String} blood_group Student blood_group (optional)
+ * @property {String} religion Student religion (optional)
  * @property {ObjectId} classe Student classe (optional)
  * @property {String} level Student level (optional)
  * @property {String} subsidiary Student subsidiary (required)
@@ -35,7 +35,7 @@ import State from "../state/model";
 import County from "../county/model";
 import Parent from "../parent/model";
 import Classe from "../classe/model";
-import HostelAllocation from "../hostel-allocation/model";
+import { HostelAllocation } from "../hostel-allocation/model";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
@@ -59,7 +59,7 @@ export const schemaCreate = {
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
-    blood_group: Joi.string().optional(),
+    religion: Joi.string().optional(),
     classe: Joi.string().trim().optional(),
     level: Joi.string().trim().optional(),
     subsidiary: Joi.string().trim().valid(Object.values(SUBSIDIARY)).optional(),
@@ -80,7 +80,7 @@ export const schemaUpdate = {
     email: Joi.string().trim().email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
-    blood_group: Joi.string().optional(),
+    religion: Joi.string().optional(),
     classe: Joi.string().trim().optional(),
     level: Joi.string().trim().optional(),
     subsidiary: Joi.string().trim().valid(Object.values(SUBSIDIARY)).optional(),
@@ -118,7 +118,7 @@ export const schema = {
         unique: true,
     },
     password: { type: String, required: [false, "Why no password?"] },
-    blood_group: { type: String },
+    religion: { type: String },
     classe: { type: ObjectId, ref: "Classe", required: [false, "Why no class?"] },
     level: { type: String },
     subsidiary: {
