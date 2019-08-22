@@ -17,25 +17,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var router = _express2.default.Router();
 
 /**
- * @api {get} /api/v1/staffs?id={recordId} Retrieve Staff records
+ * @api {get} /api/v1/staff?id={recordId} Retrieve Staff records
  * @apiName RetrieveStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
  * @apiExample {curl} Example usage for retieving a single record:
- *      curl -i api/staffs?
+ *      curl -i api/staff?
  * @apiParam {Object} filter query condition (optional)
  * @apiParam {Number} skip Number of records to offset by (optional)
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
  * @apiParam {String} sort how records would be arranged in alphabet (optional)
  * @apiParam {String} projection list of record's attributes to retrieve (optional)
- * @apiDescription Records of staffs in the school.
+ * @apiDescription Records of staff in the school.
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/staffs", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
+router.get("/staff", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
- * @api {post} /api/v1/staffs Create a Staff record
+ * @api {post} /api/v1/staff Create a Staff record
  * @apiName CreateStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -99,10 +99,10 @@ router.get("/staffs", [_authorization.checkAuth, _authorization.isValidStaff], _
  * @apiError 404 Staff not found.
  * @apiError 401 master access only.
  */
-router.post("/staffs", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
+router.post("/staff", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
- * @api {put} /api/v1/staffs/{recordId} Update a Staff record
+ * @api {put} /api/v1/staff/{recordId} Update a Staff record
  * @apiName UpdateStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -167,10 +167,10 @@ router.post("/staffs", [_authorization.checkAuth, _authorization.isValidStaff], 
  * @apiError 404 Staff not found.
  * @apiError 401 master access only.
  */
-router.put("/staffs/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
+router.put("/staff/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
- * @api {delete} /api/v1/staffs/{recordId} Delete a Staff record
+ * @api {delete} /api/v1/staff/{recordId} Delete a Staff record
  * @apiName DeleteStaff
  * @apiGroup Staff
  * @apiHeader {String} Authorization Bearer token
@@ -179,7 +179,7 @@ router.put("/staffs/:recordId", [_authorization.checkAuth, _authorization.isVali
  * @apiError 404 Staff not found.
  * @apiError 401 master access only.
  */
-router.delete("/staffs/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
+router.delete("/staff/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
 
 /**
  * @api {post} /api/v1/staff/login Login Staff

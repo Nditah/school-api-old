@@ -1,4 +1,6 @@
 /* eslint-disable import/no-cycle */
+//* Hotels
+
 /**
  * @author 4Dcoder
  * @property {Number} id hostel primaryKey
@@ -11,39 +13,6 @@
  * @description Hostel model holds record of all hostels the company deals with
  */
 
- /**
- * @author 4Dcoder
- * @property {Number} id hostelRoom primaryKey
- * @property {String} hostel hostelRoom hostel name (required)
- * @property {String} code hostelRoom code name (required)
- * @property {Number} floor hostelRoom floor (required)
- * @property {Number} hostel_bedspaces hostelRoom floor (required)
- * @property {String} description hostelRoom description (optional)
- * @property {String} status hostelRoom Status (Occupied or not Occupied)(optional)
- * @description hostelRoom model holds record of all hostelRoom the company deals with
- */
-
-/**
- * @author 4Dcoder
- * @property {Number} id hostelBedspace primaryKey
- * @property {String} room hostelBedspace room name (required)
- * @property {String} code hostelBedspace code name (required)
- * @property {Number} occupant hostelBedspace occupant (required)
- * @property {String} description hostelBedspace description (optional)
- * @property {String} status hostelBedspace Status (Occupied or not Occupied)(optional)
- * @description hostelBedspace model holds record of all hostelBedspace the company deals with
- */
-
- /**
- * @author 4Dcoder
- * @property {Number} id hostelAllocation primaryKey
- * @property {String} bedspace hostelAllocation room name (required)
- * @property {String} fees_payment hostelAllocation code name (required)
- * @property {Number} occupant hostelAllocation occupant (required)
- * @property {String} description hostelAllocation description (optional)
- * @property {String} status hostelAllocation Status (Occupied or not Occupied)(optional)
- * @description hostelAllocation model holds record of all hostelAllocation the company deals with
- */
 import Joi from "joi";
 import mongoose from "mongoose";
 // eslint-disable-next-line camelcase
@@ -55,8 +24,6 @@ import FeesType from "../fees-type/model";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
-
-//* Hotels
 
 export const hostelCreate = {
     hall: Joi.string().required(),
@@ -95,6 +62,18 @@ export const hostelSchema = {
 
 //* HOSTEL-ROOM
 
+/**
+ * @author 4Dcoder
+ * @property {Number} id hostelRoom primaryKey
+ * @property {String} hostel hostelRoom hostel name (required)
+ * @property {String} code hostelRoom code name (required)
+ * @property {Number} floor hostelRoom floor (required)
+ * @property {Number} hostel_bedspaces hostelRoom floor (required)
+ * @property {String} description hostelRoom description (optional)
+ * @property {String} status hostelRoom Status (Occupied or not Occupied)(optional)
+ * @description hostelRoom model holds record of all hostelRoom the company deals with
+ */
+
 export const hostelRoomCreate = {
     hostel: Joi.string().required(),
     code: Joi.string().required(),
@@ -132,6 +111,17 @@ export const hostelRoomSchema = {
 
 //* HOSTEL-BEDSPACE
 
+/**
+ * @author 4Dcoder
+ * @property {Number} id hostelBedspace primaryKey
+ * @property {String} room hostelBedspace room name (required)
+ * @property {String} code hostelBedspace code name (required)
+ * @property {Number} occupant hostelBedspace occupant (required)
+ * @property {String} description hostelBedspace description (optional)
+ * @property {String} status hostelBedspace Status (Occupied or not Occupied)(optional)
+ * @description hostelBedspace model holds record of all hostelBedspace the company deals with
+ */
+
 export const hostelBedspaceCreate = {
     room: Joi.string().required(),
     code: Joi.string().required(),
@@ -165,6 +155,17 @@ export const hostelBedspaceSchema = {
 };
 
 //* HOSTEL-ALLOCATION
+
+/**
+ * @author 4Dcoder
+ * @property {Number} id hostelAllocation primaryKey
+ * @property {String} bedspace hostelAllocation room name (required)
+ * @property {String} fees_payment hostelAllocation code name (required)
+ * @property {Number} occupant hostelAllocation occupant (required)
+ * @property {String} description hostelAllocation description (optional)
+ * @property {String} status hostelAllocation Status (Occupied or not Occupied)(optional)
+ * @description hostelAllocation model holds record of all hostelAllocation the company deals with
+ */
 
 export const hostelAllocationCreate = {
     bedspace: Joi.string().required(),
@@ -217,4 +218,3 @@ const HostelBedspace = mongoose.model("HostelBedspace", newHostelBedspaceSchemaS
 const HostelAllocation = mongoose.model("HostelAllocation", newHostelAllocationSchemaSchema);
 
 export { Hostel, HostelRoom, HostelBedspace, HostelAllocation };
-export default HostelAllocation;

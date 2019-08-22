@@ -1,12 +1,11 @@
 import Joi from "joi";
 import log4js from "log4js";
 import aqp from "api-query-params";
-import HostelAllocation,
-{
+import {
     Hostel, hostelCreate, hostelUpdate,
     HostelRoom, hostelRoomCreate, hostelRoomUpdate,
     HostelBedspace, hostelBedspaceCreate, hostelBedspaceUpdate,
-    hostelAllocationCreate, hostelAllocationUpdate,
+    HostelAllocation, hostelAllocationCreate, hostelAllocationUpdate,
 } from "./model";
 import { success, fail, notFound, isObjecId } from "../../../lib";
 import { STATUS_MSG } from "../../../constants";
@@ -88,9 +87,7 @@ export async function deleteHostelAllocation(req, res) {
     }
 }
 
-
-/////////////// HOSTEL CONTROLLER ///////////////
-
+//* ///////////// HOSTEL CONTROLLER ///////////////
 
 export async function fetchHostel(req, res) {
     const { query } = req;
@@ -162,7 +159,7 @@ export async function deleteHostel(req, res) {
     }
 }
 
-/////////////// HOSTEL-ROOM CONTROLLER ///////////////
+//* ///////////// HOSTEL-ROOM CONTROLLER ///////////////
 
 export async function fetchHostelRoom(req, res) {
     const { query } = req;
@@ -234,8 +231,7 @@ export async function deleteHostelRoom(req, res) {
     }
 }
 
-/////////////// HOSTEL-BEDSPACE CONTROLLER ///////////////
-
+//* ///////////// HOSTEL-BEDSPACE CONTROLLER ///////////////
 
 export async function fetchHostelBedspace(req, res) {
     const { query } = req;

@@ -41,8 +41,6 @@ var _model8 = _interopRequireDefault(_model7);
 
 var _model9 = require("../hostel-allocation/model");
 
-var _model10 = _interopRequireDefault(_model9);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // eslint-disable-next-line camelcase
@@ -61,7 +59,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {String} email Student email (optional)
  * @property {String} phone Student office phone (optional)
  * @property {String} password Student password (optional)
- * @property {String} blood_group Student blood_group (optional)
+ * @property {String} religion Student religion (optional)
  * @property {ObjectId} classe Student classe (optional)
  * @property {String} level Student level (optional)
  * @property {String} subsidiary Student subsidiary (required)
@@ -94,7 +92,7 @@ var schemaCreate = exports.schemaCreate = {
     email: _joi2.default.string().trim().email().optional(),
     phone: _joi2.default.string().optional(),
     password: _joi2.default.string().optional(),
-    blood_group: _joi2.default.string().optional(),
+    religion: _joi2.default.string().optional(),
     classe: _joi2.default.string().trim().optional(),
     level: _joi2.default.string().trim().optional(),
     subsidiary: _joi2.default.string().trim().valid(Object.values(_constants.SUBSIDIARY)).optional(),
@@ -115,7 +113,7 @@ var schemaUpdate = exports.schemaUpdate = {
     email: _joi2.default.string().trim().email().optional(),
     phone: _joi2.default.string().optional(),
     password: _joi2.default.string().optional(),
-    blood_group: _joi2.default.string().optional(),
+    religion: _joi2.default.string().optional(),
     classe: _joi2.default.string().trim().optional(),
     level: _joi2.default.string().trim().optional(),
     subsidiary: _joi2.default.string().trim().valid(Object.values(_constants.SUBSIDIARY)).optional(),
@@ -152,7 +150,7 @@ var schema = exports.schema = {
         unique: true
     },
     password: { type: String, required: [false, "Why no password?"] },
-    blood_group: { type: String },
+    religion: { type: String },
     classe: { type: ObjectId, ref: "Classe", required: [false, "Why no class?"] },
     level: { type: String },
     subsidiary: {

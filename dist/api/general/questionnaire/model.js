@@ -23,9 +23,7 @@ var _model = require("../staff/model");
 
 var _model2 = _interopRequireDefault(_model);
 
-var _model3 = require("../course/model");
-
-var _model4 = _interopRequireDefault(_model3);
+var _model3 = require("../subject/model");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

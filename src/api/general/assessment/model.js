@@ -27,7 +27,7 @@ import mongoose_csv from "mongoose-csv";
 import { DATABASE } from "../../../constants";
 import Staff from "../staff/model";
 import Student from "../student/model";
-import Course from "../course/model";
+import { Course } from "../subject/model";
 import Questionnaire from "../questionnaire/model";
 import Classroom from "../classroom/model";
 

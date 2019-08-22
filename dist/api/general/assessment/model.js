@@ -27,17 +27,15 @@ var _model3 = require("../student/model");
 
 var _model4 = _interopRequireDefault(_model3);
 
-var _model5 = require("../course/model");
+var _model5 = require("../subject/model");
 
-var _model6 = _interopRequireDefault(_model5);
+var _model6 = require("../questionnaire/model");
 
-var _model7 = require("../questionnaire/model");
+var _model7 = _interopRequireDefault(_model6);
 
-var _model8 = _interopRequireDefault(_model7);
+var _model8 = require("../classroom/model");
 
-var _model9 = require("../classroom/model");
-
-var _model10 = _interopRequireDefault(_model9);
+var _model9 = _interopRequireDefault(_model8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

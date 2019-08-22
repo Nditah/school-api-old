@@ -17,7 +17,7 @@ var fetchHostelAllocation = exports.fetchHostelAllocation = function () {
                         _aqp = (0, _apiQueryParams2.default)(query), filter = _aqp.filter, skip = _aqp.skip, limit = _aqp.limit, sort = _aqp.sort, projection = _aqp.projection;
                         _context.prev = 2;
                         _context.next = 5;
-                        return _model2.default.find(filter).skip(skip).limit(limit).sort(sort).select(projection).exec();
+                        return _model.HostelAllocation.find(filter).skip(skip).limit(limit).sort(sort).select(projection).exec();
 
                     case 5:
                         result = _context.sent;
@@ -72,7 +72,7 @@ var createHostelAllocation = exports.createHostelAllocation = function () {
                         return _context2.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
 
                     case 4:
-                        newRecord = new _model2.default(data);
+                        newRecord = new _model.HostelAllocation(data);
                         _context2.prev = 5;
                         _context2.next = 8;
                         return newRecord.save();
@@ -133,7 +133,7 @@ var updateHostelAllocation = exports.updateHostelAllocation = function () {
                     case 5:
                         _context3.prev = 5;
                         _context3.next = 8;
-                        return _model2.default.findOneAndUpdate({ _id: id }, data, { new: true });
+                        return _model.HostelAllocation.findOneAndUpdate({ _id: id }, data, { new: true });
 
                     case 8:
                         result = _context3.sent;
@@ -178,7 +178,7 @@ var deleteHostelAllocation = exports.deleteHostelAllocation = function () {
                         id = req.params.recordId;
                         _context4.prev = 1;
                         _context4.next = 4;
-                        return _model2.default.findOneAndRemove({ _id: id });
+                        return _model.HostelAllocation.findOneAndRemove({ _id: id });
 
                     case 4:
                         result = _context4.sent;
@@ -213,8 +213,7 @@ var deleteHostelAllocation = exports.deleteHostelAllocation = function () {
     };
 }();
 
-/////////////// HOSTEL CONTROLLER ///////////////
-
+//* ///////////// HOSTEL CONTROLLER ///////////////
 
 var fetchHostel = exports.fetchHostel = function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(req, res) {
@@ -424,7 +423,7 @@ var deleteHostel = exports.deleteHostel = function () {
     };
 }();
 
-/////////////// HOSTEL-ROOM CONTROLLER ///////////////
+//* ///////////// HOSTEL-ROOM CONTROLLER ///////////////
 
 var fetchHostelRoom = exports.fetchHostelRoom = function () {
     var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(req, res) {
@@ -634,8 +633,7 @@ var deleteHostelRoom = exports.deleteHostelRoom = function () {
     };
 }();
 
-/////////////// HOSTEL-BEDSPACE CONTROLLER ///////////////
-
+//* ///////////// HOSTEL-BEDSPACE CONTROLLER ///////////////
 
 var fetchHostelBedspace = exports.fetchHostelBedspace = function () {
     var _ref13 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee13(req, res) {
@@ -858,8 +856,6 @@ var _apiQueryParams = require("api-query-params");
 var _apiQueryParams2 = _interopRequireDefault(_apiQueryParams);
 
 var _model = require("./model");
-
-var _model2 = _interopRequireDefault(_model);
 
 var _lib = require("../../../lib");
 

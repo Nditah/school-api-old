@@ -173,6 +173,16 @@ var EMPLOYMENT_STATUS = exports.EMPLOYMENT_STATUS = {
     UNKNOWN: "UNKNOWN"
 };
 
+var LEVEL = exports.LEVEL = {
+    ONE: 1,
+    TWO: 2,
+    THREE: 3,
+    FOUR: 4,
+    FIVE: 5,
+    SIX: 6,
+    SEVEN: 7
+};
+
 var SUBSIDIARY = exports.SUBSIDIARY = {
     SECONDARY: "SECONDARY",
     PRIMARY: "PRIMARY",
