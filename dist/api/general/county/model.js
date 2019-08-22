@@ -40,7 +40,7 @@ var Schema = _mongoose2.default.Schema;
  * @author 4Decoder
  * @property {Number} id County primaryKey
  * @property {String} name County short name
- * @property {String} state_id County State Id
+ * @property {String} state County State Id
  * @property {Number} created_by County record created by
  * @property {Number} updated_by County record modified by
  * @description County holds record of all cities with terminal_list
@@ -49,21 +49,21 @@ var Schema = _mongoose2.default.Schema;
 var ObjectId = Schema.Types.ObjectId;
 var schemaCreate = exports.schemaCreate = {
     name: _joi2.default.string().trim().required(),
-    state_id: _joi2.default.string().required(),
+    state: _joi2.default.string().required(),
     created_by: _joi2.default.string().required()
 };
 
 var schemaUpdate = exports.schemaUpdate = {
     name: _joi2.default.string().trim().optional(),
-    state_id: _joi2.default.string().optional(),
+    state: _joi2.default.string().optional(),
     updated_by: _joi2.default.string().required()
 };
 
 var schema = exports.schema = {
     name: { type: String },
-    state_id: { type: ObjectId, ref: "State" },
-    created_by: { type: ObjectId, required: [true, "Why no input?"] },
-    updated_by: { type: ObjectId, allowNull: true }
+    state: { type: ObjectId, ref: "State" },
+    created_by: { type: ObjectId, ref: "Staff", required: true },
+    updated_by: { type: ObjectId, ref: "Staff" }
 };
 
 var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;

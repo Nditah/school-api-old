@@ -40,8 +40,8 @@ var Schema = _mongoose2.default.Schema;
  * @property {ObjectId} id Curriculum primaryKey
  * @property {String} description Curriculum description String (required)
  * @property {String} scheme Curriculum scheme String
- * @property {ObjectId} staff_id Curriculum staff ObjectId
- * @property {ObjectId} book_id Curriculum Book ObjectId
+ * @property {ObjectId} staff Curriculum staff ObjectId
+ * @property {ObjectId} book Curriculum Book ObjectId
  * @description Curriculum model holds all School curriculums
  */
 
@@ -49,8 +49,8 @@ var ObjectId = Schema.Types.ObjectId;
 var schemaCreate = exports.schemaCreate = {
     description: _joi2.default.string().optional(),
     scheme: _joi2.default.string().optional(),
-    book_id: _joi2.default.string().optional(),
-    staff_id: _joi2.default.string().optional(),
+    book: _joi2.default.string().optional(),
+    staff: _joi2.default.string().optional(),
     materials: _joi2.default.string().optional(),
     created_by: _joi2.default.string().required()
 };
@@ -58,19 +58,18 @@ var schemaCreate = exports.schemaCreate = {
 var schemaUpdate = exports.schemaUpdate = {
     description: _joi2.default.string().optional(),
     scheme: _joi2.default.string().optional(),
-    book_id: _joi2.default.string().optional(),
+    book: _joi2.default.string().optional(),
     materials: _joi2.default.string().optional(),
-    staff_id: _joi2.default.string().optional(),
+    staff: _joi2.default.string().optional(),
     updated_by: _joi2.default.string().required()
 };
 
 var schema = exports.schema = {
     description: { type: String, required: true },
-
-    scheme_id: { type: ObjectId },
-    book_id: { type: ObjectId, ref: "Book" },
-    materials: { type: File },
-    staff_id: { type: ObjectId, ref: "Staff", required: true },
+    scheme: { type: ObjectId },
+    book: { type: ObjectId, ref: "Book" },
+    materials: { type: ObjectId },
+    staff: { type: ObjectId, ref: "Staff", required: true },
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId, ref: "Staff" }
 };

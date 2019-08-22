@@ -3,7 +3,7 @@
  * @author 4Decoder
  * @property {Number} id County primaryKey
  * @property {String} name County short name
- * @property {String} state_id County State Id
+ * @property {String} state County State Id
  * @property {Number} created_by County record created by
  * @property {Number} updated_by County record modified by
  * @description County holds record of all cities with terminal_list
@@ -22,21 +22,21 @@ const { ObjectId } = Schema.Types;
 
 export const schemaCreate = {
     name: Joi.string().trim().required(),
-    state_id: Joi.string().required(),
+    state: Joi.string().required(),
     created_by: Joi.string().required(),
 };
 
 export const schemaUpdate = {
     name: Joi.string().trim().optional(),
-    state_id: Joi.string().optional(),
+    state: Joi.string().optional(),
     updated_by: Joi.string().required(),
 };
 
 export const schema = {
     name: { type: String },
-    state_id: { type: ObjectId, ref: "State" },
-    created_by: { type: ObjectId, required: [true, "Why no input?"] },
-    updated_by: { type: ObjectId, allowNull: true },
+    state: { type: ObjectId, ref: "State" },
+    created_by: { type: ObjectId, ref: "Staff", required: true },
+    updated_by: { type: ObjectId, ref: "Staff" },
 };
 
 const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
