@@ -47,8 +47,8 @@ var schemaCreate = exports.schemaCreate = {
 };
 
 var schemaUpdate = exports.schemaUpdate = {
-    amount: _joi2.default.number().trim().required(),
-    description: _joi2.default.string().trim().required(),
+    amount: _joi2.default.number().trim().optional(),
+    description: _joi2.default.string().trim().optional(),
     updated_by: _joi2.default.string().required()
 };
 
