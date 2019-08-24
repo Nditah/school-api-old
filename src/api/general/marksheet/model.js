@@ -11,22 +11,6 @@
  * @description Markheet records score per student per course
  */
 
-//* ===== RESULT =====
-
-/**
- * @author 4Dcoder
- * @property {ObjectId} id Report primaryKey
- * @property {String} type Report type "EVALUATION|TERMLY|ANNUAL" required
- * @property {String} term Report type "FIRST|SECOND|THRID|ANNUAL" required
- * @property {Array} cumulated Report cumulated Result Array
- * @property {ObjectId} student Report student ObjectId
- * @property {Array} marksheets Report marksheets Array<Marksheet>
- * @property {Number} evaluation Report evaluation [1, 2, 3, 4]
- * @property {Number} total Report total
- * @property {Number} rank Report rank for that report
- * @description Result ( a type of report) holds generated academic report being computed
- */
-
 import Joi from "joi";
 import mongoose from "mongoose";
 // eslint-disable-next-line camelcase
@@ -79,6 +63,19 @@ newMarksheetSchema.set("collection", "marksheet");
 const Marksheet = mongoose.model("Marksheet", newMarksheetSchema);
 
 //* ===== RESULT =========
+/**
+ * @author 4Dcoder
+ * @property {ObjectId} id Report primaryKey
+ * @property {String} type Report type "EVALUATION|TERMLY|ANNUAL" required
+ * @property {String} term Report type "FIRST|SECOND|THRID|ANNUAL" required
+ * @property {Array} cumulated Report cumulated Result Array
+ * @property {ObjectId} student Report student ObjectId
+ * @property {Array} marksheets Report marksheets Array<Marksheet>
+ * @property {Number} evaluation Report evaluation [1, 2, 3, 4]
+ * @property {Number} total Report total
+ * @property {Number} rank Report rank for that report
+ * @description Result ( a type of report) holds generated academic report being computed
+ */
 
 export const resultCreate = {
     type: Joi.string().trim().valid(["EVALUATION", "TERMLY", "ANNUAL"]).required(),

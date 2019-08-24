@@ -39,7 +39,7 @@ var _model7 = require("../classe/model");
 
 var _model8 = _interopRequireDefault(_model7);
 
-var _model9 = require("../hostel-allocation/model");
+var _model9 = require("../hostel/model");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

@@ -15,11 +15,10 @@ export async function fetchRecord(req, res) {
     const { query } = req;
     const { filter, skip, limit, sort, projection } = aqp(query);
     try {
-        const result = await timetable.find(filter)
-            .populate("teacher_id")
-            .populate("duration")
-            .populate({ path: "teacher_id", select: "-password" })
-            .populate({ path: "manager", select: "-password -otp" })
+        const result = await Timetable.find(filter)
+            .populate("classe")
+            .populate("course")
+            .populate("classroom")
             .skip(skip)
             .limit(limit)
             .sort(sort)

@@ -39,13 +39,18 @@ router.get("/timetables", [_authorization.checkAuth, _authorization.isValidStaff
  * @apiName CreateTimetables
  * @apiGroup Timetables
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
- * @apiParam {String} name Timetable name
+ * @apiParam {String} type Timetable type "REGULAR|ASSESSMENT"
+ * @apiParam {String} activity Timetable activity
+ *  "LESSON", "BREAK", "CLOSED", "PREP", "FREE", "LIBRARY"
+* @apiParam {String} day Timetable day
+ * @apiParam {String} from Timetable from
+ * @apiParam {String} to Timetable to
+ * @apiParam {Number} duration Timetable duration in Minutes
+ * @apiParam {ObjectId} classe Timetable classe
+ * @apiParam {ObjectId} course Timetable course
+ * @apiParam {ObjectId} classroom Timetable classroom
+ * @apiParam {String} subsidiary Timetable subsidiary
  * @apiParam {String} description Timetable description
- * @apiParam {ObjectId} classe School Classes
- * @apiParam {ObjectId} subject_id Subject ObjectId
- * @apiParam {Array} teacher_id Timetable teacher_id
- * @apiParam {Number} duration Duration of subject
  * @apiSuccess {Object} Timetable Timetable's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Timetable not found.
@@ -59,12 +64,18 @@ router.post("/timetables", [_authorization.checkAuth, _authorization.isValidStaf
  * @apiGroup Timetable
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} recordId required record ObjectId
- * @apiParam {String} name Timetable name
+ * @apiParam {String} type Timetable type "REGULAR|ASSESSMENT"
+ * @apiParam {String} activity Timetable activity
+ *  "LESSON", "BREAK", "CLOSED", "PREP", "FREE", "LIBRARY"
+* @apiParam {String} day Timetable day
+ * @apiParam {String} from Timetable from
+ * @apiParam {String} to Timetable to
+ * @apiParam {Number} duration Timetable duration in Minutes
+ * @apiParam {ObjectId} classe Timetable classe
+ * @apiParam {ObjectId} course Timetable course
+ * @apiParam {ObjectId} classroom Timetable classroom
+ * @apiParam {String} subsidiary Timetable subsidiary
  * @apiParam {String} description Timetable description
- * @apiParam {ObjectId} classe School Classes
- * @apiParam {ObjectId} subject_id Subject ObjectId
- * @apiParam {Array} teacher_id Timetable teacher_id
- * @apiParam {Number} duration Duration of subject
  * @apiSuccess {Object} Timetable Timetable's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Timetable not found.

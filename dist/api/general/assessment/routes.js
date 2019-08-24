@@ -28,11 +28,11 @@ var router = _express2.default.Router();
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
  * @apiParam {String} sort how records would be arranged in alphabet (optional)
  * @apiParam {String} projection list of record's attributes to retrieve (optional)
- * @apiDescription Records  of permissible api routes staff can access
+ * @apiDescription Assessments  of permissible api routes staff can access
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/assessments", [_authorization.checkAuth], _controller.fetchRecord);
+router.get("/assessments", [_authorization.checkAuth], _controller.fetchAssessment);
 
 /**
  * @api {post} /api/v1/assessments Create assessments
@@ -57,7 +57,7 @@ router.get("/assessments", [_authorization.checkAuth], _controller.fetchRecord);
  * @apiError 404 Assessment not found.
  * @apiError 401 master access only.
  */
-router.post("/assessments", [_authorization.checkAuth, _authorization.isValidCustomer], _controller.createRecord);
+router.post("/assessments", [_authorization.checkAuth, _authorization.isValidCustomer], _controller.createAssessment);
 
 /**
  * @api {put} /api/v1/assessments/{recordId} Update assessments
@@ -83,7 +83,7 @@ router.post("/assessments", [_authorization.checkAuth, _authorization.isValidCus
  * @apiError 404 Assessment not found.
  * @apiError 401 master access only.
  */
-router.put("/assessments/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
+router.put("/assessments/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateAssessment);
 
 /**
  * @api {delete} /api/v1/assessments/{recordId} Delete assessments
@@ -95,7 +95,82 @@ router.put("/assessments/:recordId", [_authorization.checkAuth, _authorization.i
  * @apiError 404 Assessment not found.
  * @apiError 401 master access only.
  */
-router.delete("/assessments/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteRecord);
+router.delete("/assessments/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteAssessment);
+
+//* =======ASSESSMENT-SITTING==========
+
+/**
+ * @api {get} /api/v1/assesment-sittings?id={recordId} Retrieve one or all records
+ * @apiName RetrieveAssessmentSittings
+ * @apiGroup AssessmentSitting
+ * @apiHeader {String} Authorization Bearer token
+ * @apiExample {curl} Example usage for retieving a single record:
+ *      curl -i api/assesment-sittings?
+ * @apiParam {Object} filter query condition (optional)
+ * @apiParam {Number} skip Number of records to offset by (optional)
+ * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
+ * @apiParam {String} sort how records would be arranged in alphabet (optional)
+ * @apiParam {String} projection list of record's attributes to retrieve (optional)
+ * @apiDescription AssessmentSittings  of permissible api routes staff can access
+ * @apiSuccess {Object[]} Array of Objects of records.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ */
+router.get("/assesment-sittings", [_authorization.checkAuth], _controller.fetchAssessmentSitting);
+
+/**
+ * @api {post} /api/v1/assesment-sittings Create assesment-sittings
+ * @apiName CreateAssessmentSitting
+ * @apiGroup AssessmentSitting
+ * @apiHeader {String} Authorization Bearer token
+ * @apiParam {String} student AssessmentSitting student
+ * @apiParam {String} assessment AssessmentSitting assessment
+ * @apiParam {Date} started_at AssessmentSitting started_at dateime
+ * @apiParam {Date} ended_at AssessmentSitting ended dateime
+ * @apiParam {String} responses AssessmentSitting responses
+ *  "answer1|answer2|answer3|answer4|answer5"
+ * @apiParam {Number} score AssessmentSitting score
+ * @apiParam {String} status AssessmentSitting status "OPEN|CLOSED"
+ *  Open - when the students starts and Close - when stopped.
+ * @apiSuccess {Object} AssessmentSitting AssessmentSitting's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 AssessmentSitting not found.
+ * @apiError 401 master access only.
+ */
+router.post("/assesment-sittings", [_authorization.checkAuth, _authorization.isValidCustomer], _controller.createAssessmentSitting);
+
+/**
+ * @api {put} /api/v1/assesment-sittings/{recordId} Update assesment-sittings
+ * @apiName UpdateAssessmentSitting
+ * @apiGroup AssessmentSitting
+ * @apiHeader {String} Authorization Bearer token
+ * @apiParam {ObjectId} recordId record ObjectId.
+ * @apiParam {String} student AssessmentSitting student
+ * @apiParam {String} assessment AssessmentSitting assessment
+ * @apiParam {Date} started_at AssessmentSitting started_at dateime
+ * @apiParam {Date} ended_at AssessmentSitting ended dateime
+ * @apiParam {String} responses AssessmentSitting responses
+ *  "answer1|answer2|answer3|answer4|answer5"
+ * @apiParam {Number} score AssessmentSitting score
+ * @apiParam {String} status AssessmentSitting status "OPEN|CLOSED"
+ *  Open - when the students starts and Close - when stopped.
+ * @apiSuccess {Object} AssessmentSitting AssessmentSitting's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 AssessmentSitting not found.
+ * @apiError 401 master access only.
+ */
+router.put("/assesment-sittings/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateAssessmentSitting);
+
+/**
+ * @api {delete} /api/v1/assesment-sittings/{recordId} Delete assesment-sittings
+ * @apiName DeleteAssessmentSitting
+ * @apiGroup AssessmentSitting
+ * @apiHeader {String} Authorization Bearer token
+ * @apiParam {ObjectId} recordId record ObjectId.
+ * @apiSuccess (Success 204) 204 No Content.
+ * @apiError 404 AssessmentSitting not found.
+ * @apiError 401 master access only.
+ */
+router.delete("/assesment-sittings/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteAssessmentSitting);
 
 exports.default = router;
 //# sourceMappingURL=routes.js.map

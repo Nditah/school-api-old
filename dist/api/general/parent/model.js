@@ -59,7 +59,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {String} password Parent password (optional)
  * @property {String} profession Parent profession (optional)
  * @property {String} employment_status Parent employment_status (required)
- * @property {ObjectId} students_name Parent students_name Array<ObjectId> (optional)
+ * @property {ObjectId} students Parent students Array<ObjectId> (optional)
  * @property {String} created_by Parent record created by
  * @property {String} updated_by Parent record modified by
  * @description Parent holds record of all student's parents in the school
@@ -90,7 +90,7 @@ var schemaCreate = exports.schemaCreate = {
     password: _joi2.default.string().optional(),
     profession: _joi2.default.string().optional(),
     employment_status: _joi2.default.string().trim().valid(Object.values(_constants.EMPLOYMENT_STATUS)).optional(),
-    students_name: _joi2.default.array().optional(),
+    students: _joi2.default.array().optional(),
     created_by: _joi2.default.string().optional()
 };
 
@@ -109,7 +109,7 @@ var schemaUpdate = exports.schemaUpdate = {
     password: _joi2.default.string().optional(),
     profession: _joi2.default.string().optional(),
     employment_status: _joi2.default.string().trim().valid(Object.values(_constants.EMPLOYMENT_STATUS)).optional(),
-    students_name: _joi2.default.array().optional(),
+    students: _joi2.default.array().optional(),
     updated_by: _joi2.default.string().required()
 };
 
@@ -152,9 +152,11 @@ var schema = exports.schema = {
         enum: Object.values(_constants.EMPLOYMENT_STATUS),
         required: [false, "Why no input?"]
     },
-    students_name: [{ type: ObjectId, ref: "Student", required: [false, "Why no Student's name"] }],
+    students: [{ type: ObjectId, ref: "Student" }],
+    deleted: { type: Boolean, default: false, required: true },
+    deleted_at: { type: Date },
     created_by: { type: ObjectId, ref: "Staff", required: true },
-    updated_by: { type: ObjectId, ref: "Staff", required: true }
+    updated_by: { type: ObjectId, ref: "Staff" }
 };
 
 var options = _constants.DATABASE.OPTIONS;

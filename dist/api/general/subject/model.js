@@ -143,7 +143,7 @@ var courseSchema = exports.courseSchema = {
         enum: Object.values(_constants.LEVEL),
         required: true
     },
-    code: { type: String, required: true },
+    code: { type: String, required: true, unique: true },
     type: {
         type: String,
         enum: ["ELECTIVE", "COMPULSORY"],

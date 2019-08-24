@@ -20,7 +20,7 @@ import mongoose_csv from "mongoose-csv";
 import { DATABASE } from "../../../constants";
 import Staff from "../staff/model";
 import Student from "../student/model";
-import FeesType from "../fees-type/model";
+import { Fees, FeesPayment } from "../fees/model";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
@@ -47,7 +47,7 @@ export const hostelSchema = {
     hall: { type: String, required: true, unique: true }, // unique building
     block: { type: String, required: true }, // building
     hostel_rooms: [{ type: ObjectId, ref: "HostelRoom" }],
-    hostel_fees: { type: ObjectId, ref: "FeeType", required: true },
+    hostel_fees: { type: ObjectId, ref: "Fees", required: true },
     description: { type: String },
     status: {
         type: String,

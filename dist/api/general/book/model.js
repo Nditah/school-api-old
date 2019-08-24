@@ -23,53 +23,59 @@ var _model = require("../subject/model");
 
 var _model2 = _interopRequireDefault(_model);
 
-var _model3 = require("../classe/model");
-
-var _model4 = _interopRequireDefault(_model3);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var Schema = _mongoose2.default.Schema;
 // eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
- * @property {ObjectId} id Stock primaryKey
+ * @property {ObjectId} id Book primaryKey
  * @property {String} title Book title of books
+ * @property {String} author Book author of books
  * @property {String} description Book Description of the book
- * @property {ObjectId} subsidiary Book subsidiary (required)
- * @property {ObjectId} classe_id Book store ObjectId (required)
- * @property {ObjectId} subject_id Book subject_id ObjectId
+ * @property {String} subsidiary Book subsidiary (required)
+ * @property {String} level Book level (required)
+ * @property {ObjectId} subject Book subject ObjectId
  * @description Stock model holds record of all Inventories
  */
-var Schema = _mongoose2.default.Schema;
+
 var ObjectId = Schema.Types.ObjectId;
 var schemaCreate = exports.schemaCreate = {
-    title: { type: String, required: true },
+    title: _joi2.default.string().required(),
+    author: _joi2.default.string().required(),
     subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
+    level: _joi2.default.string().valid(Object.values(_constants.LEVEL)).optional(),
     description: _joi2.default.string().optional(),
-    classe_id: _joi2.default.string().optional(),
-    subject_id: _joi2.default.string().optional(),
+    subject: _joi2.default.string().optional(),
     created_by: _joi2.default.string().required()
 };
 
 var schemaUpdate = exports.schemaUpdate = {
-    title: { type: String, required: true },
+    title: _joi2.default.string().required(),
+    author: _joi2.default.string().required(),
     subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
+    level: _joi2.default.string().valid(Object.values(_constants.LEVEL)).optional(),
     description: _joi2.default.string().optional(),
-    classe_id: _joi2.default.string().optional(),
-    subject_id: _joi2.default.string().optional(),
+    subject: _joi2.default.string().optional(),
     updated_by: _joi2.default.string().required()
 };
 
 var schema = exports.schema = {
     title: { type: String, required: true },
+    author: { type: String, required: true },
     subsidiary: {
         type: String,
         enum: Object.values(_constants.SUBSIDIARY),
         required: true
     },
+    level: {
+        type: Number,
+        enum: Object.values(_constants.LEVEL)
+    },
     description: { type: String },
-    classe_id: { type: ObjectId },
-    subject_id: { type: ObjectId },
+    subject: { type: ObjectId, ref: "Subject" },
+    deleted: { type: Boolean, default: false, required: true },
+    deleted_at: { type: Date },
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId, ref: "Staff" }
 };
