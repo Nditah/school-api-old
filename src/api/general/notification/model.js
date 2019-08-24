@@ -21,9 +21,11 @@ const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
 export const schemaCreate = {
+    title: Joi.string().optional(),
+    status: Joi.string().optional(),
     user_type: Joi.string().valid(["STAFF", "PARENT", "STUDENT"]).required(),
     staff_id: Joi.string().optional(),
-    customer_id: Joi.string().optional(),
+    student_id: Joi.string().optional(),
     parent_id: Joi.string().optional(),
     message: Joi.string().optional(),
     notification_status: Joi.string().valid("PENDING", "CLOSED").optional(),
@@ -31,9 +33,11 @@ export const schemaCreate = {
 };
 
 export const schemaUpdate = {
-    user_type: Joi.string().valid(["STAFF", "PARENT", "CUSTOMER"]).optional(),
+    title: Joi.string().optional(),
+    status: Joi.string().optional(),
+    user_type: Joi.string().valid(["STAFF", "PARENT", "STUDENT"]).required(),
     staff_id: Joi.string().optional(),
-    customer_id: Joi.string().optional(),
+    student_id: Joi.string().optional(),
     parent_id: Joi.string().optional(),
     message: Joi.string().optional(),
     notification_status: Joi.string().valid("PENDING", "CLOSED").optional(),
@@ -41,6 +45,7 @@ export const schemaUpdate = {
 };
 
 export const schema = {
+    
     user_type: { type: String, enum: ["STAFF", "PARENT", "STUDENT"], required: true },
     staff_id: { type: ObjectId, ref: "Staff" },
     student_id: { type: ObjectId, ref: "Student" },
