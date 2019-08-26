@@ -79,7 +79,7 @@ router.use(countyRoute);
 router.use(feesRoute);
 router.use(documentTypeRoute);
 router.use(documentationRoute);
-router.use(homeworkRoute);
+// router.use(homeworkRoute);
 router.use(hostelRoute);
 router.use(lessonRoute);
 router.use(multimediaRoute);

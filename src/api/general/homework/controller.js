@@ -1,7 +1,7 @@
 import Joi from "joi";
 import log4js from "log4js";
 import aqp from "api-query-params";
-import { Homework, homeworkCreate, homeworkUpdate } from "./model";
+import Homework, { homeworkCreate, homeworkUpdate } from "./model";
 import { success, fail, notFound } from "../../../lib";
 import { STATUS_MSG } from "../../../constants";
 

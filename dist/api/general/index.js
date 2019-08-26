@@ -32,6 +32,10 @@ var _asset = require("./asset");
 
 var _asset2 = _interopRequireDefault(_asset);
 
+var _announcement = require("./announcement");
+
+var _announcement2 = _interopRequireDefault(_announcement);
+
 var _attendance = require("./attendance");
 
 var _attendance2 = _interopRequireDefault(_attendance);
@@ -83,6 +87,10 @@ var _documentation2 = _interopRequireDefault(_documentation);
 var _fees = require("./fees");
 
 var _fees2 = _interopRequireDefault(_fees);
+
+var _homework = require("./homework");
+
+var _homework2 = _interopRequireDefault(_homework);
 
 var _hostel = require("./hostel");
 
@@ -226,6 +234,7 @@ router.use(_accountPosting2.default);
 router.use(_admission2.default);
 router.use(_assetAssignment2.default);
 router.use(_asset2.default);
+router.use(_announcement2.default);
 router.use(_attendance2.default);
 router.use(_bankAccount2.default);
 router.use(_admission2.default);
@@ -240,6 +249,7 @@ router.use(_county2.default);
 router.use(_fees2.default);
 router.use(_documentType2.default);
 router.use(_documentation2.default);
+// router.use(homeworkRoute);
 router.use(_hostel2.default);
 router.use(_lesson2.default);
 router.use(_multimedia2.default);
