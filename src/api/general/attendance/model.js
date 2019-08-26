@@ -25,45 +25,48 @@ const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
 export const schemaCreate = {
-    staff_id: Joi.string().optional(),
-    student_id: Joi.string().optional(),
-    office_id: Joi.string().optional(),
+    type: Joi.string().optional(),
+    staff: Joi.string().optional(),
+    student: Joi.string().optional(),
+    office: Joi.string().optional(),
     attendance_status: Joi.string().trim().valid(["SUSPENDED", "EARLY", "LATE"]).optional(),
     subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
-    classe_id: Joi.string().optional(),
+    classe: Joi.string().optional(),
     arrival_time: Joi.date().required(),
     departure_time: Joi.date().optional(),
     created_by: Joi.string().required(),
 };
 
 export const schemaUpdate = {
-    staff_id: Joi.string().optional(),
-    student_id: Joi.string().optional(),
-    office_id: Joi.string().optional(),
+    type: Joi.string().optional(),
+    staff: Joi.string().optional(),
+    student: Joi.string().optional(),
+    office: Joi.string().optional(),
     attendance_status: Joi.string().trim().valid(["SUSPENDED", "EARLY", "LATE"]).optional(),
     subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
-    classe_id: Joi.string().optional(),
+    classe: Joi.string().optional(),
     arrival_time: Joi.date().optional(),
     departure_time: Joi.date().optional(),
     updated_by: Joi.string().required(),
 };
 
 export const schema = {
-    staff_id: { type: ObjectId, ref: "Staff", required: false },
-    student_id: { type: ObjectId, ref: "Student", required: false  },
+    type: { type: String, enum: ["STAFF", "STUDENT"], required: true },
+    staff: { type: ObjectId, ref: "Staff" },
+    student: { type: ObjectId, ref: "Student" },
     attendance_status: {
         type: String,
         enum: ["SUSPENDED", "EARLY", "LATE"],
         default: "EARLY",
         required: true,
     },
-    office_id: { type: ObjectId, ref: "Office", required: false  },
+    office: { type: ObjectId, ref: "Office", required: false },
     subsidiary: {
         type: String,
         enum: Object.values(SUBSIDIARY),
         required: [true, "Why no subsidiary?"],
     },
-    classe_id: { type: ObjectId, ref: "Classe" },
+    classe: { type: ObjectId, ref: "Classe" },
     arrival_time: { type: Date },
     departure_time: { type: Date },
     created_by: { type: ObjectId, ref: "Staff", required: true },

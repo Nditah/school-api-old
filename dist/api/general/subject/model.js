@@ -95,6 +95,7 @@ var Subject = _mongoose2.default.model("Subject", newSubjectSchema);
  * @property {String} id Course ObjectId primaryKey
  * @property {String} title Course title (required)
  * @property {String} level Course level [1-7] (required)
+ * @property {String} term Course TERM "FIRST|SECOND|THIRD" (required)
  * @property {String} code Course code (required)
  * @property {String} type Course type "ELECTIVE|COMPULSORY"
  * @property {String} coefficient Course coefficient (required)
@@ -110,9 +111,10 @@ var Subject = _mongoose2.default.model("Subject", newSubjectSchema);
 
 var courseCreate = exports.courseCreate = {
     title: _joi2.default.string().trim().required(),
-    level: _joi2.default.string().valid(Object.values(_constants.LEVEL)).required(),
+    level: _joi2.default.number().valid(Object.values(_constants.LEVEL)).required(),
     code: _joi2.default.string().trim().required(),
     type: _joi2.default.string().trim().valid(["ELECTIVE", "COMPULSORY"]).required(),
+    term: _joi2.default.string().valid(Object.values(_constants.TERM)).required(),
     coefficient: _joi2.default.number().required(),
     description: _joi2.default.string().required(),
     classes: _joi2.default.array().optional(),
@@ -124,7 +126,8 @@ var courseCreate = exports.courseCreate = {
 
 var courseUpdate = exports.courseUpdate = {
     title: _joi2.default.string().trim().optional(),
-    level: _joi2.default.string().valid(Object.values(_constants.LEVEL)).optional(),
+    level: _joi2.default.number().valid(Object.values(_constants.LEVEL)).optional(),
+    term: _joi2.default.string().valid(Object.values(_constants.TERM)).optional(),
     code: _joi2.default.string().trim().optional(),
     type: _joi2.default.string().trim().valid(["ELECTIVE", "COMPULSORY"]).optional(),
     coefficient: _joi2.default.number().optional(),
@@ -141,6 +144,11 @@ var courseSchema = exports.courseSchema = {
     level: {
         type: Number,
         enum: Object.values(_constants.LEVEL),
+        required: true
+    },
+    term: {
+        type: String,
+        enum: Object.values(_constants.TERM),
         required: true
     },
     code: { type: String, required: true, unique: true },

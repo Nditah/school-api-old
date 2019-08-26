@@ -1,8 +1,20 @@
-import express from "express";
-import { checkAuth, isValidStaff, isValidCustomer } from "../../../middleware/authorization";
-import { fetchHomework, createHomework, updateHomework, deleteHomework } from "./controller";
+"use strict";
 
-const router = express.Router();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require("express");
+
+var _express2 = _interopRequireDefault(_express);
+
+var _authorization = require("../../../middleware/authorization");
+
+var _controller = require("./controller");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
 
 /**
  * @api {get} /api/v1/homeworks?id={recordId} Retrieve one or all records
@@ -20,7 +32,7 @@ const router = express.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/homeworks", [checkAuth], fetchHomework);
+router.get("/homeworks", [_authorization.checkAuth], _controller.fetchHomework);
 
 /**
  * @api {post} /api/v1/homeworks Create homeworks
@@ -45,7 +57,7 @@ router.get("/homeworks", [checkAuth], fetchHomework);
  * @apiError 404 Homework not found.
  * @apiError 401 master access only.
  */
-router.post("/homeworks", [checkAuth, isValidCustomer], createHomework);
+router.post("/homeworks", [_authorization.checkAuth, _authorization.isValidCustomer], _controller.createHomework);
 
 /**
  * @api {put} /api/v1/homeworks/{recordId} Update homeworks
@@ -71,7 +83,7 @@ router.post("/homeworks", [checkAuth, isValidCustomer], createHomework);
  * @apiError 404 Homework not found.
  * @apiError 401 master access only.
  */
-router.put("/homeworks/:recordId", [checkAuth, isValidStaff], updateHomework);
+router.put("/homeworks/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateHomework);
 
 /**
  * @api {delete} /api/v1/homeworks/{recordId} Delete homeworks
@@ -83,6 +95,7 @@ router.put("/homeworks/:recordId", [checkAuth, isValidStaff], updateHomework);
  * @apiError 404 Homework not found.
  * @apiError 401 master access only.
  */
-router.delete("/homeworks/:recordId", [checkAuth, isValidStaff], deleteHomework);
+router.delete("/homeworks/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.deleteHomework);
 
-export default router;
+exports.default = router;
+//# sourceMappingURL=routes.js.map

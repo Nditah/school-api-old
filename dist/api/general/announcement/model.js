@@ -32,49 +32,44 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // eslint-disable-next-line camelcase
 /**
  * @author 4Dcoder
- * @property {ObjectId} id Notification primaryKey
- * @property {String} user_type Notification user type "STAFF|PARENT|STUDENT"
- * @property {ObjectId} staff_id Notification staff ObjectId
- * @property {ObjectId} student_id Notification student ObjectId
- * @property {ObjectId} parent_id Notification parent ObjectId
- * @property {String} message Notification message
- * @property {String} notification_status Notification record status "PENDING|CLOSED"
- * @description Notification model holds record of all Notification
+ * @property {ObjectId} id Announcement primaryKey
+ * @property {String} user_type Announcement user type "STAFF|PARENT|STUDENT"
+ * @property {ObjectId} staff_id Announcement staff ObjectId
+ * @property {ObjectId} student_id Announcement student ObjectId
+ * @property {ObjectId} parent_id Announcement parent ObjectId
+ * @property {String} message Announcement message
+ * @property {String} status Announcement record status "PENDING|CLOSED"
+ * @description Announcement records News to be broadcast to the public.
  */
 var Schema = _mongoose2.default.Schema;
 var ObjectId = Schema.Types.ObjectId;
 var schemaCreate = exports.schemaCreate = {
-    title: _joi2.default.string().optional(),
-    status: _joi2.default.string().optional(),
     user_type: _joi2.default.string().valid(["STAFF", "PARENT", "STUDENT"]).required(),
     staff_id: _joi2.default.string().optional(),
-    student_id: _joi2.default.string().optional(),
+    customer_id: _joi2.default.string().optional(),
     parent_id: _joi2.default.string().optional(),
     message: _joi2.default.string().optional(),
-    notification_status: _joi2.default.string().valid("PENDING", "CLOSED").optional(),
+    announcement_status: _joi2.default.string().valid("PENDING", "CLOSED").optional(),
     created_by: _joi2.default.string().required()
 };
 
 var schemaUpdate = exports.schemaUpdate = {
-    title: _joi2.default.string().optional(),
-    status: _joi2.default.string().optional(),
-    user_type: _joi2.default.string().valid(["STAFF", "PARENT", "STUDENT"]).required(),
+    user_type: _joi2.default.string().valid(["STAFF", "PARENT", "CUSTOMER"]).optional(),
     staff_id: _joi2.default.string().optional(),
-    student_id: _joi2.default.string().optional(),
+    customer_id: _joi2.default.string().optional(),
     parent_id: _joi2.default.string().optional(),
     message: _joi2.default.string().optional(),
-    notification_status: _joi2.default.string().valid("PENDING", "CLOSED").optional(),
+    announcement_status: _joi2.default.string().valid("PENDING", "CLOSED").optional(),
     updated_by: _joi2.default.string().required()
 };
 
 var schema = exports.schema = {
-
     user_type: { type: String, enum: ["STAFF", "PARENT", "STUDENT"], required: true },
     staff_id: { type: ObjectId, ref: "Staff" },
     student_id: { type: ObjectId, ref: "Student" },
     parent_id: { type: ObjectId, ref: "Parent" },
     message: { type: String },
-    notification_status: { type: String, enum: ["PENDING", "CLOSED"], default: "PENDING" },
+    announcement_status: { type: String, enum: ["PENDING", "CLOSED"], default: "PENDING" },
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId, ref: "Staff" }
 };
@@ -82,9 +77,9 @@ var schema = exports.schema = {
 var options = _constants.DATABASE.OPTIONS;
 
 var newSchema = new Schema(schema, options);
-newSchema.set("collection", "notification");
+newSchema.set("collection", "announcement");
 
-var Notification = _mongoose2.default.model("Notification", newSchema);
+var Announcement = _mongoose2.default.model("Announcement", newSchema);
 
-exports.default = Notification;
+exports.default = Announcement;
 //# sourceMappingURL=model.js.map

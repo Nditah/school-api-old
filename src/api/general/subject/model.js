@@ -17,7 +17,7 @@
 import Joi from "joi";
 import mongoose from "mongoose";
 // eslint-disable-next-line camelcase
-import { DATABASE, SUBSIDIARY, LEVEL } from "../../../constants";
+import { DATABASE, SUBSIDIARY, LEVEL, TERM } from "../../../constants";
 import Staff from "../staff/model";
 import Category from "../category/model";
 
@@ -75,6 +75,7 @@ const Subject = mongoose.model("Subject", newSubjectSchema);
  * @property {String} id Course ObjectId primaryKey
  * @property {String} title Course title (required)
  * @property {String} level Course level [1-7] (required)
+ * @property {String} term Course TERM "FIRST|SECOND|THIRD" (required)
  * @property {String} code Course code (required)
  * @property {String} type Course type "ELECTIVE|COMPULSORY"
  * @property {String} coefficient Course coefficient (required)
@@ -90,9 +91,10 @@ const Subject = mongoose.model("Subject", newSubjectSchema);
 
 export const courseCreate = {
     title: Joi.string().trim().required(),
-    level: Joi.string().valid(Object.values(LEVEL)).required(),
+    level: Joi.number().valid(Object.values(LEVEL)).required(),
     code: Joi.string().trim().required(),
     type: Joi.string().trim().valid(["ELECTIVE", "COMPULSORY"]).required(),
+    term: Joi.string().valid(Object.values(TERM)).required(),
     coefficient: Joi.number().required(),
     description: Joi.string().required(),
     classes: Joi.array().optional(),
@@ -104,7 +106,8 @@ export const courseCreate = {
 
 export const courseUpdate = {
     title: Joi.string().trim().optional(),
-    level: Joi.string().valid(Object.values(LEVEL)).optional(),
+    level: Joi.number().valid(Object.values(LEVEL)).optional(),
+    term: Joi.string().valid(Object.values(TERM)).optional(),
     code: Joi.string().trim().optional(),
     type: Joi.string().trim().valid(["ELECTIVE", "COMPULSORY"]).optional(),
     coefficient: Joi.number().optional(),
@@ -121,6 +124,11 @@ export const courseSchema = {
     level: {
         type: Number,
         enum: Object.values(LEVEL),
+        required: true,
+    },
+    term: {
+        type: String,
+        enum: Object.values(TERM),
         required: true,
     },
     code: { type: String, required: true, unique: true },
