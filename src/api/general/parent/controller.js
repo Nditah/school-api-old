@@ -23,7 +23,7 @@ export async function fetchRecord(req, res) {
             delete filter.q;
         }
         const result = await Parent.find(filter)
-            .populate("students_name")
+            .populate("students")
             .populate("state")
             .populate("county")
             .populate("staff")
