@@ -58,45 +58,48 @@ var Schema = _mongoose2.default.Schema;
 
 var ObjectId = Schema.Types.ObjectId;
 var schemaCreate = exports.schemaCreate = {
-    staff_id: _joi2.default.string().optional(),
-    student_id: _joi2.default.string().optional(),
-    office_id: _joi2.default.string().optional(),
+    type: _joi2.default.string().optional(),
+    staff: _joi2.default.string().optional(),
+    student: _joi2.default.string().optional(),
+    office: _joi2.default.string().optional(),
     attendance_status: _joi2.default.string().trim().valid(["SUSPENDED", "EARLY", "LATE"]).optional(),
     subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
-    classe_id: _joi2.default.string().optional(),
+    classe: _joi2.default.string().optional(),
     arrival_time: _joi2.default.date().required(),
     departure_time: _joi2.default.date().optional(),
     created_by: _joi2.default.string().required()
 };
 
 var schemaUpdate = exports.schemaUpdate = {
-    staff_id: _joi2.default.string().optional(),
-    student_id: _joi2.default.string().optional(),
-    office_id: _joi2.default.string().optional(),
+    type: _joi2.default.string().optional(),
+    staff: _joi2.default.string().optional(),
+    student: _joi2.default.string().optional(),
+    office: _joi2.default.string().optional(),
     attendance_status: _joi2.default.string().trim().valid(["SUSPENDED", "EARLY", "LATE"]).optional(),
     subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
-    classe_id: _joi2.default.string().optional(),
+    classe: _joi2.default.string().optional(),
     arrival_time: _joi2.default.date().optional(),
     departure_time: _joi2.default.date().optional(),
     updated_by: _joi2.default.string().required()
 };
 
 var schema = exports.schema = {
-    staff_id: { type: ObjectId, ref: "Staff", required: false },
-    student_id: { type: ObjectId, ref: "Student", required: false },
+    type: { type: String, enum: ["STAFF", "STUDENT"], required: true },
+    staff: { type: ObjectId, ref: "Staff" },
+    student: { type: ObjectId, ref: "Student" },
     attendance_status: {
         type: String,
         enum: ["SUSPENDED", "EARLY", "LATE"],
         default: "EARLY",
         required: true
     },
-    office_id: { type: ObjectId, ref: "Office", required: false },
+    office: { type: ObjectId, ref: "Office", required: false },
     subsidiary: {
         type: String,
         enum: Object.values(_constants.SUBSIDIARY),
         required: [true, "Why no subsidiary?"]
     },
-    classe_id: { type: ObjectId, ref: "Classe" },
+    classe: { type: ObjectId, ref: "Classe" },
     arrival_time: { type: Date },
     departure_time: { type: Date },
     created_by: { type: ObjectId, ref: "Staff", required: true },

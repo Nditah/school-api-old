@@ -22,9 +22,9 @@ var EMPLOYEE_TYPE = exports.EMPLOYEE_TYPE = {
 };
 
 var TERM = exports.TERM = {
-    FIRST: "FIRST",
-    SECOND: "SECOND",
-    THIRD: "THIRD"
+    FIRST: "1",
+    SECOND: "2",
+    THIRD: "3"
 };
 
 var OFFICE_TYPE = exports.OFFICE_TYPE = {

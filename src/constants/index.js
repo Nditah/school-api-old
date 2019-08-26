@@ -5,9 +5,9 @@ export const EMPLOYEE_TYPE = {
 };
 
 export const TERM = {
-    FIRST: "FIRST",
-    SECOND: "SECOND",
-    THIRD: "THIRD",
+    FIRST: "1",
+    SECOND: "2",
+    THIRD: "3",
 };
 
 export const OFFICE_TYPE = {
