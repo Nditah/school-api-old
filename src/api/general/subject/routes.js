@@ -80,7 +80,7 @@ router.delete("/subjects/:recordId", [checkAuth, isValidStaff], deleteSubject);
 /**
  * @api {get} /api/v1/courses?id={recordId} Retrieve one or all records
  * @apiName RetrieveCourse
- * @apiGroup Course
+ * @apiGroup Subject
 * @apiExample {curl} Example usage for retieving a single record:
  *      curl -i api/courses?
  * @apiParam {Object} filter query condition (optional)
@@ -97,7 +97,7 @@ router.get("/courses", [checkAuth, isValidStaff], fetchCourse);
 /**
  * @api {post} /api/v1/courses Create courses
  * @apiName CreateCourse
- * @apiGroup Course
+ * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} title Course title (required)
  * @apiParam {String} level Course level (required)
@@ -119,7 +119,7 @@ router.post("/courses", [checkAuth, isValidStaff], createCourse);
 /**
  * @api {put} /api/v1/courses/{recordId} Update courses
  * @apiName UpdateCourse
- * @apiGroup Course
+ * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} recordId required record ObjectId
  * @apiParam {String} title Course title (required)
@@ -142,7 +142,7 @@ router.put("/courses/:recordId", [checkAuth, isValidStaff], updateCourse);
 /**
  * @api {delete} /api/v1/courses/{recordId} Delete courses
  * @apiName DeleteCourse
- * @apiGroup Course
+ * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
  * @apiParam {String} recordId required record ObjectId
  * @apiSuccess (Success 204) 204 No Content.
