@@ -44,9 +44,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Schema = _mongoose2.default.Schema;
 var ObjectId = Schema.Types.ObjectId;
 var schemaCreate = exports.schemaCreate = {
+    title: _joi2.default.string().optional(),
+    status: _joi2.default.string().optional(),
     user_type: _joi2.default.string().valid(["STAFF", "PARENT", "STUDENT"]).required(),
     staff_id: _joi2.default.string().optional(),
-    customer_id: _joi2.default.string().optional(),
+    student_id: _joi2.default.string().optional(),
     parent_id: _joi2.default.string().optional(),
     message: _joi2.default.string().optional(),
     notification_status: _joi2.default.string().valid("PENDING", "CLOSED").optional(),
@@ -54,9 +56,11 @@ var schemaCreate = exports.schemaCreate = {
 };
 
 var schemaUpdate = exports.schemaUpdate = {
-    user_type: _joi2.default.string().valid(["STAFF", "PARENT", "CUSTOMER"]).optional(),
+    title: _joi2.default.string().optional(),
+    status: _joi2.default.string().optional(),
+    user_type: _joi2.default.string().valid(["STAFF", "PARENT", "STUDENT"]).required(),
     staff_id: _joi2.default.string().optional(),
-    customer_id: _joi2.default.string().optional(),
+    student_id: _joi2.default.string().optional(),
     parent_id: _joi2.default.string().optional(),
     message: _joi2.default.string().optional(),
     notification_status: _joi2.default.string().valid("PENDING", "CLOSED").optional(),
@@ -64,6 +68,7 @@ var schemaUpdate = exports.schemaUpdate = {
 };
 
 var schema = exports.schema = {
+
     user_type: { type: String, enum: ["STAFF", "PARENT", "STUDENT"], required: true },
     staff_id: { type: ObjectId, ref: "Staff" },
     student_id: { type: ObjectId, ref: "Student" },
