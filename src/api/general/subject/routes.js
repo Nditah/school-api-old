@@ -68,7 +68,7 @@ router.put("/subjects/:recordId", [checkAuth, isValidStaff], updateSubject);
  * @apiName DeleteSubject
  * @apiGroup Subject
  * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} recordId required record ObjectId
+ * @apiParam {ObjectId} recordId required record ObjectId
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 404 Subject not found.
  * @apiError 401 master access only.
