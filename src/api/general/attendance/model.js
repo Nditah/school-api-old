@@ -25,7 +25,7 @@ const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
 export const schemaCreate = {
-    type:join.string().optional(),
+    type: Joi.string().optional(),
     staff: Joi.string().optional(),
     student: Joi.string().optional(),
     office: Joi.string().optional(),
@@ -38,7 +38,7 @@ export const schemaCreate = {
 };
 
 export const schemaUpdate = {
-    type:join.string().optional(),
+    type: Joi.string().optional(),
     staff: Joi.string().optional(),
     student: Joi.string().optional(),
     office: Joi.string().optional(),
@@ -51,16 +51,16 @@ export const schemaUpdate = {
 };
 
 export const schema = {
-    type: { type: String,  enum: ["STAFF", "STUDENT"], required: true },
+    type: { type: String, enum: ["STAFF", "STUDENT"], required: true },
     staff: { type: ObjectId, ref: "Staff" },
-    student: { type: ObjectId, ref: "Student"},
+    student: { type: ObjectId, ref: "Student" },
     attendance_status: {
         type: String,
         enum: ["SUSPENDED", "EARLY", "LATE"],
         default: "EARLY",
         required: true,
     },
-    office: { type: ObjectId, ref: "Office", required: false  },
+    office: { type: ObjectId, ref: "Office", required: false },
     subsidiary: {
         type: String,
         enum: Object.values(SUBSIDIARY),
