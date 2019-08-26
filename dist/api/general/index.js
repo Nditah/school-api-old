@@ -68,6 +68,10 @@ var _calendar = require("./calendar");
 
 var _calendar2 = _interopRequireDefault(_calendar);
 
+var _classe = require("./classe");
+
+var _classe2 = _interopRequireDefault(_classe);
+
 var _contactUs = require("./contact-us");
 
 var _contactUs2 = _interopRequireDefault(_contactUs);
@@ -222,12 +226,10 @@ var _unionbank2 = _interopRequireDefault(_unionbank);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// Routes
 var router = _express2.default.Router();
 
 // Use Routes
-
-
-// Routes
 router.use(_accountClass2.default);
 router.use(_accountHeading2.default);
 router.use(_accountPosting2.default);
@@ -243,6 +245,7 @@ router.use(_blogComment2.default);
 router.use(_blog2.default);
 router.use(_book2.default);
 router.use(_budget2.default);
+router.use(_classe2.default);
 router.use(_calendar2.default);
 router.use(_contactUs2.default);
 router.use(_county2.default);
