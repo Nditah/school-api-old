@@ -31,10 +31,6 @@ var router = _express2.default.Router();
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-/**
- * @author 4Decoder
- * @description Parent holds record of all parents with terminals
- */
 router.get("/parents", [_authorization.checkAuth, _authorization.isValidStaff], _controller.fetchRecord);
 
 /**
@@ -108,7 +104,6 @@ router.delete("/parents/:recordId", [_authorization.checkAuth, _authorization.is
  * @api {post} /api/v1/parents/login Login Parent
  * @apiName LoginParent
  * @apiGroup Parent
- * @apiPermission master
  * @apiParam {String} email Parent email address (optional)
  * @apiParam {String} password Parent password (optional)
  * @apiParam {String} phone Parent mobile phone number (optional)
