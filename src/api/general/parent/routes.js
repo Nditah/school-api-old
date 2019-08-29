@@ -1,7 +1,3 @@
-/**
- * @author 4Decoder
- * @description Parent holds record of all parents with terminals
- */
 import express from "express";
 import { checkAuth, isValidStaff } from "../../../middleware/authorization";
 import { fetchRecord, createRecord, updateRecord, deleteRecord, login } from "./controller";
@@ -96,7 +92,6 @@ router.delete("/parents/:recordId", [checkAuth, isValidStaff], deleteRecord);
  * @api {post} /api/v1/parents/login Login Parent
  * @apiName LoginParent
  * @apiGroup Parent
- * @apiPermission master
  * @apiParam {String} email Parent email address (optional)
  * @apiParam {String} password Parent password (optional)
  * @apiParam {String} phone Parent mobile phone number (optional)

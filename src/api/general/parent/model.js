@@ -136,18 +136,16 @@ const newSchema = new Schema(schema, options);
 
 newSchema.index({
     phone: "text",
-    phone_personal: "text",
     email: "text",
-    last_name: "text",
-    first_name: "text",
+    surname: "text",
+    given_name: "text",
 },
 {
     weights: {
         phone: 5,
-        phone_personal: 5,
         email: 4,
-        last_name: 3,
-        first_name: 1,
+        surname: 3,
+        given_name: 1,
     },
 });
 
