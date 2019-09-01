@@ -61,7 +61,7 @@ export const schemaCreate = {
     profession: Joi.string().optional(),
     employment_status: Joi.string().trim().valid(Object.values(EMPLOYMENT_STATUS)).optional(),
     students: Joi.array().optional(),
-    created_by: Joi.string().optional(),
+    created_by: Joi.string().required(),
 };
 
 export const schemaUpdate = {
