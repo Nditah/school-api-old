@@ -43,7 +43,7 @@ import mongoose_csv from "mongoose-csv";
 import { DATABASE, PAYMENT } from "../../../constants";
 import table from "./table";
 import Staff from "../staff/model";
-import AccountHeading from "../account-heading/model";
+import { AccountHeading } from "../accounting/model";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;

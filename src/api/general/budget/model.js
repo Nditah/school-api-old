@@ -20,7 +20,7 @@ import { DATABASE, SUBSIDIARY } from "../../../constants";
 // eslint-disable-next-line import/no-cycle
 import Staff from "../staff/model";
 import Office from "../office/model";
-import AccountHeading from "../account-heading/model";
+import { AccountHeading } from "../accounting/model";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;

@@ -18,7 +18,7 @@ import State from "../state/model";
 import Setting from "../setting/model";
 import Bank from "../bank/model";
 import DocumentType from "../document-type/model";
-import OffenceType from "../offence-type/model";
+import { OffenceType } from "../offence/model";
 import BankAccount from "../bank-account/model";
 import Material from "../material/model";
 import Category from "../category/model";
@@ -42,7 +42,8 @@ if (process.env.NODE_ENV === "development") {
 
 const setupUrls = [
     // `${host}/api/setups/preload/{subsidiary}/{folder}/{collection}`,
-    `${host}/api/setups/preload/general/accounting/accounting`,
+    `${host}/api/setups/preload/general/accounting/account_heading`,
+    `${host}/api/setups/preload/general/accounting/account_class`,
     `${host}/api/setups/preload/general/staff/staff`,
     `${host}/api/setups/preload/general/office/office`,
     `${host}/api/setups/preload/general/vehicle/vehicle`,
@@ -53,7 +54,7 @@ const setupUrls = [
     `${host}/api/setups/preload/general/bank/bank`,
     `${host}/api/setups/preload/general/bank-account/bank_account`,
     `${host}/api/setups/preload/general/document-type/document_type`,
-    `${host}/api/setups/preload/general/offence-type/offence_type`,
+    `${host}/api/setups/preload/general/offence/offence_type`,
     `${host}/api/setups/preload/general/stage/stage`,
 ];
 

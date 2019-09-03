@@ -1,15 +1,4 @@
 /* eslint-disable import/no-cycle */
-/**
- * @author 4Decoder
- * @property {ObjectId} id Table primaryKey
- * @property {String} type Type of fees to pay,
- * @property {ObjectId} classe_id Fees for a particular class(required),
- * @property {Number} amount Amount for each class,
- * @property {String} description Table description about fee payment
- * @property {ObjectId} created_by Table record created by
- * @property {ObjectId} updated_by Table record modified by
- * @description Table holds record of all cities with table_list
- */
 
 import Joi from "joi";
 import mongoose from "mongoose";
@@ -18,8 +7,6 @@ import mongoose_csv from "mongoose-csv";
 import { DATABASE, PAYMENT } from "../../../constants";
 import Staff from "../staff/model";
 import Voucher from "../voucher/model";
-// eslint-disable-next-line import/no-cycle
-import PayrollDetail from "../payroll-detail/model";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
@@ -41,6 +28,17 @@ export const feesUpdate = {
     updated_by: Joi.string().required(),
 };
 
+/**
+ * @author 4Decoder
+ * @property {ObjectId} id Table primaryKey
+ * @property {String} type Type of fees to pay,
+ * @property {ObjectId} classe_id Fees for a particular class(required),
+ * @property {Number} amount Amount for each class,
+ * @property {String} description Table description about fee payment
+ * @property {ObjectId} created_by Table record created by
+ * @property {ObjectId} updated_by Table record modified by
+ * @description Table holds record of all cities with table_list
+ */
 export const feesSchema = {
     type: { type: String },
     classe: { type: ObjectId, required: true },
@@ -117,7 +115,6 @@ export const feesPaymentSchema = {
 
 const newFeesPaymentSchema = new Schema(feesPaymentSchema, options);
 newFeesPaymentSchema.set("collection", "fees_payment");
-
 const FeesPayment = mongoose.model("FeesPayment", newFeesPaymentSchema);
 
 export { Fees, FeesPayment };
