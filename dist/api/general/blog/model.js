@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.schema = exports.schemaUpdate = exports.schemaCreate = undefined;
+exports.BlogComment = exports.Blog = exports.blogCommentSchema = exports.blogCommentUpdate = exports.blogCommentCreate = exports.blogSchema = exports.blogUpdate = exports.blogCreate = undefined;
 
 var _joi = require("joi");
 
@@ -27,16 +27,31 @@ var _model = require("../staff/model");
 
 var _model2 = _interopRequireDefault(_model);
 
-var _model3 = require("../blog-comment/model");
-
-var _model4 = _interopRequireDefault(_model3);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Schema = _mongoose2.default.Schema;
-// eslint-disable-next-line import/no-cycle
-
 // eslint-disable-next-line camelcase
+var Schema = _mongoose2.default.Schema;
+var ObjectId = Schema.Types.ObjectId;
+var blogCreate = exports.blogCreate = {
+    title: _joi2.default.string().required(),
+    body: _joi2.default.string().required(),
+    tags: _joi2.default.array().required(),
+    author_id: _joi2.default.string().optional(),
+    slug: _joi2.default.string().required(),
+    is_published: _joi2.default.boolean().optional(),
+    created_by: _joi2.default.string().required()
+};
+
+var blogUpdate = exports.blogUpdate = {
+    title: _joi2.default.string().optional(),
+    body: _joi2.default.string().optional(),
+    tags: _joi2.default.array().optional(),
+    author_id: _joi2.default.string().optional(),
+    slug: _joi2.default.string().optional(),
+    is_published: _joi2.default.boolean().optional(),
+    updated_by: _joi2.default.string().required()
+};
+
 /**
  * @author 4Dcoder
  * @property {ObjectId} id Blog primaryKey
@@ -50,29 +65,7 @@ var Schema = _mongoose2.default.Schema;
  * @property {String} is_published Blog published status
  * @description Blog model holds record of all popublications
  */
-
-var ObjectId = Schema.Types.ObjectId;
-var schemaCreate = exports.schemaCreate = {
-    title: _joi2.default.string().required(),
-    body: _joi2.default.string().required(),
-    tags: _joi2.default.array().required(),
-    author_id: _joi2.default.string().optional(),
-    slug: _joi2.default.string().required(),
-    is_published: _joi2.default.boolean().optional(),
-    created_by: _joi2.default.string().required()
-};
-
-var schemaUpdate = exports.schemaUpdate = {
-    title: _joi2.default.string().optional(),
-    body: _joi2.default.string().optional(),
-    tags: _joi2.default.array().optional(),
-    author_id: _joi2.default.string().optional(),
-    slug: _joi2.default.string().optional(),
-    is_published: _joi2.default.boolean().optional(),
-    updated_by: _joi2.default.string().required()
-};
-
-var schema = exports.schema = {
+var blogSchema = exports.blogSchema = {
     title: { type: String, required: [true, "Why no input?"] },
     body: { type: String, required: [true, "Why no input?"] },
     tags: [{ type: String, required: [true, "Why no input?"] }],
@@ -86,14 +79,51 @@ var schema = exports.schema = {
 var preload = _constants.DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
 var options = _constants.DATABASE.OPTIONS;
 
-var newSchema = new Schema(schema, options);
-newSchema.set("collection", "blog");
-
-var Blog = _mongoose2.default.model("Blog", newSchema);
-
+var newBlogSchema = new Schema(blogSchema, options);
+newBlogSchema.set("collection", "blog");
+var Blog = _mongoose2.default.model("Blog", newBlogSchema);
 if (preload) {
     Blog.insertMany(_table2.default);
 }
 
-exports.default = Blog;
+var blogCommentCreate = exports.blogCommentCreate = {
+    blog_id: _joi2.default.string().optional(),
+    related_comment_id: _joi2.default.string().optional(),
+    comment: _joi2.default.string().required(),
+    is_published: _joi2.default.boolean().optional(),
+    created_by: _joi2.default.string().required()
+};
+
+var blogCommentUpdate = exports.blogCommentUpdate = {
+    blog_id: _joi2.default.string().optional(),
+    related_comment_id: _joi2.default.string().optional(),
+    comment: _joi2.default.string().optional(),
+    is_published: _joi2.default.boolean().optional(),
+    updated_by: _joi2.default.string().required()
+};
+
+/**
+ * @author 4Dcoder
+ * @property {ObjectId} id BlogComment primaryKey
+ * @property {String} blog_id BlogComment blog ObjectId
+ * @property {String} related_comment_id BlogComment replied to comment ObjectId
+ * @property {String} comment BlogComment comment
+ * @property {String} is_published BlogComment published status
+ * @description BlogComment model holds record of all blog post comments and replies
+ */
+var blogCommentSchema = exports.blogCommentSchema = {
+    blog_id: { type: ObjectId, ref: "Blog" },
+    related_comment_id: { type: ObjectId, ref: "BlogComment" },
+    comment: { type: String, required: [true, "Why no input?"] },
+    is_published: { type: Boolean, default: false },
+    created_by: { type: ObjectId, ref: "Customer", required: true },
+    updated_by: { type: ObjectId }
+};
+
+var newBlogCommentSchema = new Schema(blogCommentSchema, options);
+newBlogCommentSchema.set("collection", "blog_comment");
+var BlogComment = _mongoose2.default.model("BlogComment", newBlogCommentSchema);
+
+exports.Blog = Blog;
+exports.BlogComment = BlogComment;
 //# sourceMappingURL=model.js.map

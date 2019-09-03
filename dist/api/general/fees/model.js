@@ -27,29 +27,12 @@ var _model3 = require("../voucher/model");
 
 var _model4 = _interopRequireDefault(_model3);
 
-var _model5 = require("../payroll-detail/model");
-
-var _model6 = _interopRequireDefault(_model5);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Schema = _mongoose2.default.Schema;
-// eslint-disable-next-line import/no-cycle
 
 // eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
-/**
- * @author 4Decoder
- * @property {ObjectId} id Table primaryKey
- * @property {String} type Type of fees to pay,
- * @property {ObjectId} classe_id Fees for a particular class(required),
- * @property {Number} amount Amount for each class,
- * @property {String} description Table description about fee payment
- * @property {ObjectId} created_by Table record created by
- * @property {ObjectId} updated_by Table record modified by
- * @description Table holds record of all cities with table_list
- */
 
+var Schema = _mongoose2.default.Schema;
 var ObjectId = Schema.Types.ObjectId;
 
 var PAYMENT_METHOD = _constants.PAYMENT.METHOD;
@@ -70,6 +53,17 @@ var feesUpdate = exports.feesUpdate = {
     updated_by: _joi2.default.string().required()
 };
 
+/**
+ * @author 4Decoder
+ * @property {ObjectId} id Table primaryKey
+ * @property {String} type Type of fees to pay,
+ * @property {ObjectId} classe_id Fees for a particular class(required),
+ * @property {Number} amount Amount for each class,
+ * @property {String} description Table description about fee payment
+ * @property {ObjectId} created_by Table record created by
+ * @property {ObjectId} updated_by Table record modified by
+ * @description Table holds record of all cities with table_list
+ */
 var feesSchema = exports.feesSchema = {
     type: { type: String },
     classe: { type: ObjectId, required: true },
@@ -146,7 +140,6 @@ var feesPaymentSchema = exports.feesPaymentSchema = {
 
 var newFeesPaymentSchema = new Schema(feesPaymentSchema, options);
 newFeesPaymentSchema.set("collection", "fees_payment");
-
 var FeesPayment = _mongoose2.default.model("FeesPayment", newFeesPaymentSchema);
 
 exports.Fees = Fees;

@@ -27,9 +27,7 @@ var _model3 = require("../office/model");
 
 var _model4 = _interopRequireDefault(_model3);
 
-var _model5 = require("../account-heading/model");
-
-var _model6 = _interopRequireDefault(_model5);
+var _model5 = require("../accounting/model");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

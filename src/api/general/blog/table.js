@@ -1,4 +1,6 @@
 import slugify from "slugify";
+import { toObjectId } from "../../../lib";
+import { DATABASE } from "../../../constants";
 
 const table = [
     {
@@ -12,4 +14,15 @@ const table = [
     },
 ];
 
-export default table;
+const blogBaseId = DATABASE.BASE_ID.ACCOUNT;
+const staffBaseId = DATABASE.BASE_ID.STAFF;
+
+const blogSeed = table.map((record, index) => {
+    const obj = Object.assign({}, record);
+    obj._id = toObjectId(blogBaseId, 1 + index);
+    obj.author = toObjectId(staffBaseId, record.author);
+    obj.created_by = toObjectId(staffBaseId, record.created_by);
+    return obj;
+});
+
+export default blogSeed;

@@ -61,7 +61,7 @@ export async function staffAuthenticate(loginPayload) {
         }
         user = await Staff
             .findOne(filter)
-            .populate("office")
+            .populate("office_id")
             .populate("role")
             .populate("bank_name")
             .populate("classe")
@@ -123,7 +123,7 @@ export async function parentAuthenticate(loginPayload) {
         }
         user = await Parent
             .findOne(filter)
-            .populate("students")
+            .populate("students_name")
             .populate("state")
             .populate("county")
             .populate("staff")
@@ -185,7 +185,6 @@ export async function studentAuthenticate(loginPayload) {
             .populate("hostel")
             .populate("state")
             .populate("county")
-            .populate("parents")
             .exec();
 
         if (!user) {
