@@ -91,13 +91,13 @@ var setCollection = exports.setCollection = function () {
                         Model = _model21.default;return _context2.abrupt("break", 44);
 
                     case 15:
-                        Model = _model27.default;return _context2.abrupt("break", 44);
+                        Model = _model26.default;return _context2.abrupt("break", 44);
 
                     case 17:
                         Model = _model13.default;return _context2.abrupt("break", 44);
 
                     case 19:
-                        Model = _model31.default;return _context2.abrupt("break", 44);
+                        Model = _model30.default;return _context2.abrupt("break", 44);
 
                     case 21:
                         Model = _model15.default;return _context2.abrupt("break", 44);
@@ -127,10 +127,10 @@ var setCollection = exports.setCollection = function () {
                         Model = _model23.default;return _context2.abrupt("break", 44);
 
                     case 39:
-                        Model = _model25.default;return _context2.abrupt("break", 44);
+                        Model = _model24.OffenceType;return _context2.abrupt("break", 44);
 
                     case 41:
-                        Model = _model29.default;return _context2.abrupt("break", 44);
+                        Model = _model28.default;return _context2.abrupt("break", 44);
 
                     case 43:
                         return _context2.abrupt("return", (0, _lib.fail)(res, 401, "Error invalid collection: " + collection));
@@ -197,13 +197,13 @@ var downloadCsv = exports.downloadCsv = function () {
                         Model = _model21.default;return _context3.abrupt("break", 41);
 
                     case 12:
-                        Model = _model27.default;return _context3.abrupt("break", 41);
+                        Model = _model26.default;return _context3.abrupt("break", 41);
 
                     case 14:
                         Model = _model13.default;return _context3.abrupt("break", 41);
 
                     case 16:
-                        Model = _model31.default;return _context3.abrupt("break", 41);
+                        Model = _model30.default;return _context3.abrupt("break", 41);
 
                     case 18:
                         Model = _model15.default;return _context3.abrupt("break", 41);
@@ -233,10 +233,10 @@ var downloadCsv = exports.downloadCsv = function () {
                         Model = _model23.default;return _context3.abrupt("break", 41);
 
                     case 36:
-                        Model = _model25.default;return _context3.abrupt("break", 41);
+                        Model = _model24.OffenceType;return _context3.abrupt("break", 41);
 
                     case 38:
-                        Model = _model29.default;return _context3.abrupt("break", 41);
+                        Model = _model28.default;return _context3.abrupt("break", 41);
 
                     case 40:
                         return _context3.abrupt("return", (0, _lib.fail)(res, 401, "Error invalid collection: " + collection));
@@ -298,13 +298,13 @@ var uploadCsv = exports.uploadCsv = function () {
                         Model = _model21.default;return _context4.abrupt("break", 42);
 
                     case 13:
-                        Model = _model27.default;return _context4.abrupt("break", 42);
+                        Model = _model26.default;return _context4.abrupt("break", 42);
 
                     case 15:
                         Model = _model13.default;return _context4.abrupt("break", 42);
 
                     case 17:
-                        Model = _model31.default;return _context4.abrupt("break", 42);
+                        Model = _model30.default;return _context4.abrupt("break", 42);
 
                     case 19:
                         Model = _model15.default;return _context4.abrupt("break", 42);
@@ -334,10 +334,10 @@ var uploadCsv = exports.uploadCsv = function () {
                         Model = _model23.default;return _context4.abrupt("break", 42);
 
                     case 37:
-                        Model = _model25.default;return _context4.abrupt("break", 42);
+                        Model = _model24.OffenceType;return _context4.abrupt("break", 42);
 
                     case 39:
-                        Model = _model29.default;return _context4.abrupt("break", 42);
+                        Model = _model28.default;return _context4.abrupt("break", 42);
 
                     case 41:
                         return _context4.abrupt("return", (0, _lib.fail)(res, 401, "Error invalid collection: " + collection));
@@ -451,21 +451,19 @@ var _model22 = require("../document-type/model");
 
 var _model23 = _interopRequireDefault(_model22);
 
-var _model24 = require("../offence-type/model");
+var _model24 = require("../offence/model");
 
-var _model25 = _interopRequireDefault(_model24);
+var _model25 = require("../bank-account/model");
 
-var _model26 = require("../bank-account/model");
+var _model26 = _interopRequireDefault(_model25);
 
-var _model27 = _interopRequireDefault(_model26);
+var _model27 = require("../material/model");
 
-var _model28 = require("../material/model");
+var _model28 = _interopRequireDefault(_model27);
 
-var _model29 = _interopRequireDefault(_model28);
+var _model29 = require("../category/model");
 
-var _model30 = require("../category/model");
-
-var _model31 = _interopRequireDefault(_model30);
+var _model30 = _interopRequireDefault(_model29);
 
 var _lib = require("../../../lib");
 
@@ -495,5 +493,5 @@ if (process.env.NODE_ENV === "development") {
 
 var setupUrls = [
 // `${host}/api/setups/preload/{subsidiary}/{folder}/{collection}`,
-host + "/api/setups/preload/general/accounting/accounting", host + "/api/setups/preload/general/staff/staff", host + "/api/setups/preload/general/office/office", host + "/api/setups/preload/general/vehicle/vehicle", host + "/api/setups/preload/general/county/county", host + "/api/setups/preload/general/state/state", host + "/api/setups/preload/general/table/table", host + "/api/setups/preload/general/setting/setting", host + "/api/setups/preload/general/bank/bank", host + "/api/setups/preload/general/bank-account/bank_account", host + "/api/setups/preload/general/document-type/document_type", host + "/api/setups/preload/general/offence-type/offence_type", host + "/api/setups/preload/general/stage/stage"];
+host + "/api/setups/preload/general/accounting/account_heading", host + "/api/setups/preload/general/accounting/account_class", host + "/api/setups/preload/general/staff/staff", host + "/api/setups/preload/general/office/office", host + "/api/setups/preload/general/vehicle/vehicle", host + "/api/setups/preload/general/county/county", host + "/api/setups/preload/general/state/state", host + "/api/setups/preload/general/table/table", host + "/api/setups/preload/general/setting/setting", host + "/api/setups/preload/general/bank/bank", host + "/api/setups/preload/general/bank-account/bank_account", host + "/api/setups/preload/general/document-type/document_type", host + "/api/setups/preload/general/offence/offence_type", host + "/api/setups/preload/general/stage/stage"];
 //# sourceMappingURL=controller.js.map
