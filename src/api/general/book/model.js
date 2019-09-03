@@ -33,7 +33,7 @@ export const schemaUpdate = {
     title: Joi.string().required(),
     author: Joi.string().required(),
     subsidiary: Joi.string().valid(Object.values(SUBSIDIARY)).optional(),
-    level: Joi.string().valid(Object.values(LEVEL)).optional(),
+    level: Joi.number().valid(Object.values(LEVEL)).optional(),
     description: Joi.string().optional(),
     subject: Joi.string().optional(),
     updated_by: Joi.string().required(),
