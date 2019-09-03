@@ -6,8 +6,7 @@ import rp from "request-promise";
 import csv from "fast-csv";
 import mongoose from "mongoose";
 
-import AccountHeading from "../account-heading/model";
-import AccountClass from "../account-class/model";
+import { AccountClass, AccountHeading } from "../accounting/model";
 import Table from "../table/model";
 import Staff from "../staff/model";
 import Office from "../office/model";
@@ -43,8 +42,7 @@ if (process.env.NODE_ENV === "development") {
 
 const setupUrls = [
     // `${host}/api/setups/preload/{subsidiary}/{folder}/{collection}`,
-    `${host}/api/setups/preload/general/account-class/account_class`,
-    `${host}/api/setups/preload/general/account-heading/account_heading`,
+    `${host}/api/setups/preload/general/accounting/accounting`,
     `${host}/api/setups/preload/general/staff/staff`,
     `${host}/api/setups/preload/general/office/office`,
     `${host}/api/setups/preload/general/vehicle/vehicle`,

@@ -82,55 +82,55 @@ var setCollection = exports.setCollection = function () {
                         break;
 
                     case 9:
-                        Model = _model4.default;return _context2.abrupt("break", 44);
+                        Model = _model.AccountClass;return _context2.abrupt("break", 44);
 
                     case 11:
-                        Model = _model2.default;return _context2.abrupt("break", 44);
+                        Model = _model.AccountHeading;return _context2.abrupt("break", 44);
 
                     case 13:
-                        Model = _model24.default;return _context2.abrupt("break", 44);
+                        Model = _model21.default;return _context2.abrupt("break", 44);
 
                     case 15:
-                        Model = _model30.default;return _context2.abrupt("break", 44);
+                        Model = _model27.default;return _context2.abrupt("break", 44);
 
                     case 17:
-                        Model = _model16.default;return _context2.abrupt("break", 44);
+                        Model = _model13.default;return _context2.abrupt("break", 44);
 
                     case 19:
-                        Model = _model34.default;return _context2.abrupt("break", 44);
+                        Model = _model31.default;return _context2.abrupt("break", 44);
 
                     case 21:
-                        Model = _model18.default;return _context2.abrupt("break", 44);
+                        Model = _model15.default;return _context2.abrupt("break", 44);
 
                     case 23:
-                        Model = _model6.default;return _context2.abrupt("break", 44);
+                        Model = _model3.default;return _context2.abrupt("break", 44);
 
                     case 25:
-                        Model = _model14.default;return _context2.abrupt("break", 44);
+                        Model = _model11.default;return _context2.abrupt("break", 44);
 
                     case 27:
-                        Model = _model20.default;return _context2.abrupt("break", 44);
+                        Model = _model17.default;return _context2.abrupt("break", 44);
 
                     case 29:
-                        Model = _model22.default;return _context2.abrupt("break", 44);
+                        Model = _model19.default;return _context2.abrupt("break", 44);
 
                     case 31:
-                        Model = _model8.default;return _context2.abrupt("break", 44);
+                        Model = _model5.default;return _context2.abrupt("break", 44);
 
                     case 33:
-                        Model = _model10.default;return _context2.abrupt("break", 44);
+                        Model = _model7.default;return _context2.abrupt("break", 44);
 
                     case 35:
-                        Model = _model12.default;return _context2.abrupt("break", 44);
+                        Model = _model9.default;return _context2.abrupt("break", 44);
 
                     case 37:
-                        Model = _model26.default;return _context2.abrupt("break", 44);
+                        Model = _model23.default;return _context2.abrupt("break", 44);
 
                     case 39:
-                        Model = _model28.default;return _context2.abrupt("break", 44);
+                        Model = _model25.default;return _context2.abrupt("break", 44);
 
                     case 41:
-                        Model = _model32.default;return _context2.abrupt("break", 44);
+                        Model = _model29.default;return _context2.abrupt("break", 44);
 
                     case 43:
                         return _context2.abrupt("return", (0, _lib.fail)(res, 401, "Error invalid collection: " + collection));
@@ -188,55 +188,55 @@ var downloadCsv = exports.downloadCsv = function () {
                         break;
 
                     case 6:
-                        Model = _model4.default;return _context3.abrupt("break", 41);
+                        Model = _model.AccountClass;return _context3.abrupt("break", 41);
 
                     case 8:
-                        Model = _model2.default;return _context3.abrupt("break", 41);
+                        Model = _model.AccountHeading;return _context3.abrupt("break", 41);
 
                     case 10:
-                        Model = _model24.default;return _context3.abrupt("break", 41);
+                        Model = _model21.default;return _context3.abrupt("break", 41);
 
                     case 12:
-                        Model = _model30.default;return _context3.abrupt("break", 41);
+                        Model = _model27.default;return _context3.abrupt("break", 41);
 
                     case 14:
-                        Model = _model16.default;return _context3.abrupt("break", 41);
+                        Model = _model13.default;return _context3.abrupt("break", 41);
 
                     case 16:
-                        Model = _model34.default;return _context3.abrupt("break", 41);
+                        Model = _model31.default;return _context3.abrupt("break", 41);
 
                     case 18:
-                        Model = _model18.default;return _context3.abrupt("break", 41);
+                        Model = _model15.default;return _context3.abrupt("break", 41);
 
                     case 20:
-                        Model = _model6.default;return _context3.abrupt("break", 41);
+                        Model = _model3.default;return _context3.abrupt("break", 41);
 
                     case 22:
-                        Model = _model14.default;return _context3.abrupt("break", 41);
+                        Model = _model11.default;return _context3.abrupt("break", 41);
 
                     case 24:
-                        Model = _model20.default;return _context3.abrupt("break", 41);
+                        Model = _model17.default;return _context3.abrupt("break", 41);
 
                     case 26:
-                        Model = _model22.default;return _context3.abrupt("break", 41);
+                        Model = _model19.default;return _context3.abrupt("break", 41);
 
                     case 28:
-                        Model = _model8.default;return _context3.abrupt("break", 41);
+                        Model = _model5.default;return _context3.abrupt("break", 41);
 
                     case 30:
-                        Model = _model10.default;return _context3.abrupt("break", 41);
+                        Model = _model7.default;return _context3.abrupt("break", 41);
 
                     case 32:
-                        Model = _model12.default;return _context3.abrupt("break", 41);
+                        Model = _model9.default;return _context3.abrupt("break", 41);
 
                     case 34:
-                        Model = _model26.default;return _context3.abrupt("break", 41);
+                        Model = _model23.default;return _context3.abrupt("break", 41);
 
                     case 36:
-                        Model = _model28.default;return _context3.abrupt("break", 41);
+                        Model = _model25.default;return _context3.abrupt("break", 41);
 
                     case 38:
-                        Model = _model32.default;return _context3.abrupt("break", 41);
+                        Model = _model29.default;return _context3.abrupt("break", 41);
 
                     case 40:
                         return _context3.abrupt("return", (0, _lib.fail)(res, 401, "Error invalid collection: " + collection));
@@ -289,55 +289,55 @@ var uploadCsv = exports.uploadCsv = function () {
                         break;
 
                     case 7:
-                        Model = _model4.default;return _context4.abrupt("break", 42);
+                        Model = _model.AccountClass;return _context4.abrupt("break", 42);
 
                     case 9:
-                        Model = _model2.default;return _context4.abrupt("break", 42);
+                        Model = _model.AccountHeading;return _context4.abrupt("break", 42);
 
                     case 11:
-                        Model = _model24.default;return _context4.abrupt("break", 42);
+                        Model = _model21.default;return _context4.abrupt("break", 42);
 
                     case 13:
-                        Model = _model30.default;return _context4.abrupt("break", 42);
+                        Model = _model27.default;return _context4.abrupt("break", 42);
 
                     case 15:
-                        Model = _model16.default;return _context4.abrupt("break", 42);
+                        Model = _model13.default;return _context4.abrupt("break", 42);
 
                     case 17:
-                        Model = _model34.default;return _context4.abrupt("break", 42);
+                        Model = _model31.default;return _context4.abrupt("break", 42);
 
                     case 19:
-                        Model = _model18.default;return _context4.abrupt("break", 42);
+                        Model = _model15.default;return _context4.abrupt("break", 42);
 
                     case 21:
-                        Model = _model6.default;return _context4.abrupt("break", 42);
+                        Model = _model3.default;return _context4.abrupt("break", 42);
 
                     case 23:
-                        Model = _model14.default;return _context4.abrupt("break", 42);
+                        Model = _model11.default;return _context4.abrupt("break", 42);
 
                     case 25:
-                        Model = _model20.default;return _context4.abrupt("break", 42);
+                        Model = _model17.default;return _context4.abrupt("break", 42);
 
                     case 27:
-                        Model = _model22.default;return _context4.abrupt("break", 42);
+                        Model = _model19.default;return _context4.abrupt("break", 42);
 
                     case 29:
-                        Model = _model8.default;return _context4.abrupt("break", 42);
+                        Model = _model5.default;return _context4.abrupt("break", 42);
 
                     case 31:
-                        Model = _model10.default;return _context4.abrupt("break", 42);
+                        Model = _model7.default;return _context4.abrupt("break", 42);
 
                     case 33:
-                        Model = _model12.default;return _context4.abrupt("break", 42);
+                        Model = _model9.default;return _context4.abrupt("break", 42);
 
                     case 35:
-                        Model = _model26.default;return _context4.abrupt("break", 42);
+                        Model = _model23.default;return _context4.abrupt("break", 42);
 
                     case 37:
-                        Model = _model28.default;return _context4.abrupt("break", 42);
+                        Model = _model25.default;return _context4.abrupt("break", 42);
 
                     case 39:
-                        Model = _model32.default;return _context4.abrupt("break", 42);
+                        Model = _model29.default;return _context4.abrupt("break", 42);
 
                     case 41:
                         return _context4.abrupt("return", (0, _lib.fail)(res, 401, "Error invalid collection: " + collection));
@@ -405,73 +405,67 @@ var _mongoose = require("mongoose");
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _model = require("../account-heading/model");
+var _model = require("../accounting/model");
 
-var _model2 = _interopRequireDefault(_model);
+var _model2 = require("../table/model");
 
-var _model3 = require("../account-class/model");
+var _model3 = _interopRequireDefault(_model2);
 
-var _model4 = _interopRequireDefault(_model3);
+var _model4 = require("../staff/model");
 
-var _model5 = require("../table/model");
+var _model5 = _interopRequireDefault(_model4);
 
-var _model6 = _interopRequireDefault(_model5);
+var _model6 = require("../office/model");
 
-var _model7 = require("../staff/model");
+var _model7 = _interopRequireDefault(_model6);
 
-var _model8 = _interopRequireDefault(_model7);
+var _model8 = require("../report/model");
 
-var _model9 = require("../office/model");
+var _model9 = _interopRequireDefault(_model8);
 
-var _model10 = _interopRequireDefault(_model9);
+var _model10 = require("../vehicle/model");
 
-var _model11 = require("../report/model");
+var _model11 = _interopRequireDefault(_model10);
 
-var _model12 = _interopRequireDefault(_model11);
+var _model12 = require("../budget/model");
 
-var _model13 = require("../vehicle/model");
+var _model13 = _interopRequireDefault(_model12);
 
-var _model14 = _interopRequireDefault(_model13);
+var _model14 = require("../county/model");
 
-var _model15 = require("../budget/model");
+var _model15 = _interopRequireDefault(_model14);
 
-var _model16 = _interopRequireDefault(_model15);
+var _model16 = require("../state/model");
 
-var _model17 = require("../county/model");
+var _model17 = _interopRequireDefault(_model16);
 
-var _model18 = _interopRequireDefault(_model17);
+var _model18 = require("../setting/model");
 
-var _model19 = require("../state/model");
+var _model19 = _interopRequireDefault(_model18);
 
-var _model20 = _interopRequireDefault(_model19);
+var _model20 = require("../bank/model");
 
-var _model21 = require("../setting/model");
+var _model21 = _interopRequireDefault(_model20);
 
-var _model22 = _interopRequireDefault(_model21);
+var _model22 = require("../document-type/model");
 
-var _model23 = require("../bank/model");
+var _model23 = _interopRequireDefault(_model22);
 
-var _model24 = _interopRequireDefault(_model23);
+var _model24 = require("../offence-type/model");
 
-var _model25 = require("../document-type/model");
+var _model25 = _interopRequireDefault(_model24);
 
-var _model26 = _interopRequireDefault(_model25);
+var _model26 = require("../bank-account/model");
 
-var _model27 = require("../offence-type/model");
+var _model27 = _interopRequireDefault(_model26);
 
-var _model28 = _interopRequireDefault(_model27);
+var _model28 = require("../material/model");
 
-var _model29 = require("../bank-account/model");
+var _model29 = _interopRequireDefault(_model28);
 
-var _model30 = _interopRequireDefault(_model29);
+var _model30 = require("../category/model");
 
-var _model31 = require("../material/model");
-
-var _model32 = _interopRequireDefault(_model31);
-
-var _model33 = require("../category/model");
-
-var _model34 = _interopRequireDefault(_model33);
+var _model31 = _interopRequireDefault(_model30);
 
 var _lib = require("../../../lib");
 
@@ -501,5 +495,5 @@ if (process.env.NODE_ENV === "development") {
 
 var setupUrls = [
 // `${host}/api/setups/preload/{subsidiary}/{folder}/{collection}`,
-host + "/api/setups/preload/general/account-class/account_class", host + "/api/setups/preload/general/account-heading/account_heading", host + "/api/setups/preload/general/staff/staff", host + "/api/setups/preload/general/office/office", host + "/api/setups/preload/general/vehicle/vehicle", host + "/api/setups/preload/general/county/county", host + "/api/setups/preload/general/state/state", host + "/api/setups/preload/general/table/table", host + "/api/setups/preload/general/setting/setting", host + "/api/setups/preload/general/bank/bank", host + "/api/setups/preload/general/bank-account/bank_account", host + "/api/setups/preload/general/document-type/document_type", host + "/api/setups/preload/general/offence-type/offence_type", host + "/api/setups/preload/general/stage/stage"];
+host + "/api/setups/preload/general/accounting/accounting", host + "/api/setups/preload/general/staff/staff", host + "/api/setups/preload/general/office/office", host + "/api/setups/preload/general/vehicle/vehicle", host + "/api/setups/preload/general/county/county", host + "/api/setups/preload/general/state/state", host + "/api/setups/preload/general/table/table", host + "/api/setups/preload/general/setting/setting", host + "/api/setups/preload/general/bank/bank", host + "/api/setups/preload/general/bank-account/bank_account", host + "/api/setups/preload/general/document-type/document_type", host + "/api/setups/preload/general/offence-type/offence_type", host + "/api/setups/preload/general/stage/stage"];
 //# sourceMappingURL=controller.js.map

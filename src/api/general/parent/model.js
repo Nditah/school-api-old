@@ -28,7 +28,6 @@ import mongoose from "mongoose";
 // eslint-disable-next-line camelcase
 import mongoose_csv from "mongoose-csv";
 import { DATABASE, GENDER, EMPLOYMENT_STATUS, MARITAL_STATUS } from "../../../constants";
-// import table from "./table";
 import Student from "../student/model";
 import State from "../state/model";
 import County from "../county/model";

@@ -1,9 +1,7 @@
 import express from "express";
 
 // Routes
-import accountClassRoute from "./account-class";
-import accountHeadingRoute from "./account-heading";
-import accountPostingRoute from "./account-posting";
+import accountingRoute from "./accounting";
 import admissionRoute from "./admission";
 import assetAssignmentRoute from "./asset-assignment";
 import assetRoute from "./asset";
@@ -60,9 +58,7 @@ import unionbankRoute from "./unionbank";
 const router = express.Router();
 
 // Use Routes
-router.use(accountClassRoute);
-router.use(accountHeadingRoute);
-router.use(accountPostingRoute);
+router.use(accountingRoute);
 router.use(admissionRoute);
 router.use(assetAssignmentRoute);
 router.use(assetRoute);

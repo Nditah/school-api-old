@@ -8,17 +8,9 @@ var _express = require("express");
 
 var _express2 = _interopRequireDefault(_express);
 
-var _accountClass = require("./account-class");
+var _accounting = require("./accounting");
 
-var _accountClass2 = _interopRequireDefault(_accountClass);
-
-var _accountHeading = require("./account-heading");
-
-var _accountHeading2 = _interopRequireDefault(_accountHeading);
-
-var _accountPosting = require("./account-posting");
-
-var _accountPosting2 = _interopRequireDefault(_accountPosting);
+var _accounting2 = _interopRequireDefault(_accounting);
 
 var _admission = require("./admission");
 
@@ -236,9 +228,7 @@ var router = _express2.default.Router();
 
 
 // Routes
-router.use(_accountClass2.default);
-router.use(_accountHeading2.default);
-router.use(_accountPosting2.default);
+router.use(_accounting2.default);
 router.use(_admission2.default);
 router.use(_assetAssignment2.default);
 router.use(_asset2.default);
