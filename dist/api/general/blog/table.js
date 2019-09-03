@@ -8,6 +8,10 @@ var _slugify = require("slugify");
 
 var _slugify2 = _interopRequireDefault(_slugify);
 
+var _lib = require("../../../lib");
+
+var _constants = require("../../../constants");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var table = [{
@@ -19,5 +23,16 @@ var table = [{
     created_by: 1
 }];
 
-exports.default = table;
+var blogBaseId = _constants.DATABASE.BASE_ID.ACCOUNT;
+var staffBaseId = _constants.DATABASE.BASE_ID.STAFF;
+
+var blogSeed = table.map(function (record, index) {
+    var obj = Object.assign({}, record);
+    obj._id = (0, _lib.toObjectId)(blogBaseId, 1 + index);
+    obj.author = (0, _lib.toObjectId)(staffBaseId, record.author);
+    obj.created_by = (0, _lib.toObjectId)(staffBaseId, record.created_by);
+    return obj;
+});
+
+exports.default = blogSeed;
 //# sourceMappingURL=table.js.map

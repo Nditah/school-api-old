@@ -1,10 +1,9 @@
-/**
- * @author 4Decoder
- * @description Offence holds record of all offences involving company vehicles
- */
 import express from "express";
 import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, updateRecord, deleteRecord } from "./controller";
+import {
+    fetchOffence, createOffence, updateOffence, deleteOffence,
+    fetchOffenceType, createOffenceType, updateOffenceType, deleteOffenceType,
+} from "./controller";
 
 const router = express.Router();
 
@@ -19,11 +18,11 @@ const router = express.Router();
  * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
  * @apiParam {String} sort how records would be arranged in alphabet (optional)
  * @apiParam {String} projection list of record's attributes to retrieve (optional)
- * @apiDescription Records  of account headings belonging to one classification
+ * @apiDescription Offences  of account headings belonging to one classification
  * @apiSuccess {Object[]} Array of Objects of records.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get("/offences", [checkAuth, isValidStaff], fetchRecord);
+router.get("/offences", [checkAuth, isValidStaff], fetchOffence);
 
 /**
  * @api {post} /api/v1/offences Create offences
@@ -48,7 +47,7 @@ router.get("/offences", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Offence not found.
  * @apiError 401 master access only.
  */
-router.post("/offences", [checkAuth, isValidStaff], createRecord);
+router.post("/offences", [checkAuth, isValidStaff], createOffence);
 
 /**
  * @api {put} /api/v1/offences/{recordId} Update offences
@@ -74,7 +73,7 @@ router.post("/offences", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 Offence not found.
  * @apiError 401 master access only.
  */
-router.put("/offences/:recordId", [checkAuth, isValidStaff], updateRecord);
+router.put("/offences/:recordId", [checkAuth, isValidStaff], updateOffence);
 
 /**
  * @api {delete} /api/v1/offences/{recordId} Delete offences
@@ -86,6 +85,75 @@ router.put("/offences/:recordId", [checkAuth, isValidStaff], updateRecord);
  * @apiError 404 Offence not found.
  * @apiError 401 master access only.
  */
-router.delete("/offences/:recordId", [checkAuth, isValidStaff], deleteRecord);
+router.delete("/offences/:recordId", [checkAuth, isValidStaff], deleteOffence);
+
+//* ================ OFFENCE TYPE ===================
+
+/**
+ * @api {get} /api/v1/offence-types?id={recordId} Retrieve one or all records
+ * @apiName RetrieveOffenceType
+ * @apiGroup OffenceType
+ * @apiExample {curl} Example usage for retieving a single record:
+ *      curl -i api/offence-types?
+ * @apiParam {Object} filter query condition (optional)
+ * @apiParam {Number} skip Number of records to offset by (optional)
+ * @apiParam {Number} limit Maximum Number of records to retrieve (optional)
+ * @apiParam {String} sort how records would be arranged in alphabet (optional)
+ * @apiParam {String} projection list of record's attributes to retrieve (optional)
+ * @apiDescription OffenceTypes  of account headings belonging to one classification
+ * @apiSuccess {Object[]} Array of Objects of records.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ */
+router.get("/offence-types", [checkAuth, isValidStaff], fetchOffenceType);
+
+/**
+ * @api {post} /api/v1/offence-types Create offence-types
+ * @apiName CreateOffenceType
+ * @apiGroup OffenceType
+ * @apiParam {String} code OffenceType code (required)
+ * @apiParam {String} offender_type OffenceType offender_type "PARTNER", "STAFF" (required)
+ * @apiParam {String} name OffenceType name (required)
+ * @apiParam {Number} fine OffenceType fine (required)
+ * @apiParam {String} discipline OffenceType discipline
+ * "WARNING", "SUSPENSION", "DISMISSED" (required)
+ * @apiParam {Number} suspension_days OffenceType suspension_days (required)
+ * @apiParam {String} description OffenceType description (required)
+ * @apiSuccess {Object} OffenceType OffenceType's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 OffenceType not found.
+ * @apiError 401 master access only.
+ */
+router.post("/offence-types", [checkAuth, isValidStaff], createOffenceType);
+
+/**
+ * @api {put} /api/v1/offence-types/{recordId} Update offence-types
+ * @apiName UpdateOffenceType
+ * @apiGroup OffenceType
+ * @apiPermission master
+ * @apiParam {String} code OffenceType code
+ * @apiParam {String} offender_type OffenceType offender_type "PARTNER", "STAFF"
+ * @apiParam {String} name OffenceType name
+ * @apiParam {Number} fine OffenceType fine
+ * @apiParam {String} discipline OffenceType discipline
+ * "WARNING", "SUSPENSION", "DISMISSED"
+ * @apiParam {Number} suspension_days OffenceType suspension_days
+ * @apiParam {String} description OffenceType description
+ * @apiSuccess {Object} OffenceType OffenceType's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 OffenceType not found.
+ * @apiError 401 master access only.
+ */
+router.put("/offence-types/:recordId", [checkAuth, isValidStaff], updateOffenceType);
+
+/**
+ * @api {delete} /api/v1/offence-types/{recordId} Delete offence-types
+ * @apiName DeleteOffenceType
+ * @apiGroup OffenceType
+ * @apiParam {String} recordId ObjectId
+ * @apiSuccess (Success 204) 204 No Content.
+ * @apiError 404 OffenceType not found.
+ * @apiError 401 master access only.
+ */
+router.delete("/offence-types/:recordId", [checkAuth, isValidStaff], deleteOffenceType);
 
 export default router;

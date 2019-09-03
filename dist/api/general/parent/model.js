@@ -37,8 +37,6 @@ var _model8 = _interopRequireDefault(_model7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import table from "./table";
-
 // eslint-disable-next-line camelcase
 /* eslint-disable import/no-cycle */
 /**
