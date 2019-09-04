@@ -44,7 +44,7 @@ var schemaCreate = exports.schemaCreate = {
     title: _joi2.default.string().required(),
     author: _joi2.default.string().required(),
     subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
-    level: _joi2.default.string().valid(Object.values(_constants.LEVEL)).optional(),
+    level: _joi2.default.number().valid(Object.values(_constants.LEVEL)).optional(),
     description: _joi2.default.string().optional(),
     subject: _joi2.default.string().optional(),
     created_by: _joi2.default.string().required()
@@ -54,7 +54,7 @@ var schemaUpdate = exports.schemaUpdate = {
     title: _joi2.default.string().required(),
     author: _joi2.default.string().required(),
     subsidiary: _joi2.default.string().valid(Object.values(_constants.SUBSIDIARY)).optional(),
-    level: _joi2.default.string().valid(Object.values(_constants.LEVEL)).optional(),
+    level: _joi2.default.number().valid(Object.values(_constants.LEVEL)).optional(),
     description: _joi2.default.string().optional(),
     subject: _joi2.default.string().optional(),
     updated_by: _joi2.default.string().required()
