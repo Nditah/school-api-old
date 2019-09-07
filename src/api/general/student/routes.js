@@ -1,7 +1,3 @@
-/**
- * @author 4Decoder
- * @description Student holds record of all students
- */
 import express from "express";
 import { checkAuth, isValidStaff } from "../../../middleware/authorization";
 import { fetchRecord, createRecord, updateRecord, deleteRecord, login } from "./controller";
@@ -53,7 +49,7 @@ router.get("/students", [checkAuth, isValidStaff], fetchRecord);
  * @apiError 404 Student not found.
  * @apiError 401 master access only.
  */
-router.post("/students", createRecord);
+router.post("/students", [checkAuth, isValidStaff], createRecord);
 
 /**
  * @api {put} /api/v1/students/{recordId} Update students
@@ -83,7 +79,7 @@ router.post("/students", createRecord);
  * @apiError 404 Student not found.
  * @apiError 401 master access only.
  */
-router.put("/students/:recordId", [checkAuth], updateRecord);
+router.put("/students/:recordId", [checkAuth, isValidStaff], updateRecord);
 
 /**
  * @api {delete} /api/v1/students/{recordId} Delete students

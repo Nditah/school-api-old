@@ -58,7 +58,7 @@ router.get("/parents", [_authorization.checkAuth, _authorization.isValidStaff], 
  * @apiError 404 Parent not found.
  * @apiError 401 master access only.
  */
-router.post("/parents", _controller.createRecord);
+router.post("/parents", [_authorization.checkAuth, _authorization.isValidStaff], _controller.createRecord);
 
 /**
  * @api {put} /api/v1/parents/{recordId} Update parents
@@ -87,7 +87,7 @@ router.post("/parents", _controller.createRecord);
  * @apiError 404 Parent not found.
  * @apiError 401 master access only.
  */
-router.put("/parents/:recordId", [_authorization.checkAuth], _controller.updateRecord);
+router.put("/parents/:recordId", [_authorization.checkAuth, _authorization.isValidStaff], _controller.updateRecord);
 
 /**
  * @api {delete} /api/v1/parents/{recordId} Delete parents
