@@ -7,7 +7,6 @@
  * @property {String} middle_name Parent middle_name (optional)
  * @property {String} last_name Parent first_name (optional)
  * @property {String} gender Parent gender (optional)
- * @property {Date} birth_date Parent birth_date (optional)
  * @property {String} marital_status Parent marital_status (optional)
  * @property {String} address Parent address (optional)
  * @property {ObjectId} state Parent state (optional)
@@ -49,7 +48,6 @@ export const schemaCreate = {
     surname: Joi.string().optional(),
     given_name: Joi.string().optional(),
     gender: Joi.string().optional(),
-    birth_date: Joi.date().optional(),
     marital_status: Joi.string().optional(),
     address: Joi.string().optional(),
     state: Joi.string().optional(),
@@ -68,7 +66,6 @@ export const schemaUpdate = {
     surname: Joi.string().optional(),
     given_name: Joi.string().optional(),
     gender: Joi.string().optional(),
-    birth_date: Joi.date().optional(),
     marital_status: Joi.string().optional(),
     address: Joi.string().optional(),
     state: Joi.string().optional(),
@@ -92,7 +89,6 @@ export const schema = {
         default: GENDER.MALE,
         required: [false, "Why no gender?"],
     },
-    birth_date: { type: Date, required: [true, "Date is required"] },
     marital_status: {
         type: String,
         enum: Object.values(MARITAL_STATUS),
