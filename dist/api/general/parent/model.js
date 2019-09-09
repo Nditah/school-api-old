@@ -47,7 +47,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {String} middle_name Parent middle_name (optional)
  * @property {String} last_name Parent first_name (optional)
  * @property {String} gender Parent gender (optional)
- * @property {Date} birth_date Parent birth_date (optional)
  * @property {String} marital_status Parent marital_status (optional)
  * @property {String} address Parent address (optional)
  * @property {ObjectId} state Parent state (optional)
@@ -78,7 +77,6 @@ var schemaCreate = exports.schemaCreate = {
     surname: _joi2.default.string().optional(),
     given_name: _joi2.default.string().optional(),
     gender: _joi2.default.string().optional(),
-    birth_date: _joi2.default.date().optional(),
     marital_status: _joi2.default.string().optional(),
     address: _joi2.default.string().optional(),
     state: _joi2.default.string().optional(),
@@ -97,7 +95,6 @@ var schemaUpdate = exports.schemaUpdate = {
     surname: _joi2.default.string().optional(),
     given_name: _joi2.default.string().optional(),
     gender: _joi2.default.string().optional(),
-    birth_date: _joi2.default.date().optional(),
     marital_status: _joi2.default.string().optional(),
     address: _joi2.default.string().optional(),
     state: _joi2.default.string().optional(),
@@ -121,7 +118,6 @@ var schema = exports.schema = {
         default: _constants.GENDER.MALE,
         required: [false, "Why no gender?"]
     },
-    birth_date: { type: Date, required: [true, "Date is required"] },
     marital_status: {
         type: String,
         enum: Object.values(_constants.MARITAL_STATUS),
