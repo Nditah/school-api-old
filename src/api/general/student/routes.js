@@ -30,7 +30,6 @@ router.get("/students", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {String} given_name Student given_name (optional)
  * @apiParam {String} last_name Student surname (optional)
  * @apiParam {String} gender Student gender (optional)
- * @apiParam {Date} birth_date Student birth_date (optional)
  * @apiParam {String} address Student address (optional)
  * @apiParam {ObjectId} state Student state (optional)
  * @apiParam {ObjectId} county Student county (optional)
@@ -44,6 +43,8 @@ router.get("/students", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {ObjectId} hostel Student hostel (optional)
  * @apiParam {String} photo Student photo (optional)
  * @apiParam {Array} parents Student parents Array<ObjectId> (optional)
+ * @apiParam {String} reg_no Student reg_no (optional)
+ * @apiParam {Date} admission_year Student admission_year (optional)
  * @apiSuccess {Object} Student Student's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Student not found.
@@ -60,7 +61,6 @@ router.post("/students", [checkAuth, isValidStaff], createRecord);
  * @apiParam {String} surname Student surname (optional)
  * @apiParam {String} given_name Student given_name (optional)
  * @apiParam {String} gender Student gender (optional)
- * @apiParam {Date} birth_date Student birth_date (optional)
  * @apiParam {String} address Student address (optional)
  * @apiParam {String} state Student state (optional)
  * @apiParam {String} county Student county (optional)
@@ -74,6 +74,8 @@ router.post("/students", [checkAuth, isValidStaff], createRecord);
  * @apiParam {ObjectId} hostel Student hostel (optional)
  * @apiParam {String} photo Student photo (optional)
  * @apiParam {Array} parents Student parents Array<ObjectId> (optional)
+ * @apiParam {String} reg_no Student reg_no (optional)
+ * @apiParam {Date} admission_year Student admission_year (optional)
  * @apiSuccess {Object} Student Student's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Student not found.

@@ -61,11 +61,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {String} password Student password (optional)
  * @property {String} religion Student religion (optional)
  * @property {ObjectId} classe Student classe (optional)
- * @property {String} level Student level (optional)
+ * @property {Number} level Student level (optional)
  * @property {String} subsidiary Student subsidiary (required)
  * @property {ObjectId} hostel Student hostel (optional)
  * @property {String} photo Student photo (optional)
  * @property {Array} parents Student parents Array<ObjectId> (optional)
+ * @property {String} reg_no Student reg_no (optional)
+ * @property {Date} admission_year Student admission_year (optional)
  * @property {ObjectId} created_by Student record created by
  * @property {ObjectId} updated_by Student record modified by
  * @description Student holds record of all students in the school.
@@ -94,11 +96,13 @@ var schemaCreate = exports.schemaCreate = {
     password: _joi2.default.string().optional(),
     religion: _joi2.default.string().optional(),
     classe: _joi2.default.string().trim().optional(),
-    level: _joi2.default.string().trim().optional(),
+    level: _joi2.default.number().trim().optional(),
     subsidiary: _joi2.default.string().trim().valid(Object.values(_constants.SUBSIDIARY)).optional(),
     hostel: _joi2.default.string().trim().optional(),
     photo: _joi2.default.string().optional(),
     parents: _joi2.default.array().optional(),
+    reg_no: _joi2.default.string().trim().optional(),
+    admission_year: _joi2.default.date().optional(),
     created_by: _joi2.default.string().required()
 };
 
@@ -115,11 +119,13 @@ var schemaUpdate = exports.schemaUpdate = {
     password: _joi2.default.string().optional(),
     religion: _joi2.default.string().optional(),
     classe: _joi2.default.string().trim().optional(),
-    level: _joi2.default.string().trim().optional(),
+    level: _joi2.default.number().trim().optional(),
     subsidiary: _joi2.default.string().trim().valid(Object.values(_constants.SUBSIDIARY)).optional(),
     hostel: _joi2.default.string().trim().optional(),
     photo: _joi2.default.string().optional(),
     parents: _joi2.default.array().optional(),
+    reg_no: _joi2.default.string().trim().optional(),
+    admission_year: _joi2.default.date().optional(),
     updated_by: _joi2.default.string().required()
 };
 
@@ -152,7 +158,7 @@ var schema = exports.schema = {
     password: { type: String, required: [false, "Why no password?"] },
     religion: { type: String },
     classe: { type: ObjectId, ref: "Classe", required: [false, "Why no class?"] },
-    level: { type: String },
+    level: { type: Number },
     subsidiary: {
         type: String,
         enum: Object.values(_constants.SUBSIDIARY),
@@ -161,6 +167,10 @@ var schema = exports.schema = {
     hostel: { type: ObjectId, ref: "HostelAllocation" },
     photo: { type: String },
     parents: [{ type: ObjectId, ref: "Parent" }],
+    admission_year: { type: Date },
+    reg_no: { type: String },
+    deleted: { type: Boolean, default: false, required: true },
+    deleted_at: { type: Date },
     created_by: { type: ObjectId, ref: "Staff", required: true },
     updated_by: { type: ObjectId, ref: "Staff" }
 };
