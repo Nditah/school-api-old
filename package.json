@@ -21,7 +21,11 @@
     "type": "git",
     "url": "git+https://github.com/Nditah/school-api.git"
   },
-  "keywords": ["Express", "RestAPI", "MongoDB"],
+  "keywords": [
+    "Express",
+    "RestAPI",
+    "MongoDB"
+  ],
   "dependencies": {
     "api-query-params": "^4.9.0",
     "app-root-path": "^2.1.0",
