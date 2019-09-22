@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.createWebhook = exports.createRecord = exports.createOtp = exports.fetchRecord = undefined;
+exports.createRecord = exports.createOtp = exports.fetchRecord = undefined;
 
 var fetchRecord = exports.fetchRecord = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, res) {
@@ -150,147 +150,52 @@ var createOtp = exports.createOtp = function () {
     };
 }();
 
-// eslint-disable-next-line complexity
-
-
 var createRecord = exports.createRecord = function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res) {
-        var data, _Joi$validate, error, recipientArray, user, sentSms, myArray, sendingSms, totalSms, resolvedFinalArray, data2, result2;
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(req, res) {
+        var data, _Joi$validate, error, result;
 
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
             while (1) {
-                switch (_context4.prev = _context4.next) {
+                switch (_context3.prev = _context3.next) {
                     case 0:
                         data = req.body;
-
-                        data.direction = "OUTBOUND";
                         _Joi$validate = _joi2.default.validate(data, _model.schemaCreate), error = _Joi$validate.error;
 
                         if (!error) {
-                            _context4.next = 5;
+                            _context3.next = 4;
                             break;
                         }
 
-                        return _context4.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
+                        return _context3.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
 
-                    case 5:
-                        // eslint-disable-next-line max-len
-                        recipientArray = data.recipient;
-                        _context4.prev = 6;
-                        _context4.next = 9;
-                        return _model4.default.findOne({ _id: data.created_by }).exec();
+                    case 4:
+                        _context3.prev = 4;
+                        _context3.next = 7;
+                        return (0, _services.sendSmsAsync)(data.recipient, data.message);
 
-                    case 9:
-                        user = _context4.sent;
-                        _context4.next = 12;
-                        return _model2.default.count({ created_by: data.created_by });
+                    case 7:
+                        result = _context3.sent;
+
+                        console.log(result);
+                        return _context3.abrupt("return", (0, _lib.success)(res, 201, result, result.message));
 
                     case 12:
-                        sentSms = _context4.sent;
-                        myArray = (0, _lib.stringToArrayPhone)(recipientArray) || [];
-                        sendingSms = myArray.length;
-                        totalSms = sentSms + sendingSms;
+                        _context3.prev = 12;
+                        _context3.t0 = _context3["catch"](4);
 
-                        if (!(totalSms > user.sms_units)) {
-                            _context4.next = 18;
-                            break;
-                        }
+                        logger.error(_context3.t0);
+                        return _context3.abrupt("return", (0, _lib.fail)(res, 500, "Error creating record. " + _context3.t0.message));
 
-                        return _context4.abrupt("return", (0, _lib.fail)(res, 422, "Error! You have " + user.sms_units + " units left. You cannot send " + sendingSms));
-
-                    case 18:
-                        _context4.next = 20;
-                        return Promise.all(myArray.map(function () {
-                            var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(phone) {
-                                var send, newRecord, result;
-                                return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                                    while (1) {
-                                        switch (_context3.prev = _context3.next) {
-                                            case 0:
-                                                _context3.next = 2;
-                                                return (0, _services.sendSmsAsync)(phone, data.message);
-
-                                            case 2:
-                                                send = _context3.sent;
-
-                                                data.sid = send.sid;
-                                                data.recipient = phone;
-                                                newRecord = new _model2.default(data);
-                                                _context3.next = 8;
-                                                return newRecord.save();
-
-                                            case 8:
-                                                result = _context3.sent;
-                                                return _context3.abrupt("return", result);
-
-                                            case 10:
-                                            case "end":
-                                                return _context3.stop();
-                                        }
-                                    }
-                                }, _callee3);
-                            }));
-
-                            return function (_x7) {
-                                return _ref4.apply(this, arguments);
-                            };
-                        }() // important to return the value
-                        ));
-
-                    case 20:
-                        resolvedFinalArray = _context4.sent;
-                        data2 = { sms_units: user.sms_units - sendingSms };
-                        _context4.next = 24;
-                        return _model4.default.findOneAndUpdate({ _id: data.created_by }, data2, { new: true });
-
-                    case 24:
-                        result2 = _context4.sent;
-
-                        console.log(result2.sms_units);
-                        return _context4.abrupt("return", (0, _lib.success)(res, 201, resolvedFinalArray, "Record created successfully!"));
-
-                    case 29:
-                        _context4.prev = 29;
-                        _context4.t0 = _context4["catch"](6);
-
-                        logger.error(_context4.t0);
-                        return _context4.abrupt("return", (0, _lib.fail)(res, 500, "Error creating record. " + _context4.t0.message));
-
-                    case 33:
+                    case 16:
                     case "end":
-                        return _context4.stop();
+                        return _context3.stop();
                 }
             }
-        }, _callee4, null, [[6, 29]]);
+        }, _callee3, null, [[4, 12]]);
     }));
 
     return function createRecord(_x5, _x6) {
         return _ref3.apply(this, arguments);
-    };
-}();
-
-var createWebhook = exports.createWebhook = function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(req, res) {
-        var data;
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
-            while (1) {
-                switch (_context5.prev = _context5.next) {
-                    case 0:
-                        data = req.body;
-
-                        (0, _services.receiveSms)(req, res);
-                        logger.info("Operation was successful", data);
-
-                    case 3:
-                    case "end":
-                        return _context5.stop();
-                }
-            }
-        }, _callee5);
-    }));
-
-    return function createWebhook(_x8, _x9) {
-        return _ref5.apply(this, arguments);
     };
 }();
 

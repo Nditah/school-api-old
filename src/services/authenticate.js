@@ -61,12 +61,10 @@ export async function staffAuthenticate(loginPayload) {
         }
         user = await Staff
             .findOne(filter)
-            .populate("office_id")
+            .populate("office")
             .populate("role")
-            .populate("bank_name")
             .populate("classe")
             .populate("subject")
-            .populate("bank_name")
             .populate("state")
             .populate("county")
             .exec();
@@ -79,6 +77,7 @@ export async function staffAuthenticate(loginPayload) {
                 throw new Error(`Authentication failed. OTP Access is ${user.otp_access}`);
             }
         }
+        console.log("User is coming *****", user);
         if (!(bcryptjs.compareSync(password || "", user.password)
         || (bcryptjs.compareSync(otp || "", user.otp) && user.otp_access))) {
             throw new Error("Wrong password or otp credentials.");

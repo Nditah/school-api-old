@@ -19,12 +19,10 @@ const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
 export const schemaCreate = {
-    sid: Joi.string().optional(),
-    sender: Joi.string().required(),
+    sender: Joi.string().optional(),
+    sender_as: Joi.string().optional(),
     recipient: Joi.string().optional(),
     message: Joi.string().required(),
-    direction: Joi.string().valid("INBOUND", "OUTBOUND").optional(),
-    created_by: Joi.string().required(),
 };
 
 export const schema = {

@@ -2,8 +2,8 @@ import Joi from "joi";
 import log4js from "log4js";
 import aqp from "api-query-params";
 import Sms, { schemaCreate } from "./model";
-import { success, fail, notFound, generateOtp, hash, stringToArrayPhone } from "../../../lib";
-import { receiveSms, sendSmsAsync } from "../../../services";
+import { success, fail, notFound, generateOtp, hash } from "../../../lib";
+import { sendSmsAsync } from "../../../services";
 import Staff from "../staff/model";
 import Student from "../student/model";
 
@@ -73,46 +73,16 @@ export async function createOtp(req, res) {
     }
 }
 
-// eslint-disable-next-line complexity
 export async function createRecord(req, res) {
     const data = req.body;
-    data.direction = "OUTBOUND";
     const { error } = Joi.validate(data, schemaCreate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
-    // eslint-disable-next-line max-len
-    const { recipient: recipientArray } = data;
     try {
-        const user = await Staff.findOne({ _id: data.created_by }).exec();
-        const sentSms = await Sms.count({ created_by: data.created_by });
-        const myArray = stringToArrayPhone(recipientArray) || [];
-        const sendingSms = myArray.length;
-        const totalSms = sentSms + sendingSms;
-        if (totalSms > user.sms_units) {
-            return fail(res, 422, `Error! You have ${user.sms_units} units left. You cannot send ${sendingSms}`);
-            // console.log(`You have ${user.sms_units}Units left. You cannot send ${sendingSms}`);
-        }
-        const resolvedFinalArray = await Promise.all(myArray.map(async (phone) => {
-            const send = await sendSmsAsync(phone, data.message);
-            data.sid = send.sid;
-            data.recipient = phone;
-            const newRecord = new Sms(data);
-            const result = await newRecord.save();
-            return result; // important to return the value
-        }));
-
-        const data2 = { sms_units: (user.sms_units - sendingSms) };
-        const result2 = await Staff.findOneAndUpdate({ _id: data.created_by },
-            data2, { new: true });
-        console.log(result2.sms_units);
-        return success(res, 201, resolvedFinalArray, "Record created successfully!");
+        const result = await sendSmsAsync(data.recipient, data.message);
+        console.log(result);
+        return success(res, 201, result, result.message);
     } catch (err) {
         logger.error(err);
         return fail(res, 500, `Error creating record. ${err.message}`);
     }
-}
-
-export async function createWebhook(req, res) {
-    const data = req.body;
-    receiveSms(req, res);
-    logger.info("Operation was successful", data);
 }

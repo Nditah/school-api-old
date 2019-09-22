@@ -40,12 +40,10 @@ var Schema = _mongoose2.default.Schema;
 
 var ObjectId = Schema.Types.ObjectId;
 var schemaCreate = exports.schemaCreate = {
-    sid: _joi2.default.string().optional(),
-    sender: _joi2.default.string().required(),
+    sender: _joi2.default.string().optional(),
+    sender_as: _joi2.default.string().optional(),
     recipient: _joi2.default.string().optional(),
-    message: _joi2.default.string().required(),
-    direction: _joi2.default.string().valid("INBOUND", "OUTBOUND").optional(),
-    created_by: _joi2.default.string().required()
+    message: _joi2.default.string().required()
 };
 
 var schema = exports.schema = {
