@@ -308,7 +308,7 @@ newSchema.plugin(mongoose_csv);
 
 const Staff = mongoose.model("Staff", newSchema);
 
-Staff.findOne({ email: "admin@royalacademy.ng" })
+Staff.findOne({ email: "admin@rafs.sch.ng" })
     .then((user) => {
         if (!user) {
             console.log(table[ 0 ]);
