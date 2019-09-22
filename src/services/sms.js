@@ -1,9 +1,15 @@
+import rp from "request-promise";
+
 const dotenv = require("dotenv");
 const { SMS } = require("../constants");
 
 dotenv.config();
 
-const smsApi = process.env.SMS_API;
+// Todo call from settings
+const smsCode = process.env.SMS_API || "ACd99e2c5d2c34ab65269a11ae97da2ead";
+// const smsEmail = process.env.SMS_EMAIL || "admin@rafs.sch.ng";
+// const smsPassword = process.env.SMS_PASSWORD || "royal";
+
 const client = null;
 // eslint-disable-next-line new-cap
 const sender = SMS.PEACE_SMS_SENDER;
@@ -31,29 +37,18 @@ function sendSms(recipient, message) {
 }
 
 async function sendSmsAsync(recipient, message) {
-    const data = {
-        from: formatPhone(sender),
-        body: message,
-        to: formatPhone(recipient),
+    const headersObj = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        json: true,
     };
-    const result = await client.messages.create(data);
-    return result;
+    const options = {
+        method: "GET",
+        uri: `https://sms-app-backend.herokuapp.com/api/v1/sms/externally?code=${smsCode}&recipient=${recipient}&message=${message}`,
+        headers: headersObj,
+        json: true,
+    };
+    return rp(options).then(response => response).catch(err => err);
 }
 
-/**
- * Twilio Webhook for receiving sms
- * Receive message via this webhook set at the twilio user settings
- */
-async function receiveSms(req, res) {
-    const twiml = ""; // new twilio.TwimlResponse();
-    twiml.message("Twilio incoming message:");
-    const message = twiml.toString();
-    res.send(message);
-}
-
-// Read Multiple SMS Records
-function readMultipleSms() {
-    client.messages.each(messages => console.log(messages.sid));
-}
-
-export { sendSms, sendSmsAsync, receiveSms, readMultipleSms };
+export { sendSms, sendSmsAsync };

@@ -26,7 +26,7 @@ var staffAuthenticate = exports.staffAuthenticate = function () {
                             filter.email = email;
                         }
                         _context.next = 8;
-                        return _model2.default.findOne(filter).populate("office_id").populate("role").populate("bank_name").populate("classe").populate("subject").populate("bank_name").populate("state").populate("county").exec();
+                        return _model2.default.findOne(filter).populate("office").populate("role").populate("classe").populate("subject").populate("state").populate("county").exec();
 
                     case 8:
                         user = _context.sent;
@@ -52,20 +52,22 @@ var staffAuthenticate = exports.staffAuthenticate = function () {
                         throw new Error("Authentication failed. OTP Access is " + user.otp_access);
 
                     case 14:
+                        console.log("User is coming *****", user);
+
                         if (_bcryptjs2.default.compareSync(password || "", user.password) || _bcryptjs2.default.compareSync(otp || "", user.otp) && user.otp_access) {
-                            _context.next = 16;
+                            _context.next = 17;
                             break;
                         }
 
                         throw new Error("Wrong password or otp credentials.");
 
-                    case 16:
+                    case 17:
                         query = { _id: user._id };
                         update = { otp_access: false };
-                        _context.next = 20;
+                        _context.next = 21;
                         return _model2.default.findOneAndUpdate(query, update, { new: true }).exec();
 
-                    case 20:
+                    case 21:
 
                         // Delete private attributes
                         user.password = null;
@@ -84,23 +86,23 @@ var staffAuthenticate = exports.staffAuthenticate = function () {
                         token = _jsonwebtoken2.default.sign(payload, _constants.JWT.jwtSecret, {
                             expiresIn: "240h" // JWT.tokenExpireTime,
                         });
-                        _context.next = 31;
+                        _context.next = 32;
                         break;
 
-                    case 28:
-                        _context.prev = 28;
+                    case 29:
+                        _context.prev = 29;
                         _context.t0 = _context["catch"](3);
                         throw new Error("Authentication failed " + _context.t0.message);
 
-                    case 31:
+                    case 32:
                         return _context.abrupt("return", { token: token, user: user });
 
-                    case 32:
+                    case 33:
                     case "end":
                         return _context.stop();
                 }
             }
-        }, _callee, null, [[3, 28]]);
+        }, _callee, null, [[3, 29]]);
     }));
 
     return function staffAuthenticate(_x) {

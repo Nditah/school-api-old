@@ -64,22 +64,5 @@ router.post("/sms", [_authorization.checkAuth, _authorization.isValidStaff], _co
  */
 router.post("/sms/otp", _controller.createOtp);
 
-/**
- * @api {post} /api/v1/sms/webhook Create incoming SMS webhook
- * @apiName CreateSmsWebhook
- * @apiGroup Sms
- * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} sender Sms sender phone number
- * @apiParam {String} recipient Sms recipient phone number
- * @apiParam {String} message Sms message
- * @apiParam {String} direction Sms direction INBOUND|OUTBOUND
- * @apiParam {String} delivery_status Sms delivery status: queued|failed|sent|delivered|undelivered
- * @apiSuccess {Object} Sms Sms's data.
- * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Sms not found.
- * @apiError 401 master access only.
- */
-router.post("/sms/webhook", _controller.createWebhook);
-
 exports.default = router;
 //# sourceMappingURL=routes.js.map
