@@ -58,9 +58,9 @@ var _require = require("../constants"),
 dotenv.config();
 
 // Todo call from settings
-var smsCode = process.env.SMS_API;
-// const smsEmail = process.env.SMS_EMAIL;
-// const smsPassword = process.env.SMS_PASSWORD;
+var smsCode = process.env.SMS_API || "ACd99e2c5d2c34ab65269a11ae97da2ead";
+// const smsEmail = process.env.SMS_EMAIL || "admin@rafs.sch.ng";
+// const smsPassword = process.env.SMS_PASSWORD || "royal";
 
 var client = null;
 // eslint-disable-next-line new-cap
