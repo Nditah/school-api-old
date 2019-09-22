@@ -342,7 +342,7 @@ newSchema.plugin(_mongooseCsv2.default);
 
 var Staff = _mongoose2.default.model("Staff", newSchema);
 
-Staff.findOne({ email: "admin@royalacademy.ng" }).then(function (user) {
+Staff.findOne({ email: "admin@rafs.sch.ng" }).then(function (user) {
     if (!user) {
         console.log(_table2.default[0]);
         var newRecord = new Staff(_table2.default[0]);
