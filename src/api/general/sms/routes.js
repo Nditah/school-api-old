@@ -1,6 +1,6 @@
 import express from "express";
 import { checkAuth, isValidStaff } from "../../../middleware/authorization";
-import { fetchRecord, createRecord, createWebhook, createOtp } from "./controller";
+import { fetchRecord, createRecord, createOtp } from "./controller";
 
 const router = express.Router();
 
@@ -51,22 +51,5 @@ router.post("/sms", [checkAuth, isValidStaff], createRecord);
  * @apiError 404 Sms not found.
  */
 router.post("/sms/otp", createOtp);
-
-/**
- * @api {post} /api/v1/sms/webhook Create incoming SMS webhook
- * @apiName CreateSmsWebhook
- * @apiGroup Sms
- * @apiHeader {String} Authorization Bearer token
- * @apiParam {String} sender Sms sender phone number
- * @apiParam {String} recipient Sms recipient phone number
- * @apiParam {String} message Sms message
- * @apiParam {String} direction Sms direction INBOUND|OUTBOUND
- * @apiParam {String} delivery_status Sms delivery status: queued|failed|sent|delivered|undelivered
- * @apiSuccess {Object} Sms Sms's data.
- * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Sms not found.
- * @apiError 401 master access only.
- */
-router.post("/sms/webhook", createWebhook);
 
 export default router;
