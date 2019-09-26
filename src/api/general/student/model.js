@@ -30,18 +30,24 @@
 
 import Joi from "joi";
 import mongoose from "mongoose";
+import autoIncrement from "mongoose-auto-increment";
 // eslint-disable-next-line camelcase
 import mongoose_csv from "mongoose-csv";
 import { DATABASE, GENDER, SUBSIDIARY } from "../../../constants";
-import table from "./table";
 import State from "../state/model";
 import County from "../county/model";
 import Parent from "../parent/model";
 import Classe from "../classe/model";
 import { HostelAllocation } from "../hostel/model";
+import credentials from "../../../config/credentials";
 
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
+
+const { uri } = credentials;
+const connection = mongoose.createConnection(uri);
+
+autoIncrement.initialize(connection);
 
 export const schemaLogin = {
     email: Joi.string().trim().email().optional(),
@@ -147,27 +153,33 @@ export const schema = {
     updated_by: { type: ObjectId, ref: "Staff" },
 };
 
-const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
+// const preload = DATABASE.PRELOAD_TABLE_DATA.DEFAULT;
 const options = DATABASE.OPTIONS;
 
 const newSchema = new Schema(schema, options);
 newSchema.index({ phone: 1, email: 1 }, { unique: true });
 newSchema.set("collection", "student");
 newSchema.plugin(mongoose_csv);
+newSchema.plugin(autoIncrement.plugin, {
+    model: "Student",
+    field: "serial",
+    startAt: 1,
+    incrementBy: 1,
+});
 
 const Student = mongoose.model("Student", newSchema);
 
-Student.findOne({ email: "student@royalacademy.ng" })
-    .then((user) => {
-        if (!user) {
-            console.log(table[ 0 ]);
-            const newRecord = new Student(table[ 0 ]);
-            newRecord.save();
-            delete table[ 0 ];
-        }
-    })
-    .catch(err => console.log(__dirname, err.message));
+// Student.findOne({ email: "student@royalacademy.ng" })
+//     .then((user) => {
+//         if (!user) {
+//             console.log(table[ 0 ]);
+//             const newRecord = new Student(table[ 0 ]);
+//             newRecord.save();
+//             delete table[ 0 ];
+//         }
+//     })
+//     .catch(err => console.log(__dirname, err.message));
 
-if (preload) { Student.insertMany(table); }
+// if (preload) { Student.insertMany(table); }
 
 export default Student;
