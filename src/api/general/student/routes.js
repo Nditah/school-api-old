@@ -45,6 +45,7 @@ router.get("/students", [checkAuth, isValidStaff], fetchRecord);
  * @apiParam {Array} parents Student parents Array<ObjectId> (optional)
  * @apiParam {String} reg_no Student reg_no (optional)
  * @apiParam {Date} admission_year Student admission_year (optional)
+ * @apiParam {Number} serial_no Student serial_no (optional)
  * @apiSuccess {Object} Student Student's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Student not found.
@@ -76,6 +77,7 @@ router.post("/students", [checkAuth, isValidStaff], createRecord);
  * @apiParam {Array} parents Student parents Array<ObjectId> (optional)
  * @apiParam {String} reg_no Student reg_no (optional)
  * @apiParam {Date} admission_year Student admission_year (optional)
+ * @apiParam {Number} serial_no Student serial_no (optional)
  * @apiSuccess {Object} Student Student's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Student not found.

@@ -22,6 +22,7 @@
  * @property {Array} parents Student parents Array<ObjectId> (optional)
  * @property {String} reg_no Student reg_no (optional)
  * @property {Date} admission_year Student admission_year (optional)
+ * @property {Number} serial_no Student serial_no (optional)
  * @property {ObjectId} created_by Student record created by
  * @property {ObjectId} updated_by Student record modified by
  * @description Student holds record of all students in the school.
@@ -70,6 +71,7 @@ export const schemaCreate = {
     parents: Joi.array().optional(),
     reg_no: Joi.string().trim().optional(),
     admission_year: Joi.date().optional(),
+    serial_no: Joi.number().optional(),
     created_by: Joi.string().required(),
 };
 
@@ -93,6 +95,7 @@ export const schemaUpdate = {
     parents: Joi.array().optional(),
     reg_no: Joi.string().trim().optional(),
     admission_year: Joi.date().optional(),
+    serial_no: Joi.number().optional(),
     updated_by: Joi.string().required(),
 };
 
@@ -137,6 +140,7 @@ export const schema = {
     parents: [{ type: ObjectId, ref: "Parent" }],
     admission_year: { type: Date },
     reg_no: { type: String },
+    serial_no: { type: Number, unique: true },
     deleted: { type: Boolean, default: false, required: true },
     deleted_at: { type: Date },
     created_by: { type: ObjectId, ref: "Staff", required: true },
