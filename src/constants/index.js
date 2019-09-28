@@ -10,6 +10,11 @@ export const TERM = {
     THIRD: "3",
 };
 
+export const SEMESTER = {
+    FIRST: "1",
+    SECOND: "2",
+};
+
 export const OFFICE_TYPE = {
     BOARD: "BOARD",
     DIRECTORATE: "DIRECTORATE",
@@ -159,11 +164,11 @@ export const LEVEL = {
 };
 
 export const SUBSIDIARY = {
-    SECONDARY: "SECONDARY",
-    PRIMARY: "PRIMARY",
-    NURSERY: "NURSERY",
     CRECHE: "CRECHE",
-    DAYCARE: "DAYCARE",
+    NURSERY: "NURSERY",
+    PRIMARY: "PRIMARY",
+    SECONDARY: "SECONDARY",
+    TERTIARY: "TERTIARY",
 };
 
 export const VEHICLE = {
