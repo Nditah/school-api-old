@@ -33,7 +33,7 @@ import mongoose from "mongoose";
 import autoIncrement from "mongoose-auto-increment";
 // eslint-disable-next-line camelcase
 import mongoose_csv from "mongoose-csv";
-import { DATABASE, GENDER, SUBSIDIARY } from "../../../constants";
+import { DATABASE, GENDER, SUBSIDIARY, LEVEL } from "../../../constants";
 import State from "../state/model";
 import County from "../county/model";
 import Parent from "../parent/model";
@@ -65,12 +65,12 @@ export const schemaCreate = {
     address: Joi.string().optional(),
     state: Joi.string().optional(),
     county: Joi.string().optional(),
-    email: Joi.string().trim().email().optional(),
+    email: Joi.email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
     religion: Joi.string().optional(),
     classe: Joi.string().trim().optional(),
-    level: Joi.number().optional(),
+    level: Joi.number().valid(Object.values(LEVEL)).optional(),
     subsidiary: Joi.string().trim().valid(Object.values(SUBSIDIARY)).optional(),
     hostel: Joi.string().trim().optional(),
     photo: Joi.string().optional(),
@@ -89,12 +89,12 @@ export const schemaUpdate = {
     address: Joi.string().optional(),
     state: Joi.string().optional(),
     county: Joi.string().optional(),
-    email: Joi.string().trim().email().optional(),
+    email: Joi.email().optional(),
     phone: Joi.string().optional(),
     password: Joi.string().optional(),
     religion: Joi.string().optional(),
     classe: Joi.string().trim().optional(),
-    level: Joi.number().optional(),
+    level: Joi.number().valid(Object.values(LEVEL)).optional(),
     subsidiary: Joi.string().trim().valid(Object.values(SUBSIDIARY)).optional(),
     hostel: Joi.string().trim().optional(),
     photo: Joi.string().optional(),
