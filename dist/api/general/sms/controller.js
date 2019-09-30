@@ -150,48 +150,96 @@ var createOtp = exports.createOtp = function () {
     };
 }();
 
-var createRecord = exports.createRecord = function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(req, res) {
-        var data, _Joi$validate, error, result;
+// eslint-disable-next-line complexity
 
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+
+var createRecord = exports.createRecord = function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res) {
+        var data, _Joi$validate, error, recipientArray, myArray, resolvedFinalArray;
+
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
             while (1) {
-                switch (_context3.prev = _context3.next) {
+                switch (_context4.prev = _context4.next) {
                     case 0:
                         data = req.body;
+
+                        data.direction = "OUTBOUND";
                         _Joi$validate = _joi2.default.validate(data, _model.schemaCreate), error = _Joi$validate.error;
 
                         if (!error) {
-                            _context3.next = 4;
+                            _context4.next = 5;
                             break;
                         }
 
-                        return _context3.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
+                        return _context4.abrupt("return", (0, _lib.fail)(res, 422, "Error validating request data. " + error.message));
 
-                    case 4:
-                        _context3.prev = 4;
-                        _context3.next = 7;
-                        return (0, _services.sendSmsAsync)(data.recipient, data.message);
+                    case 5:
+                        recipientArray = data.recipient;
+                        _context4.prev = 6;
+                        myArray = (0, _lib.stringToArrayPhone)(recipientArray) || [];
+                        _context4.next = 10;
+                        return Promise.all(myArray.map(function () {
+                            var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(phone) {
+                                var response, newRecord, result;
+                                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                                    while (1) {
+                                        switch (_context3.prev = _context3.next) {
+                                            case 0:
+                                                _context3.next = 2;
+                                                return (0, _services.sendSmsAsync)(phone, data.message);
 
-                    case 7:
-                        result = _context3.sent;
+                                            case 2:
+                                                response = _context3.sent;
 
-                        console.log(result);
-                        return _context3.abrupt("return", (0, _lib.success)(res, 201, result, result.message));
+                                                if (!response.success) {
+                                                    _context3.next = 11;
+                                                    break;
+                                                }
 
-                    case 12:
-                        _context3.prev = 12;
-                        _context3.t0 = _context3["catch"](4);
+                                                data.sid = response.payload.sid;
+                                                data.recipient = phone;
+                                                newRecord = new _model2.default(data);
+                                                _context3.next = 9;
+                                                return newRecord.save();
 
-                        logger.error(_context3.t0);
-                        return _context3.abrupt("return", (0, _lib.fail)(res, 500, "Error creating record. " + _context3.t0.message));
+                                            case 9:
+                                                result = _context3.sent;
+                                                return _context3.abrupt("return", result);
 
-                    case 16:
+                                            case 11:
+                                                console.log("response ===> ", response);
+                                                return _context3.abrupt("return", response);
+
+                                            case 13:
+                                            case "end":
+                                                return _context3.stop();
+                                        }
+                                    }
+                                }, _callee3);
+                            }));
+
+                            return function (_x7) {
+                                return _ref4.apply(this, arguments);
+                            };
+                        }()));
+
+                    case 10:
+                        resolvedFinalArray = _context4.sent;
+                        return _context4.abrupt("return", (0, _lib.success)(res, 201, resolvedFinalArray, "Processing sms"));
+
+                    case 14:
+                        _context4.prev = 14;
+                        _context4.t0 = _context4["catch"](6);
+
+                        logger.error(_context4.t0);
+                        return _context4.abrupt("return", (0, _lib.fail)(res, 500, "Error creating record. " + _context4.t0.message));
+
+                    case 18:
                     case "end":
-                        return _context3.stop();
+                        return _context4.stop();
                 }
             }
-        }, _callee3, null, [[4, 12]]);
+        }, _callee4, null, [[6, 14]]);
     }));
 
     return function createRecord(_x5, _x6) {

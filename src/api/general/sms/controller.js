@@ -2,7 +2,7 @@ import Joi from "joi";
 import log4js from "log4js";
 import aqp from "api-query-params";
 import Sms, { schemaCreate } from "./model";
-import { success, fail, notFound, generateOtp, hash } from "../../../lib";
+import { success, fail, notFound, generateOtp, hash, stringToArrayPhone } from "../../../lib";
 import { sendSmsAsync } from "../../../services";
 import Staff from "../staff/model";
 import Student from "../student/model";
@@ -73,14 +73,28 @@ export async function createOtp(req, res) {
     }
 }
 
+// eslint-disable-next-line complexity
 export async function createRecord(req, res) {
     const data = req.body;
+    data.direction = "OUTBOUND";
     const { error } = Joi.validate(data, schemaCreate);
     if (error) return fail(res, 422, `Error validating request data. ${error.message}`);
+    const { recipient: recipientArray } = data;
     try {
-        const result = await sendSmsAsync(data.recipient, data.message);
-        console.log(result);
-        return success(res, 201, result, result.message);
+        const myArray = stringToArrayPhone(recipientArray) || [];
+        const resolvedFinalArray = await Promise.all(myArray.map(async (phone) => {
+            const response = await sendSmsAsync(phone, data.message);
+            if (response.success) {
+                data.sid = response.payload.sid;
+                data.recipient = phone;
+                const newRecord = new Sms(data);
+                const result = await newRecord.save();
+                return result;
+            }
+            console.log("response ===> ", response);
+            return response;
+        }));
+        return success(res, 201, resolvedFinalArray, "Processing sms");
     } catch (err) {
         logger.error(err);
         return fail(res, 500, `Error creating record. ${err.message}`);
