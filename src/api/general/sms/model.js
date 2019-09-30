@@ -21,15 +21,15 @@ const { ObjectId } = Schema.Types;
 export const schemaCreate = {
     sender: Joi.string().optional(),
     sender_as: Joi.string().optional(),
-    recipient: Joi.string().optional(),
+    recipient: Joi.string().required(),
     message: Joi.string().required(),
 };
 
 export const schema = {
     sid: { type: String },
-    sender: { type: String, required: true, default: SMS.PEACE_SMS_SENDER },
+    sender: { type: String },
     recipient: { type: String, required: true },
-    message: { type: String, required: [true, "Why no message?"] },
+    message: { type: String, required: true },
     direction: { type: String, enum: ["INBOUND", "OUTBOUND"], default: "OUTBOUND", required: true },
     delivery_status: { type: String },
     created_by: { type: ObjectId, ref: "Staff" },
