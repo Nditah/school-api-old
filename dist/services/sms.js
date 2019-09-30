@@ -97,14 +97,10 @@ dotenv.config();
 
 // Todo call from settings
 var smsCode = process.env.SMS_API || "acd99e2c5d2c34ab65269a11ae97da2e";
-// const smsEmail = process.env.SMS_EMAIL || "peacegroup@gmail.com";
-// const smsPassword = process.env.SMS_PASSWORD || "peace@01#";
+var smsEmail = process.env.SMS_EMAIL || "admin@rafs.sch.ng";
+var smsPassword = process.env.SMS_PASSWORD || "royal";
 var SMS_URL = "https://sms-app-backend.herokuapp.com/api/v1/sms";
 // const SMS_URL = "http://localhost:8000/api/v1/sms";
-
-var client = null;
-// eslint-disable-next-line new-cap
-var sender = SMS.PEACE_SMS_SENDER;
 
 function formatPhone(phone) {
     var str = phone.toString();

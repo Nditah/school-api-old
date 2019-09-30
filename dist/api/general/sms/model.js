@@ -42,15 +42,15 @@ var ObjectId = Schema.Types.ObjectId;
 var schemaCreate = exports.schemaCreate = {
     sender: _joi2.default.string().optional(),
     sender_as: _joi2.default.string().optional(),
-    recipient: _joi2.default.string().optional(),
+    recipient: _joi2.default.string().required(),
     message: _joi2.default.string().required()
 };
 
 var schema = exports.schema = {
     sid: { type: String },
-    sender: { type: String, required: true, default: _constants.SMS.PEACE_SMS_SENDER },
+    sender: { type: String },
     recipient: { type: String, required: true },
-    message: { type: String, required: [true, "Why no message?"] },
+    message: { type: String, required: true },
     direction: { type: String, enum: ["INBOUND", "OUTBOUND"], default: "OUTBOUND", required: true },
     delivery_status: { type: String },
     created_by: { type: ObjectId, ref: "Staff" }
