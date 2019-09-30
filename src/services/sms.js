@@ -6,9 +6,11 @@ const { SMS } = require("../constants");
 dotenv.config();
 
 // Todo call from settings
-const smsCode = process.env.SMS_API || "ACd99e2c5d2c34ab65269a11ae97da2ead";
-// const smsEmail = process.env.SMS_EMAIL || "admin@rafs.sch.ng";
-// const smsPassword = process.env.SMS_PASSWORD || "royal";
+const smsCode = process.env.SMS_API || "acd99e2c5d2c34ab65269a11ae97da2e";
+// const smsEmail = process.env.SMS_EMAIL || "peacegroup@gmail.com";
+// const smsPassword = process.env.SMS_PASSWORD || "peace@01#";
+const SMS_URL = "https://sms-app-backend.herokuapp.com/api/v1/sms";
+// const SMS_URL = "http://localhost:8000/api/v1/sms";
 
 const client = null;
 // eslint-disable-next-line new-cap
@@ -26,14 +28,19 @@ function formatPhone(phone) {
     return str;
 }
 
-function sendSms(recipient, message) {
-    const data = {
-        from: formatPhone(sender),
-        body: message,
-        to: formatPhone(recipient),
+async function sendSmsAsyncGet(recipient, message) {
+    const headersObj = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        json: true,
     };
-    client.messages.create(data)
-        .then(result => console.log(result.sid));
+    const options = {
+        method: "GET",
+        uri: `${SMS_URL}?code=${smsCode}&recipient=${recipient}&message=${message}`,
+        headers: headersObj,
+        json: true,
+    };
+    return rp(options).then(response => response).catch(err => err);
 }
 
 async function sendSmsAsync(recipient, message) {
@@ -43,12 +50,13 @@ async function sendSmsAsync(recipient, message) {
         json: true,
     };
     const options = {
-        method: "GET",
-        uri: `https://sms-app-backend.herokuapp.com/api/v1/sms/externally?code=${smsCode}&recipient=${recipient}&message=${message}`,
+        method: "POST",
+        uri: `${SMS_URL}?code=${smsCode}`,
         headers: headersObj,
+        body: { recipient, message },
         json: true,
     };
-    return rp(options).then(response => response).catch(err => err);
+    return rp(options).then(response => response).catch(err => err.error);
 }
 
-export { sendSms, sendSmsAsync };
+export { sendSmsAsync, sendSmsAsyncGet };

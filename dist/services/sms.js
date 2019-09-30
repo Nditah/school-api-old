@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.sendSmsAsync = exports.sendSms = undefined;
+exports.sendSmsAsyncGet = exports.sendSmsAsync = undefined;
 
-var sendSmsAsync = function () {
+var sendSmsAsyncGet = function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(recipient, message) {
         var headersObj, options;
         return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -19,7 +19,7 @@ var sendSmsAsync = function () {
                         };
                         options = {
                             method: "GET",
-                            uri: "https://sms-app-backend.herokuapp.com/api/v1/sms/externally?code=" + smsCode + "&recipient=" + recipient + "&message=" + message,
+                            uri: SMS_URL + "?code=" + smsCode + "&recipient=" + recipient + "&message=" + message,
                             headers: headersObj,
                             json: true
                         };
@@ -37,8 +37,46 @@ var sendSmsAsync = function () {
         }, _callee);
     }));
 
-    return function sendSmsAsync(_x, _x2) {
+    return function sendSmsAsyncGet(_x, _x2) {
         return _ref.apply(this, arguments);
+    };
+}();
+
+var sendSmsAsync = function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(recipient, message) {
+        var headersObj, options;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        headersObj = {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                            json: true
+                        };
+                        options = {
+                            method: "POST",
+                            uri: SMS_URL + "?code=" + smsCode,
+                            headers: headersObj,
+                            body: { recipient: recipient, message: message },
+                            json: true
+                        };
+                        return _context2.abrupt("return", (0, _requestPromise2.default)(options).then(function (response) {
+                            return response;
+                        }).catch(function (err) {
+                            return err.error;
+                        }));
+
+                    case 3:
+                    case "end":
+                        return _context2.stop();
+                }
+            }
+        }, _callee2);
+    }));
+
+    return function sendSmsAsync(_x3, _x4) {
+        return _ref2.apply(this, arguments);
     };
 }();
 
@@ -58,9 +96,11 @@ var _require = require("../constants"),
 dotenv.config();
 
 // Todo call from settings
-var smsCode = process.env.SMS_API || "ACd99e2c5d2c34ab65269a11ae97da2ead";
-// const smsEmail = process.env.SMS_EMAIL || "admin@rafs.sch.ng";
-// const smsPassword = process.env.SMS_PASSWORD || "royal";
+var smsCode = process.env.SMS_API || "acd99e2c5d2c34ab65269a11ae97da2e";
+// const smsEmail = process.env.SMS_EMAIL || "peacegroup@gmail.com";
+// const smsPassword = process.env.SMS_PASSWORD || "peace@01#";
+var SMS_URL = "https://sms-app-backend.herokuapp.com/api/v1/sms";
+// const SMS_URL = "http://localhost:8000/api/v1/sms";
 
 var client = null;
 // eslint-disable-next-line new-cap
@@ -78,17 +118,6 @@ function formatPhone(phone) {
     return str;
 }
 
-function sendSms(recipient, message) {
-    var data = {
-        from: formatPhone(sender),
-        body: message,
-        to: formatPhone(recipient)
-    };
-    client.messages.create(data).then(function (result) {
-        return console.log(result.sid);
-    });
-}
-
-exports.sendSms = sendSms;
 exports.sendSmsAsync = sendSmsAsync;
+exports.sendSmsAsyncGet = sendSmsAsyncGet;
 //# sourceMappingURL=sms.js.map
