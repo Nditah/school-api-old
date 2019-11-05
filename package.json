@@ -47,7 +47,7 @@
     "lodash": "^4.17.15",
     "log4js": "^3.0.6",
     "moment": "^2.24.0",
-    "mongoose": "^5.4.7",
+    "mongoose": "^5.7.5",
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-csv": "^1.1.0",
     "morgan": "^1.9.0",
